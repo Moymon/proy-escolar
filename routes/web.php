@@ -21,4 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('Inicio');
+
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);

@@ -369,12 +369,17 @@ return [
             ],
         ],*/
         [
+            'text'    => 'Dashborad',
+            'icon'    => 'fas fa-home',
+            'url'     => 'Inicio',
+        ],
+        [
             'text'    => 'Alumnos',
             'icon'    => 'fas fa-fw fa-user',
             'submenu' => [
                 [
                     'text' => 'Alumnos de Licenciatura',
-                    'route'  => 'home',
+                    'url'  => '#',
                 ],
                 [
                     'text'    => 'Alumnos de Posgrado',
@@ -424,7 +429,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Archivo para constancias',
-                    'url'  => '#',
+                    'url'  => 'procedimientos',
                 ],
             ],
         ],
