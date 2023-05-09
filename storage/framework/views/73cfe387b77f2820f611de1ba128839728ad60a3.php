@@ -22,13 +22,23 @@
     </div>
 
 
-<form action="/insertAlumno" method="POST">
+<form action="/crudAlumno" method="POST">
     <?php echo csrf_field(); ?> 
         <div  class="card text-center">
                 <input type="text" name="id_alumno">
         </div>
+        <div class="card">
+            <div class="card-body">
+                <input type="text" name="nombre" placeholder="nombre">
+                <input type="text" name="nombres" placeholder="nombres">
+                <input type="text" name="paterno" placeholder="paterno">
+                <input type="text" name="materno" placeholder="materno">
+            </div>
+        </div>
         <div class="card-footer">
-                <button class="btn btn-outline-primary" type="submit">Guardar</button>
+                <button class="btn btn-outline-primary" name="create" type="submit">Guardar</button>
+                <button class="btn btn-outline-primary" name="read" type="submit">Buscar</button>
+                <button class="btn btn-outline-primary" name="update" type="submit">Editar</button>
         </div>
 </form>
 <?php $__env->stopSection(); ?>

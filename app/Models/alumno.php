@@ -13,6 +13,30 @@ class alumno extends Model
 
     protected $fillable=[
         'id_alumno',
-        
+        'cve_unica',
+        'nombre',
+        'nombres',
+        'paterno',
+        'materno',
+        'conducta',
+        'calle',
+        'num_ext',
+        'num_int',
+        'colonia',
+        'codigo_postal',
+        'ciudad',
+        'estado',
+        'curp',
+        'correo_uaslp',
+        'correo_alterno',
+        'telefono',
+        'celular',
+        'genero',
+        'fecha_nace',
+        'secundaria',
+        'cve_prepa',
+        'nss',
+        'archivo_nss',
+        'fecha_registro_nss'
     ];
 }

@@ -311,13 +311,14 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        [
+        /*[
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
-        ],
+        ],*/
+        /*
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -366,8 +367,82 @@ return [
                     'url'  => '#',
                 ],
             ],
+        ],*/
+        [
+            'text'    => 'Alumnos',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Alumnos de Licenciatura',
+                    'route'  => 'home',
+                ],
+                [
+                    'text'    => 'Alumnos de Posgrado',
+                    'url'     => '#',
+                ],
+            ],
         ],
-        ['header' => 'labels'],
+        [
+            'text'    => 'Kardex',
+            'icon'    => 'far fa-newspaper',
+            'submenu' => [
+                [
+                    'text' => 'Impresion',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Examenes ET y ER',
+            'icon'    => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text'    => 'Registro de exámenes ER',
+                    'url'   => '#',
+                ],
+                [
+                    'text'    => 'Registro de exámenes ET',
+                    'url'     => '#',
+                ],
+                [
+                    'text'    => 'Captura de calificaciones',
+                    'url'   => '#',
+                ],
+                [
+                    'text'    => 'Listado de exámenes',
+                    'url'   => '#',
+                ],
+                [
+                    'text'    => 'Fechas de exámenes',
+                    'url'   => '#',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Procedimientos',
+            'icon'    => 'fab fa-first-order-alt',
+            'submenu' => [
+                [
+                    'text' => 'Archivo para constancias',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Administracion',
+            'icon'    => 'fas fa-wrench',
+            'submenu' => [
+                [
+                    'text' => 'Perfil',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'Usuarios',
+                    'url'     => '#',
+                ],
+            ],
+        ],
+        /*['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -382,7 +457,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
