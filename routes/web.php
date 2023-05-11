@@ -24,3 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('Inicio');
 
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
+
+/*Rutas para examenes*/
+Route::get('/ex_re',[App\Http\Controllers\menu\sidebar::class,'examenes_regularizacion']);

@@ -403,7 +403,7 @@ return [
             'submenu' => [
                 [
                     'text'    => 'Registro de exámenes ER',
-                    'url'   => '#',
+                    'url'   => 'ex_re',
                 ],
                 [
                     'text'    => 'Registro de exámenes ET',

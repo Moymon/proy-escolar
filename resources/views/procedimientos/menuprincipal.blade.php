@@ -74,17 +74,91 @@
                 </div>
              </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table id="archivo" class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead>
+                        <tr>
+                            <th class="sorting sorting_asc" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" tabindex="0" rowspan="1" colspan="1" >
+                                Cre
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Clv
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Materia
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Cal
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Fecha
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Ex
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Sem
+                            </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                        </tr>
+                        <tr>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                            <td>Lorem</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th rowspan="1" colspan="1">Cre</th>
+                            <th rowspan="1" colspan="1">Clv</th>
+                            <th rowspan="1" colspan="1">Materia</th>
+                            <th rowspan="1" colspan="1">Cal</th>
+                            <th rowspan="1" colspan="1">Fecha</th>
+                            <th rowspan="1" colspan="1">Ex</th>
+                            <th rowspan="1" colspan="1">Sem</th>
+                            <th rowspan="1" colspan="1"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-outline-primary" type="button" tabindex="0">Generar Archivo</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
 </form>
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
     <!-- jQuery -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.responsive.min.js"></script>
 
+    <script>
+    $(function () {
+    $("#archivo").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+    }) });
+    </script>
 @stop
