@@ -107,6 +107,8 @@
                             </th>
                             <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Sinodal Titular
                             </th>
+                            <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Opciones
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -120,6 +122,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -131,6 +134,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -144,6 +148,7 @@
                             <th rowspan="1" colspan="1">Recibo</th>
                             <th rowspan="1" colspan="1">RPE TIT.</th>
                             <th rowspan="1" colspan="1">Sinodal Titular</th>
+                            <th rowspan="1" colspan="1">Opciones</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -261,17 +266,94 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Sinodal Titular</label>
-                            <br>
                             <input type="text" name="" disabled>
                         </div>
                     </div>
-                </div>  
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Sinodal Titular</label>
+                            <input type="text" name="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>RPE. Secreario</label>
+                            <br>
+                            <input type="text" name="" disabled>
+                        </div>    
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Sinodal Secretario</label>
+                            <br>
+                            <input type="text" name="" disabled>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Sinodal Titular</label>
+                            <br>
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>   
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Única</label>
+                            <br>
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>   
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>Tipo de Examen</label>
+                            <br>
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>   
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>No. de Recibo</label>
+                            <br>
+                            <input type="text" name="">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <br>
+                            <button class="btn btn-light">Completar</button>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Registrar Examen</button>
       </div>
     </div>
   </div>
