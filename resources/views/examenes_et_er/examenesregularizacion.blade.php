@@ -122,7 +122,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                            <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -134,7 +134,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                            <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -186,6 +186,7 @@
                             <th>Grupo</th>
                             <th>RPE</th>
                             <th>Profesor</th>
+                            <th>Completar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -200,6 +201,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -212,6 +214,33 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -231,69 +260,63 @@
                         <div class="form-group">
                             <label>Materia</label>
                             <br>
-                            <input type="text" name="" disabled>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>Fecha</label>
                             <br>
-                            <input type="text" name="" disabled>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>Hora</label>
                             <br>
-                            <input type="text" name="" disabled>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>Salón</label>
                             <br>
-                            <input type="text" name="" disabled>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>R.P.E Titular</label>
-                            <input type="text" name="" disabled>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>Sinodal Titular</label>
-                            <input type="text" name="" disabled>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>Sinodal Titular</label>
-                            <input type="text" name="" disabled>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-sm-2">
                         <div class="form-group">
-                            <label>RPE. Secreario</label>
+                            <label>RPE Titular</label>
                             <br>
-                            <input type="text" name="" disabled>
+                            <input class="form-control" type="text" name="" disabled>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Sinodal Titular</label>
+                            <br>
+                            <input class="form-control" type="text" name="" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>RPE Secretario</label>
+                            <br>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>    
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Sinodal Secretario</label>
                             <br>
-                            <input type="text" name="" disabled>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Sinodal Titular</label>
                             <br>
@@ -306,7 +329,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>Única</label>
                             <br>
@@ -319,7 +342,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>Tipo de Examen</label>
                             <br>
@@ -332,22 +355,14 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>No. de Recibo</label>
                             <br>
-                            <input type="text" name="">
+                            <input class="form-control" type="text" name="">
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <br>
-                            <button class="btn btn-light">Completar</button>
-                        </div>
-                    </div>
-                </div> 
+                </div>
             </div>
         </div>
       </div>
