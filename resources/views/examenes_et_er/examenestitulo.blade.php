@@ -1,8 +1,8 @@
 @extends('adminlte::page')
-@section('title', 'Exámenes a Regularización')
+@section('title', 'Exámenes a Título')
 
 @section('content_header')
-    <h1>Exámenes a Regularización</h1>
+    <h1>Exámenes a Título</h1>
 @stop
 
 @section('content')
@@ -26,16 +26,6 @@
                     </div> 
                     <div class="form-group">
                         <label>Ciclo Escolar</label>
-                        <select class="form-control">
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Período</label>
                         <select class="form-control">
                             <option>option 1</option>
                             <option>option 2</option>
@@ -99,13 +89,9 @@
                         </th>
                         <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Salón
                         </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Ex
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Tipo Ex
                         </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Recibo
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >RPE TIT.
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Sinodal Titular
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >No. Recibo
                         </th>
                         <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Opciones
                         </th>
@@ -120,13 +106,9 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
                         <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -144,10 +126,8 @@
                         <th rowspan="1" colspan="1">Fecha</th>
                         <th rowspan="1" colspan="1">Hora</th>
                         <th rowspan="1" colspan="1">Salón</th>
-                        <th rowspan="1" colspan="1">Ex</th>
-                        <th rowspan="1" colspan="1">Recibo</th>
-                        <th rowspan="1" colspan="1">RPE TIT.</th>
-                        <th rowspan="1" colspan="1">Sinodal Titular</th>
+                        <th rowspan="1" colspan="1">Tipo Ex</th>
+                        <th rowspan="1" colspan="1">No. Recibo</th>
                         <th rowspan="1" colspan="1">Opciones</th>
                     </tr>
                 </tfoot>
@@ -177,16 +157,10 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Clave</th>
-                            <th>Materia</th>
-                            <th>Cal</th>
-                            <th>Tipo</th>
-                            <th>Sem</th>
-                            <th>Fecha</th>
-                            <th>Semestre</th>
                             <th>Grupo</th>
-                            <th>RPE</th>
-                            <th>Profesor</th>
+                            <th>Materia</th>
+                            <th>Ex. Ordinario</th>
+                            <th>Ex. Extraordinario</th>
                             <th>Completar</th>
                         </tr>
                     </thead>
@@ -196,8 +170,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                        </tr>
+                        <tr>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -209,34 +184,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -248,13 +198,16 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="form-group">
-                            <label>Clave</label>
-                            <div class="input-group">
-                                <input type="number" name="" class="form-control">
-                                <div class="input-group-append">
-                                    <button class="btn btn-light"><i class="fas fa-search"></i> Ir </button>
-                                </div>
-                            </div>
+                            <label>Grupo</label>
+                            <br>
+                            <input class="form-control" type="text" name="grupo" disabled>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group">
+                            <label>Cve.Materia</label>
+                            <br>
+                            <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
                     <div class="col-3">
@@ -278,9 +231,16 @@
                             <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
                         <div class="form-group">
                             <label>Salón</label>
+                            <br>
+                            <input class="form-control" type="text" name="" disabled>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group">
+                            <label>Exámen</label>
                             <br>
                             <input class="form-control" type="text" name="" disabled>
                         </div>
@@ -301,7 +261,7 @@
                             <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>RPE Secretario</label>
                             <br>
@@ -318,45 +278,6 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <div class="form-group">
-                            <label>Sinodal Titular</label>
-                            <br>
-                            <select class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>   
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label>Única</label>
-                            <br>
-                            <select class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>   
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label>Tipo de Examen</label>
-                            <br>
-                            <select class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>   
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-2">
                         <div class="form-group">
                             <label>No. de Recibo</label>
                             <br>

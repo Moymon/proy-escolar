@@ -393,7 +393,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Impresion',
-                    'url'  => '#',
+                    'url'  => 'index_kardex',
                 ],
             ],
         ],
@@ -407,7 +407,7 @@ return [
                 ],
                 [
                     'text'    => 'Registro de exámenes ET',
-                    'url'     => '#',
+                    'url'     => 'ex_t',
                 ],
                 [
                     'text'    => 'Captura de calificaciones',
@@ -415,7 +415,7 @@ return [
                 ],
                 [
                     'text'    => 'Listado de exámenes',
-                    'url'   => '#',
+                    'url'   => 'list_ex',
                 ],
                 [
                     'text'    => 'Fechas de exámenes',

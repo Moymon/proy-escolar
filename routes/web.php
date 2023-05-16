@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\menu\sidebar;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,11 @@ Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->n
 
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
 
+/*Rutas para el kardex*/
+Route::get('/index_kardex',[sidebar::class,'kardex']);
+
 /*Rutas para examenes*/
-Route::get('/ex_re',[App\Http\Controllers\menu\sidebar::class,'examenes_regularizacion']);
+Route::get('/ex_re',[sidebar::class,'examenes_regularizacion']);
+Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
+Route::get('/list_ex',[sidebar::class,'listado_examenes']);
+Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
