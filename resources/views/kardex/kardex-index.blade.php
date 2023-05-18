@@ -1,4 +1,6 @@
 @extends('adminlte::page')
+@extends('modalAlumnos')
+
 @section('title', 'Kardex')
 
 @section('content_header')
@@ -7,10 +9,9 @@
         <div class="col-6">
             <h1>Kardex</h1>
         </div>
-        <div class="col-6 ">
+        <div class="col-6">
             <div class="d-flex justify-content-end">
-                <input class="" type="number" name="" placeholder="Clave Única">
-                <a class="btn btn-light"><i class="fas fa-search"></i></a>
+                <button class="btn btn-light form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
             </div>
         </div>
     </div>
@@ -89,10 +90,10 @@
                 </div>
             </div><!--Fin col segunda columna-->
         </div><!--Fin row Primera Seccion-->
-        <div class="row">
+        <div class="row"> <!--Card para las tabs-->
            <div class="col-12 card">
                 <div class="card-title">
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-start">
                         <button class="btn btn-app"><i class="fas fa-print">Imprimir</i></button>
                     </div>
                 </div>
@@ -110,16 +111,17 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="pill" role="tab"  href="#tab-observaciones_academicas">Observaciones Académicas</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" role="tab"  href="#tab-cambios">Cambios</a>
-                        </li>
                    </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="">
                         <div class="tab-pane fade show active" id="tab-kardex" role="tabpanel">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-light" data-toggle="modal" data-target="#nuevaMateria"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <br>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped dataTable dtr-inline">
+                                <table class="table table-bordered table-striped dataTable dtr-inline" id="materias">
                                     <thead>
                                         <tr>
                                             <th>NUM</th>
@@ -135,6 +137,7 @@
                                             <th>Creditos aprobados</th>
                                             <th>Observaciones</th>
                                             <th>Cpm</th>
+                                            <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -152,6 +155,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm" data-toggle="modal" data-id="1" data-target="#registroExamen"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -167,6 +171,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm" data-toggle="modal" data-id="1" data-target="#registroExamen"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -182,6 +187,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -197,6 +203,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -652,64 +659,124 @@
                                 </div>    
                             </div>
                         </div><!--Tab Observaciones Academicas-->
-                        <div class="tab-pane fade show" id="tab-cambios" role="tabpanel">
-                            <form >
-                                <div class="form-group"> 
-                                    <div class="d-flex justify-content-around row">
-                                        <div class="col-1">
-                                            <label class="col-form-label">Clave</label>
-                                            <input class="form-control" type="text" name="">
-                                        </div>
-                                        <div class="col-3">
-                                            <label class="col-form-label">Nombre de la materia</label>
-                                            <input class="form-control" type="text" name="">
-                                        </div>
-                                        <div class="col-1">
-                                            <label class="col-form-label">Calificación</label>
-                                            <input class="form-control" type="text" name="">
-                                        </div>
-                                        <div class="col-2">
-                                            <label class="col-form-label">Fecha</label>
-                                            <input class="form-control" type="date" name="">
-                                        </div>
-                                        <div class="col-2">
-                                            <label class="col-form-label">Tipo de Examen</label>
-                                            <input class="form-control" type="text" name="">
-                                        </div>
-                                        <div class="col-1">
-                                            <label class="col-form-label">Examen</label>
-                                            <input class="form-control" type="numer" name="">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="d-flex justify-content-end row">
-                                        <div class="col-1">
-                                            <button class="btn btn-light form-control">Agregar</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <button class="btn btn-light form-control">Eliminar</button>
-                                        </div>
-                                        <div class="col-1">
-                                            <button class="btn btn-light form-control">Modificar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div><!--Tab Cambios-->
                     </div><!--Tab principal-->
                </div><!--Fin card body de kardex-->
            </div><!--Fin card de kardex--> 
         </div>
-    </div><!--fin card body-->
-    <div class="card-footer">
-        <div class="row d-flex justify-content-end">
-            <div class="col-1">
-                <button class="btn btn-light form-control">Imprimir</button>
-            </div>
-        </div>
-    </div><!--Fin card footer-->    
+    </div><!--fin card body-->    
 </div><!--fin card-->
 
+<!--Modal de nueva materia-->
+<div class="modal fade" id="nuevaMateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Materia Nueva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form >
+                        <div class="form-group"> 
+                            <div class="d-flex justify-content-around row">
+                                <div class="col-2">
+                                    <label class="col-form-label">Clave</label>
+                                    <input class="form-control" type="text" name="clave">
+                                </div>
+                                <div class="col-4">
+                                    <label class="col-form-label">Nombre de la materia</label>
+                                    <input class="form-control" type="text" name="nombre">
+                                </div>
+                                <div class="col-2">
+                                    <label class="col-form-label">Calificación</label>
+                                    <input class="form-control" type="text" name="calificacion">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Fecha</label>
+                                    <input class="form-control" type="date" name="fecha">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Tipo de Examen</label>
+                                    <input class="form-control" type="text" name="tipo_examen">
+                                </div>
+                                <div class="col-2">
+                                    <label class="col-form-label">Semestre</label>
+                                    <input class="form-control" type="numer" name="semestre">
+                                </div>    
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Agregar Materia</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal para editar materia-->
+<div class="modal fade" id="editarMateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Materia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form >
+                        <div class="form-group "> 
+                            <div class="d-flex justify-content-around row">
+                                <div class="col-2">
+                                    <label class="col-form-label">Clave</label>
+                                    <input class="form-control update" type="text" name="clave">
+                                </div>
+                                <div class="col-4">
+                                    <label class="col-form-label">Nombre de la materia</label>
+                                    <input class="form-control update" type="text" name="nombre" disabled>
+                                </div>
+                                <div class="col-2">
+                                    <label class="col-form-label">Calificación</label>
+                                    <input class="form-control update" type="text" name="calificacion">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Fecha</label>
+                                    <input class="form-control update" type="date" name="fecha">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Tipo de Examen</label>
+                                    <input class="form-control  update" type="text" name="tipo_examen">
+                                </div>
+                                <div class="col-2">
+                                    <label class="col-form-label">Semestre</label>
+                                    <input class="form-control update" type="numer" name="semestre">
+                                </div>    
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Actualizar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
 
 @stop
 
@@ -717,5 +784,14 @@
 @stop
 
 @section('js')
+<script>
+    
+</script>
     <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        function crearMateria(e) {
+            //console.log(e.parentElement.parentElement);
+            $('#nuevaMateria').modal('show');
+        }
+    </script>
 @stop
