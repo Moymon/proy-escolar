@@ -301,6 +301,33 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        [
+            'text'         => 'Cuenta',
+            'url'          => '#',
+            'icon'         => 'fas fa-user',
+            'topnav_right' => true,
+            'submenu'      => [
+                [
+                                    'text'  => 'Configuración',
+                                    'icon'  => 'fas fa-user-cog',
+                                    'url'   => '#',
+                                    'classes' => 'text-center',
+                                ],
+                                [
+                                    'text'  => 'Editar',
+                                    'icon'  => 'fas fa-user-edit',
+                                    'url'   => '#',
+                                    'classes' => 'text-center',
+                                ],
+                                [
+                                    'text'  => 'Salir',
+                                    'icon'  => 'fas fa-power-off',
+                                    'url'   => '#',
+                                    'classes' => 'text-center',
+                                ],
+                              ]
+        ],
+        
 
         // Sidebar items:
         [
@@ -381,11 +408,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Alumnos de Licenciatura',
-                    'url'  => '#',
+                    'url'  => 'al_lic',
                 ],
                 [
                     'text'    => 'Alumnos de Posgrado',
-                    'url'     => '#',
+                    'url'     => 'al_pos',
                 ],
             ],
         ],

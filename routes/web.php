@@ -26,6 +26,11 @@ Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->n
 
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
 
+/* Rutas ALumno*/
+Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
+Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
+
+
 /*Rutas para el kardex*/
 Route::get('/index_kardex',[sidebar::class,'kardex']);
 

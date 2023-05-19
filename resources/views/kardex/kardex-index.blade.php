@@ -784,14 +784,5 @@
 @stop
 
 @section('js')
-<script>
-    
-</script>
-    <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script>
-    <script>
-        function crearMateria(e) {
-            //console.log(e.parentElement.parentElement);
-            $('#nuevaMateria').modal('show');
-        }
-    </script>
+    <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script>   
 @stop

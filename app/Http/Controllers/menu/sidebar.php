@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class sidebar extends Controller
 {
+
+    /*Alumnos*/
+    public function alumnos_licenciatura(){
+        return view('alumnos.alumnos_licenciatura');
+    }
+
+    public function alumnos_posgrado(){
+        return view('alumnos.alumnos_posgrado');
+    }
+
     //
     /*Rutas para Kardex*/
     public function kardex(){
@@ -36,6 +46,5 @@ class sidebar extends Controller
     public function procedimientos_archivos_constancias(){
         return view('procedimientos.menuprincipal');
     }
-
 
 }
