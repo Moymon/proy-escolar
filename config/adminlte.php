@@ -291,6 +291,7 @@ return [
 
     'menu' => [
         // Navbar items:
+        /*Especificar topnav agrega solo al navbar*/
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -309,7 +310,8 @@ return [
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'can'  => 'manage-blog', 
+            /*can se utiliza para roles, para asi mostrar rutas*/
         ],
         /*[
             'text'        => 'pages',
@@ -419,7 +421,7 @@ return [
                 ],
                 [
                     'text'    => 'Fechas de exámenes',
-                    'url'   => '#',
+                    'url'   => 'fechas_et_er',
                 ],
             ],
         ],
@@ -501,7 +503,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -546,7 +548,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

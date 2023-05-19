@@ -1,4 +1,5 @@
 @extends('adminlte::page')
+
 @section('title', 'Listado de Exámenes')
 
 @section('content_header')
@@ -35,7 +36,9 @@
             </div>
             <div class="form-group">
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-light">Listar Fechas</button>
+                    <div class="col-2">
+                        <button class="btn bg-gradient-secondary">Listar Fechas</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,9 +73,10 @@
             </div>
             <div class="form-group">
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-light">Listar Exámenes</button>
+                    <div class="col-3">
+                       <button class="btn bg-gradient-secondary form-control">Listar Exámenes</button> 
+                    </div>
                 </div>
-                
             </div>                
         </div>
       </div>
@@ -124,10 +128,10 @@
                             <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="form-group">
                             <br>
-                            <button class="btn btn-light form-control">Ver Sinodal Secretario</button>
+                            <button class="btn bg-gradient-secondary form-control">Ver Sinodal Secretario</button>
                         </div>
                     </div>
                 </div>

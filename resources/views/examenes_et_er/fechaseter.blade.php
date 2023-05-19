@@ -51,8 +51,12 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
+                    <br>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-light form-control">Buscar</button>
+                        <div class="col-6">
+                            <button class="btn bg-gradient-secondary form-control">Buscar</button>
+                        </div>
+                        
                     </div>  
                 </div>        
             </div>
@@ -149,16 +153,22 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-6">
-                                <div class="form-group">
-                                    <button class="btn btn-light form-control">Agregar</button>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="form-group col-3">
+                                        <button class="btn bg-gradient-secondary form-control">Agregar</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-light form-control">Eliminar</button>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="form-group col-3">
+                                        <button class="btn bg-gradient-secondary form-control">Eliminar</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-light form-control">Limpiar</button>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="form-group col-3">
+                                        <button class="btn bg-gradient-secondary    form-control">Limpiar</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -184,37 +194,37 @@
                         <div class="row">
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Agregar Materias</button>
+                                    <button class="btn bg-gradient-secondary form-control">Agregar Materias</button>
                                 </div>
                             </div> <!--Fin boton agregar materias-->
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Cambiar fechas</button>
+                                    <button class="btn bg-gradient-secondary form-control">Cambiar fechas</button>
                                 </div>
                             </div> <!--Fin boton cambiar fechas-->
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Cambiar salones</button>
+                                    <button class="btn bg-gradient-secondary form-control">Cambiar salones</button>
                                 </div>
                             </div> <!--Fin boton Cambiar Salones-->
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Cambiar horarios</button>
+                                    <button class="btn bg-gradient-secondary form-control">Cambiar horarios</button>
                                 </div>
                             </div> <!--Fin boton Cambiar horarios-->
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Imprimir</button>
+                                    <button class="btn bg-gradient-secondary form-control">Imprimir</button>
                                 </div>
                             </div> <!--Fin boton imprimir-->
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Imprimir Sinodales</button>
+                                    <button class="btn bg-gradient-secondary form-control">Imprimir Sinodales</button>
                                 </div>
                             </div> <!--Fin boton Imprimir Sinodales-->
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button class="btn btn-light form-control">Exportar XLS</button>
+                                    <button class="btn bg-gradient-secondary form-control">Exportar XLS</button>
                                 </div>
                             </div> <!--Fin boton Exportar XLS-->
                         </div><!--Fin del row de los ultimos botones-->
@@ -224,9 +234,6 @@
         </div>
     </div>    
 </div>
-
-
-
 @stop
 
 @section('css')

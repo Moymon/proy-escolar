@@ -1,8 +1,21 @@
 @extends('adminlte::page')
+@extends('modalAlumnos')
+
 @section('title', 'Exámenes a Regularización')
 
 @section('content_header')
-    <h1>Exámenes a Regularización</h1>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-6">
+            <h1>Exámenes a Regularización</h1>
+        </div>
+        <div class="col-6">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+            </div>
+        </div>
+    </div>
+</div>
 @stop
 
 @section('content')
@@ -47,7 +60,7 @@
                 </div>
                 <div class="col-md-6"> 
                     <br> 
-                    <button class="btn btn-light"><i class="fas fa-search"></i></button>
+                    <button class="btn bg-gradient-secondary"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
@@ -77,7 +90,7 @@
                     </div>
                     <div class="col-md-6">
                         <br>
-                        <button class="btn btn-light" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
+                        <button class="btn bg-gradient-secondary" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
                     </div>
                 </div>
             </div>

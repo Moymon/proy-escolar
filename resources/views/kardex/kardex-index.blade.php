@@ -11,7 +11,7 @@
         </div>
         <div class="col-6">
             <div class="d-flex justify-content-end">
-                <button class="btn btn-light form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
             </div>
         </div>
     </div>
@@ -50,14 +50,14 @@
                                     <label>Aprobo 45 Créditos en 1 y 2 Semestres</label>
                                 </div>
                                 <div class="col-4">
-                                   <input class="form-control" width="50%" type="text" name="" disabled> 
+                                   <input class="form-control" type="text" name="" disabled> 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6"> 
                         <br> 
-                        <button class="btn btn-light"><i class="fas fa-search"></i></button>
+                        <button class="btn bg-gradient-secondary"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
            <div class="col-12 card">
                 <div class="card-title">
                     <div class="d-flex justify-content-start">
-                        <button class="btn btn-app"><i class="fas fa-print">Imprimir</i></button>
+                        <button class="btn btn-app bg-gradient-secondary"><i class="fas fa-print">Imprimir</i></button>
                     </div>
                 </div>
                 <div class="card-header p-0 pt-1 ">
@@ -117,7 +117,7 @@
                     <div class="tab-content" id="">
                         <div class="tab-pane fade show active" id="tab-kardex" role="tabpanel">
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-light" data-toggle="modal" data-target="#nuevaMateria"><i class="fas fa-plus"></i></button>
+                                <button class="btn bg-gradient-primary" data-toggle="modal" data-target="#nuevaMateria"><i class="fas fa-plus"></i></button>
                             </div>
                             <br>
                             <div class="table-responsive">
