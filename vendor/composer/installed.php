@@ -1094,6 +1094,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'spatie/laravel-permission' => array(
+            'pretty_version' => '5.10.1',
+            'version' => '5.10.1.0',
+            'reference' => 'd08b3ffc5870cce4a47a39f22174947b33c191ae',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-permission',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/console' => array(
             'pretty_version' => 'v6.0.19',
             'version' => '6.0.19.0',

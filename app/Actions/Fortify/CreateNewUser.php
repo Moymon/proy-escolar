@@ -32,6 +32,6 @@ class CreateNewUser implements CreatesNewUsers
             'nombre' => $input['nombre'],
             'apellido_pa' => $input['apellido_pa'],
             'apellido_ma' => $input['apellido_ma'],
-        ]);
+        ])->assignRole('Administrador');
     }
 }

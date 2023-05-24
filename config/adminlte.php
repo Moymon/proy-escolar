@@ -473,6 +473,7 @@ return [
                 [
                     'text'    => 'Usuarios',
                     'url'     => '#',
+                    'can'     => ['administrador','capturista'],
                 ],
             ],
         ],
