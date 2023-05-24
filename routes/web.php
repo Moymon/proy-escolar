@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\menu\sidebar;
+use App\Http\Controllers\authwp;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,17 @@ Route::get('/ex_re',[sidebar::class,'examenes_regularizacion']);
 Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
 Route::get('/list_ex',[sidebar::class,'listado_examenes']);
 Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+
+/*Login chafa*/
+Route::post('/login_wp',[authwp::class,'login_without_password']);
