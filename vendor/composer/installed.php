@@ -517,6 +517,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'laravelcollective/html' => array(
+            'pretty_version' => 'v6.4.1',
+            'version' => '6.4.1.0',
+            'reference' => '64ddfdcaeeb8d332bd98bef442bef81e39c3910b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravelcollective/html',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'league/commonmark' => array(
             'pretty_version' => '2.4.0',
             'version' => '2.4.0.0',

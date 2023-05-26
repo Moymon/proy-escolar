@@ -23,7 +23,7 @@
                  alt="{{ Auth::user()->name }}">
         @endif
         <span >
-            {{ Auth::user()->name }}
+            {{ Auth::user()->nombre }}
         </span>
     </a>
 
@@ -40,7 +40,7 @@
                          alt="{{ Auth::user()->name }}">
                 @endif
                 <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif">
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->nombre }}
                     @if(config('adminlte.usermenu_desc'))
                         <small></small>
                     @endif

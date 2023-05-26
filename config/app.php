@@ -165,6 +165,7 @@ return [
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
         Illuminate\Filesystem\FilesystemServiceProvider::class,
@@ -212,6 +213,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+         // ...
+          'Form' => Collective\Html\FormFacade::class,
+          'Html' => Collective\Html\HtmlFacade::class,
+        // ...
     ])->toArray(),
 
 ];

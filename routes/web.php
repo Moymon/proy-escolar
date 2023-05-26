@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\menu\sidebar;
 use App\Http\Controllers\authwp;
+use App\Http\Controllers\usuarios\usuariosController;
+use App\Http\Controllers\administracion\datosGenerales;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +16,24 @@ use App\Http\Controllers\authwp;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-Auth::routes();
+//Auth::routes();
 
+/*Login chafa*/
+Route::post('/login_wp',[authwp::class,'login_without_password']);
+
+/*Otras rutas*/
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('Inicio');
 
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
 
-/* Rutas ALumno*/
+/* Rutas Alumnos*/
 Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
 Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
 
@@ -41,6 +47,16 @@ Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
 Route::get('/list_ex',[sidebar::class,'listado_examenes']);
 Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
 
+/*Rutas de administracion*/
+Route::get('/usuarios',[sidebar::class,'usuarios']);
+Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
+
+Route::get('/administracion-index',[datosGenerales::class,'index']);
+Route::get('/administracion-edit/{id}',[datosGenerales::class,'edit']);
+Route::post('/administracion-update/{id}',[datosGenerales::class,'update']);
+
+
+/*------------*/
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -52,5 +68,3 @@ Route::middleware([
 });
 
 
-/*Login chafa*/
-Route::post('/login_wp',[authwp::class,'login_without_password']);

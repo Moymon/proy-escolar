@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class sidebar extends Controller
 {
 
-    /*Alumnos*/
+    /*Alumnos-------------------------------------------------------------------------------*/
     public function alumnos_licenciatura(){
         return view('alumnos.alumnos_licenciatura');
     }
@@ -18,13 +18,13 @@ class sidebar extends Controller
     }
 
     //
-    /*Rutas para Kardex*/
+    /*Rutas para Kardex---------------------------------------------------------------------*/
     public function kardex(){
         return view('kardex.kardex-index');
     }
 
     //
-    /*Rutas para Examenes ET y ET*/
+    /*------------------Rutas para Examenes ET y ET-------------------------------------------*/
     public function examenes_regularizacion(){
         return view('examenes_et_er.examenesregularizacion');
     }
@@ -42,9 +42,14 @@ class sidebar extends Controller
         return view('examenes_et_er.fechaseter');
     }
     
-    /*Rutas para Procedimientos*/
+    /*Rutas para Procedimientos-------------------------------------------------------------*/
     public function procedimientos_archivos_constancias(){
         return view('procedimientos.menuprincipal');
     }
 
+    /*Rutas para Administracion-------------------------------------------------------------*/
+    /*Funcion Index que mostrara los usuarios*/
+    public function usuarios(){
+        return view('administracion.usuarios-index');
+    }
 }

@@ -11,7 +11,15 @@ class authwp extends Controller
     //
     public function login_without_password(Request $request){
 
-        $resultado = $this->validar_sesion($request->rpe,$request->password);
+        $usuario = User::where('rpe',$request->rpe)->first();
+
+        if(Auth::login($usuario)){
+            return redirect('/Inicio');
+        }else{
+            return redirect('/login');
+        }
+
+        /*$resultado = $this->validar_sesion($request->rpe,$request->password);
 
         if($resultado == 1){
             $usuario = User::where('rpe',$request->rpe)->first();
@@ -20,8 +28,8 @@ class authwp extends Controller
 
             return redirect('/Inicio');
         }else{
-            return view('/login');
-        }
+            return redirect('/login');
+        }*/
     }
 
     function validar_sesion($rpe, $pass)

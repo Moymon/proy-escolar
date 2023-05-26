@@ -6,6 +6,15 @@
 @stop
 
 @section('content')
+
+    @if(Auth::guest())
+        <a href="{{ url('login') }}"></a>
+        @else
+        <div>
+            <input type="text" value="{{ Auth::user()->nombre }}">
+        </div>
+    @endif
+
     <x-adminlte-small-box title="Notas" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

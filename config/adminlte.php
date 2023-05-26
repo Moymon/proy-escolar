@@ -301,32 +301,6 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-        [
-            'text'         => 'Cuenta',
-            'url'          => '#',
-            'icon'         => 'fas fa-user',
-            'topnav_right' => true,
-            'submenu'      => [
-                [
-                                    'text'  => 'Configuración',
-                                    'icon'  => 'fas fa-user-cog',
-                                    'url'   => '#',
-                                    'classes' => 'text-center',
-                                ],
-                                [
-                                    'text'  => 'Editar',
-                                    'icon'  => 'fas fa-user-edit',
-                                    'url'   => '#',
-                                    'classes' => 'text-center',
-                                ],
-                                [
-                                    'text'  => 'Salir',
-                                    'icon'  => 'fas fa-power-off',
-                                    'url'   => '#',
-                                    'classes' => 'text-center',
-                                ],
-                              ]
-        ],
         
 
         // Sidebar items:
@@ -405,30 +379,36 @@ return [
         [
             'text'    => 'Alumnos',
             'icon'    => 'fas fa-fw fa-user',
+            'can'     => ['administrador','capturista'],
             'submenu' => [
                 [
                     'text' => 'Alumnos de Licenciatura',
                     'url'  => 'al_lic',
+                    'can'     => ['administrador','capturista'],
                 ],
                 [
                     'text'    => 'Alumnos de Posgrado',
                     'url'     => 'al_pos',
+                    'can'     => ['administrador','capturista'],
                 ],
             ],
         ],
         [
             'text'    => 'Kardex',
             'icon'    => 'far fa-newspaper',
+            'can'     => ['administrador','capturista'],
             'submenu' => [
                 [
                     'text' => 'Impresion',
                     'url'  => 'index_kardex',
+                    'can'     => ['administrador','capturista'],
                 ],
             ],
         ],
         [
             'text'    => 'Examenes ET y ER',
             'icon'    => 'fas fa-book',
+            'can'     => ['administrador','capturista'],
             'submenu' => [
                 [
                     'text'    => 'Registro de exámenes ER',
@@ -455,25 +435,34 @@ return [
         [
             'text'    => 'Procedimientos',
             'icon'    => 'fab fa-first-order-alt',
+            'can'     => ['administrador','capturista'],
             'submenu' => [
                 [
                     'text' => 'Archivo para constancias',
                     'url'  => 'procedimientos',
+                    'can'     => ['administrador','capturista'],
                 ],
             ],
         ],
         [
             'text'    => 'Administracion',
             'icon'    => 'fas fa-wrench',
+            'can'     => ['administrador','capturista'],
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
+                    'can'     => ['administrador','capturista'],
                 ],
                 [
                     'text'    => 'Usuarios',
-                    'url'     => '#',
+                    'url'     => 'usuarios',
                     'can'     => ['administrador','capturista'],
+                ],
+                [
+                    'text'    => 'Datos Generales',
+                    'url'     => 'administracion-index',
+                    'can'     => ['administrador'],  
                 ],
             ],
         ],
