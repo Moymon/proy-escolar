@@ -9,6 +9,8 @@ class datosGenerales extends Model
 {
     use HasFactory;
 
+    protected $table = "datos_generales";
+
     protected $fillable = [
         'institucion',
         'url',

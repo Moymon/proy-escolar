@@ -455,6 +455,16 @@ return [
                     'can'     => ['administrador','capturista'],
                 ],
                 [
+                    'text' => 'Roles',
+                    'url'  => 'roles',
+                    'can'  => ['administrador'],
+                ],
+                [
+                    'text' => 'Permisos',
+                    'url'  => 'permisos',
+                    'can'  => ['administrador'],
+                ],
+                [
                     'text'    => 'Usuarios',
                     'url'     => 'usuarios',
                     'can'     => ['administrador','capturista'],

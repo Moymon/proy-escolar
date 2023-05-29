@@ -5,6 +5,7 @@ use App\Http\Controllers\menu\sidebar;
 use App\Http\Controllers\authwp;
 use App\Http\Controllers\usuarios\usuariosController;
 use App\Http\Controllers\administracion\datosGenerales;
+use App\Http\Controllers\rolesypermisos\roles_permisos;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,9 @@ Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
 Route::get('/usuarios',[sidebar::class,'usuarios']);
 Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
 
+Route::get('/roles',[roles_permisos::class,'index_r']);
+
+
 Route::get('/administracion-index',[datosGenerales::class,'index']);
 Route::get('/administracion-edit/{id}',[datosGenerales::class,'edit']);
 Route::post('/administracion-update/{id}',[datosGenerales::class,'update']);
@@ -67,4 +71,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::post('/cerrarsesion',[authwp::class,'logout']);
 

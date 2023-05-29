@@ -1,20 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\usuarios;
+namespace App\Http\Controllers\rolesypermisos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Spatie\Permission\Models\Role;
 
-class usuariosController extends Controller
+class roles_permisos extends Controller
 {
+    /*R = rol 
+      P = permiso
+    */
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index_r()
+    {
+        //
+    }
+
+    public function index_p()
     {
         //
     }
@@ -57,14 +64,9 @@ class usuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user)
+    public function edit($id)
     {
         //
-
-        $roles = Role::all();
-
-        $usuario = User::where('id',$user)->first();
-        return view('administracion.usuarios.usuarios-edit',compact('usuario','roles'));
     }
 
     /**
@@ -76,19 +78,7 @@ class usuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = User::where('id',$id)->first();
-
-        $usuario->roles()->sync($request->roles);
-        
-
-        return redirect()->route('catalogo.usuarios.edit',$id)->with('info','Se actualizaron los datos con exito');
-    }
-
-    public function actualizar(Request $request)
-    {
         //
-       return redirect("/Inicio");
-       //echo $request->rol;
     }
 
     /**

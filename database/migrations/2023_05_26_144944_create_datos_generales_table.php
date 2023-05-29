@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('datos_generales', function (Blueprint $table) {
             $table->id('id');
             $table->string('institucion',100);
-            $table->string('url',50);
-            $table->string('version_git',50);
+            $table->string('url',100);
+            $table->string('version_git',100);
             $table->string('nombre_version',50);
             $table->string('correo',25);
-            $table->integer('telefono');
+            $table->bigint('telefono');
             $table->integer('ext');
-            $table->string('master',100);
+            $table->string('master',300);
             $table->timestamps();
         });
     }

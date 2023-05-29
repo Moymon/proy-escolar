@@ -5,6 +5,11 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 
+/*Para comprobar la contrasena encryptaba*/
+use App\Models\administracion\datosGenerales as datosGenModel;
+use App\Encryption;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class authwp extends Controller
 {
@@ -12,12 +17,25 @@ class authwp extends Controller
     public function login_without_password(Request $request){
 
         $usuario = User::where('rpe',$request->rpe)->first();
+        $datosG = datosGenModel::find(1);
 
-        if(Auth::login($usuario)){
+        if( Crypt::decrypt($datosG->master) == $request->password && $usuario !== NULL ){
+            Auth::login($usuario);   
+            return redirect('/Inicio');
+        }else{
+            $resultado = $this->validar_sesion($request->rpe,$request->password);
+            if($resultado == 1){
+                Auth::login($usuario);
+                return redirect('/Inicio');
+            }
+        }
+        return redirect('/login');
+
+        /*if(Auth::login($usuario)){
             return redirect('/Inicio');
         }else{
             return redirect('/login');
-        }
+        }*/
 
         /*$resultado = $this->validar_sesion($request->rpe,$request->password);
 
@@ -79,5 +97,10 @@ class authwp extends Controller
         }
         
         return $conectado;
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return redirect('/login');
     }
 }

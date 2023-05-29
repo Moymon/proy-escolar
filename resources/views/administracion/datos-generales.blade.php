@@ -32,43 +32,50 @@
                 <div class="row">
                     <div class="col-3">
                         <label>Institucion</label>
-                        <input class="form-control" type="text" name="institucion" value="" <?= $boton == 'edit' ? "disabled" : "" ?>  />
+                        <input class="form-control" type="text" name="institucion" value="{{$datosG->institucion}}" <?= $boton == 'edit' ? "disabled" : "" ?>  />
                     </div>
                     <div class="col-3">
                         <label>URL del Sitio</label>
-                        <input class="form-control" type="text" name="url" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="text" name="url" value="{{$datosG->url}}" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                     <div class="col-3">
                         <label>Version de git</label>
-                        <input class="form-control" type="text" name="version_git" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="text" name="version_git" value="{{$datosG->version_git}}" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                     <div class="col-3">
                         <label>Nombre de git</label>
-                        <input class="form-control" type="text" name="nombre_version" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="text" name="nombre_version" value="{{$datosG->nombre_version}}" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-3">
                         <label>Correo</label>
-                        <input class="form-control" type="email" name="correo" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="email" name="correo" value="{{$datosG->correo}}" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                     <div class="col-3">
                         <label>Telefono</label>
-                        <input class="form-control" type="number" name="telefono" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="number" name="telefono" value="{{$datosG->telefono}}" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                     <div class="col-3">
                         <label>ext</label>
-                        <input class="form-control" type="number"  name="ext" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="number"  name="ext" value="{{$datosG->ext}}" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                     <div class="col-3">
                         <label>Clave Maestra</label>
-                        <input class="form-control" type="password" name="master" value="" <?= $boton == 'edit' ? "disabled" : "" ?>>
+                        <input class="form-control" type="password" name="master" value="soyunacontrasena" <?= $boton == 'edit' ? "disabled" : "" ?>>
                     </div>
                 </div>
+                <br>
 
                  @if ($boton == 'update')
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-12">
+                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                    
                 @endif
             </form>
         </div>
