@@ -53,7 +53,12 @@ Route::get('/usuarios',[sidebar::class,'usuarios']);
 Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
 
 Route::get('/roles',[roles_permisos::class,'index_r']);
+Route::post('/roles-create',[roles_permisos::class,'create_r']);
+Route::get('/roles-edit/{id}',[roles_permisos::class,'edit']);
+Route::post('/roles/update/{id}',[roles_permisos::class,'update']);
 
+Route::get('/permisos',[roles_permisos::class,'index_p']);
+Route::post('/permisos-create',[roles_permisos::class,'create_p']);
 
 Route::get('/administracion-index',[datosGenerales::class,'index']);
 Route::get('/administracion-edit/{id}',[datosGenerales::class,'edit']);
@@ -71,5 +76,6 @@ Route::middleware([
     })->name('dashboard');
 });
 
+/*Cerrar session*/
 Route::post('/cerrarsesion',[authwp::class,'logout']);
 

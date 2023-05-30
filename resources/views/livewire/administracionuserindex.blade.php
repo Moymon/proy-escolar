@@ -11,6 +11,8 @@
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
+                        <th>Rol</th>
+                        <th>Permisos</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -21,6 +23,14 @@
                             <td>{{$user->nombre}}</td>
                             <td>{{$user->apellido_pa}}</td>
                             <td>{{$user->apellido_ma}}</td>
+                            @foreach ($user->roles as $rol)
+                                <td>{{$rol->name}}</td>
+                                <td>
+                                @foreach ($rol->permissions as $permission)
+                                    {{$permission->name}}
+                                @endforeach
+                                </td>
+                            @endforeach
                             <td>
                                 <div class="input-group">
                                     <div class="col-6">
