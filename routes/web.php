@@ -35,34 +35,75 @@ Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->n
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
 
 /* Rutas Alumnos*/
-Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
-Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
+/*Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
+Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);*/
 
 
 /*Rutas para el kardex*/
-Route::get('/index_kardex',[sidebar::class,'kardex']);
+//Route::get('/index_kardex',[sidebar::class,'kardex']);
 
 /*Rutas para examenes*/
-Route::get('/ex_re',[sidebar::class,'examenes_regularizacion']);
+/*Route::get('/ex_re',[sidebar::class,'examenes_regularizacion']);
 Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
 Route::get('/list_ex',[sidebar::class,'listado_examenes']);
-Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
+Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);*/
 
 /*Rutas de administracion*/
-Route::get('/usuarios',[sidebar::class,'usuarios']);
-Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
+//Route::get('/usuarios',[sidebar::class,'usuarios']);
+//Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
 
-Route::get('/roles',[roles_permisos::class,'index_r']);
-Route::post('/roles-create',[roles_permisos::class,'create_r']);
-Route::get('/roles-edit/{id}',[roles_permisos::class,'edit']);
-Route::post('/roles/update/{id}',[roles_permisos::class,'update']);
+/*Permisos de rutas para el administrador*/
+Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
+    /*Permisos de solo lectura*/
+    Route::group(['middleware' => ['permission:administrador.read']], function(){
+        /*Rutas de administracion*/
+        Route::get('/roles',[roles_permisos::class,'index_r']);
+        Route::get('/permisos',[roles_permisos::class,'index_p']);
+        Route::get('/administracion-index',[datosGenerales::class,'index']);
+        Route::get('/usuarios',[sidebar::class,'usuarios']);
+        /*Rutas de examenes*/
+        Route::get('/ex_re',[sidebar::class,'examenes_regularizacion']);
+        Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
+        Route::get('/list_ex',[sidebar::class,'listado_examenes']);
+        Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
+        /*Rutas para el kardex*/
+        Route::get('/index_kardex',[sidebar::class,'kardex']);
+        /* Rutas Alumnos*/
+        Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
+        Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
+    });
+    /*Permisos de editar*/
+    Route::group(['middleware' => ['permission:administrador.edit']], function(){
+        Route::get('/roles-edit/{id}',[roles_permisos::class,'edit']);
+        Route::get('/administracion-edit/{id}',[datosGenerales::class,'edit']);
+    });
+    /*Permisos de crear*/
+    Route::group(['middleware' => ['permission:administrador.create']], function(){
+        Route::post('/roles-create',[roles_permisos::class,'create_r']);
+        Route::post('/permisos-create',[roles_permisos::class,'create_p']);
+    });
+    /*Permisos de actualizar*/
+    Route::group(['middleware' => ['permission:administrador.update']], function(){
+        Route::post('/roles/update/{id}',[roles_permisos::class,'update']);
+        Route::post('/administracion-update/{id}',[datosGenerales::class,'update']);
+    });
+    /*Permisos de todo*/
+    Route::group(['middleware' => ['permission:administrador.create|administrador.read|administrador.update']], function(){
+        Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
+    });
+});
 
-Route::get('/permisos',[roles_permisos::class,'index_p']);
-Route::post('/permisos-create',[roles_permisos::class,'create_p']);
+//Route::get('/roles',[roles_permisos::class,'index_r']);
+//Route::post('/roles-create',[roles_permisos::class,'create_r']);
+//Route::get('/roles-edit/{id}',[roles_permisos::class,'edit']);
+//Route::post('/roles/update/{id}',[roles_permisos::class,'update']);
 
-Route::get('/administracion-index',[datosGenerales::class,'index']);
-Route::get('/administracion-edit/{id}',[datosGenerales::class,'edit']);
-Route::post('/administracion-update/{id}',[datosGenerales::class,'update']);
+//Route::get('/permisos',[roles_permisos::class,'index_p']);
+//Route::post('/permisos-create',[roles_permisos::class,'create_p']);
+
+//Route::get('/administracion-index',[datosGenerales::class,'index']);
+//Route::get('/administracion-edit/{id}',[datosGenerales::class,'edit']);
+//Route::post('/administracion-update/{id}',[datosGenerales::class,'update']);
 
 
 /*------------*/

@@ -48,14 +48,38 @@
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
-
     <div class="p-3 tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="row border border-5 p-3">
+            <div class="col-1">
+                <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
+            </div> 
+            <div class="col-3">
+                <div class="col-4">
+                    <label for="clave_uaslp" class="m-0 form-label">Clave UASLP:</label>
+                    <input type="text" class="form-control" id="clave_uaslp">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-5">
+                    <label for="clave_ingenieria" class="m-0 form-label">Clave Ingeniería</label>
+                    <input type="text" class="form-control" id="clave_ingenieria">
+                </div>
+            </div>
+        </div>
         <div class="w-100 row p-0 m-0 h-100" id="">
-
+            <div class="border border-5 p-3">
+                <div class="col-4">
+                    <img src="https://picsum.photos/200/300" alt="">
+                </div>
+                <div class="col-3">
+                    <label for="clave_uaslp" class="m-0 form-label">Clave UASLP</label>
+                    <input type="text" class="small form-control" id="clave_uaslp">
+                </div>
+            </div>
+            
             <div class="border border-5 shadow p-3 mb-3 col-12 d-flex flex-sm-row flex-column align-items-center justify-content-around">
                 <div style="height:150px;width:min(150px, 100%)!important;" class="me-2">
-                    <img src="{{ asset('img/usuario.svg')}}" alt="">
-
+                    
                 </div>
                 <div class="row m-0 p-0 w-75">
 

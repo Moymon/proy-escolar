@@ -27,8 +27,8 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Origen</th>
-                    <th>Permisos</th>
-                    <th>Permisos</th>
+                    <th>Lista de Permisos</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
                         <td>{{$rol->guard_name}}</td>
                         <td>
                             @foreach ($rol->permissions as $permission)
-                                {{$permission->name}}
+                                <h5><div class="badge badge-secondary">{{$permission->name}}</div></h5>
                             @endforeach
                         </td>
                         <td width="10px">Ver...<a href="/roles-edit/{{$rol->id}}"><i class="fas fa-list"></i></a></td>
