@@ -41,421 +41,414 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Alumno</button>
-      <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Contacto</button>
-      <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Academico</button>
+      <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-alumno" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Alumno</button>
+      <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilio</button>
+      <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-academico" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedente Academico</button>
+      <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-egreso" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Datos de Egreso</button>
     </div>
 </nav>
 
+<!--Tabs-->
 <div class="tab-content" id="nav-tabContent">
-    <div class="p-3 tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <div class="row border border-5 p-3">
-            <div class="col-1">
-                <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
-            </div> 
-            <div class="col-3">
-                <div class="col-4">
-                    <label for="clave_uaslp" class="m-0 form-label">Clave UASLP:</label>
-                    <input type="text" class="form-control" id="clave_uaslp">
+    <!--Tab alumno-->
+    <div class="p-3 tab-pane fade show active" id="nav-alumno" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="border border-5 p-3">
+            <div class="row">
+                <div class="col-1">
+                    <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="col-5">
-                    <label for="clave_ingenieria" class="m-0 form-label">Clave Ingeniería</label>
-                    <input type="text" class="form-control" id="clave_ingenieria">
-                </div>
-            </div>
-        </div>
-        <div class="w-100 row p-0 m-0 h-100" id="">
-            <div class="border border-5 p-3">
-                <div class="col-4">
-                    <img src="https://picsum.photos/200/300" alt="">
-                </div>
-                <div class="col-3">
-                    <label for="clave_uaslp" class="m-0 form-label">Clave UASLP</label>
-                    <input type="text" class="small form-control" id="clave_uaslp">
-                </div>
-            </div>
-            
-            <div class="border border-5 shadow p-3 mb-3 col-12 d-flex flex-sm-row flex-column align-items-center justify-content-around">
-                <div style="height:150px;width:min(150px, 100%)!important;" class="me-2">
-                    
-                </div>
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
-                        <label for="clave_uaslp" class="m-0 form-label">Clave UASLP</label>
-                        <input type="text" class="small form-control" id="clave_uaslp">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="clave_ingenieria" class="m-0 form-label">Clave Ingeniería</label>
-                        <input type="text" class="mid form-control" id="clave_ingenieria">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="carrera" class="m-0 form-label">Carrera</label>
-                        <select id="carrera" class="form-select form-control" aria-label="Carrera">
-                            <option selected>Carrera</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="ciclo_escolar" class="m-0 form-label">Ciclo Escolar</label>
-                        <input type="text" class=" form-control" id="ciclo_escolar">
-                    </div>
-
-                    <hr style="width:100%;color:black" class="border border-5 mt-1 mb-1">
-
-
-                    <div class="col-sm-6 col-12">
-                        <label for="nombre" class="m-0 form-label">Nombre</label>
-                        <input type="text" class=" form-control" id="nombre">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="nombres" class="m-0 form-label">Nombres</label>
-                        <input type="text" class=" form-control" id="nombres">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="apellido_paterno" class="m-0 form-label">Apellido Paterno</label>
-                        <input type="text" class=" form-control" id="apellido_paterno">
-                    </div>
-                    <div class="col-sm-6 col-12">
-                        <label for="apellido_materno" class="m-0 form-label">Apellido Materno</label>
-                        <input type="text" class=" form-control" id="apellido_materno">
-                    </div>
-
-
-                    <div class="col-sm-6 col-12">
-                        <label for="sexo" class="m-0 form-label">Sexo</label>
-                        <select id="sexo" class="form-select form-control" aria-label="sexo">
-                            <option selected>sexo</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                        </select>
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="fecha_nacimiento" class="m-0 form-label">Fecha de Nacimiento</label>
-                        <input type="date" class=" form-control" id="fecha_nacimiento">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="curp" class="m-0 form-label">Curp</label>
-                        <input type="text" class="mid form-control" id="curp">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row w-75">
-                    <div class="col-12">
-                        <label for="situacion" class="m-0 form-label">Situación</label>
-                        <input type="text" class=" form-control" id="situacion">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="fecha_situacion" class="m-0 form-label">Fecha de la Situación</label>
-                        <input type="date" class="mid form-control" id="fecha_situacion">
-                    </div>
-
-                    <div class="col-12">
-                        <label for="condicion" class="m-0 form-label">Condición</label>
-                        <input type="text" class="small form-control" id="condicion">
-                    </div>
-                </div>
-            </div>
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 row m-0 d-flex flex-column align-items-center justify-content-around">
-                <div class="d-flex flex-sm-row flex-column align-items-center justify-content-around">
-                    <div class="row m-0 p-0 w-75">
-                        <div class="w-auto col-12">
-                            <label for="afiliacion_imss" class="m-0 form-label">No. de Afiliación IMSS</label>
-                            <input type="text" class="w-100 m-0 small form-control" id="afiliacion_imss">
+                <div class="col-11">
+                    <div class="row"> 
+                        <div class="col-2">
+                            <div class="">
+                                <label for="clave_uaslp" class="form-label">Clave UASLP:</label>
+                                <input type="text" class="form-control" id="clave_uaslp">
+                            </div>
                         </div>
-  
-                        <div class="col-12">
-                            <label for="unidad_medicina" class="m-0 form-label">Unidad de Medicina Familiar</label>
-                            <input type="text" class="small form-control" id="unidad_medicina">
+                        <div class="col-3">
+                            <div class="">
+                                <label for="clave_ingenieria" class="form-label">Clave Ingeniería</label>
+                                <input type="text" class="form-control" id="clave_ingenieria">
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 row m-0 d-flex flex-column">
-                
-                    <div class="d-flex flex-column align-items-center justify-content-center">
-                        <div style="height:150px;width:min(150px, 100%)!important;display:block!important;" class="me-2">
-                            <img src="{{ asset('img/usuario.svg')}}" alt="">
-                        </div>
-
-                        <div class="d-flex flex-column align-items-center justify-content-center" style="width: min(250px, 100%)">
-                            <label for="nombre_asesor" class="m-0 form-label">Nombre del Asesor</label>
-                            <select id="nombre_asesor" class="form-select form-control" aria-label="nombre_asesor">
-                                <option selected>nombre_asesor</option>
+                        <div class="col-3">
+                            <label for="carrera" class="form-label">Carrera</label>
+                            <select id="carrera" class="form-select form-control" aria-label="Carrera">
+                                <option selected>Carrera</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
+                                <option value="3">Three</option>
                             </select>
-                            <button id="cambio_asesor" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="mt-1 btn-sm bg-dark">Cambio Asesor</button>
+                        </div>
+                        <div class="col-2">
+                            <label for="ciclo_escolar" class="form-label">Ciclo Escolar</label>
+                            <input type="text" class=" form-control" id="ciclo_escolar">
                         </div>
                     </div>
-                
+                    <br>
+                    <div class="row">
+                        <!---<div class="col-1"></div>---->
+                        <div class="col-3">
+                            <label for="situacion" class="m-0 form-label">Situación</label>
+                            <input type="text" class=" form-control" id="situacion">
+                        </div>
+                        <div class="col-2">
+                            <label for="fecha_situacion" class="m-0 form-label">Fecha de la Situación</label>
+                            <input type="date" class="mid form-control" id="fecha_situacion">
+                        </div>
+                        <div class="col-2">
+                            <label for="conducta" class="m-0 form-label">Conducta</label>
+                            <input type="text" class="mid form-control" name="conducta">
+                        </div>
+                        <div class="col-3">
+                            <label for="condicion" class="m-0 form-label">Condición</label>
+                            <input type="text" class="small form-control" id="condicion">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-5">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class=" form-control" id="nombre">
+                </div>
+                <div class="col-3">
+                    <label for="nombres" class="form-label">Nombres</label>
+                    <input type="text" class=" form-control" id="nombres">
+                </div>
+                <div class="col-3">
+                    <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+                    <input type="text" class=" form-control" id="apellido_paterno">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label for="apellido_materno" class="m-0 form-label">Apellido Materno</label>
+                    <input type="text" class=" form-control" id="apellido_materno">
+                </div>
+                <div class="col-1">
+                    <label for="sexo" class="m-0 form-label">Sexo</label>
+                    <select id="sexo" class="form-select form-control" aria-label="sexo">
+                        <option selected>sexo</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label for="fecha_nacimiento" class="m-0 form-label">Fecha de Nacimiento</label>
+                    <input type="date" class=" form-control" id="fecha_nacimiento">
+                </div>
+                <div class="col-3">
+                    <label for="curp" class="m-0 form-label">CURP</label>
+                    <input type="text" class="mid form-control" id="curp">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2">
+                    <label for="afiliacion_imss" class="m-0 form-label">Número de Seguridad Social (IMSS)</label>
+                    <input type="text" class="w-100 m-0 small form-control" id="afiliacion_imss">
+                </div>
+                <div class="col-2">
+                    <label for="fecha_imss" class="m-0 form-label">Fecha Afiliacion NNS</label>
+                    <input type="date" class="w-100 m-0 small form-control" id="fecha_imss">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Archivo de NSS (Nombre)</label>
+                    <input type="text" name="archivo_nss" class="form-control" />
+                </div>
+                <div class="col-3">
+                    <label for="nombre_asesor" class="m-0 form-label">Nombre del Asesor</label>
+                    <select id="nombre_asesor" class="form-select form-control" aria-label="nombre_asesor">
+                        <option selected>nombre_asesor</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <br>
+                    <button id="cambio_asesor" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="form-control m-0 btn-sm bg-dark">Cambio de Asesor</button>
+                </div>
             </div>
         </div>
-        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-start">
+        <br>
+        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
             <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
             <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
         </div>
     </div>
 
-    <div class="p-3 tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <div class="w-100 row p-0 m-0 h-100" id="">
-
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
-                        <label for="calle_numero" class="m-0 form-label">Calle y No.</label>
-                        <input type="text" class="small form-control" id="calle_numero">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="colonia" class="m-0 form-label">Colonia</label>
-                        <input type="text" class="mid form-control" id="colonia">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="codigo_postal" class="m-0 form-label">Código Postal</label>
-                        <input type="text" class=" form-control" id="codigo_postal">
-                    </div>
-
-                    <div class="col-12">
-                        <label for="ciudad_municipio" class="m-0 form-label">Ciudad y/o Municipio</label>
-                        <input type="text" class=" form-control" id="ciudad_municipio">
-                    </div>
-                    
-                    <div class=" col-12">
-                        <label for="estado" class="m-0 form-label">Estado</label>
-                        <input type="text" class=" form-control" id="estado">
-                    </div>
+    <!--Tab Domicilio y Tutor-->
+    <div class="p-3 tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="border border-5 shadow p-3">
+            <h3 class="text-center">Domicilio del Alumno</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
+            <div class="row">
+                <div class="col-3">
+                    <label for="calle" class="m-0 form-label">Calle</label>
+                    <input type="text" class="small form-control" id="calle">    
+                </div>
+                <div class="col-2">
+                    <label for="num_ext" class="m-0 form-label">No. Exterior</label>
+                    <input type="number" class="small form-control" id="num_ext">
+                </div>
+                <div class="col-2">
+                    <label for="num_int" class="m-0 form-label">No. Interior</label>
+                    <input type="number" class="small form-control" id="num_int">
+                </div>
+                <div class="col-3">
+                    <label for="colonia" class="m-0 form-label">Colonia</label>
+                    <input type="text" class="mid form-control" id="colonia">
+                </div>
+                <div class="col-2">
+                    <label for="codigo_postal" class="m-0 form-label">Código Postal</label>
+                    <input type="text" class=" form-control" id="codigo_postal">
                 </div>
             </div>
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
-                        <label for="telefono" class="m-0 form-label">Teléfono</label>
-                        <input type="text" class="small form-control" id="telefono">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="celular" class="m-0 form-label">Teléfono Celular</label>
-                        <input type="text" class="mid form-control" id="celular">
-                    </div>
-
-                    <div class=" col-12">
-                        <label for="correo_personal" class="m-0 form-label">Correo Electrónico Personal</label>
-                        <input type="email" class=" form-control" id="correo_personal">
-                    </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label for="ciudad_municipio" class="m-0 form-label">Ciudad y/o Municipio</label>
+                    <input type="text" class=" form-control" id="ciudad_municipio">
+                </div>
+                <div class="col-3">
+                    <label for="estado" class="m-0 form-label">Estado</label>
+                    <input type="text" class=" form-control" id="estado">
+                </div>
+                <div class="col-3">
+                    <label for="telefono" class="m-0 form-label">Teléfono</label>
+                    <input type="number" class="small form-control" id="telefono">
+                </div>
+                <div class="col-3">
+                    <label for="celular" class="m-0 form-label">Celular</label>
+                    <input type="number" class="mid form-control" id="celular">    
                 </div>
             </div>
-
-            <h3 class="text-center">Tutor</h3>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label for="correo_alterno" class="m-0 form-label">Correo Alterno</label>
+                    <input type="email" class="form-control" id="correo_alterno">
+                </div>
+                <div class="col-3">
+                    <label for="correo_uaslp" class="m-0 form-label">Correo UASLP</label>
+                    <input type="email" class="form-control" id="correo_uaslp">
+                </div>
+            </div>
+        </div>
+        <div class="border border-5 shadow p-3" id="">
+            
+            <h3 class="text-center">Domicilio del Tutor</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
 
-            <div class="border border-5 shadow p-3 mb-3 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
-                        <label for="padre" class="m-0 form-label">Padre o tutor</label>
-                        <input type="text" class="small form-control" id="padre">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="madre" class="m-0 form-label">Madre</label>
-                        <input type="text" class="mid form-control" id="madre">
-                    </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="padre" class="m-0 form-label">Padre o tutor</label>
+                    <input type="text" class="small form-control" id="padre">
+                </div>
+                <div class="col-3">
+                    <label for="madre" class="m-0 form-label">Madre</label>
+                    <input type="text" class="mid form-control" id="madre">
+                </div>
+                <div class="col-3">
+                    <label for="calle_tutor" class="m-0 form-label">Calle</label>
+                    <input type="text" class="small form-control" id="calle_tutor">
+                </div>
+                <div class="col-3">
+                    <label for="numero_ext_tutor" class="m-0 form-label">No. Exterior</label>
+                    <input type="text" class="small form-control" id="numero_ext_tutor">
                 </div>
             </div>
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
-                        <label for="calle_numero_tutor" class="m-0 form-label">Calle y No.</label>
-                        <input type="text" class="small form-control" id="calle_numero_tutor">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="colonia_tutor" class="m-0 form-label">Colonia</label>
-                        <input type="text" class="mid form-control" id="colonia_tutor">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="codigo_postal_tutor" class="m-0 form-label">Código Postal</label>
-                        <input type="text" class=" form-control" id="codigo_postal_tutor">
-                    </div>
-
-                    <div class="col-12">
-                        <label for="ciudad_municipio_tutor" class="m-0 form-label">Ciudad y/o Municipio</label>
-                        <input type="text" class=" form-control" id="ciudad_municipio_tutor">
-                    </div>
-                    
-                    <div class=" col-12">
-                        <label for="estado_tutor" class="m-0 form-label">Estado</label>
-                        <input type="text" class=" form-control" id="estado_tutor">
-                    </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label for="numero_int_tutor" class="m-0 form-label">No. Interior</label>
+                    <input type="text" class="small form-control" id="numero_int_tutor">
+                </div>
+                <div class="col-3">
+                    <label for="colonia_tutor" class="m-0 form-label">Colonia</label>
+                    <input type="text" class="mid form-control" id="colonia_tutor">
+                </div>
+                <div class="col-3">
+                    <label for="codigo_postal_tutor" class="m-0 form-label">Código Postal</label>
+                    <input type="text" class=" form-control" id="codigo_postal_tutor">
+                </div>
+                <div class="col-3">
+                    <label for="ciudad_municipio_tutor" class="m-0 form-label">Ciudad y/o Municipio</label>
+                    <input type="text" class=" form-control" id="ciudad_municipio_tutor">    
                 </div>
             </div>
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
-                        <label for="telefono_tutor" class="m-0 form-label">Teléfono</label>
-                        <input type="text" class="small form-control" id="telefono_tutor">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="celular_tutor" class="m-0 form-label">Teléfono Celular</label>
-                        <input type="text" class="mid form-control" id="celular_tutor">
-                    </div>
-
-                    <div class=" col-12">
-                        <label for="correo_personal_tutor" class="m-0 form-label">Correo Electrónico Personal</label>
-                        <input type="email" class=" form-control" id="correo_personal_tutor">
-                    </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label for="estado_tutor" class="m-0 form-label">Estado</label>
+                    <input type="text" class=" form-control" id="estado_tutor">
+                </div>
+                <div class="col-3">
+                    <label for="telefono_tutor" class="m-0 form-label">Teléfono</label>
+                    <input type="text" class="small form-control" id="telefono_tutor">    
+                </div>
+                <div class="col-3">
+                    <label for="celular_tutor" class="m-0 form-label">Celular</label>
+                    <input type="text" class="mid form-control" id="celular_tutor">
+                </div>
+                <div class="col-3">
+                    <label for="correo_personal_tutor" class="m-0 form-label">Correo Electrónico Personal</label>
+                    <input type="email" class=" form-control" id="correo_personal_tutor">
                 </div>
             </div>
         </div>
-        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-start">
+        <br>
+        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
             <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
             <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
         </div>
     </div>
 
-
-    <div class="p-3 tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <div class="w-100 row p-0 m-0 h-100" id="">
-
-
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12">
+<!--Antecedente academico-->
+    <div class="p-3 tab-pane fade" id="nav-academico" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="border border-5 shadow p-3" id="">
+            <div class="row">
+                <div class="row">
+                    <div class="col-3">
                         <label for="secundaria" class="m-0 form-label">Secundaria</label>
                         <input type="text" class="small form-control" id="secundaria">
                     </div>
 
-                    <div class="col-sm-6 col-12">
+                    <div class="col-3">
                         <label for="ciudad_secundaria" class="m-0 form-label">Ciudad</label>
                         <input type="text" class=" form-control" id="ciudad_secundaria">
                     </div>
-
-                    <hr style="width:100%;color:black" class="border border-5 mt-1 mb-1">
-
-                    <div class="col-12">
+                    <div class="col-3">
                         <label for="bachillerato" class="m-0 form-label">Bachillerato</label>
                         <input type="text" class=" form-control" id="bachillerato">
                     </div>
-
-                    <div class="col-sm-6 col-12">
+                    <div class="col-3">
                         <label for="ciudad_bachillerato" class="m-0 form-label">Ciudad</label>
                         <input type="text" class=" form-control" id="ciudad_bachillerato">
                     </div>
-                    
-                    <div class="col-sm-6 col-12">
+                    <div class="col-3">
                         <label for="estado_bachillerato" class="m-0 form-label">Estado</label>
                         <input type="text" class=" form-control" id="estado_bachillerato">
                     </div>
-
-                    <div class="col-sm-6 col-12">
+                    <div class="col-3">
                         <div class="d-flex flex-column">
                             <label for="periodo_bachillerato_incio" class="m-0 form-label">Periodo</label>
-                            <div class="d-flex flex-column">
-                                <div class="">
+                            <div class="row">
+                                <div class="col-6">
                                     <input type="date" class="mid form-control" id="periodo_bachillerato_incio">
                                 </div>
-                                <div class="">
+                                <div class="col-6">
                                     <input type="date" class="mid form-control" id="periodo_bachillerato_fin">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
+        </div>
+        <br>
+        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
+            <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
+            <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
+        </div>
+    </div>
 
-            <div class="border border-5 shadow p-3 mb-3 col-lg-6 col-12 m-0 d-flex align-items-center justify-content-around">
-                <div class="row m-0 p-0 w-75">
-
-                    <div class="col-sm-6 col-12" style="margin-right: 10px;">
-                        <label for="fecha_pasante" class="m-0 form-label">Fecha de Pasante</label>
-                        <input type="text" class="small form-control" id="fecha_pasante">
-                    </div>
-
-                    <div class="col-sm-6 col-12" >
-                        <div class="d-flex flex-column">
+<!--Datos de Egreso-->
+    <div class="p-3 tab-pane fade" id="nav-egreso" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="border border-5 shadow p-3" id="">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="fecha_pasante" class="m-0 form-label">Fecha de Pasante</label>
+                            <input type="date" class="small form-control" id="fecha_pasante">
+                        </div>
+                        <div class="col-4">
                             <label for="periodo_pasante_incio" class="m-0 form-label">Periodo</label>
-                            <div class="d-flex flex-column">
-                                <div class="">
-                                    <input type="date" class="mid form-control" id="periodo_pasante_incio">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="">
+                                        <input type="date" class="mid form-control" id="periodo_pasante_incio">
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <input type="date" class="mid form-control" id="periodo_pasante_fin">
+                                <div class="col-6">
+                                    <div class="">
+                                        <input type="date" class="mid form-control" id="periodo_pasante_fin">
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <label for="fecha_titulacion" class="m-0 form-label">Fecha de Titulación</label>
+                            <input type="text" class="mid form-control" id="fecha_titulacion">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-1">
+                            <label for="libro" class="m-0 form-label">Libro</label>
+                            <input type="text" class="mid form-control" id="libro">
+                        </div>
+                        <div class="col-1">
+                            <label for="acta" class="m-0 form-label">Acta</label>
+                            <input type="text" class="mid form-control" id="acta">
+                        </div>
+                        <div class="col-3">
+                            <label for="ciclo_escolar_horario" class="m-0 form-label">Estado de Titulación </label>
+                            <input type="text" class=" form-control" id="estado:_titulacion">    
+                        </div>
+                        <div class="col-3">
+                            <label for="opcion_titulacion" class="m-0 form-label">Opción de Titulación</label>
+                            <select id="opcion_titulacion" class="form-select form-control" aria-label="opcion_titulacion">
+                                <option selected>titulacion</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                            </select>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Portal del egresado
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-6 col-6">
-                        <div class="w-100 p-3 d-flex align-items-center justofy-content-center">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                               Portal del egresado
-                            </label>
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-6">
+                                    <button class="btn btn-dark">Imprimir Etiqueta</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
-                    <div class="col-sm-6 col-12">
-                        <label for="fecha_titulacion" class="m-0 form-label">Fecha de Titulación</label>
-                        <input type="text" class="mid form-control" id="fecha_titulacion">
-                    </div>
-
-                    <div class="col-sm-2 col-6">
-                        <label for="libro" class="m-0 form-label">Libro</label>
-                        <input type="text" class="mid form-control" id="libro">
-                    </div>
-
-                    <div class="col-sm-2 col-6">
-                        <label for="acta" class="m-0 form-label">Acta</label>
-                        <input type="text" class="mid form-control" id="acta">
-                    </div>
-
-                    <div class="col-sm-6 col-12">
-                        <label for="ciclo_escolar_horario" class="m-0 form-label">Estado de Titulación </label>
-                        <input type="text" class=" form-control" id="estado:_titulacion">
-                    </div>
-                    <div class="col-sm-6 col-12">
-                        <label for="opcion_titulacion" class="m-0 form-label">Opción de Titulación</label>
-                        <select id="opcion_titulacion" class="form-select form-control" aria-label="opcion_titulacion">
-                            <option selected>titulacion</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                        </select>
-                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-6">
+                                    <button class="btn btn-dark">Imprimir Orden de Pago y Etiqueta de Archivo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
                 </div>
             </div>
+            
         </div>
-        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-start">
+        <br>
+        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
             <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
             <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
         </div>

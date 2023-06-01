@@ -27,7 +27,9 @@
                                 <td>{{$rol->name}}</td>
                                 <td>
                                 @foreach ($rol->permissions as $permission)
-                                    {{$permission->name}}
+                                    <div class="badge badge-secondary">
+                                        <h6>{{$permission->name}}</h6>
+                                    </div> 
                                 @endforeach
                                 </td>
                             @endforeach

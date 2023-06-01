@@ -40,7 +40,7 @@
                         <td>{{$rol->guard_name}}</td>
                         <td>
                             @foreach ($rol->permissions as $permission)
-                                <h5><div class="badge badge-secondary">{{$permission->name}}</div></h5>
+                                <div class="badge badge-secondary"><h6>{{$permission->name}}</h6></div>
                             @endforeach
                         </td>
                         <td width="10px">Ver...<a href="/roles-edit/{{$rol->id}}"><i class="fas fa-list"></i></a></td>
