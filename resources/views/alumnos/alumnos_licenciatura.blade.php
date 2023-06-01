@@ -109,27 +109,28 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-5">
-                    <label for="nombre" class="form-label">Nombre</label>
+                <div class="col-4">
+                    <label for="nombre" class="m-0 form-label">Nombre</label>
                     <input type="text" class=" form-control" id="nombre">
                 </div>
-                <div class="col-3">
-                    <label for="nombres" class="form-label">Nombres</label>
+                <div class="col-2">
+                    <label for="nombres" class="m-0 form-label">Nombres</label>
                     <input type="text" class=" form-control" id="nombres">
                 </div>
-                <div class="col-3">
-                    <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+                <div class="col-2">
+                    <label for="apellido_paterno" class="m-0 form-label">Apellido Paterno</label>
                     <input type="text" class=" form-control" id="apellido_paterno">
                 </div>
-            </div>
-            <br>
-            <div class="row">
                 <div class="col-3">
                     <label for="apellido_materno" class="m-0 form-label">Apellido Materno</label>
                     <input type="text" class=" form-control" id="apellido_materno">
                 </div>
+            </div>
+            <br>
+            <div class="row">
+                
                 <div class="col-1">
-                    <label for="sexo" class="m-0 form-label">Sexo</label>
+                    <label for="sexo" class="m-0 form-label">Genero</label>
                     <select id="sexo" class="form-select form-control" aria-label="sexo">
                         <option selected>sexo</option>
                         <option value="1">Masculino</option>
@@ -143,6 +144,18 @@
                 <div class="col-3">
                     <label for="curp" class="m-0 form-label">CURP</label>
                     <input type="text" class="mid form-control" id="curp">
+                </div>
+                <div class="col-3">
+                    <label for="nombre_asesor" class="m-0 form-label">Nombre del Asesor</label>
+                    <select id="nombre_asesor" class="form-select form-control" aria-label="nombre_asesor">
+                        <option selected>nombre_asesor</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <br>
+                    <button id="cambio_asesor" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="form-control m-0 btn-sm bg-dark">Cambio de Asesor</button>
                 </div>
             </div>
             <br>
@@ -159,18 +172,8 @@
                     <label class="m-0 form-label">Archivo de NSS (Nombre)</label>
                     <input type="text" name="archivo_nss" class="form-control" />
                 </div>
-                <div class="col-3">
-                    <label for="nombre_asesor" class="m-0 form-label">Nombre del Asesor</label>
-                    <select id="nombre_asesor" class="form-select form-control" aria-label="nombre_asesor">
-                        <option selected>nombre_asesor</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                    </select>
-                </div>
-                <div class="col-2">
-                    <br>
-                    <button id="cambio_asesor" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="form-control m-0 btn-sm bg-dark">Cambio de Asesor</button>
-                </div>
+                
+                
             </div>
         </div>
         <br>
@@ -310,7 +313,7 @@
 <!--Antecedente academico-->
     <div class="p-3 tab-pane fade" id="nav-academico" role="tabpanel" aria-labelledby="nav-contact-tab">
         <div class="border border-5 shadow p-3" id="">
-            <div class="row">
+            <div class="">
                 <div class="row">
                     <div class="col-3">
                         <label for="secundaria" class="m-0 form-label">Secundaria</label>
@@ -321,6 +324,9 @@
                         <label for="ciudad_secundaria" class="m-0 form-label">Ciudad</label>
                         <input type="text" class=" form-control" id="ciudad_secundaria">
                     </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-3">
                         <label for="bachillerato" class="m-0 form-label">Bachillerato</label>
                         <input type="text" class=" form-control" id="bachillerato">
@@ -337,11 +343,12 @@
                         <div class="d-flex flex-column">
                             <label for="periodo_bachillerato_incio" class="m-0 form-label">Periodo</label>
                             <div class="row">
-                                <div class="col-6">
-                                    <input type="date" class="mid form-control" id="periodo_bachillerato_incio">
+                                <div class="col-4">
+                                    <input type="number" min="1900" max="2099" class="mid form-control" id="periodo_bachillerato_incio" value="2015"/>
                                 </div>
-                                <div class="col-6">
-                                    <input type="date" class="mid form-control" id="periodo_bachillerato_fin">
+                                <label>-</label>
+                                <div class="col-4">
+                                    <input type="number" class="mid form-control" min="1900" max="2099" id="periodo_bachillerato_fin" value="2018"/>
                                 </div>
                             </div>
                         </div>
@@ -360,7 +367,7 @@
     <div class="p-3 tab-pane fade" id="nav-egreso" role="tabpanel" aria-labelledby="nav-contact-tab">
         <div class="border border-5 shadow p-3" id="">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-12">
                     <div class="row">
                         <div class="col-3">
                             <label for="fecha_pasante" class="m-0 form-label">Fecha de Pasante</label>
@@ -371,23 +378,24 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="">
-                                        <input type="date" class="mid form-control" id="periodo_pasante_incio">
+                                        <input type="number" class="mid form-control" id="periodo_pasante_incio" min="1900" max="2099" value="2020">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="">
-                                        <input type="date" class="mid form-control" id="periodo_pasante_fin">
+                                        <input type="number" class="mid form-control" id="periodo_pasante_fin" min="1900" max="2099" value="2021" >
                                     </div>    
                                 </div>
                             </div>
                         </div>
+                        
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-2">
                             <label for="fecha_titulacion" class="m-0 form-label">Fecha de Titulación</label>
                             <input type="text" class="mid form-control" id="fecha_titulacion">
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
                         <div class="col-1">
                             <label for="libro" class="m-0 form-label">Libro</label>
                             <input type="text" class="mid form-control" id="libro">
@@ -409,11 +417,9 @@
                             </select>
                         </div>
                     </div>    
-                </div>
-                <div class="col-sm-4">
-                    <div class="row">
+                    <div class="row m-3">
                         <div class="col-12">
-                            <div class="row d-flex justify-content-center">
+                            <div class="row d-flex justify-content-start">
                                 <div class="col-6">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
@@ -423,27 +429,7 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-6">
-                                    <button class="btn btn-dark">Imprimir Etiqueta</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-6">
-                                    <button class="btn btn-dark">Imprimir Orden de Pago y Etiqueta de Archivo</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>     
-                </div>
+                </div>     
             </div>
             
         </div>
