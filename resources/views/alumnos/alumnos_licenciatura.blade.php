@@ -189,57 +189,55 @@
             <h3 class="text-center">Domicilio del Alumno</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <label for="calle" class="m-0 form-label">Calle</label>
                     <input type="text" class="small form-control" id="calle">    
                 </div>
-                <div class="col-2">
+                <div class="col-1">
                     <label for="num_ext" class="m-0 form-label">No. Exterior</label>
                     <input type="number" class="small form-control" id="num_ext">
                 </div>
-                <div class="col-2">
+                <div class="col-1">
                     <label for="num_int" class="m-0 form-label">No. Interior</label>
                     <input type="number" class="small form-control" id="num_int">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="colonia" class="m-0 form-label">Colonia</label>
                     <input type="text" class="mid form-control" id="colonia">
                 </div>
-                <div class="col-2">
+                <div class="col-1">
                     <label for="codigo_postal" class="m-0 form-label">Código Postal</label>
                     <input type="text" class=" form-control" id="codigo_postal">
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <label for="ciudad_municipio" class="m-0 form-label">Ciudad y/o Municipio</label>
                     <input type="text" class=" form-control" id="ciudad_municipio">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="estado" class="m-0 form-label">Estado</label>
                     <input type="text" class=" form-control" id="estado">
-                </div>
-                <div class="col-3">
-                    <label for="telefono" class="m-0 form-label">Teléfono</label>
-                    <input type="number" class="small form-control" id="telefono">
-                </div>
-                <div class="col-3">
-                    <label for="celular" class="m-0 form-label">Celular</label>
-                    <input type="number" class="mid form-control" id="celular">    
                 </div>
             </div>
             <br>
             <div class="row">
-                <div class="col-3">
+                <div class="col-1">
+                    <label for="telefono" class="m-0 form-label">Teléfono</label>
+                    <input type="text" class="small form-control" id="telefono">
+                </div>
+                <div class="col-1">
+                    <label for="celular" class="m-0 form-label">Celular</label>
+                    <input type="text" class="mid form-control" id="celular">    
+                </div>
+                <div class="col-2">
                     <label for="correo_alterno" class="m-0 form-label">Correo Alterno</label>
                     <input type="email" class="form-control" id="correo_alterno">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="correo_uaslp" class="m-0 form-label">Correo UASLP</label>
                     <input type="email" class="form-control" id="correo_uaslp">
                 </div>
             </div>
+            <br>
         </div>
         <div class="border border-5 shadow p-3" id="">
             
@@ -255,49 +253,46 @@
                     <label for="madre" class="m-0 form-label">Madre</label>
                     <input type="text" class="mid form-control" id="madre">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="calle_tutor" class="m-0 form-label">Calle</label>
                     <input type="text" class="small form-control" id="calle_tutor">
                 </div>
-                <div class="col-3">
+                <div class="col-1">
                     <label for="numero_ext_tutor" class="m-0 form-label">No. Exterior</label>
                     <input type="text" class="small form-control" id="numero_ext_tutor">
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-3">
+                <div class="col-1">
                     <label for="numero_int_tutor" class="m-0 form-label">No. Interior</label>
                     <input type="text" class="small form-control" id="numero_int_tutor">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="colonia_tutor" class="m-0 form-label">Colonia</label>
                     <input type="text" class="mid form-control" id="colonia_tutor">
-                </div>
-                <div class="col-3">
-                    <label for="codigo_postal_tutor" class="m-0 form-label">Código Postal</label>
-                    <input type="text" class=" form-control" id="codigo_postal_tutor">
-                </div>
-                <div class="col-3">
-                    <label for="ciudad_municipio_tutor" class="m-0 form-label">Ciudad y/o Municipio</label>
-                    <input type="text" class=" form-control" id="ciudad_municipio_tutor">    
                 </div>
             </div>
             <br>
             <div class="row">
+                <div class="col-1">
+                    <label for="codigo_postal_tutor" class="m-0 form-label">Código Postal</label>
+                    <input type="text" class=" form-control" id="codigo_postal_tutor">
+                </div>
+                <div class="col-2">
+                    <label for="ciudad_municipio_tutor" class="m-0 form-label">Ciudad y/o Municipio</label>
+                    <input type="text" class=" form-control" id="ciudad_municipio_tutor">    
+                </div>
                 <div class="col-3">
                     <label for="estado_tutor" class="m-0 form-label">Estado</label>
                     <input type="text" class=" form-control" id="estado_tutor">
                 </div>
-                <div class="col-3">
+                <div class="col-1">
                     <label for="telefono_tutor" class="m-0 form-label">Teléfono</label>
-                    <input type="text" class="small form-control" id="telefono_tutor">    
+                    <input type="tel" class="small form-control" id="telefono_tutor">    
                 </div>
-                <div class="col-3">
+                <div class="col-1">
                     <label for="celular_tutor" class="m-0 form-label">Celular</label>
-                    <input type="text" class="mid form-control" id="celular_tutor">
+                    <input type="tel" class="form-control" id="celular_tutor">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="correo_personal_tutor" class="m-0 form-label">Correo Electrónico Personal</label>
                     <input type="email" class=" form-control" id="correo_personal_tutor">
                 </div>
