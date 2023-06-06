@@ -41,8 +41,8 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-alumno" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Alumno</button>
-      <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilio</button>
+      <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-datos_generales" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Datos Generales</button>
+      <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Contacto y Domicilio</button>
       <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-academico" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedente Academico</button>
       <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-egreso" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Datos de Egreso</button>
     </div>
@@ -51,7 +51,7 @@
 <!--Tabs-->
 <div class="tab-content" id="nav-tabContent">
     <!--Tab alumno-->
-    <div class="p-3 tab-pane fade show active" id="nav-alumno" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="p-3 tab-pane fade show active" id="nav-datos_generales" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="border border-5 p-3">
             <div class="row">
                 <div class="col-1">
@@ -135,6 +135,7 @@
                         <option selected>sexo</option>
                         <option value="1">Masculino</option>
                         <option value="2">Femenino</option>
+                        <option value="3">Otro</option>
                     </select>
                 </div>
                 <div class="col-2">
@@ -172,8 +173,64 @@
                     <label class="m-0 form-label">Archivo de NSS (Nombre)</label>
                     <input type="text" name="archivo_nss" class="form-control" />
                 </div>
-                
-                
+                <div class="col-2">
+                    <label class="m-0 form-label">Estado Civil</label>
+                    <select class="form-control form-select">
+                        <option>Soltero/a</option>
+                        <option>Casado/a</option>
+                        <option>Divorciado/a</option>
+                        <option>Viudo/a</option>
+                        <option>Separado/a</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2">
+                    <input type="checkbox" name="">
+                    <label>Cuenta con lengua indigena</label>
+                </div>
+                <div class="col-2">
+                    <label class="m-0">Discapacidad</label>
+                    <select class="form-control form-select">
+                        <option>Ninguna</option>
+                        <option>Fisica/Motriz</option>
+                        <option>Intelectual</option>
+                        <option>Multiple</option>
+                        <option>Auditiva:hipoacusia</option>
+                        <option>Auditiva/Sordera</option>
+                        <option>Visual: baja vision</option>
+                        <option>Visual: Ceguera</option>
+                        <option>Psicosocial</option>
+                        <option>Otras</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <h3 class="text-center">Contacto de emergencia</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
+            <div class="row">
+                <div class="col-2">
+                    <label class="m-0 form-label">Nombre</label>
+                    <input class="form-control" type="text" name="">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Parentesco</label>
+                    <select class="form-control form-select">
+                        <option>Padre</option>
+                        <option>Madre</option>
+                        <option>Tio/a</option>
+                        <option>Hermano/a</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Telefono</label>
+                    <input class="form-control" type="text" name="">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Celular</label>
+                    <input class="form-control" type="text" name="">
+                </div>
             </div>
         </div>
         <br>
@@ -186,7 +243,7 @@
     <!--Tab Domicilio y Tutor-->
     <div class="p-3 tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="border border-5 shadow p-3">
-            <h3 class="text-center">Domicilio del Alumno</h3>
+            <h3 class="text-center">Domicilio y contacto del alumno</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-2">
@@ -241,7 +298,7 @@
         </div>
         <div class="border border-5 shadow p-3" id="">
             
-            <h3 class="text-center">Domicilio del Tutor</h3>
+            <h3 class="text-center">Domicilio y contacto del tutor</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
 
             <div class="row">

@@ -29,16 +29,16 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-alumno" type="button" role="tab" aria-controls="nav-alumno" aria-selected="true">Alumno</button>
-      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-licenciatura" type="button" role="tab" aria-controls="nav-licenciatura" aria-selected="false">Licenciatura</button>
-      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-posgrado" type="button" role="tab" aria-controls="nav-posgrado" aria-selected="false">Posgrado</button>
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-datos_generales" type="button" role="tab" aria-controls="nav-alumno" aria-selected="true">Datos Generales</button>
+      <button class="nav-link" id="" data-bs-toggle="tab" data-bs-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-domicilio" aria-selected="true">Contacto y Domicilio</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-antecedentes" type="button" role="tab" aria-controls="nav-licenciatura" aria-selected="false">Antecedentes Academicos</button>
     </div>
 </nav>
 
 <!--Tabs posgrado-->
 <div class="tab-content" id="nav-tabContent">
-    <!--Tab Alumno-->
-    <div class="p-3 tab-pane fade show active" id="nav-alumno" role="tabpanel" aria-labelledby="nav-alumno-tab">
+    <!--Tab datos generales-->
+    <div class="p-3 tab-pane fade show active" id="nav-datos_generales" role="tabpanel" aria-labelledby="nav-alumno-tab">
         <div class="border border-5 p-3" id="">
             <div class="row">
                 <div class="col-1">
@@ -78,26 +78,170 @@
                             <label for="apellido_materno" class="m-0 form-label">Apellido Materno</label>
                             <input type="text" class=" form-control" id="apellido_materno" aria-describedby="emailHelp">
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <label for="nombres" class="m-0 form-label">Nombres</label>
                             <input type="text" class=" form-control" id="nombres" aria-describedby="emailHelp">
                         </div>
                         <div class="col-3">
-                            <label for="curp" class="m-0 form-label">CURP</label>
-                            <input type="text" class="mid form-control" id="curp" aria-describedby="emailHelp">
-                        </div>    
-                        <div class="col-2">
-                            <label for="sexo" class="m-0 form-label">Sexo</label>
-                            <select id="sexo" class="form-select form-control" aria-label="sexo">
-                                <option selected>sexo</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                            </select>
+                            <label for="nombres" class="m-0 form-label">Nombre</label>
+                            <input type="text" class=" form-control" id="nombres" aria-describedby="emailHelp">
                         </div>
                     </div>
                 </div>
             </div>
             <br>
+            <div class="row">
+                <div class="col-3">
+                    <label for="curp" class="m-0 form-label">CURP</label>
+                    <input type="text" class="mid form-control" id="curp" aria-describedby="emailHelp">
+                </div>
+                <div class="col-2">
+                    <label class="m-0">Estado Civil</label>
+                    <select id="edo_civil" class="form-select form-control">
+                        <option>Soltero/a</option>
+                        <option>Casado/a</option>
+                        <option>Viudo/a</option>
+                        <option>Separado/a</option>
+                        <option>Divorciado</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label for="sexo" class="m-0 form-label">Genero</label>
+                    <select id="sexo" class="form-select form-control" aria-label="sexo">
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                        <option value="2">Otros</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label class="m-0">Estado</label>
+                    <select class="form-control form-select">
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2">
+                    <label for="afiliacion_imss" class="m-0 form-label">Número de Seguridad Social (IMSS)</label>
+                    <input type="text" class="w-100 m-0 small form-control" id="afiliacion_imss">
+                </div>
+                <div class="col-2">
+                    <label for="fecha_imss" class="m-0 form-label">Fecha Afiliacion NNS</label>
+                    <input type="date" class="w-100 m-0 small form-control" id="fecha_imss">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Archivo de NSS (Nombre)</label>
+                    <input type="text" name="archivo_nss" class="form-control" />
+                </div>
+                <div class="col-2">
+                    <label class="m-0">Discapacidad</label>
+                    <select class="form-control form-select">
+                        <option>Ninguna</option>
+                        <option>Fisica/Motriz</option>
+                        <option>Intelectual</option>
+                        <option>Multiple</option>
+                        <option>Auditiva:hipoacusia</option>
+                        <option>Auditiva/Sordera</option>
+                        <option>Visual: baja vision</option>
+                        <option>Visual: Ceguera</option>
+                        <option>Psicosocial</option>
+                        <option>Otras</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <br>
+                    <div class="form-check">
+                        <input class="form-check-input"  type="checkbox" name="">
+                        <label class="form-check-label">Cuenta con lengua indigena</label>    
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                    <label class="m-0">CVU</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">RFC</label>
+                    <input type="text" name="" class="form-control">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Asesor de Tesis</label>
+                    <select class="form-control form-select">
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <br>
+                    <button class="btn-sm bg-dark">Cambiar Asesor</button>
+                </div>      
+            </div>
+            <br>
+            <h3 class="text-center">Contacto de emergencia</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
+            <div class="row">
+                <div class="col-2">
+                    <label class="m-0 form-label">Nombre</label>
+                    <input class="form-control" type="text" name="">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Parentesco</label>
+                    <select class="form-control form-select">
+                        <option>Padre</option>
+                        <option>Madre</option>
+                        <option>Tio/a</option>
+                        <option>Hermano/a</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Telefono</label>
+                    <input class="form-control" type="text" name="">
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Celular</label>
+                    <input class="form-control" type="text" name="">
+                </div>
+            </div>
+        </div>
+        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
+            <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
+            <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
+        </div>
+    </div>
+<!--Tab Domicilio-->
+    <div class="p-3 tab-pane fade" id="nav-domicilio" role="tabpanel" >
+        <div class="border border-5 p-3">
+            <h3 class="text-center">Contacto</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
+            <div class="row">
+                <div class="col-1">
+                    <label for="telefono" class="m-0 form-label">Teléfono</label>
+                    <input type="text" class="m-0 form-control" id="telefono" aria-describedby="emailHelp">
+                </div>
+                <div class="col-1">
+                    <label for="celular" class="m-0 form-label">Celular</label>
+                    <input type="text" class="m-0 form-control" id="celular" aria-describedby="emailHelp">
+                </div>
+                <div class="col-2">
+                    <label for="correo" class="m-0 form-label">Correo Electrónico Personal</label>
+                    <input type="email" class="small form-control" id="correo" aria-describedby="emailHelp">
+                </div>
+                <div class="col-2">
+                    <label for="correo" class="m-0 form-label">Correo Institucional</label>
+                    <input type="email_insti" class="small form-control" id="correo" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <br>
+            <br>
+            <h3 class="text-center">Domicilio Actual</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-2">
                     <label for="calle" class="m-0 form-label">Calle</label>
@@ -111,7 +255,7 @@
                     <label for="num_int" class="m-0 form-label">No. Interior</label>
                     <input type="text" class="small form-control" id="num_int" aria-describedby="emailHelp">
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label for="colonia" class="m-0 form-label">Colonia</label>
                     <input type="text" class="mid form-control" id="colonia" aria-describedby="emailHelp">
                 </div>
@@ -119,45 +263,63 @@
                     <label for="codigo_postal" class="m-0 form-label">Código Postal</label>
                     <input type="text" class=" form-control" id="codigo_postal" aria-describedby="emailHelp">
                 </div>
-                <div class="col-1">
-                    <label for="telefono" class="m-0 form-label">Teléfono</label>
-                    <input type="text" class="m-0 form-control" id="telefono" aria-describedby="emailHelp">
+                <div class="col-2">
+                    <label class="m-0 form-label">Ciudad</label>
+                    <input class="form-control" type="text" name="">
                 </div>
                 <div class="col-2">
-                    <label for="correo" class="m-0 form-label">Correo Electrónico Personal</label>
-                    <input type="email" class="small form-control" id="correo" aria-describedby="emailHelp">
+                    <label class="m-0 form-label">Estado</label>
+                    <input class="form-control" type="text" name="">
                 </div>
             </div>
             <br>
+            <br>
+            <h3 class="text-center">Domicilio de correspondencia</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
-                <div class="col-3">
-                    <label for="ciudad_municipio" class="m-0 form-label">Ciudad y/o Municipio</label>
-                    <select id="ciudad_municipio" class="form-select form-control" aria-label="ciudad_municipio">
-                        <option selected>Ciudad y/o Municipio</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                    </select>
+                <div class="col-2">
+                    <label for="calle" class="m-0 form-label">Calle</label>
+                    <input type="text" class="small form-control" id="calle" aria-describedby="emailHelp" disabled>
+                </div>    
+                <div class="col-1">
+                    <label for="num_ext" class="m-0 form-label">No. Exterior</label>
+                    <input type="text" class="small form-control" id="num_ext" aria-describedby="emailHelp" disabled>
                 </div>
-                <div class=" col-3">
-                    <label for="estado" class="m-0 form-label">Estado</label>
-                    <select id="estado" class="form-select form-control" aria-label="estado">
-                        <option selected>estado</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                    </select>
-                </div>   
+                <div class="col-1">
+                    <label for="num_int" class="m-0 form-label">No. Interior</label>
+                    <input type="text" class="small form-control" id="num_int" aria-describedby="emailHelp" disabled>
+                </div>
+                <div class="col-2">
+                    <label for="colonia" class="m-0 form-label">Colonia</label>
+                    <input type="text" class="mid form-control" id="colonia" aria-describedby="emailHelp" disabled>
+                </div>
+                <div class="col-1">
+                    <label for="codigo_postal" class="m-0 form-label">Código Postal</label>
+                    <input type="text" class=" form-control" id="codigo_postal" aria-describedby="emailHelp" disabled>
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Ciudad</label>
+                    <input class="form-control" type="text" name="" disabled>
+                </div>
+                <div class="col-2">
+                    <label class="m-0 form-label">Estado</label>
+                    <input class="form-control" type="text" name="" disabled>
+                </div>
             </div>
+            <br>
+            <br>
         </div>
+        <br>
         <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
             <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
             <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
         </div>
     </div>
-
-<!--Tab licenciatura-->
-    <div class="p-3 tab-pane fade" id="nav-licenciatura" role="tabpanel" aria-labelledby="nav-licenciatura-tab">
+<!--Tab antecedentes-->
+    <div class="p-3 tab-pane fade" id="nav-antecedentes" role="tabpanel" aria-labelledby="nav-licenciatura-tab">
         <div class="border border-5 shadow p-3" id="">
-
+            <h3 class="text-center">Licenciatura</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-3">
                     <label for="universidad" class="m-0 form-label">Universidad</label>
@@ -183,6 +345,12 @@
                         <option value="2">Two</option>
                     </select>
                 </div>
+                
+                <div class="row m-0 p-0 w-75">
+                </div>
+            </div>
+            <br>
+            <div class="row">
                 <div class="col-2">
                     <label for="licenciatura" class="m-0 form-label">Número de cédula</label>
                     <input type="text" class="mid form-control" id="licenciatura" aria-describedby="emailHelp">
@@ -194,20 +362,10 @@
                             Cambiar según el sexo
                         </label>
                     </div>
-                </div>
-                <div class="row m-0 p-0 w-75">
-                </div>
+                </div> 
             </div>
-        </div>
-        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
-            <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
-            <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
-        </div>
-    </div>
-
-<!--Tab posgrado-->
-    <div class="p-3 tab-pane fade" id="nav-posgrado" role="tabpanel" aria-labelledby="nav-posgrado-tab">
-        <div class="border border-5 p-3" id="">
+            <h3 class="text-center">Posgrado</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-3">
                     <label for="universidad_posgrado" class="m-0 form-label">Universidad</label>
@@ -282,13 +440,46 @@
                     </select>
                 </div>
             </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead>
+                        <tr>
+                            <th>Nivel</th>
+                            <th>Posgrado</th>
+                            <th>Facultad</th>
+                            <th>Universidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <br>
         <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
             <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
             <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
         </div>
     </div>
+
 </div>
 @stop
 
