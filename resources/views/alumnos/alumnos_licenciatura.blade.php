@@ -243,7 +243,28 @@
     <!--Tab Domicilio y Tutor-->
     <div class="p-3 tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="border border-5 shadow p-3">
-            <h3 class="text-center">Domicilio y contacto del alumno</h3>
+            <h3 class="text-center">Contacto</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
+            <div class="row">
+                <div class="col-1">
+                    <label for="telefono" class="m-0 form-label">Teléfono</label>
+                    <input type="text" class="small form-control" id="telefono">
+                </div>
+                <div class="col-1">
+                    <label for="celular" class="m-0 form-label">Celular</label>
+                    <input type="text" class="mid form-control" id="celular">    
+                </div>
+                <div class="col-2">
+                    <label for="correo_alterno" class="m-0 form-label">Correo Alterno</label>
+                    <input type="email" class="form-control" id="correo_alterno">
+                </div>
+                <div class="col-2">
+                    <label for="correo_uaslp" class="m-0 form-label">Correo institucional</label>
+                    <input type="email" class="form-control" id="correo_uaslp">
+                </div>
+            </div>
+            <br>
+            <h3 class="text-center">Domicilio Actual</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-2">
@@ -276,31 +297,43 @@
                 </div>
             </div>
             <br>
+            <h3 class="text-center">Domicilio de correspondencia</h3>
+            <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
-                <div class="col-1">
-                    <label for="telefono" class="m-0 form-label">Teléfono</label>
-                    <input type="text" class="small form-control" id="telefono">
+                <div class="col-2">
+                    <label for="calle" class="m-0 form-label">Calle</label>
+                    <input type="text" class="small form-control" id="calle" disabled>
                 </div>
                 <div class="col-1">
-                    <label for="celular" class="m-0 form-label">Celular</label>
-                    <input type="text" class="mid form-control" id="celular">    
+                    <label for="num_ext" class="m-0 form-label">No. Exterior</label>
+                    <input type="number" class="small form-control" id="num_ext" disabled>
+                </div>
+                <div class="col-1">
+                    <label for="num_int" class="m-0 form-label">No. Interior</label>
+                    <input type="number" class="small form-control" id="num_int" disabled>
                 </div>
                 <div class="col-2">
-                    <label for="correo_alterno" class="m-0 form-label">Correo Alterno</label>
-                    <input type="email" class="form-control" id="correo_alterno">
+                    <label for="colonia" class="m-0 form-label">Colonia</label>
+                    <input type="text" class="mid form-control" id="colonia" disabled>
+                </div>
+                <div class="col-1">
+                    <label for="codigo_postal" class="m-0 form-label">Código Postal</label>
+                    <input type="text" class=" form-control" id="codigo_postal" disabled>
                 </div>
                 <div class="col-2">
-                    <label for="correo_uaslp" class="m-0 form-label">Correo UASLP</label>
-                    <input type="email" class="form-control" id="correo_uaslp">
+                    <label for="ciudad_municipio" class="m-0 form-label">Ciudad y/o Municipio</label>
+                    <input type="text" class=" form-control" id="ciudad_municipio" disabled>
+                </div>
+                <div class="col-2">
+                    <label for="estado" class="m-0 form-label">Estado</label>
+                    <input type="text" class=" form-control" id="estado" disabled>
                 </div>
             </div>
-            <br>
         </div>
+        <br>
         <div class="border border-5 shadow p-3" id="">
-            
             <h3 class="text-center">Domicilio y contacto del tutor</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
-
             <div class="row">
                 <div class="col-3">
                     <label for="padre" class="m-0 form-label">Padre o tutor</label>

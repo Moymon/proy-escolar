@@ -1,10 +1,7 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <div class="card-header">
-                    <input wire:model="search" class="form-control" type="text" placeholder="Ingresa nombre o rpe">    
-            </div>
-            <table class="table table-striped">
+            <table id="tabla_usuarios" class="table table-striped">
                 <thead>
                     <tr>
                         <th>RPE</th>

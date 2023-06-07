@@ -21,7 +21,8 @@
                 <button class="btn btn-info" data-toggle="modal" data-target="#nuevoRol" ><i class="fas fa-plus"></i></button>
             </div>
         </div>
-        <table id="roles" class="table table-bordered table-striped dataTable dtr-inline">
+        <br>
+        <table id="tabla_roles" class="table table-bordered table-striped dataTable dtr-inline">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -93,4 +94,23 @@
 @stop
 
 @section('js')
+<script>
+ $(document).ready(function (){
+        $('#tabla_roles').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+        });
+    });    
+</script>
 @stop

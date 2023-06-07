@@ -18,7 +18,28 @@
 @stop
 
 @section('css')
+
 @stop
 
 @section('js')
+<script>
+ $(document).ready(function (){
+        $('#tabla_usuarios').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+        });
+    });    
+</script>
+    
 @stop

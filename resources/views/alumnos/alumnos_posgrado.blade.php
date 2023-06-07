@@ -355,14 +355,6 @@
                     <label for="licenciatura" class="m-0 form-label">Número de cédula</label>
                     <input type="text" class="mid form-control" id="licenciatura" aria-describedby="emailHelp">
                 </div>
-                <div class="col-2">
-                    <div class="p-3 d-flex align-items-center justofy-content-center">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Cambiar según el sexo
-                        </label>
-                    </div>
-                </div> 
             </div>
             <h3 class="text-center">Posgrado</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
