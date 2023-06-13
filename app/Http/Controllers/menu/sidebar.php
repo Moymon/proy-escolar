@@ -23,6 +23,10 @@ class sidebar extends Controller
         return view('kardex.kardex-index');
     }
 
+    public function verificacion(){
+        return view('kardex.kardex-verificacion');
+    }
+
     //
     /*------------------Rutas para Examenes ET y ET-------------------------------------------*/
     public function examenes_regularizacion(){

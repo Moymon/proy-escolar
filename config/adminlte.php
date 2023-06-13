@@ -403,6 +403,11 @@ return [
                     'url'  => 'index_kardex',
                     'can'     => ['administrador','capturista'],
                 ],
+                [
+                    'text' => 'Verificación',
+                    'url'  => 'verificacion_kardex',
+                    'can'  => ['administrador'],
+                ]
             ],
         ],
         [

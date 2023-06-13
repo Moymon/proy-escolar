@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
         /*Rutas para el kardex*/
         Route::get('/index_kardex',[sidebar::class,'kardex']);
+        Route::get('/verificacion_kardex',[sidebar::class,'verificacion']);
         /* Rutas Alumnos*/
         Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
         Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
