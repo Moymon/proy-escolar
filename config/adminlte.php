@@ -377,6 +377,106 @@ return [
             'url'     => 'Inicio',
         ],
         [
+            'text' => 'Licenciatura',
+            'icon' => 'fas fa-book-reader',
+            'can'  => ['administrador'],
+            'classes' => 'treeview',
+            'submenu' => [
+                [
+                    'text' => 'Alumnos',
+                    'icon' => 'fas fa-users',
+                    'can'  => ['administrador'],
+                    'url'  => 'al_lic',
+                    'classes'   => 'ml-2', 
+                ],
+                [
+                    'text' => 'Kardex',
+                    'icon' => 'far fa-newspaper',
+                    'can'  => ['administrador'],
+                    'classes' => 'ml-2',
+                    'submenu' => [
+                        [
+                            'text' => 'Impresión',
+                            'url'  => 'index_kardex_lic',
+                            'can'  => ['administrador'],
+                            'classes' => 'ml-3',       
+                        ],
+                        [
+                            'text' => 'Verificación',
+                            'url'  => 'verificacion_kardex_lic',
+                            'can'  => ['administrador'],
+                            'classes' => 'ml-3', 
+                        ],
+                    ],
+                ],
+                [
+                    'text'    => 'Examenes ET y ER',
+                    'icon'    => 'fas fa-book',
+                    'can'     => ['administrador','capturista'],
+                    'submenu' => [
+                        [
+                            'text'    => 'Registro de exámenes ER',
+                            'url'   => 'ex_re',
+                        ],
+                        [
+                            'text'    => 'Registro de exámenes ET',
+                            'url'     => 'ex_t',
+                        ],
+                        [
+                            'text'    => 'Captura de calificaciones',
+                            'url'   => '#',
+                        ],
+                        [
+                            'text'    => 'Listado de exámenes',
+                            'url'   => 'list_ex',
+                        ],
+                        [
+                            'text'    => 'Fechas de exámenes',
+                            'url'   => 'fechas_et_er',
+                        ],
+                        [
+                            'text' => 'Ordenes de Pago',
+                            'url'  => 'ordenes_pago',
+                        ]
+                    ],
+                ],
+            ],
+        ],
+        [
+            'text' => 'Posgrado',
+            'icon' => 'fas fa-user-graduate',
+            'can'  => ['administrador'],
+            'submenu' => [
+                [
+                    'text' => 'Alumnos',
+                    'icon' => 'fas fa-users',
+                    'can'  => ['administrador'],
+                    'url'  => 'al_pos',
+                    'classes'   => 'm-1', 
+                ],
+                [
+                    'text' => 'Kardex',
+                    'icon' => 'far fa-newspaper',
+                    'can'  => ['administrador'],
+                    'classes' => 'm-1',
+                    'submenu' => [
+                        [
+                            'text' => 'Impresión',
+                            'url'  => 'index_kardex_pos',
+                            'can'  => ['administrador'],
+                            'classes' => 'm-2',       
+                        ],
+                        [
+                            'text' => 'Verificación',
+                            'url'  => 'verificacion_kardex_pos',
+                            'can'  => ['administrador'],
+                            'classes' => 'm-2', 
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
             'text'    => 'Alumnos',
             'icon'    => 'fas fa-fw fa-user',
             'can'     => ['administrador','capturista'],
@@ -390,50 +490,6 @@ return [
                     'text'    => 'Alumnos de Posgrado',
                     'url'     => 'al_pos',
                     'can'     => ['administrador','capturista'],
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Kardex',
-            'icon'    => 'far fa-newspaper',
-            'can'     => ['administrador','capturista'],
-            'submenu' => [
-                [
-                    'text' => 'Impresion',
-                    'url'  => 'index_kardex',
-                    'can'     => ['administrador','capturista'],
-                ],
-                [
-                    'text' => 'Verificación',
-                    'url'  => 'verificacion_kardex',
-                    'can'  => ['administrador'],
-                ]
-            ],
-        ],
-        [
-            'text'    => 'Examenes ET y ER',
-            'icon'    => 'fas fa-book',
-            'can'     => ['administrador','capturista'],
-            'submenu' => [
-                [
-                    'text'    => 'Registro de exámenes ER',
-                    'url'   => 'ex_re',
-                ],
-                [
-                    'text'    => 'Registro de exámenes ET',
-                    'url'     => 'ex_t',
-                ],
-                [
-                    'text'    => 'Captura de calificaciones',
-                    'url'   => '#',
-                ],
-                [
-                    'text'    => 'Listado de exámenes',
-                    'url'   => 'list_ex',
-                ],
-                [
-                    'text'    => 'Fechas de exámenes',
-                    'url'   => 'fechas_et_er',
                 ],
             ],
         ],
@@ -472,7 +528,7 @@ return [
                 [
                     'text'    => 'Usuarios',
                     'url'     => 'usuarios',
-                    'can'     => ['administrador','capturista'],
+                    'can'     => ['administrador'],
                 ],
                 [
                     'text'    => 'Datos Generales',

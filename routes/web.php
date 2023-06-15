@@ -66,9 +66,10 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
         Route::get('/list_ex',[sidebar::class,'listado_examenes']);
         Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
+        Route::get('/ordenes_pago',[sidebar::class,'ordenes_pago']);
         /*Rutas para el kardex*/
-        Route::get('/index_kardex',[sidebar::class,'kardex']);
-        Route::get('/verificacion_kardex',[sidebar::class,'verificacion']);
+        Route::get('/index_kardex_lic',[sidebar::class,'kardex_lic']);
+        Route::get('/verificacion_kardex_lic',[sidebar::class,'verificacion_lic']);
         /* Rutas Alumnos*/
         Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
         Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);

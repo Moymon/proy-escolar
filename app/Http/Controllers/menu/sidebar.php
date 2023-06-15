@@ -19,12 +19,12 @@ class sidebar extends Controller
 
     //
     /*Rutas para Kardex---------------------------------------------------------------------*/
-    public function kardex(){
-        return view('kardex.kardex-index');
+    public function kardex_lic(){
+        return view('kardex.kardex-index-lic');
     }
 
-    public function verificacion(){
-        return view('kardex.kardex-verificacion');
+    public function verificacion_lic(){
+        return view('kardex.kardex-verificacion-lic');
     }
 
     //
@@ -44,6 +44,11 @@ class sidebar extends Controller
 
     public function fechas_et_er(){
         return view('examenes_et_er.fechaseter');
+    }
+
+    public function ordenes_pago()
+    {
+        return view('examenes_et_er.ordenes');
     }
     
     /*Rutas para Procedimientos-------------------------------------------------------------*/
