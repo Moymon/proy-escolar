@@ -25,71 +25,66 @@
             <div class="col-md-1">
                 <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
             </div>
-            <div class="col-md-6">
+            <div class="col-11">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-2">
                         <div class="form-group">
                             <label>Clave UASLP</label>
-                            <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                        </div>
-                        <div class="form-group">
-                            <label>Situación</label>
-                            <input type="text" class="form-control" id="cve_unica" name="situacion">
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha de situación</label>
-                            <input type="date" class="form-control" id="cve_unica" name="fecha_situacion">
-                        </div>
-                        <div class="form-group">
-                            <label>Condición</label>
-                            <input type="text" class="form-control" id="cve_unica" name="Condicion">
-                        </div>
-                        <div class="form-group">
-                            <div class="row d-flex justify-content-end">
-                                <div class="col-6">
-                                    <label>Aprobo 45 Créditos en 1 y 2 Semestres</label>
-                                </div>
-                                <div class="col-4">
-                                   <input class="form-control" type="text" name="" disabled> 
-                                </div>
-                            </div>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="cve_unica" name="cve_unica">
+                                <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>    
+                            </div>  
                         </div>
                     </div>
-                    <div class="col-md-6"> 
-                        <br> 
-                        <button class="btn bg-gradient-secondary"><i class="fas fa-search"></i></button>
+                    <div class="col-2">
+                        <label>Situación</label>
+                        <input type="text" class="form-control" id="cve_unica" name="situacion" disabled>   
+                    </div>
+                    <div class="col-2">
+                        <label class="form-label">Fecha de situación</label>
+                        <input type="date" class="form-control" id="cve_unica" name="fecha_situacion" disabled>    
+                    </div>
+                    <div class="col-2">
+                        <label>Condición</label>
+                        <input type="text" class="form-control" id="cve_unica" name="Condicion" disabled>   
+                    </div>
+                    <div class="col-2">
+                        <label>Clave Ingeniería</label>
+                        <input type="number" class="form-control" name="ingenieria" disabled> 
+                    </div>
+                    <div class="col-3">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" name="domiclio" disabled>
+                    </div>
+                    <div class="col-3">
+                        <label>Asesor</label>
+                        <input type="text" class="form-control" name="colonia" disabled>    
+                    </div>
+                    <div class="col-3">
+                        <label>Carrera</label>
+                        <input type="text" name="cp" class="form-control" disabled>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Ingeniería</label>
-                    <input type="number" class="form-control" name="ingenieria" disabled>
-                </div> 
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" name="domiclio" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Asesor</label>
-                    <input type="text" class="form-control" name="colonia" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Carrera</label>
-                    <input type="text" name="cp" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <div class="row d-flex justify-content-end">
-                        <div class="col-6 ">
-                            <label>Aprobo 45 Créditos en 3er Semestre</label>
-                        </div>
-                        <div class="col-4">
-                           <input class="form-control" type="text" name="" disabled> 
-                        </div>
-                    </div>
-                </div>
-            </div><!--Fin col segunda columna-->
         </div><!--Fin row Primera Seccion-->
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <label>Aprobo 45 Créditos en 1 y 2 Semestres</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" name="" disabled>    
+                </div>
+                
+            </div>
+            <div class="col-6">
+                <label>Aprobo 45 Créditos en 3er Semestre</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" name="" disabled>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
         <div class="row"> <!--Card para las tabs-->
            <div class="col-12 card">
                 <div class="card-title">
@@ -121,7 +116,7 @@
                             </div>
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped dataTable dtr-inline" id="materias">
+                                <table class="table table-bordered table-striped dataTable dtr-inline tablas_impresion" id="materias">
                                     <thead>
                                         <tr>
                                             <th>NUM</th>
@@ -211,7 +206,7 @@
                         </div><!--Tab de kardex-->
                         <div class="tab-pane fade show" id="tab-estadisticas_semestrales" role="tabpanel">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped dataTable dtr-inline">
+                                <table class="table table-bordered table-striped dataTable dtr-inline tablas_impresion">
                                     <thead>
                                         <tr>
                                             <th>Semestre</th>
@@ -629,7 +624,7 @@
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped dataTable dtr-inline">
+                                        <table class="table table-bordered table-striped dataTable dtr-inline tablas_impresion">
                                             <thead>
                                                 <tr>
                                                     <th>Fecha EGEL</th>
@@ -784,5 +779,24 @@
 @stop
 
 @section('js')
-    <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script>   
+    <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script> 
+    <script>
+    $(document).ready(function (){
+            $('.table').DataTable({
+                language:{
+                    "emptyTable" : "No hay información",
+                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu" : "Mostrar _MENU_ resultados",
+                    "search"     : "Buscar",
+                    "zeroRecords": "Resultados no encontrados",
+                    "paginate":{
+                        "first"  :"Primero",
+                        "last"   :"Ultimo",
+                        "next"   :"Siguiente",
+                        "previous":"Anterior"
+                    }
+                },
+            });
+        });    
+    </script>
 @stop

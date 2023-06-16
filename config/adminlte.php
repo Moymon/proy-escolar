@@ -413,31 +413,52 @@ return [
                     'text'    => 'Examenes ET y ER',
                     'icon'    => 'fas fa-book',
                     'can'     => ['administrador','capturista'],
+                    'classes' => 'ml-2',
                     'submenu' => [
                         [
                             'text'    => 'Registro de exámenes ER',
                             'url'   => 'ex_re',
+                            'classes' => 'ml-3',
                         ],
                         [
                             'text'    => 'Registro de exámenes ET',
                             'url'     => 'ex_t',
+                            'classes' => 'ml-3',
                         ],
                         [
                             'text'    => 'Captura de calificaciones',
                             'url'   => '#',
+                            'classes' => 'ml-3',
                         ],
                         [
                             'text'    => 'Listado de exámenes',
                             'url'   => 'list_ex',
+                            'classes' => 'ml-3',
                         ],
                         [
                             'text'    => 'Fechas de exámenes',
                             'url'   => 'fechas_et_er',
+                            'classes' => 'ml-3',
                         ],
                         [
                             'text' => 'Ordenes de Pago',
                             'url'  => 'ordenes_pago',
-                        ]
+                            'classes' => 'ml-3',
+                        ],
+                    ],
+                ],
+                [
+                    'text'    => 'Procedimientos',
+                    'icon'    => 'fab fa-first-order-alt',
+                    'can'     => ['administrador','capturista'],
+                    'classes' => 'ml-2',
+                    'submenu' => [
+                        [
+                            'text' => 'Archivo para constancias',
+                            'url'  => 'procedimientos',
+                            'classes' => 'ml-3',
+                            'can'     => ['administrador','capturista'],
+                        ],
                     ],
                 ],
             ],
@@ -452,56 +473,27 @@ return [
                     'icon' => 'fas fa-users',
                     'can'  => ['administrador'],
                     'url'  => 'al_pos',
-                    'classes'   => 'm-1', 
+                    'classes'   => 'ml-2', 
                 ],
                 [
                     'text' => 'Kardex',
                     'icon' => 'far fa-newspaper',
                     'can'  => ['administrador'],
-                    'classes' => 'm-1',
+                    'classes' => 'ml-2',
                     'submenu' => [
                         [
                             'text' => 'Impresión',
                             'url'  => 'index_kardex_pos',
                             'can'  => ['administrador'],
-                            'classes' => 'm-2',       
+                            'classes' => 'ml-3',       
                         ],
                         [
                             'text' => 'Verificación',
                             'url'  => 'verificacion_kardex_pos',
                             'can'  => ['administrador'],
-                            'classes' => 'm-2', 
+                            'classes' => 'ml-3', 
                         ],
                     ],
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Alumnos',
-            'icon'    => 'fas fa-fw fa-user',
-            'can'     => ['administrador','capturista'],
-            'submenu' => [
-                [
-                    'text' => 'Alumnos de Licenciatura',
-                    'url'  => 'al_lic',
-                    'can'     => ['administrador','capturista'],
-                ],
-                [
-                    'text'    => 'Alumnos de Posgrado',
-                    'url'     => 'al_pos',
-                    'can'     => ['administrador','capturista'],
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Procedimientos',
-            'icon'    => 'fab fa-first-order-alt',
-            'can'     => ['administrador','capturista'],
-            'submenu' => [
-                [
-                    'text' => 'Archivo para constancias',
-                    'url'  => 'procedimientos',
-                    'can'     => ['administrador','capturista'],
                 ],
             ],
         ],
@@ -512,28 +504,38 @@ return [
             'submenu' => [
                 [
                     'text' => 'Perfil',
+                    'icon' => 'fas fa-user',
                     'url'  => '#',
                     'can'     => ['administrador','capturista'],
+                    'classes' => 'ml-2',
                 ],
                 [
                     'text' => 'Roles',
+                    'icon' => 'fas fa-dice',
                     'url'  => 'roles',
                     'can'  => ['administrador'],
+                    'classes' => 'ml-2',
                 ],
                 [
                     'text' => 'Permisos',
+                    'icon' => 'fas fa-clipboard-list',
                     'url'  => 'permisos',
                     'can'  => ['administrador'],
+                    'classes' => 'ml-2',
                 ],
                 [
                     'text'    => 'Usuarios',
+                    'icon'    => 'fas fa-users',
                     'url'     => 'usuarios',
                     'can'     => ['administrador'],
+                    'classes' => 'ml-2',
                 ],
                 [
                     'text'    => 'Datos Generales',
+                    'icon'    => 'fas fa-cogs',
                     'url'     => 'administracion-index',
                     'can'     => ['administrador'],  
+                    'classes' => 'ml-2',
                 ],
             ],
         ],

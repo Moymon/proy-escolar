@@ -159,19 +159,24 @@
 @stop
 
 @section('js')
-    
-    <script> console.log('Hi!'); </script>
-    
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.responsive.min.js"></script>
-
-    <script>
-    $(function () {
-    $("#archivo").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }) });
-    </script>
-
-
+<script type="text/javascript">
+        $(document).ready(function (){
+        $('.table').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    });  
+</script>
 @stop

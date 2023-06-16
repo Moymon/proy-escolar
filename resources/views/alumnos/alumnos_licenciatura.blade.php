@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@extends('modalAlumnos')
 
 @section('title', 'Dashboard')
 
@@ -21,19 +21,10 @@
 
         <div class="w-50 d-flex flex-row align-items-center justify-content-end">
             <div>
-                <form id="busquedaAlumno" class="input-group rounded" style="margin-right: 10px">
-                    @csrf
-                    <div class="d-flex flex-row align-items-end">
-                        <input name="clave_unicaSearch" type="search" class="form-control rounded" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />
-                        <button type="submit" class="input-group-text border-0 h-100" id="search-addon">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
+                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
             </div>
-
             <div>
-                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="btn-sm bg-dark"><i class="bi bi-plus"></i></button>
+                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark"><i class="bi bi-plus"></i></button>
             </div>
         </div>
     </div>
@@ -187,8 +178,15 @@
             <br>
             <div class="row">
                 <div class="col-2">
-                    <input type="checkbox" name="">
-                    <label>Cuenta con lengua indigena</label>
+                    <label>Habla alguna lengua indigena</label>
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="form-control form-select"> 
+                                <option>No</option>
+                                <option>Si</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2">
                     <label class="m-0">Discapacidad</label>
@@ -243,7 +241,7 @@
     <!--Tab Domicilio y Tutor-->
     <div class="p-3 tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="border border-5 shadow p-3">
-            <h3 class="text-center">Contacto</h3>
+            <h3 class="text-center">Datos de Contacto</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-1">
@@ -297,7 +295,7 @@
                 </div>
             </div>
             <br>
-            <h3 class="text-center">Domicilio de correspondencia</h3>
+            <h3 class="text-center">Domicilio Permanente</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-2">
@@ -327,6 +325,13 @@
                 <div class="col-2">
                     <label for="estado" class="m-0 form-label">Estado</label>
                     <input type="text" class=" form-control" id="estado" disabled>
+                </div>
+            </div>
+            <br>
+            <div class="row d-flex justify-content-end">
+                <div class="ml-2 ">
+                    <button disabled id="guardar" style="margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
+                    <button disabled id="modificar" style="margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
                 </div>
             </div>
         </div>
@@ -1176,5 +1181,23 @@
 @stop
 
 @section('js')
-   
+<script>
+    $(document).ready(function (){
+            $('.table').DataTable({
+                language:{
+                    "emptyTable" : "No hay información",
+                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu" : "Mostrar _MENU_ resultados",
+                    "search"     : "Buscar",
+                    "zeroRecords": "Resultados no encontrados",
+                    "paginate":{
+                        "first"  :"Primero",
+                        "last"   :"Ultimo",
+                        "next"   :"Siguiente",
+                        "previous":"Anterior"
+                    }
+                },
+            });
+        });    
+</script>
 @stop

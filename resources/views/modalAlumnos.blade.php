@@ -35,7 +35,7 @@
                             </div>
                             <div class="row">
                                 <div class="table-responsive">
-                                    <table id="alumnos" class="table table-bordered table-striped dataTable dtr-inline">
+                                    <table id="alumnos" class="table table-bordered table-striped dataTable dtr-inline tabla_alumno">
                                         <thead>
                                             <tr>
                                                 <th>CVE. UASLP</th>
@@ -90,3 +90,26 @@
         </div>
     </div>
 </div>
+
+
+@section('js')
+    <script>
+    $(document).ready(function (){
+            $('.table').DataTable({
+                language:{
+                    "emptyTable" : "No hay información",
+                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu" : "Mostrar _MENU_ resultados",
+                    "search"     : "Buscar",
+                    "zeroRecords": "Resultados no encontrados",
+                    "paginate":{
+                        "first"  :"Primero",
+                        "last"   :"Ultimo",
+                        "next"   :"Siguiente",
+                        "previous":"Anterior"
+                    }
+                },
+            });
+        });    
+    </script>  
+@stop

@@ -88,7 +88,7 @@
 @section('js')
 <script>
  $(document).ready(function (){
-        $('#tabla_permisos').DataTable({
+        $('.table').DataTable({
             language:{
                 "emptyTable" : "No hay información",
                 "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -102,6 +102,7 @@
                     "previous":"Anterior"
                 }
             },
+            "autoWidth":false,
         });
     });    
 </script>

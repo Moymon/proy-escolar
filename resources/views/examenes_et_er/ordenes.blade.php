@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-3">
+        <div class="col-4">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="col-9">
+        <div class="col-8">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -173,18 +173,73 @@
                             <input class="form-control" type="date" name="" disabled>
                         </div>
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-3">
                             <div class="card">
                                  <div class="card-body">
-                                    <div class="input-group">
-                                        
-                                    </div>
                                     <label>Número de Recibo</label>
-                                    <input type="text" name="">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="" disabled>
+                                        <button type="button" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i></button>
+                                        <button type="button" class="btn btn-outline-info"><i class="fas fa-save"></i></button>
+                                        <button type="button" class="btn btn-outline-info"><i class="fas fa-window-close"></i></button>   
+                                    </div>
                                  </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card col-12">
+                    <div class="card-body">
+                        <table id="" class="table table-bordered table-striped dataTable dtr-inline tabla_pagos">
+                            <thead>
+                                <tr>
+                                    <th>SUO</th>
+                                    <th>RPE</th>
+                                    <th>Profesor</th>
+                                    <th>Clave de la Materia</th>
+                                    <th>Clave de la Materia UASLP</th>
+                                    <th>Materia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>    
+                        </table>       
                     </div>
                 </div>
             </div>    
@@ -196,5 +251,24 @@
 @stop
 
 @section('js')
-
+<script type="text/javascript">
+        $(document).ready(function (){
+        $('.table').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    });  
+</script>
 @stop

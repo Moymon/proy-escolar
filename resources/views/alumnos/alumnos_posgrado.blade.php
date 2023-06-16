@@ -11,19 +11,14 @@
 @section('content')
 <div class="w-100 d-flex align-items-center justify-content-end">
     <div>
-        <form id="busquedaAlumno" class="input-group rounded" style="margin-right: 10px">
-            @csrf
-            <div class="d-flex flex-row align-items-end">
-                <input name="clave_unicaSearch" type="search" class="form-control rounded" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />
-                <button type="submit" class="input-group-text border-0 h-100" id="search-addon">
-                    <i class="fas fa-search"></i>
-                </button>
+        <div class=" d-flex flex-row align-items-center justify-content-end">
+            <div>
+                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
             </div>
-        </form>
-    </div>
-
-    <div>
-        <button style="border rounded-circle width:min(150px, 100%);" type="button" class="btn-sm bg-dark"><i class="bi bi-plus"></i></button>
+            <div>
+                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark"><i class="bi bi-plus"></i></button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -137,6 +132,17 @@
                     <input type="text" name="archivo_nss" class="form-control" />
                 </div>
                 <div class="col-2">
+                    <label class="m-0">Habla alguna lengua indigena</label>
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="form-control form-select"> 
+                                <option>No</option>
+                                <option>Si</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
                     <label class="m-0">Discapacidad</label>
                     <select class="form-control form-select">
                         <option>Ninguna</option>
@@ -150,13 +156,6 @@
                         <option>Psicosocial</option>
                         <option>Otras</option>
                     </select>
-                </div>
-                <div class="col-2">
-                    <br>
-                    <div class="form-check">
-                        <input class="form-check-input"  type="checkbox" name="">
-                        <label class="form-check-label">Cuenta con lengua indigena</label>    
-                    </div>
                 </div>
             </div>
             <br>
@@ -218,7 +217,7 @@
 <!--Tab Domicilio-->
     <div class="p-3 tab-pane fade" id="nav-domicilio" role="tabpanel" >
         <div class="border border-5 p-3">
-            <h3 class="text-center">Contacto</h3>
+            <h3 class="text-center">Datos de Contacto</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-1">
@@ -274,7 +273,7 @@
             </div>
             <br>
             <br>
-            <h3 class="text-center">Domicilio de correspondencia</h3>
+            <h3 class="text-center">Domicilio Permanente</h3>
             <hr style="width:100%;color:black" class="border border-5 mt-0">
             <div class="row">
                 <div class="col-2">
@@ -304,6 +303,14 @@
                 <div class="col-2">
                     <label class="m-0 form-label">Estado</label>
                     <input class="form-control" type="text" name="" disabled>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row d-flex justify-content-end">
+                <div class="ml-2 ">
+                    <button disabled id="guardar" style="margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
+                    <button disabled id="modificar" style="margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
                 </div>
             </div>
             <br>
@@ -346,14 +353,20 @@
                     </select>
                 </div>
                 
-                <div class="row m-0 p-0 w-75">
-                </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-2">
                     <label for="licenciatura" class="m-0 form-label">Número de cédula</label>
                     <input type="text" class="mid form-control" id="licenciatura" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <br>
+            <div class="row d-flex justify-content-end">
+                
+                <div class="ml-2 ">
+                    <button disabled id="guardar" style="margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
+                    <button disabled id="modificar" style="margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
                 </div>
             </div>
             <h3 class="text-center">Posgrado</h3>
@@ -433,14 +446,21 @@
                 </div>
             </div>
             <br>
+            <div class="row d-flex justify-content-end">
+                <div class="mr-5">
+                    <button  id="nuevo_pos" type="button" class="btn bg-dark"><i class="fas fa-folder-plus" data-toggle="modal" data-target="#nuevoPosgrado"></i></button>
+                </div>
+            </div>
+            <br>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped dataTable dtr-inline">
+                <table class="table table-bordered table-striped dataTable dtr-inline tabla_posgrado">
                     <thead>
                         <tr>
                             <th>Nivel</th>
                             <th>Posgrado</th>
                             <th>Facultad</th>
                             <th>Universidad</th>
+                            <th>Edicion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -449,29 +469,102 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td class="text-center" width="10px"><a href="#" class="m-0 btn btn-info"> <i class="fas fa-pencil-alt"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td class="text-center" width="10px"><a href="#" class="m-0 btn btn-info"> <i class="fas fa-pencil-alt"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td class="text-center" width="10px"><a href="#" class="m-0 btn btn-info"> <i class="fas fa-pencil-alt"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="mb-2 d-flex flex-sm-row flex-column align-items-center justify-content-end">
-            <button disabled id="guardar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Guardar</button>
-            <button disabled id="modificar" style="width:min(150px, 100%);margin-right:10px;margin-bottom:10px;" type="button" class="btn-sm bg-dark">Modificar</button>
-        </div>
     </div>
+</div>
 
+<!--Modal nuevo pos-->
+<div class="modal fade" id="nuevoPosgrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingrese los datos del Posgrado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-3">
+                <label for="posgrado_alumno" class="m-0 form-label">Posgrado</label>
+                <select id="posgrado_alumno" class="form-select form-control" aria-label="posgrado_alumno">
+                    <option selected>posgrado</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="fecha_titulacion" class="m-0 form-label">Fecha de Titulación</label>
+                <input type="date" class="mid form-control" id="fecha_titulacion" aria-describedby="emailHelp">
+            </div>
+            <div class="col-1">
+                <label for="libro" class="m-0 form-label">Libro</label>
+                <input type="text" class="mid form-control" id="libro" aria-describedby="emailHelp">
+            </div>   
+            <div class="col-1">
+                <label for="acta" class="m-0 form-label">Acta</label>
+                <input type="text" class="mid form-control" id="acta" aria-describedby="emailHelp">
+            </div>
+            <div class="col-3">
+                <div class="m-0">
+                    <label for="periodo_posgrado_incio" class="m-0 form-label">Periodo</label>
+                    <div class="row">
+                        <div class="col-5">
+                            <input type="number" class="m-0 form-control" id="periodo_posgrado_incio" aria-describedby="emailHelp" min="1900" max="2099" value="2015">
+                        </div>
+                        <label class="col-1">-</label>
+                        <div class="col-5">
+                            <input type="number" class="m-0 form-control" id="periodo_posgrado_fin" aria-describedby="emailHelp" min="1900" max="2099" value="2016">
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <label for="numero_cedeula" class="m-0 form-label">Número de cédula</label>
+                <input type="text" class="mid form-control" id="numero_cedeula" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+                <label for="estado_titulacion" class="m-0 form-label">Estado de Titulación</label>
+                <input type="text" class="mid form-control" id="estado_titulacion" aria-describedby="emailHelp">
+            </div>
+            <div class="col-3">
+                <label for="opcion_titulacion" class="m-0 form-label">Opción de Titulación</label>
+                <select id="opcion_titulacion" class="form-select form-control" aria-label="opcion_titulacion">
+                    <option selected>opcion titulacion</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                </select>
+            </div>
+        </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
 @stop
 
@@ -489,4 +582,25 @@
 @section('js')
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function (){
+        $('.table').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    });  
+    </script>
 @stop
