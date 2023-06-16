@@ -10,8 +10,9 @@
             <h1>Exámenes a Regularización</h1>
         </div>
         <div class="col-6">
+
             <div class="d-flex justify-content-end">
-                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
             </div>
         </div>
     </div>
@@ -23,79 +24,72 @@
 <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-1">
             <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
         </div>
-        <div class="col-md-6">
+        <div class="col-11">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Clave UASLP</label>
+                <div class="col-2 mb-3">
+                    <label class="form-label">Clave UASLP</label>
+                    <div class="input-group">
                         <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                    </div>
-                    <div class="form-group">
-                        <label>Ingeniería</label>
-                        <input type="number" class="form-control" name="ingenieria">
-                    </div> 
-                    <div class="form-group">
-                        <label>Ciclo Escolar</label>
-                        <select class="form-control">
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Período</label>
-                        <select class="form-control">
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
-                        </select>
+                        <button class="btn btn-info"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
-                <div class="col-md-6"> 
-                    <br> 
-                    <button class="btn bg-gradient-secondary"><i class="fas fa-search"></i></button>
+                <div class="col-2 mb-3">
+                    <label>Clave Ingeniería</label>
+                    <input type="number" class="form-control" name="ingenieria" >
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" class="form-control" name="domiclio" disabled>
-            </div>
-            <div class="form-group">
-                <label>Asesor</label>
-                <input type="text" class="form-control" name="colonia" disabled>
-            </div>
-            <div class="form-group">
-                <label>Carrera</label>
-                <input type="text" name="cp" class="form-control" disabled>
+                <div class="col-2 mb-3">
+                    <label>Ciclo Escolar</label>
+                    <select class="form-control form-select" >
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+                <div class="col-2 mb-3">
+                    <label>Período</label>
+                    <select class="form-control form-select" >
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+                <div class="col-4 mb-3">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-12">
+                                <label>Materias encontradas</label>
+                                <div class="col-6 input-group">
+                                    <input type="text" class="form-control" name="grp_encontrados" disabled>
+                                    <button class="btn bg-gradient-secondary" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mb-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="domiclio" disabled>
+                </div>
+                <div class="col-4 mb-3">
+                    <label>Asesor</label>
+                    <input type="text" class="form-control" name="colonia" disabled>
+                </div>
+                <div class="col-4 mb-3">
+                    <label >Carrera</label>
+                    <input type="text" name="cp" class="form-control" disabled>
+                </div>
+                
             </div>
         </div>
      </div>
-
-     <div class="row">
-         <div class="col-md-6">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Materias encontradas</label>
-                        <input type="text" class="form-control" name="grp_encontrados" disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <br>
-                        <button class="btn bg-gradient-secondary" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
-                    </div>
-                </div>
-            </div>
-         </div>
-    </div>
+     <br>
     <div class="row">
         <div class="col-12 table-responsive">
             <table id="archivo" class="table table-bordered table-striped dataTable dtr-inline">
