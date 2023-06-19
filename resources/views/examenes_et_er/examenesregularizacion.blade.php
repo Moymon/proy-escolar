@@ -67,7 +67,7 @@
                                 <label>Materias encontradas</label>
                                 <div class="col-6 input-group">
                                     <input type="text" class="form-control" name="grp_encontrados" disabled>
-                                    <button class="btn bg-gradient-secondary" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
+                                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                        <td width="10px" class="text-center"><button class="m-1 btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="m-1 btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -141,7 +141,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                        <td width="10px" class="text-center"><button class="m-1 btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="m-1 btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -209,7 +209,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -222,7 +222,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -235,7 +235,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -248,7 +248,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -259,7 +259,7 @@
                             <div class="input-group">
                                 <input type="number" name="" class="form-control">
                                 <div class="input-group-append">
-                                    <button class="btn btn-light"><i class="fas fa-search"></i> Ir </button>
+                                    <button class="btn btn-info"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>

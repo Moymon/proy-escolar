@@ -22,68 +22,59 @@
 <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-1">
             <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
         </div>
-        <div class="col-md-6">
+        <div class="col-11">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Clave UASLP</label>
-                        <input type="number" class="form-control" id="cve_unica" name="cve_unica">
+                <div class="col-2 m-3">
+                    <label>Clave UASLP </label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="">
+                        <button class="btn btn-info"><i class="fas fa-search"></i></button>
                     </div>
-                    <div class="form-group">
-                        <label>Ingeniería</label>
-                        <input type="number" class="form-control" name="ingenieria">
-                    </div>                        
                 </div>
-                <div class="col-md-6">  
-                    <button class="btn bg-gradient-secondary"><i class="fas fa-search"></i></button>
+                <div class="col-2 m-3">
+                    <label>Ingeniería</label>
+                    <input type="number" class="form-control" name="ingenieria" disabled>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input class="form-control" type="text" name="nombre" disabled>
-            </div>
-            <div class="form-group">
-                <label>Asesor</label>
-                <input class="form-control" type="text" name="asesor" disabled>
-            </div>
-            <div class="form-group">
-                <label>Carrera</label>
-                <input class="form-control" type="text" name="nombre" disabled>
+                <div class="col-3 m-3">
+                    <label>Nombre</label>
+                    <input class="form-control" type="text" name="nombre" disabled>
+                </div>
+                <div class="col-3 m-3">
+                    <label>Asesor</label>
+                    <input class="form-control" type="text" name="asesor" disabled>
+                </div>
+                <div class="col-2 m-3">
+                    <label>Carrera</label>
+                    <input type="text" class="form-control" name="domiclio" disabled>    
+                </div>
+                <div class="col-2 m-3">
+                    <label>Domicilio</label>
+                    <input type="text" class="form-control" name="domiclio" disabled>
+                </div>
+                <div class="col-2 m-3">
+                    <label>Colonia</label>
+                    <input type="text" class="form-control" name="colonia" disabled>
+                </div>
+                <div class="col-2 m-3">
+                    <label>Código Postal</label>
+                    <input type="text" name="cp" class="form-control" disabled>
+                </div>
+                <div class="col-2 m-3">
+                   <label>Teléfono</label>
+                    <input type="number" class="form-control" name="telefono" disabled> 
+                </div>
+                <div class="col-2 m-3">
+                    <label>Ciudad</label>
+                    <input type="text" class="form-control" name="Ciudad" disabled>
+                </div>
             </div>
         </div>
      </div>
-
-     <div class="row">
-         <div class="col-md-6">
-            <div class="form-group">
-                <label>Domicilio</label>
-                <input type="text" class="form-control" name="domiclio" disabled>
-            </div>
-            <div class="form-group">
-                <label>Colonia</label>
-                <input type="text" class="form-control" name="colonia" disabled>
-            </div>
-            <div class="form-group">
-                <label>Código Postal</label>
-                <input type="text" name="cp" class="form-control" disabled>
-            </div>
-         </div>
-         <div class="col-md-6">
-            <div class="form-group">
-                <label>Teléfono</label>
-                <input type="number" class="form-control" name="telefono" disabled>
-            </div>
-            <div class="form-group">
-                <label>Ciudad</label>
-                <input type="text" class="form-control" name="Ciudad" disabled>
-            </div>
-         </div>
-    </div>
+     <br>
+     <br>
     <div class="row">
         <div class="col-12 table-responsive">
             <table id="archivo" class="table table-bordered table-striped dataTable dtr-inline">

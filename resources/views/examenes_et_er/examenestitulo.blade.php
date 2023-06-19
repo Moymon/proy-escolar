@@ -22,76 +22,62 @@
 <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-1">
             <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
         </div>
-        <div class="col-md-6">
+        <div class="col-11">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Clave UASLP</label>
+                <div class="col-2 m-1">
+                    <label>Clave UASLP</label>
+                    <div class="input-group">
                         <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                    </div>
-                    <div class="form-group">
-                        <label>Ingeniería</label>
-                        <input type="number" class="form-control" name="ingenieria">
-                    </div> 
-                    <div class="form-group">
-                        <label>Ciclo Escolar</label>
-                        <select class="form-control">
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                            <option>option 5</option>
-                        </select>
+                        <button class="btn btn-info"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
-                <div class="col-md-6"> 
-                    <br> 
-                    <button class="btn bg-gradient-secondary"><i class="fas fa-search"></i></button>
+                <div class="col-2 m-1"> 
+                    <label>Ingeniería</label>
+                    <input type="number" class="form-control" name="ingenieria">
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" class="form-control" name="domiclio" disabled>
-            </div>
-            <div class="form-group">
-                <label>Asesor</label>
-                <input type="text" class="form-control" name="colonia" disabled>
-            </div>
-            <div class="form-group">
-                <label>Carrera</label>
-                <input type="text" name="cp" class="form-control" disabled>
+                <div class="col-2 m-1">
+                    <label>Ciclo Escolar</label>
+                    <select class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+                <div class="col-3 m-1">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="domiclio" disabled>
+                </div>
+                <div class="col-3 m-1">
+                    <label>Asesor</label>
+                    <input type="text" class="form-control" name="colonia" disabled>
+                </div>
+                <div class="col-3 m-1">
+                    <label>Carrera</label>
+                    <input type="text" name="cp" class="form-control" disabled>
+                </div>
+                <div class="col-2 m-1">
+                    <label>Materias Encontradas</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="grp_encontrados" disabled>
+                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
+                    </div>
+                </div>
             </div>
         </div>
      </div>
-     <br>
-     <div class="row">
-         <div class="col-md-6">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Materias encontradas</label>
-                        <input type="text" class="form-control" name="grp_encontrados" disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <br>
-                        <button class="btn bg-gradient-secondary" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
-                    </div>
-                </div>
-            </div>
-         </div>
-    </div>
+    <br>
+    <br>
     <div class="row">
         <div class="col-12 table-responsive">
             <table id="archivo" class="table table-bordered table-striped dataTable dtr-inline">
                 <thead>
                     <tr>
-                        <th class="sorting sorting_asc" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" tabindex="0" rowspan="1" colspan="1" >
-                            Clave
+                        <th class="sorting sorting_asc" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" tabindex="0" rowspan="1" colspan="1" >Clave
                         </th>
                         <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Materia
                         </th>
@@ -118,7 +104,9 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                        <td width="10">
+                            <button class="m-1 btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="m-1 btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -128,7 +116,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="d-flex justify-content-around"><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                        <td width="10px"><button class="m-1btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="m-1 btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -182,28 +170,28 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="d-flex justify-content-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
+                            <td width="10px" class="text-center"><a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
