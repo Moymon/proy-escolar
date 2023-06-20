@@ -11,7 +11,10 @@
     <div class="col-4 d-flex flex-column">
         <div class="card w-100 h-100">
             <div class="card-body">
-                <form id="formFiltroFechas" method="POST" action="{{route('getTipoConsulta')}}" class="m-0 p-0">
+                <form action="" class="m-0 p-0">
+                <!--
+                    <form id="formFiltroFechas" method="POST" action="route('getTipoConsulta')" class="m-0 p-0">
+                -->
                     @csrf
 
                     <input type="hidden" name="tipoConsulta" id="tipoConsulta">
@@ -152,7 +155,10 @@
             
             <div class="card w-100 h-100">
                 <div class="card-body">
-                    <form id="camposMateriaInfo" method="POST" action="{{route('getCalificaciones')}}">
+                    <form action="">
+                    <!--
+                    <form id="camposMateriaInfo" method="POST" action="route('getCalificaciones')">
+                    -->
                         @csrf
                         <div class="m-0 row w-100 mt-1 border p-2">
                           <div class="col-5 p-0 d-flex flex-column">
