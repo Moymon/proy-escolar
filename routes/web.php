@@ -7,6 +7,9 @@ use App\Http\Controllers\usuarios\usuariosController;
 use App\Http\Controllers\administracion\datosGenerales;
 use App\Http\Controllers\rolesypermisos\roles_permisos;
 
+
+use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +70,7 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         Route::get('/list_ex',[sidebar::class,'listado_examenes']);
         Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
         Route::get('/ordenes_pago',[sidebar::class,'ordenes_pago']);
+        Route::get('/cap_ex_reg',[sidebar::class,'captura_ex_reg']);
         /*Rutas para el kardex*/
         Route::get('/index_kardex_lic',[sidebar::class,'kardex_lic']);
         Route::get('/verificacion_kardex_lic',[sidebar::class,'verificacion_lic']);
@@ -93,6 +97,12 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
     Route::group(['middleware' => ['permission:administrador.create|administrador.read|administrador.update']], function(){
         Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
     });
+
+
+
+    /*Ejemplos obtencion de fechas y materias*/
+    Route::post('/get-dataCapturaCalificaciones',[ExamenEjemplo::class,'getTipoConsulta'])->name('getTipoConsulta');
+    Route::post('/get-calificaciones',[ExamenEjemplo::class,'getCalificaciones'])->name('getCalificaciones');
 });
 
 //Route::get('/roles',[roles_permisos::class,'index_r']);

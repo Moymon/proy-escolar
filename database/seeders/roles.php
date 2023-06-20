@@ -26,5 +26,11 @@ class roles extends Seeder
         /*Segundo crear permisos*/
         Permission::create(['name'=>'administrador'])->syncRoles([$rol_Admin]);
         Permission::create(['name'=>'capturista'])->syncRoles([$rol_Ventillas]);
+        
+        /*Segundo crear permisos*/
+        Permission::create(['name'=>'administrador.update'])->syncRoles([$rol_Admin]);
+        Permission::create(['name'=>'administrador.edit'])->syncRoles([$rol_Admin]);
+        Permission::create(['name'=>'administrador.create'])->syncRoles([$rol_Admin]);
+        Permission::create(['name'=>'administrador.read'])->syncRoles([$rol_Admin]);
     }
 }

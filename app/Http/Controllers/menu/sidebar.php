@@ -50,6 +50,10 @@ class sidebar extends Controller
     {
         return view('examenes_et_er.ordenes');
     }
+
+    public function captura_ex_reg(){ //****** */
+        return view('examenes_et_er.captura_ex_reg');
+    }
     
     /*Rutas para Procedimientos-------------------------------------------------------------*/
     public function procedimientos_archivos_constancias(){
@@ -61,4 +65,8 @@ class sidebar extends Controller
     public function usuarios(){
         return view('administracion.usuarios-index');
     }
+
+
+
+
 }

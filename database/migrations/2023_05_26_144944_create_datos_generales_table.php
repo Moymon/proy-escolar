@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('version_git',100);
             $table->string('nombre_version',50);
             $table->string('correo',25);
-            $table->bigint('telefono');
+            $table->bigInteger('telefono');
             $table->integer('ext');
             $table->string('master',300);
             $table->timestamps();

@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cat_materia', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
-            $table->dropPrimary('cat_materia');
-
+        Schema::create('sinodal_ase_lic', function (Blueprint $table) {
+            $table->integer('folio_ase_lic')->unique();
+            $table->string('nombre', 150);
+            $table->integer('rpe_sinodal');
+            
+            $table->primary('folio_ase_lic');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cat_materia');
+        Schema::dropIfExists('sinodal_ase_lic');
     }
 };

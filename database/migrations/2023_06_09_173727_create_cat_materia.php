@@ -13,22 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cat_materia', function (Blueprint $table) {
+        Schema::table('cat_materia', function (Blueprint $table) {
             $table->string('cve_materia',6)->primary();
             $table->string('cve_mat_uaslp',10);
             $table->string('cve_area',3)->index();
-            $table->integer('creditos');
-            $table->string('nombre_l',150);
-            $table->string('nombre_c',50);
+
+            $table->integer('creditos')->nullable();
+            $table->string('nombre_l',150)->nullable();
+            $table->string('nombre_c',50)->nullable();
+
             $table->string('nombre_ing',150);
-            $table->integer('examenes');
-            $table->boolean('laboratorio');
-            $table->boolean('lab_oboratorio');
-            $table->boolean('lab_resultado');
-            $table->boolean('calificacion_lit');
-            $table->integer('horas_teoria');
-            $table->integer('horas_lab');
-            $table->timestamps();
+            
+            $table->integer('examenes')->nullable();
+            $table->boolean('laboratorio')->nullable();
+            $table->boolean('lab_oboratorio')->nullable();
+            $table->boolean('lab_resultado')->nullable();
+            $table->boolean('calificacion_lit')->nullable();
+            $table->integer('horas_teoria')->nullable();
+            $table->integer('horas_lab')->nullable();
+            //$table->timestamps();
         });
     }
 

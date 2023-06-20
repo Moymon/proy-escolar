@@ -427,7 +427,7 @@ return [
                         ],
                         [
                             'text'    => 'Captura de calificaciones',
-                            'url'   => '#',
+                            'url'   => 'cap_ex_reg',
                             'classes' => 'ml-3',
                         ],
                         [
