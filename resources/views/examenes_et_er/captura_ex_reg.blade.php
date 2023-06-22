@@ -11,10 +11,10 @@
     <div class="col-4 d-flex flex-column">
         <div class="card w-100 h-100">
             <div class="card-body">
-                <form action="" class="m-0 p-0">
                 <!--
-                    <form id="formFiltroFechas" method="POST" action="route('getTipoConsulta')" class="m-0 p-0">
+                <form action="" class="m-0 p-0">
                 -->
+                <form id="formFiltroFechas" method="POST" action="{{route('getTipoConsulta')}}" class="m-0 p-0">
                     @csrf
 
                     <input type="hidden" name="tipoConsulta" id="tipoConsulta">
@@ -33,7 +33,7 @@
                                 <option value="2021 - 2022/1">2021 - 2022/I</option>
                                 <option value="2021 - 2022/2">2021 - 2022/II</option>
                                 <option value="2022 - 2023/1">2022 - 2023/I</option>
-                                <option value="2022 - 2023/2">2023 - 2023/II</option>
+                                <option value="2022 - 2023/2">2022 - 2023/II</option>
                                 <option value="2023 - 2024/1">2023 - 2024/I</option>
                                 <option value="2023 - 2024/2">2023 - 2024/II</option>
                             </select>
@@ -155,10 +155,10 @@
             
             <div class="card w-100 h-100">
                 <div class="card-body">
-                    <form action="">
                     <!--
-                    <form id="camposMateriaInfo" method="POST" action="route('getCalificaciones')">
+                    <form action="">
                     -->
+                    <form id="camposMateriaInfo" method="POST" action="{{route('getCalificaciones')}}">
                         @csrf
                         <div class="m-0 row w-100 mt-1 border p-2">
                           <div class="col-5 p-0 d-flex flex-column">
@@ -202,7 +202,9 @@
                         </div>
                     </form>
 
-                    <form action="">
+                    <form method="POST" action="{{route('updateCalificaciones')}}" id="formCalificaciones">
+                        
+                        @csrf
                         <input type="hidden" name="materiaCampo" id="materiaCampoModal">
                         <input type="hidden" name="claveCampo" id="claveCampooModal">
       
@@ -242,7 +244,7 @@
                         </div>
       
                         <div class=" d-flex flex-row align-items-center justify-content-start w-100">
-                          <button disabled id="" style="" type="button" class="px-5 m-0 btn-success btn-sm mt-2">Guardar</button>
+                          <button id="guardarCalificaciones" style="" type="submit" class="px-5 m-0 btn-success btn-sm mt-2">Guardar</button>
                         </div>
       
                         <div id="contenedorForm">
@@ -260,7 +262,7 @@
 
 @section('css')
 <style>
-        label{
+    label{
         font-weight: 500!important;
     }
 
@@ -302,22 +304,38 @@
 
 @section('js')
 <script>
-    // Selecciona el id de la tabla de fechas, tbody
+    //Constantes para cada form de Consulta
+	/* Tres form en total:
+		formFechasFiltro: para los campos de ciclo-escolar y periodo, este form hace la consulta para la tabla de Fechas y Examenes-Materia
+		formMateriaConsulta: cundo se selecciona una de las materias, este form se encarga de recibir la informacion y con ella hacer la consulta para la tabla calificaciones.
+		formCalificaciones: Este form recibe la informacion de materia y realiza el update de calificaciones.
+	*/
     const formFechasFiltro = document.getElementById("formFiltroFechas");
     const formMateriaConsulta = document.getElementById("camposMateriaInfo");
+    const formCalificaciones = document.getElementById("formCalificaciones");
   
+    //Constantes para identificar cada tbody de las tablas de la pantalla
+	//Estos tobody ayudaran a identificar, donde se colocaran las consultas a base de datos
     const tablaFechasTbody = document.querySelector("#tablaFechas tbody");
     const tablaExamenesTbody = document.querySelector("#tablaExamen tbody");
     const tablaCalificacionesTbody = document.querySelector("#tablaCalificaciones tbody");
   
+    //Constantes para algunos botones de la pantalla
+	//Estos botones, ademas de hacer el submit en sus respectivos form, se encargan de realizar otra accion
+	//por ello son declarados para manejar estos eventos.
     const botonFechas = document.querySelector("#fechasbutton");
     const botonExamenes = document.querySelector("#examenesbutton");
+    const botonGuardar = document.querySelector('#guardarCalificaciones');
+
+    //Constant para un input dentro del form de fechas(Ciclo-escolar, periodo)
+	//este input sirvira para identificar la consulta que se hara, 
+	//es decir para la tabla de fechas o la tabla examenes-materia
     const tipoConsulta = document.querySelector("#tipoConsulta");
   
-    const materiaCampo = document.querySelector("#materiaCanpo");
-  
+    //Esta funcion permite englobar cada uno de los listener que se usuaran para la dinamica de la pagina
     cargarEventListener();
     function cargarEventListener() {
+        // Estos listener cambian el valor del input escondido en el form (ciclo-escolar, periodo) para la el tipo de consulta que se hara
         botonFechas.addEventListener("click", () => {
             tipoConsulta.value = "fecha";
         });
@@ -325,109 +343,303 @@
             tipoConsulta.value = "examen";
         });
   
+        //Estos listener se les asigna un evento y la funcion que se ejecutara cuando suceda el evento
+		
+		//Listener para el evento de submit de cada form cuando se hace la consulta a base de datos
         formFechasFiltro.addEventListener("submit", consultaFechas);
-        tablaExamenesTbody.addEventListener("click", seleccionarExamen);
         formMateriaConsulta.addEventListener("submit", consultaCalificaciones);
+        formCalificaciones.addEventListener("submit", updateCalificaciones);
+
+        //Listener para la dinamica de seleccion de una materia en la tabla de (examenes-materia) 
+        tablaExamenesTbody.addEventListener("click", seleccionarExamen);
     }
-  
+
+
+    /********************************************************************************/
+    /* Funciones: Peticiones Asincronas con Fetch y .then, estas funciones permiten */
+    /* esperar la consulta a base de datos medinate la route() de los form          */
+    /* Para entender el funcionamiento de fecth y .then revisar la funcion          */
+    /* consultarFechas()                                                            */
+    /********************************************************************************/
+                /***********************************************************/
+                /*CAMBIO EN LARAVEL CON ESTRUCTURA OFICIAL DE DATOS 
+                En estas funciones se recibe la informacion en un formato json,
+                de este se filtra el $data que es un array o lista con la 
+                informacion correspondiente a cada consulta. 
+                
+                Para manejar la estructura oficial,se debe ajustar esta 
+                seccion si es que los datos no estan englobados en una 
+                variable como $data.
+                Si se quiere mantener esta estructura englobar los datos
+                recibidos desde el controlador en una variable $data.
+
+                Por ultimo solo basta con modificar el nombre asignado 
+                para cada campo recibido, por ejemplo: en esta estructura se 
+                recibe el campo element.fecha esta dentro de un forEach de $data, 
+                en otra estructura se puede llamar fechaCalificacion, solo
+                se debe cambiar esto por element.fechaCalifiacion.*/
+                /***********************************************************/
+
+    //Esta funcion recibe el evento formFechasFiltro "submit" esto sucede cuando se presiona el boton type="submit"
     function consultaFechas(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
+        e.preventDefault(); //evita que el boton recargue la pagina
+
+        const formData = new FormData(this); //se recibe el form del cual se esta haciendo el listener
   
-        const createTableCell = (content, className) => {
-            const td = document.createElement("td");
+        if (tipoConsulta.value === "fecha") { // se evalua el valor del input escondido en el form para saber que tipo de consulta realizar (fecha o examen)
+            limpiarHTML(tablaFechasTbody); // Se llama a la funcion de limpiar en caso de que esten datos ya consultados en la tabla 
+  
+            fetch(this.getAttribute("action"), {  //this.getAttribute("action") representa la accion definida por route() en el form
+                //se construye la peticion asincrona
+                method: "POST",
+                body: formData,
+            })
+            .then((response) => response.json()) //"promesa" donde se espera la respuesta json desde el controlador de laravel
+            .then((response) => { //despues de recibir el valor de la respues json desde el controlador se trabaja con los datos recibidos
+            
+                /*En este caso se obtiene la informacion de reponse en el objeto o array $data*/
+                const data = response.data; //se obtiene el elemento data que contiene la informacion de las fechas
+
+                //se define dos arrays para dar formato a las fechas obtenidas
+                const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+                const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+                data.forEach((element) => { // se recorre cada valor recibo, en este caso las fechas
+
+                    //Se da formato a las fechas 
+                    const fechaOriginal = new Date(element.fecha);
+                    const diaSemana = diasSemana[fechaOriginal.getDay()];
+                    const dia = fechaOriginal.getDate();
+                    const mes = meses[fechaOriginal.getMonth()];
+                    const anio = fechaOriginal.getFullYear();
+  
+                    /*En estas lineas de codigo
+                        - Se guarda la fecha formateada
+                        - Se crea un elemnto tr llamada row
+                        - Se crea un elemento td llamndo a la funcion createTableCell(fechaFormateada, "fechaCampo"); llamada td
+                        - Al constante row (tr) se le agrega el elemento td creado anteriormente - appendChild()
+                    */
+                    const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
+                    const row = document.createElement("tr");
+                    const td = createTableCell(fechaFormateada, "fechaCampo");
+                    row.appendChild(td);
+
+
+                    /*A la constante tablaFechasTbody se le agrega el elemento row(tr)*/
+                    tablaFechasTbody.appendChild(row);
+                });
+            })
+            .catch((error) => { //en caso de tener un error se ejecuta lo siguiente, en este caso nose trabaja el error solo se muestra un cosole.log()
+                console.error("Error:", error);
+            });
+        } else if (tipoConsulta.value === "examen") {
+            limpiarHTML(tablaExamenesTbody); //Se llama a la funion de limpiarHTML en caso de tener elemntos consultados anteriormente
+  
+            fetch(this.getAttribute("action"), {
+                method: "POST",
+                body: formData,
+            })
+            .then((response) => response.json())
+            .then((response) => {
+
+                const data = response.data; //se obtiene el $data de los datos consultados
+
+                data.forEach((element) => { //Se recorre el $data para asignar cada valor recibido
+                    //Se crear un row donde se guaradra la informacion de cada celda de la tabla 
+                    const row = document.createElement("tr");
+  
+                    //se contruye un objeto con la informacion de los datos recibidos
+                    //en cada uno de estos se llama a la funcion createTableCell() que retorna un elemento td
+                    const fieldOrder = {
+                        tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
+                        tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
+                        tdHora: createTableCell(element.hora, "horaCampo"),
+                        tdSalon: createTableCell(element.salon, "salonCampo"),
+                        tdTipo: createTableCell(element.tipo, "tipoCampo"),
+                        tdNombre: createTableCell(element.nombre, "nombreCampo"),
+                        tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
+                    };
+  
+                    //Se obtiene la llave dentro del objeto de cada td creado, esta servira para identificar cada celda y su valor
+                    const fieldKeys = Object.keys(fieldOrder);
+  
+                    //se recorre el array de llaves y se busca dentro del objeto el valor que coincida con la llave fieldOrder[key]
+                    //cuando este coinicida, se hace un appendChild() en el row de este valor encontrado.
+                    fieldKeys.forEach(key => {
+                        const field = fieldOrder[key];
+                        row.appendChild(field);
+                    });
+  
+                    /*A la constante tablaFechasTbody se le agrega el elemento row(tr)*/
+                    tablaExamenesTbody.appendChild(row);
+                });
+            })
+            .catch((error) => { //en caso de tener un error se ejecuta lo siguiente, en este caso nose trabaja el error solo se muestra un cosole.log()
+                console.error("Error:", error);
+            });
+        }
+    }
+
+    // Funcion para consulta de calificaciones, esta se ejecuta cunado se consulta las calificaiciones de una materia que se selecciona por primera vez
+    // Llama a la funcion promesaDatosFormTablaCalificacinoes()
+    function consultaCalificaciones(e){
+      e.preventDefault();
+      const formData = new FormData(this);
+      promesaDatosFormTablaCalificacinoes(this.getAttribute("action"), formData); //this.getAttribute("action") representa la accion definida por route() en el form
+    }
+
+    // Funcion para la actualizacion de calificaciones esta se ejecuta cuando se captura o editan las califiaciones de una materia
+    // esta funcion a diferencia de consultaCalificaiciones(), llama la funcion de validacion antes de pasar a la actualizacion de
+    // estas califcaciones
+    // Llama a la funcion promesaDatosFormTablaCalificacinoes()
+    function updateCalificaciones(e){
+        e.preventDefault();
+        var validacion;
+
+        validacion = validarCalificaciones(e);
+        if(!validacion){
+            //console.log("no paso la prueba");
+            return;
+        }
+        const formData = new FormData(this);
+        promesaDatosFormTablaCalificacinoes(this.getAttribute("action"), formData); //this.getAttribute("action") representa la accion definida por route() en el form
+    }
+
+    //Esta funcion solo define el fetch y .then para la recepcion y manejo de estos datos
+    function promesaDatosFormTablaCalificacinoes(action, formData){
+        limpiarHTML(tablaCalificacionesTbody); //Se limpia la tabla en caso de haber datos ya consultados
+  
+        fetch(action, {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((response) => {
+
+            const data = response.data; //Se recogen los datos de response en $data
+            //console.log(data);
+
+            //Se recogen los datos recibidos en response de los campos definidos en el controlador
+            const claveCampo_materia = response.claveCampo_materia;
+            const nombreCampo_materia = response.nombreCampo_materia;
+
+            //Los siguientes son campos escondidos en la tabla de captura de calificaciones
+            //En estos campos se define el value recibido por respons
+
+            //LARAVEL CON ESTRUCUTRA ORIGINAL
+            //estos campos sirven para establecer unsa relacion entre los datos de la tabla de calificacion y para registrarlos 
+            //es necesario actualizar estos datos y hacer la relacion en los controladores segun la estructura original
+            const materiaCampoModal = document.getElementById("materiaCampoModal");
+            const claveCampoModal = document.getElementById("claveCampooModal");
+            materiaCampoModal.value = nombreCampo_materia;
+            claveCampoModal.value = claveCampo_materia;
+
+            //console.log(data);
+            data.forEach((element) => { //Se manejan los datos recibidos
+                const row = document.createElement("tr");
+
+                //La siguiente constante permite es un booleano que evalua si todas las calificaciones de la consulta, ninguna es vacia
+                //En caso de ser vacia alguna significa que es la primersa captura de calificaciones
+                //En caso de no ser vacia es significa que ya se registraron calificaciones anteriormente
+                const todasLasCalificacionesNoNulas = data.every((element) => element.calificacion !== null && element.calificacion !== "");
+
+                //Se crea un objeto con la informacion de cada 
+                const fieldOrder = {
+                    tdCveUnica: createTableCell(element.cve_unica, "cve_unicaModal"),
+                    tdnombre: createTableCell(element.nombre + " " + element.paterno + " " + element.materno, "nombreModal"),
+                    tdCalificacion: createTableCellCalificacion(element.calificacion, "calificacionModal", todasLasCalificacionesNoNulas, element.cve_unica),
+                };
+
+                const fieldKeys = Object.keys(fieldOrder);
+
+                fieldKeys.forEach(key => {
+                    const field = fieldOrder[key];
+                    row.className="fila-calificacion";
+                    row.appendChild(field);
+                });
+                //row.appendChild(tdButton);
+
+                tablaCalificacionesTbody.appendChild(row);
+            });
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    }
+
+
+    /********************************************************************************/
+    /* Funciones: para la creacion de celdas 'td' en las tablas de la pantalla      */
+    /* estas funciones son llamadas cuando se hace una cosulta nueva y se asignan   */
+    /* nuevos datos a las tablas                                                    */
+    /********************************************************************************/
+    function createTableCell(content, className) {
+        const td = document.createElement("td");
+        td.className = className;
+        td.textContent = content;
+    
+        return td;
+    }
+
+    function createTableCellCalificacion(content, className, todasLasCalificacionesNoNulas, cve_unica){
+        const td = document.createElement("td");
             td.className = className;
             td.textContent = content;
-    
-            if (className === "materiaCampo") {
-                td.setAttribute("onclick", "inicializacionModalCalificaciones()")
-                td.setAttribute("data-toggle", "modal");
-                td.setAttribute("data-target", "#modal_capturaDeCalificaciones");
-            }
-            return td;
-        };
-  
-        if (tipoConsulta.value === "fecha") {
-            const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-            const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-  
-            limpiarHTML(tablaFechasTbody);
-  
-            fetch(this.getAttribute("action"), {
-                method: "POST",
-                body: formData,
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    const data = response.data;
-                    data.forEach((element) => {
-                        const fechaOriginal = new Date(element.fecha);
-                        const diaSemana = diasSemana[fechaOriginal.getDay()];
-                        const dia = fechaOriginal.getDate();
-                        const mes = meses[fechaOriginal.getMonth()];
-                        const anio = fechaOriginal.getFullYear();
-  
-                        const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
-                        const row = document.createElement("tr");
-                        const td = createTableCell(fechaFormateada, "fechaCampo");
-                        row.appendChild(td);
-  
-                        tablaFechasTbody.appendChild(row);
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        } else if (tipoConsulta.value === "examen") {
-            limpiarHTML(tablaExamenesTbody);
-  
-            fetch(this.getAttribute("action"), {
-                method: "POST",
-                body: formData,
-            })
-                .then((response) => response.json())
-                .then((response) => {
-                    const data = response.data;
-                    data.forEach((element) => {
-                        const row = document.createElement("tr");
-  
-                        const fieldOrder = {
-                            tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
-                            tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
-                            tdHora: createTableCell(element.hora, "horaCampo"),
-                            tdSalon: createTableCell(element.salon, "salonCampo"),
-                            tdTipo: createTableCell(element.tipo, "tipoCampo"),
-                            tdNombre: createTableCell(element.nombre, "nombreCampo"),
-                            tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
-                        };
-  
-                        const fieldKeys = Object.keys(fieldOrder);
-  
-                        fieldKeys.forEach(key => {
-                            const field = fieldOrder[key];
-                            row.appendChild(field);
-                        });
-  
-                        tablaExamenesTbody.appendChild(row);
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        }
+                if (todasLasCalificacionesNoNulas) {
+                    // Todos los elementos de calificacion no son nulos o vacíos
+
+                    const inputCal = document.createElement("input");
+                    const divIcon = document.createElement("div");
+                    const buttonCaptura = document.createElement("button");
+
+                    buttonCaptura.setAttribute("class", "w-100 h-100 btn btn-primary p-0");
+                    buttonCaptura.disabled = false;
+                    buttonCaptura.setAttribute("onclick", "transformarEnEditable(this)");
+                    buttonCaptura.innerHTML = `
+                    <i class='fas fa-edit'></i>
+                    `;
+                    divIcon.appendChild(buttonCaptura);
+
+                    divIcon.setAttribute("style", "height:26px;width:26px;top:25%;left:85%;");
+                    divIcon.setAttribute("class", "position-absolute");
+
+                    td.setAttribute("class", "d-flex align-items-center justify-content-center position-relative " + className);
+                    td.appendChild(divIcon);
+                } else {
+                    // Al menos uno de los elementos de calificacion es nulo o vacío
+                    const inputCal = document.createElement("input");
+                    const divIcon = document.createElement("div");
+                    const buttonCaptura = document.createElement("button");
+
+                    buttonCaptura.setAttribute("class", "w-100 h-100 btn p-0");
+                    buttonCaptura.disabled = true;
+                    buttonCaptura.innerHTML = `
+                    <i class='fas fa-save' style='color:#b4b4b4'></i>
+                    `;
+                    divIcon.appendChild(buttonCaptura);
+
+                    divIcon.setAttribute("style", "height:26px;width:26px;top:25%;left:85%;");
+                    divIcon.setAttribute("class", "position-absolute");
+
+                    inputCal.setAttribute("class", "w-25 text-center");
+                    inputCal.setAttribute("type", "text");
+                    inputCal.setAttribute("style", "cursor: pointer!important;border-top:none!important;border-right:none!important;border-left:none!important;background-color:transparent!important;");
+
+                    td.setAttribute("class", "d-flex align-items-center justify-content-center position-relative " + className);
+                    td.appendChild(inputCal);
+                    td.appendChild(divIcon);
+
+                }
+
+        return td;
     }
+ 
   
-    // Elimina todos los elementos del tbody
-    function limpiarHTML(node) {
-        // Forma lenta e insegura
-        // node.innerHTML = '';
-  
-        // Forma rápida
-        while (node.firstChild) {
-            node.removeChild(node.firstChild);
-        }
-    }
-  
+    /********************************************************************************/
+    /* Funcion para la seleccion de una fila en la tabla de examenes-materia        */
+    /* al seleccionar una materia esta se asigna en cada campo del form de materia  */
+    /* donde esta el boton para la consulta de calificaciones                       */
+    /********************************************************************************/
     function seleccionarExamen(e) {
       e.preventDefault();
     
@@ -456,85 +668,115 @@
       });
   
     }
-  
-  
-    function consultaCalificaciones(e){
-      e.preventDefault();
-      //console.log("Hola");
-  
-      const formData = new FormData(this);
-  
-      const createTableCell = (content, className) => {
-            const td = document.createElement("td");
-            td.className = className;
-            td.textContent = content;
-            if (className === "calificacionModal" && !content) {
-              const inputCal = document.createElement("input");
-              inputCal.setAttribute("class", "w-100 text-center");
-              inputCal.setAttribute("type", "text");
-              inputCal.setAttribute("style", "border:none!important;cursor: pointer!important;padding:14px;");
-              td.className = "p-0";
-              td.appendChild(inputCal);
-            }
-  
-            return td;
-      };
-  
-      limpiarHTML(tablaCalificacionesTbody);
-  
-      fetch(this.getAttribute("action"), {
-            method: "POST",
-            body: formData,
-      })
-      .then((response) => response.json())
-      .then((response) => {
 
-            const data = response.data;
-            //console.log(data);
-            const claveCampo_materia = response.claveCampo_materia;
-            const nombreCampo_materia = response.nombreCampo_materia;
-  
-            //const titleModal = document.getElementById("modal_capturaDeCalificacionesTitle");
-            const materiaCampoModal = document.getElementById("materiaCampoModal");
-            const claveCampoModal = document.getElementById("claveCampooModal");
-  
-            //titleModal.textContent = "Captura de calificaciones - Materia: " + nombreCampo_materia;
-            materiaCampoModal.value = nombreCampo_materia;
-            claveCampoModal.value = claveCampo_materia;
-  
-            console.log(data);
-            data.forEach((element) => {
-                const row = document.createElement("tr");
-                /*
-                const tdButton = document.createElement("td");
-                const button = document.createElement("button");
-  
-                tdButton.setAttribute("class", "sin-borde");
-                button.setAttribute("onclick", "transformarEnEditable(this)");
-                button.setAttribute("class", "editar btn btn-primary btn-sm");
-                button.textContent = "Editar";
-                tdButton.appendChild(button);
-                */
-                const fieldOrder = {
-                  tdCveUnica: createTableCell(element.cve_unica, "cve_unicaModal"),
-                  tdnombre: createTableCell(element.nombre + " " + element.paterno + " " + element.materno, "nombreModal"),
-                  tdCalificacion: createTableCell(element.calificacion, "calificacionModal"),
-                };
-  
-                const fieldKeys = Object.keys(fieldOrder);
-  
-                fieldKeys.forEach(key => {
-                    const field = fieldOrder[key];
-                    row.appendChild(field);
-                });
-                //row.appendChild(tdButton);
-  
-                tablaCalificacionesTbody.appendChild(row);
-            });
-      })
-      .catch((error) => {
-          console.error("Error:", error);
-      });
+
+    /********************************************************************************/
+    /* Funcion para la limpieza de una tabla cuando esta ya tiene datos y se quiere */
+    /* cargar nuevos datos                                                          */
+    /********************************************************************************/
+    function limpiarHTML(node) {
+        // Forma lenta e insegura
+        // node.innerHTML = '';
+
+        // Forma rápida
+        while (node.firstChild) {
+            node.removeChild(node.firstChild);
+        }
+    }
+
+
+    /********************************************************************************/
+    /* Funuciones: Para validacion de las calificaciones cuando estas son           */
+    /* capturadas por primera vez o se quiere editar las calificaciones             +/
+    /********************************************************************************/
+    function validarCalificaciones(e) {
+        e.preventDefault();
+
+        const filas = document.getElementsByClassName('fila-calificacion');
+        let evaluaCalificaciones = true;
+        const datosCalificaciones = [];
+        var validacion = true;
+
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i];
+            const celdaClave = fila.querySelector('.cve_unicaModal');
+            const celdaCalificacion = fila.querySelector('.calificacionModal');
+
+            const clave = celdaClave.textContent.trim();
+            const inputCalificacion = celdaCalificacion.querySelector('input');
+            const calificacion = inputCalificacion ? inputCalificacion.value.trim() : celdaCalificacion.textContent.trim();
+
+            if (!calificacion) {
+                // La calificación está vacía
+                evaluaCalificaciones = false;
+                mostrarAdvertencia(celdaCalificacion, 'Asigna una Calificacion');
+            } else if (!validarRangoCalificacion(calificacion)) {
+                // La calificación no está dentro del rango válido
+                evaluaCalificaciones = false;
+                mostrarAdvertencia(celdaCalificacion, 'Asigna una calificación valida: 0-10, AC o NP');
+            } else {
+                // La calificación es válida, elimina cualquier advertencia anterior
+                eliminarAdvertencia(celdaCalificacion);
+                datosCalificaciones.push({ clave, calificacion });
+            }
+        }
+
+        if (evaluaCalificaciones) {
+            // Todas las calificaciones son válidas
+            //console.log("PASÓ LA PRUEBA");
+            //console.log(datosCalificaciones);
+
+            const form = document.getElementById('formCalificaciones');
+            //const form = new FormData(this);
+
+            // Todas las calificaciones son válidas, asigna los datos al formulario
+            const inputDatosCalificaciones = document.createElement('input');
+            inputDatosCalificaciones.setAttribute('type', 'hidden');
+            inputDatosCalificaciones.setAttribute('name', 'datosCalificaciones');
+            inputDatosCalificaciones.value = JSON.stringify(datosCalificaciones);
+            form.appendChild(inputDatosCalificaciones);
+
+            validacion = true;
+        } else {
+            validacion = false;
+            //return;
+            //console.log("NO PASÓ LA PRUEBA");
+        }
+
+        return validacion;
+    }
+
+    function validarRangoCalificacion(calificacion) {
+        const calificacionesValidas = ['AC', 'NP'];
+        //var valoresAceptados = /^([1-9]|10)$/;
+        const valorNumerico = parseInt(calificacion);
+        const isNumeric = n => !isNaN(n);
+        //console.log(valorNumerico);
+
+        //console.log(isNumeric(calificacion));
+        
+        if (calificacionesValidas.includes(calificacion)) {
+            return true; // La calificación es válida (AC o NP)
+        } else if (!isNaN(valorNumerico) && valorNumerico >= 0 && valorNumerico <= 10 && isNumeric(calificacion)) {
+            return true; // La calificación es válida (1-10)
+        }
+        return false; // La calificación no cumple con el rango válido
+    }
+
+    function mostrarAdvertencia(celda, content) {
+        eliminarAdvertencia(celda);
+        const divAdvertencia = document.createElement('div');
+        divAdvertencia.setAttribute('class', 'advertenciaCalificacion');
+        divAdvertencia.setAttribute('style', 'height:17px;width:17px;margin-left:5px;');
+        divAdvertencia.innerHTML = `<i data-bs-toggle="tooltip" data-bs-placement="top" title="${content}"  class='fas fa-info-circle' style='color: red;cursor:pointer;'></i>`;
+        celda.appendChild(divAdvertencia);
+    }
+
+    function eliminarAdvertencia(celda) {
+        const divAdvertencia = celda.querySelector('.advertenciaCalificacion');
+        if (divAdvertencia) {
+            celda.removeChild(divAdvertencia);
+        }
     }
 </script>
   
@@ -570,5 +812,63 @@
     // Se verifican los campos iniciales al cargar la pagina
     verificarCampos();
   
+</script>
+
+
+<script>
+    function transformarEnEditable(nodo){
+            
+            var nodoTd = nodo.parentNode.parentNode; //Nodo TD
+
+            const inputCal = document.createElement("input");
+            const divIcon = document.createElement("div");
+            const buttonCaptura = document.createElement("button");
+
+            var calificacion = nodoTd.textContent.trim();
+            nodoTd.textContent = "";
+            inputCal.value = calificacion;
+            inputCal.setAttribute("class", "w-25 text-center");
+            inputCal.setAttribute("type", "text");
+            inputCal.setAttribute("style", "cursor: pointer!important;border-top:none!important;border-right:none!important;border-left:none!important;background-color:transparent!important;");
+
+            buttonCaptura.setAttribute("class", "w-100 h-100 btn btn-success p-0");
+            buttonCaptura.disabled = false;
+            buttonCaptura.setAttribute("onclick", "finalizarEdicion(this)");
+            buttonCaptura.innerHTML = `
+            <i class='fas fa-check'></i>
+            `;
+            divIcon.appendChild(buttonCaptura);
+
+            divIcon.setAttribute("style", "height:26px;width:26px;top:25%;left:85%;");
+            divIcon.setAttribute("class", "position-absolute");
+
+            nodoTd.appendChild(divIcon);
+            nodoTd.appendChild(inputCal);
+    }
+
+    function finalizarEdicion(nodo){
+        var nodoTd = nodo.parentNode.parentNode; //Nodo TD
+
+        const divIcon = document.createElement("div");
+        const buttonCaptura = document.createElement("button");
+
+        const inputCal = nodoTd.querySelector("input");
+        var calificacion = inputCal.value;
+        nodoTd.textContent = calificacion;
+        inputCal.remove();
+
+        buttonCaptura.setAttribute("class", "w-100 h-100 btn btn-primary p-0");
+        buttonCaptura.disabled = false;
+        buttonCaptura.setAttribute("onclick", "transformarEnEditable(this)");
+        buttonCaptura.innerHTML = `
+        <i class='fas fa-edit'></i>
+        `;
+        divIcon.appendChild(buttonCaptura);
+
+        divIcon.setAttribute("style", "height:26px;width:26px;top:25%;left:85%;");
+        divIcon.setAttribute("class", "position-absolute");
+
+        nodoTd.appendChild(divIcon);
+    }
 </script>
 @stop

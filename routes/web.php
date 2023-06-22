@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
     /*Ejemplos obtencion de fechas y materias*/
     Route::post('/get-dataCapturaCalificaciones',[ExamenEjemplo::class,'getTipoConsulta'])->name('getTipoConsulta');
     Route::post('/get-calificaciones',[ExamenEjemplo::class,'getCalificaciones'])->name('getCalificaciones');
+    Route::post('/update-calificaciones',[ExamenEjemplo::class,'updateCalificaciones'])->name('updateCalificaciones');
 });
 
 //Route::get('/roles',[roles_permisos::class,'index_r']);

@@ -6,6 +6,8 @@ use App\Models\modelosPruebaCapExReg\ExamenLic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\alumno;
+use App\Models\modelosPruebaCapExReg\Kardex;
 use Illuminate\Support\Facades\Response;
 
 class ExamenEjemplo extends Controller
@@ -100,6 +102,45 @@ class ExamenEjemplo extends Controller
             'data' => $data,
         ];
         
+        return response()->json($response);
+    }
+
+    public function updateCalificaciones(Request $request){
+        $claveCampo = $request->claveCampo;
+        $materiaCampo = $request->materiaCampo;
+
+
+        $calificacionesArray = json_decode($request->datosCalificaciones, true);
+        //dd($calificacionesArray);
+        // Accede a cada elemento de datosCalificaciones
+        foreach ($calificacionesArray as $calificacion) {
+            $clave = $calificacion['clave'];
+            $valorCalificacion = $calificacion['calificacion'];
+        
+            $alumno = Alumno::where('cve_unica', $clave)->first();
+            //dd($alumno->id_alumno);
+            $kardex = Kardex::where('id_alumno', $alumno->id_alumno)
+                ->where('cve_materia', $claveCampo)
+                ->first();
+        
+            //dd($kardex);
+            $kardex->calificacion = $valorCalificacion;
+            $kardex->save();
+        }
+
+
+        $data = DB::table('alumno')
+        ->join('kardex_lic', 'alumno.id_alumno', '=', 'kardex_lic.id_alumno')
+        ->join('cat_materia', 'kardex_lic.cve_materia', '=', 'cat_materia.cve_materia')
+        ->where('kardex_lic.cve_materia', $request->claveCampo)
+        ->get();
+
+        $response = [
+            'claveCampo_materia' => $request->claveCampo,
+            'nombreCampo_materia' => $request->materiaCampo,
+            'data' => $data,
+        ];
+
         return response()->json($response);
     }
 }
