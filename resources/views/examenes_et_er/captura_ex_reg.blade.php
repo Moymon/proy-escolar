@@ -315,7 +315,7 @@
     const formCalificaciones = document.getElementById("formCalificaciones");
   
     //Constantes para identificar cada tbody de las tablas de la pantalla
-	//Estos tobody ayudaran a identificar, donde se colocaran las consultas a base de datos
+	//Estos tobody ayudaran a identificar, donde se colocaran las consultas de base de datos
     const tablaFechasTbody = document.querySelector("#tablaFechas tbody");
     const tablaExamenesTbody = document.querySelector("#tablaExamen tbody");
     const tablaCalificacionesTbody = document.querySelector("#tablaCalificaciones tbody");
@@ -352,6 +352,11 @@
 
         //Listener para la dinamica de seleccion de una materia en la tabla de (examenes-materia) 
         tablaExamenesTbody.addEventListener("click", seleccionarExamen);
+
+
+        //ES IMPORTNATE RECALCAR QUE SE DEBE MANTENER O MANEJAR LAS CLASES ESTABLECIDAS EN EL HTML
+        //DE NO SER ASI NO SE PODRAN IDENTIFICAR LOS ELEMENTOS PARA MANEJARLOS, SI SE CAMBIAN ESTAS CLASE
+        //DEBERA CAMBIAR LOS CAMPOS CON LOS QUE SE LLAMAN EN ESTAS FUNCIONES
     }
 
 
@@ -538,23 +543,25 @@
             data.forEach((element) => { //Se manejan los datos recibidos
                 const row = document.createElement("tr");
 
-                //La siguiente constante permite es un booleano que evalua si todas las calificaciones de la consulta, ninguna es vacia
-                //En caso de ser vacia alguna significa que es la primersa captura de calificaciones
-                //En caso de no ser vacia es significa que ya se registraron calificaciones anteriormente
+                //La siguiente constante es un booleano que evalua si todas las calificaciones de la consulta, ninguna es vacia
+                //En caso de ser vacia alguna significa que es la primera captura de calificaciones
+                //En caso de no ser vacia significa que ya se registraron calificaciones anteriormente
                 const todasLasCalificacionesNoNulas = data.every((element) => element.calificacion !== null && element.calificacion !== "");
 
-                //Se crea un objeto con la informacion de cada 
+                //Se crea un objeto con la informacion de cada campo recibido y se registra en cada una de las celdas que se usaran
                 const fieldOrder = {
                     tdCveUnica: createTableCell(element.cve_unica, "cve_unicaModal"),
                     tdnombre: createTableCell(element.nombre + " " + element.paterno + " " + element.materno, "nombreModal"),
-                    tdCalificacion: createTableCellCalificacion(element.calificacion, "calificacionModal", todasLasCalificacionesNoNulas, element.cve_unica),
+                    tdCalificacion: createTableCellCalificacion(element.calificacion, "calificacionModal", todasLasCalificacionesNoNulas),
                 };
 
+                //Se obtiene cada una de las keys(nombres) de los campos en el objeto
                 const fieldKeys = Object.keys(fieldOrder);
 
+                //Se itera sobre el array de keys del objeto y de esta manera ir registrando cada celda en su fila
                 fieldKeys.forEach(key => {
                     const field = fieldOrder[key];
-                    row.className="fila-calificacion";
+                    row.className="fila-calificacion"; //Se asignan clases que ayudaran a identificar el row de la tabla de calificaciones
                     row.appendChild(field);
                 });
                 //row.appendChild(tdButton);
@@ -571,8 +578,13 @@
     /********************************************************************************/
     /* Funciones: para la creacion de celdas 'td' en las tablas de la pantalla      */
     /* estas funciones son llamadas cuando se hace una cosulta nueva y se asignan   */
-    /* nuevos datos a las tablas                                                    */
+    /* nuevos datos a las tablas   
+        Parametros:
+            - content: es el contenido de los datos recibidos por controlador
+            - className: es la clase con la que se identificara cada celda
+    */
     /********************************************************************************/
+    
     function createTableCell(content, className) {
         const td = document.createElement("td");
         td.className = className;
@@ -581,11 +593,18 @@
         return td;
     }
 
-    function createTableCellCalificacion(content, className, todasLasCalificacionesNoNulas, cve_unica){
+    /* Parametros:
+            - content: es el contenido de los datos recibidos por controlador, es la informacion que contendra la celda de la tabla
+            - className: es la clase con la que se identificara cada celda
+            - todasLasCalificacionesNoNulas: booleano con la evaluacion de si las calificaciones en alguna no existe el registro
+                si en alguna no hay registro se considera como captura por primera vez, si no hay registro se considera como 
+                editable
+    */
+    function createTableCellCalificacion(content, className, todasLasCalificacionesNoNulas){
         const td = document.createElement("td");
             td.className = className;
             td.textContent = content;
-                if (todasLasCalificacionesNoNulas) {
+                if (todasLasCalificacionesNoNulas) { //Si no son nulas se agrega el boton para edicion en la celda de la calificacion
                     // Todos los elementos de calificacion no son nulos o vacíos
 
                     const inputCal = document.createElement("input");
@@ -605,7 +624,7 @@
 
                     td.setAttribute("class", "d-flex align-items-center justify-content-center position-relative " + className);
                     td.appendChild(divIcon);
-                } else {
+                } else { //Si no es editable se agrega el boton de captura de save, pero no es funcional solo es adorno para la celda, siginifica que es la primera captura
                     // Al menos uno de los elementos de calificacion es nulo o vacío
                     const inputCal = document.createElement("input");
                     const divIcon = document.createElement("div");
@@ -643,23 +662,29 @@
     function seleccionarExamen(e) {
       e.preventDefault();
     
+      //Cuando ocurre la selecion de una materia se hace sobre una celda(td) por lo que sera necesario obtener su padre
       const materiaSeleccionada = e.target.parentElement;
-      const tds = Array.from(materiaSeleccionada.children);
+      const tds = Array.from(materiaSeleccionada.children); //Se hace un array con todos los datos del padre, es decir cada celda
   
+      //Se hace un objeto con los campos que seran llenados con la informacion de la materia seleccionada
       const fieldOrder = {
-        materiaCampo: document.getElementById("materiaCampo"),
-        tipoCampo: document.getElementById("tipoCampo"),
-        salonCampo: document.getElementById("salonCampo"),
-        nombreCampo: document.getElementById("nombreCampo"),
-        nombreCampo2: document.getElementById("nombreCampo2"),
-        claveCampo: document.getElementById("claveCampo"),
+            materiaCampo: document.getElementById("materiaCampo"),
+            tipoCampo: document.getElementById("tipoCampo"),
+            salonCampo: document.getElementById("salonCampo"),
+            nombreCampo: document.getElementById("nombreCampo"),
+            nombreCampo2: document.getElementById("nombreCampo2"),
+            claveCampo: document.getElementById("claveCampo"),
       };
     
+      //Se obtienes las keys(nombres) de los campos del objetos creado anteriormente
       const fieldKeys = Object.keys(fieldOrder);
   
+      //Se hace un forEach sobre los tds obtenidos
       tds.forEach(td => {
+        //Se itera osbre el array de llaves para identificar cada campo del objeto
         fieldKeys.forEach(key => {
-          if(td.classList.contains(key)) {
+            //Se evalua si la iteracion del td coincide con la iteracion de las keys
+          if(td.classList.contains(key)) { //SI coincide se registra la informacion dentro de la celda
             const contenido = td.textContent;
             const field = fieldOrder[key];
             field.value = contenido;
@@ -690,20 +715,24 @@
     /* capturadas por primera vez o se quiere editar las calificaciones             +/
     /********************************************************************************/
     function validarCalificaciones(e) {
-        e.preventDefault();
+        e.preventDefault(); //previene la accion por defecto
 
+        //S obtienen todas las filas de la tabla de calificaciones segun la clase asignada "fila-calificacion"
         const filas = document.getElementsByClassName('fila-calificacion');
-        let evaluaCalificaciones = true;
-        const datosCalificaciones = [];
-        var validacion = true;
+        let evaluaCalificaciones = true; //bandera para identificar cuando existe un error
+        const datosCalificaciones = []; //array donde se guardara la cve_unica y la calificacion
+        var validacion = true; //bandera para indicar al form si se logro la validacion o no
 
-        for (let i = 0; i < filas.length; i++) {
-            const fila = filas[i];
-            const celdaClave = fila.querySelector('.cve_unicaModal');
-            const celdaCalificacion = fila.querySelector('.calificacionModal');
+        for (let i = 0; i < filas.length; i++) { //Se itera sobre las filas
+            const fila = filas[i]; 
+            const celdaClave = fila.querySelector('.cve_unicaModal'); //se obtiene la clave unica segun la fila que se esta iterando
+            const celdaCalificacion = fila.querySelector('.calificacionModal'); //Se obtien la calificaion seguna la fila en la que se esta iterando
 
-            const clave = celdaClave.textContent.trim();
-            const inputCalificacion = celdaCalificacion.querySelector('input');
+            const clave = celdaClave.textContent.trim(); //se obtiene el contenido de la celda, cve_unica
+            const inputCalificacion = celdaCalificacion.querySelector('input'); //Se obtiene el contenido de la celda, calificacion
+
+            //Se identifica si la celda contiene un input o solo es texto, esto ayudara a poder evaluar la celda cuando un usuario no 
+            //finaliza la edicion de una calificacion, se podran leer celdas tanto con inputs como con solo texto y obtener su valor
             const calificacion = inputCalificacion ? inputCalificacion.value.trim() : celdaCalificacion.textContent.trim();
 
             if (!calificacion) {
@@ -723,13 +752,10 @@
 
         if (evaluaCalificaciones) {
             // Todas las calificaciones son válidas
-            //console.log("PASÓ LA PRUEBA");
-            //console.log(datosCalificaciones);
-
             const form = document.getElementById('formCalificaciones');
             //const form = new FormData(this);
 
-            // Todas las calificaciones son válidas, asigna los datos al formulario
+            // Todas las calificaciones son válidas, se asignan los datos al formulario
             const inputDatosCalificaciones = document.createElement('input');
             inputDatosCalificaciones.setAttribute('type', 'hidden');
             inputDatosCalificaciones.setAttribute('name', 'datosCalificaciones');
@@ -738,22 +764,20 @@
 
             validacion = true;
         } else {
+            //Las calificaciones no son validas
             validacion = false;
-            //return;
-            //console.log("NO PASÓ LA PRUEBA");
         }
 
+        //Se retorna el resultado de la validacion
         return validacion;
     }
 
+    
     function validarRangoCalificacion(calificacion) {
-        const calificacionesValidas = ['AC', 'NP'];
+        const calificacionesValidas = ['AC', 'NP']; //array con las posibilidades de registro en caso de no ser nuemeros
         //var valoresAceptados = /^([1-9]|10)$/;
-        const valorNumerico = parseInt(calificacion);
-        const isNumeric = n => !isNaN(n);
-        //console.log(valorNumerico);
-
-        //console.log(isNumeric(calificacion));
+        const valorNumerico = parseInt(calificacion); //se convierte a numero el string de la calficacioon
+        const isNumeric = n => !isNaN(n); //constante que permite evaluar que un string con numeros y letras solo haya numeros
         
         if (calificacionesValidas.includes(calificacion)) {
             return true; // La calificación es válida (AC o NP)
@@ -763,7 +787,10 @@
         return false; // La calificación no cumple con el rango válido
     }
 
-    function mostrarAdvertencia(celda, content) {
+    //Parametros:
+        //- celda: celda donde se realizara la advertencia
+        //- content: es el mensaje que mostrara la adevertencia
+    function mostrarAdvertencia(celda, content) {//Esta funcion creara el simbolo de advertencia on un tooltip para mostrar un mensaje
         eliminarAdvertencia(celda);
         const divAdvertencia = document.createElement('div');
         divAdvertencia.setAttribute('class', 'advertenciaCalificacion');
@@ -772,6 +799,7 @@
         celda.appendChild(divAdvertencia);
     }
 
+    //Esta funcion limpia la advertecia
     function eliminarAdvertencia(celda) {
         const divAdvertencia = celda.querySelector('.advertenciaCalificacion');
         if (divAdvertencia) {
@@ -782,6 +810,9 @@
   
   
 <script>
+    //Esta funcion sirve para evaluar si los campos no para la obtenciona de las fechas y las materias
+    //Estan llenos de no ser asi, los botones se deshabilitan
+
     //Se obtiene los elementos del formulario para el filtrado de fechas
     //Junto con el boton de submit
     const form = document.getElementById('formFiltroFechas');
@@ -816,6 +847,10 @@
 
 
 <script>
+    //Estas funcion solo se encargan de dar estilo al boton segun la edicion, 
+    //Es decir cuando se presion en el boton de editar calificacion, se agregan los estilos
+    //en la funcion transformaEnEditable() aqui tambien se agrega el evento "onclick", "finalizarEdicion(this)"
+    //para el nuevo boton editado.
     function transformarEnEditable(nodo){
             
             var nodoTd = nodo.parentNode.parentNode; //Nodo TD
@@ -870,5 +905,67 @@
 
         nodoTd.appendChild(divIcon);
     }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#tablaExamen').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    });  
+
+    /*
+    $(document).ready(function (){
+        $('#tablaFechas').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    });  
+    */
+    /*
+    $(document).ready(function (){
+        $('#tablaCalificaciones').DataTable({
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    }); 
+    */
 </script>
 @stop
