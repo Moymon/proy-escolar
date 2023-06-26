@@ -122,34 +122,27 @@
                     <br>
                     <div class="row">
                         <div class="col-2">
-                            <div class="row">
-                                <div class="col-12">
-                                   <label class="form-label">Clave de <br> Materia</label> 
-                                </div>
-                            </div> 
+                            <label>Clave de Materia</label>
                             <div class="row">
                                 <div class="col-6">
-                                    <input class="form-control" type="text" name="" disabled>  
+                                    <input class="form-control" type="text" name="" disabled>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2"> 
-                            <div class="row">
-                                <div class="col-12">
-                                    <label class="form-label">Clave de <br>Materia UASLP</label>  
-                                </div>
-                            </div>
+                        <div class="col-3">
+                            <label>Clave de Materia UASLP</label>
                             <div class="row">
                                 <div class="col-6">
-                                    <input class="form-control" type="text" name="" disabled>    
+                                    <input class="form-control" type="text" name="" disabled>   
                                 </div>
                             </div>
                         </div>
                         <div class="col-4"> 
-                            <label class="form-label"><br>Materia</label>
+                            <label class="">Materia</label>
                             <input class="form-control" type="text" name="" disabled>
                         </div>
                     </div>
+                    <br>
                     <br>
                     <div class="row">
                         <div class="col-2">
@@ -194,7 +187,7 @@
             <div class="row">
                 <div class="card col-12">
                     <div class="card-body">
-                        <table id="" class="table table-bordered table-striped dataTable dtr-inline tabla_pagos">
+                        <table id="tabla_pagos" class="table table-bordered table-striped dataTable dtr-inline ">
                             <thead>
                                 <tr>
                                     <th>SUO</th>
@@ -253,7 +246,7 @@
 @section('js')
 <script type="text/javascript">
         $(document).ready(function (){
-        $('.table').DataTable({
+        $('#tabla_pagos').DataTable({
             language:{
                 "emptyTable" : "No hay información",
                 "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",

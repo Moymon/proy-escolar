@@ -44,11 +44,7 @@
                         <div class="col-2">
                             <label for="clave_uaslp" class="m-0 form-label">Clave UASLP </label>
                             <input type="text" class="small form-control" id="clave_uaslp" aria-describedby="emailHelp">
-                        </div> 
-                        <div class="col-2">
-                            <label for="clave_uaslp_posgrado" class="m-0 form-label">Clave UASLP</label>
-                            <input type="text" class="small form-control" id="clave_uaslp_posgrado" aria-describedby="emailHelp">
-                        </div> 
+                        </div>
                         <div class="col-5">
                             <label for="posgrado" class="m-0 form-label">Posgrado</label>
                             <select id="posgrado" class="form-select form-control" aria-label="posgrado">
