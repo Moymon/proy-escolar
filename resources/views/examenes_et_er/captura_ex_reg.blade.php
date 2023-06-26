@@ -303,6 +303,10 @@
 @stop
 
 @section('js')
+<!--
+<script src="resources/js/es_es.json"></script>
+-->
+
 <script>
     //Constantes para cada form de Consulta
 	/* Tres form en total:
@@ -319,6 +323,9 @@
     const tablaFechasTbody = document.querySelector("#tablaFechas tbody");
     const tablaExamenesTbody = document.querySelector("#tablaExamen tbody");
     const tablaCalificacionesTbody = document.querySelector("#tablaCalificaciones tbody");
+
+    const tablaExamenes = document.querySelector("#tablaExamen");
+
   
     //Constantes para algunos botones de la pantalla
 	//Estos botones, ademas de hacer el submit en sus respectivos form, se encargan de realizar otra accion
@@ -387,74 +394,86 @@
 
     //Esta funcion recibe el evento formFechasFiltro "submit" esto sucede cuando se presiona el boton type="submit"
     function consultaFechas(e) {
-        e.preventDefault(); //evita que el boton recargue la pagina
+        e.preventDefault(); //evita que el botón recargue la página
 
-        const formData = new FormData(this); //se recibe el form del cual se esta haciendo el listener
-  
-        if (tipoConsulta.value === "fecha") { // se evalua el valor del input escondido en el form para saber que tipo de consulta realizar (fecha o examen)
-            limpiarHTML(tablaFechasTbody); // Se llama a la funcion de limpiar en caso de que esten datos ya consultados en la tabla 
-  
-            fetch(this.getAttribute("action"), {  //this.getAttribute("action") representa la accion definida por route() en el form
-                //se construye la peticion asincrona
+        const formData = new FormData(this); //se recibe el form del cual se está haciendo el listener
+
+        if (tipoConsulta.value === "fecha") {// se evalúa el valor del input escondido en el form para saber qué tipo de consulta realizar (fecha o examen)
+            
+            // Destruir la instancia de DataTables existente
+            if ($.fn.DataTable.isDataTable("#tablaFechas")) {
+                $("#tablaFechas").DataTable().destroy();
+            }
+            limpiarHTML(tablaFechasTbody); // Se llama a la función de limpiar en caso de que haya datos ya consultados en la tabla
+
+            fetch(this.getAttribute("action"), {
                 method: "POST",
                 body: formData,
             })
-            .then((response) => response.json()) //"promesa" donde se espera la respuesta json desde el controlador de laravel
-            .then((response) => { //despues de recibir el valor de la respues json desde el controlador se trabaja con los datos recibidos
-            
-                /*En este caso se obtiene la informacion de reponse en el objeto o array $data*/
-                const data = response.data; //se obtiene el elemento data que contiene la informacion de las fechas
+            .then((response) => response.json()) // "promesa" donde se espera la respuesta json desde el controlador de Laravel
+            .then((response) => {
+                // después de recibir el valor de la respuesta json desde el controlador, se trabaja con los datos recibidos
+                const data = response.data; // se obtiene el elemento data que contiene la información de las fechas
 
-                //se define dos arrays para dar formato a las fechas obtenidas
-                const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-                const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+                const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado",];
+                const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",];
 
-                data.forEach((element) => { // se recorre cada valor recibo, en este caso las fechas
-
-                    //Se da formato a las fechas 
+                data.forEach((element) => {
                     const fechaOriginal = new Date(element.fecha);
                     const diaSemana = diasSemana[fechaOriginal.getDay()];
                     const dia = fechaOriginal.getDate();
                     const mes = meses[fechaOriginal.getMonth()];
                     const anio = fechaOriginal.getFullYear();
-  
-                    /*En estas lineas de codigo
-                        - Se guarda la fecha formateada
-                        - Se crea un elemnto tr llamada row
-                        - Se crea un elemento td llamndo a la funcion createTableCell(fechaFormateada, "fechaCampo"); llamada td
-                        - Al constante row (tr) se le agrega el elemento td creado anteriormente - appendChild()
-                    */
+
                     const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
                     const row = document.createElement("tr");
                     const td = createTableCell(fechaFormateada, "fechaCampo");
                     row.appendChild(td);
 
-
-                    /*A la constante tablaFechasTbody se le agrega el elemento row(tr)*/
                     tablaFechasTbody.appendChild(row);
                 });
+
+                // Inicialización de DataTables
+                $('#tablaFechas').DataTable({
+                    scrollY: '200px',
+                    scrollCollapse: true,
+                    paging: true,
+                    searching: false,
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
+                        //url: 'resources/js/es_es.json'
+                    },
+                    /*
+                    info: function(start, end, total, items) {
+                        //return 'start + ' de ' + total;}
+                        //return start + ' a ' + end + ' de ' + total + ' entradas';
+                    }
+                    */
+                    info: false
+                });
             })
-            .catch((error) => { //en caso de tener un error se ejecuta lo siguiente, en este caso nose trabaja el error solo se muestra un cosole.log()
+            .catch((error) => {
                 console.error("Error:", error);
             });
         } else if (tipoConsulta.value === "examen") {
-            limpiarHTML(tablaExamenesTbody); //Se llama a la funion de limpiarHTML en caso de tener elemntos consultados anteriormente
-  
+
+            // Destruir la instancia de DataTables existente
+            if ($.fn.DataTable.isDataTable("#tablaExamen")) {
+                    $("#tablaExamen").DataTable().destroy();
+            }
+            limpiarHTML(tablaExamenesTbody);
+
             fetch(this.getAttribute("action"), {
                 method: "POST",
                 body: formData,
             })
             .then((response) => response.json())
             .then((response) => {
+                const data = response.data;
 
-                const data = response.data; //se obtiene el $data de los datos consultados
-
-                data.forEach((element) => { //Se recorre el $data para asignar cada valor recibido
-                    //Se crear un row donde se guaradra la informacion de cada celda de la tabla 
+                data.forEach((element) => {
                     const row = document.createElement("tr");
-  
-                    //se contruye un objeto con la informacion de los datos recibidos
-                    //en cada uno de estos se llama a la funcion createTableCell() que retorna un elemento td
+
                     const fieldOrder = {
                         tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
                         tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
@@ -464,22 +483,38 @@
                         tdNombre: createTableCell(element.nombre, "nombreCampo"),
                         tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
                     };
-  
-                    //Se obtiene la llave dentro del objeto de cada td creado, esta servira para identificar cada celda y su valor
+
                     const fieldKeys = Object.keys(fieldOrder);
-  
-                    //se recorre el array de llaves y se busca dentro del objeto el valor que coincida con la llave fieldOrder[key]
-                    //cuando este coinicida, se hace un appendChild() en el row de este valor encontrado.
-                    fieldKeys.forEach(key => {
+
+                    fieldKeys.forEach((key) => {
                         const field = fieldOrder[key];
                         row.appendChild(field);
                     });
-  
-                    /*A la constante tablaFechasTbody se le agrega el elemento row(tr)*/
+
                     tablaExamenesTbody.appendChild(row);
+
+                    //cargaFiltros(data);
+                });
+
+                // Inicialización de DataTables con paginación, scroll y buscador
+                $('#tablaExamen').DataTable({
+                    scrollY: '200px',
+                    scrollCollapse: true,
+                    paging: true, // Habilitar paginación
+                    searching: true, // Habilitar el buscador
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+                        //url: 'resources/js/es_es.json'
+                    },
+                    /*
+                    info: function(start, end, total, items) {
+                        return start + ' de ' + total;
+                    }
+                    */
+                   info: false,
                 });
             })
-            .catch((error) => { //en caso de tener un error se ejecuta lo siguiente, en este caso nose trabaja el error solo se muestra un cosole.log()
+            .catch((error) => {
                 console.error("Error:", error);
             });
         }
@@ -573,7 +608,6 @@
             console.error("Error:", error);
         });
     }
-
 
     /********************************************************************************/
     /* Funciones: para la creacion de celdas 'td' en las tablas de la pantalla      */
@@ -905,67 +939,5 @@
 
         nodoTd.appendChild(divIcon);
     }
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function (){
-        $('#tablaExamen').DataTable({
-            language:{
-                "emptyTable" : "No hay información",
-                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "lengthMenu" : "Mostrar _MENU_ resultados",
-                "search"     : "Buscar",
-                "zeroRecords": "Resultados no encontrados",
-                "paginate":{
-                    "first"  :"Primero",
-                    "last"   :"Ultimo",
-                    "next"   :"Siguiente",
-                    "previous":"Anterior"
-                }
-            },
-            "autoWidth":false,
-        });
-    });  
-
-    /*
-    $(document).ready(function (){
-        $('#tablaFechas').DataTable({
-            language:{
-                "emptyTable" : "No hay información",
-                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "lengthMenu" : "Mostrar _MENU_ resultados",
-                "search"     : "Buscar",
-                "zeroRecords": "Resultados no encontrados",
-                "paginate":{
-                    "first"  :"Primero",
-                    "last"   :"Ultimo",
-                    "next"   :"Siguiente",
-                    "previous":"Anterior"
-                }
-            },
-            "autoWidth":false,
-        });
-    });  
-    */
-    /*
-    $(document).ready(function (){
-        $('#tablaCalificaciones').DataTable({
-            language:{
-                "emptyTable" : "No hay información",
-                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "lengthMenu" : "Mostrar _MENU_ resultados",
-                "search"     : "Buscar",
-                "zeroRecords": "Resultados no encontrados",
-                "paginate":{
-                    "first"  :"Primero",
-                    "last"   :"Ultimo",
-                    "next"   :"Siguiente",
-                    "previous":"Anterior"
-                }
-            },
-            "autoWidth":false,
-        });
-    }); 
-    */
 </script>
 @stop
