@@ -3,7 +3,7 @@
 @section('title', 'Listado de Exámenes')
 
 @section('content_header')
-    <h1>Captura de Examenes a Regularización</h1>
+    <h1>Captura de examenes a regularización</h1>
 @stop
 
 @section('content')
@@ -21,7 +21,7 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <label for="ciclo_escolar" class="m-0 form-label fw-light">Ciclo Escolar</label>
+                            <label for="ciclo_escolar" class="m-0 form-label fw-light">Ciclo escolar</label>
                             <select name="ciclo_escolar" id="ciclo_escolar" class="mb-1 form-select form-control">
                                 <option value="" selected>Ciclo Escolar</option>
                                 <option value="2018 - 2019/1">2018 - 2019/I</option>
@@ -54,7 +54,7 @@
                     <br>
                     <div class="row d-flex justify-content-center">
                         <div class="col-6 ">
-                            <button type="submit" id="fechasbutton" class="btn-sm bg-dark form-control">Listar Fechas</button>
+                            <button type="submit" id="fechasbutton" class="btn-sm bg-dark form-control">Listar fechas</button>
                         </div>
                     </div>
                 
@@ -87,7 +87,7 @@
                     <br>
                     <div class="row d-flex justify-content-center">
                         <div class="col-6">
-                            <button type="submit" id="examenesbutton" class="btn-sm bg-dark form-control">Listar Exámenes</button>
+                            <button type="submit" id="examenesbutton" class="btn-sm bg-dark form-control">Listar exámenes</button>
                         </div>
                     </div>
                 </form>
@@ -104,10 +104,10 @@
                                 <th scope="col">Clave</th>
                                 <th scope="col">Materia</th>
                                 <th scope="col">Hora</th>
-                                <th scope="col">Salon</th>
+                                <th scope="col">Salón</th>
                                 <th scope="col">Ex</th>
-                                <th scope="col">Sinodal Titular</th>
-                                <th scope="col">Sinodal Secretario</th>
+                                <th scope="col">Sinodal titular</th>
+                                <th scope="col">Sinodal secretario</th>
                             </tr>
                         </thead>
                         <tbody id="bodyTablaExamen">
@@ -160,7 +160,7 @@
                     -->
                     <form id="camposMateriaInfo" method="POST" action="{{route('getCalificaciones')}}">
                         @csrf
-                        <div class="m-0 row w-100 mt-1 border p-2">
+                        <div class="m-0 row w-100 mt-1 p-2">
                           <div class="col-5 p-0 d-flex flex-column">
                             <div style="padding-right:10px;">
                               <label for="materiaCampo" class="m-0 form-label fw-light">Materia</label>
@@ -169,25 +169,25 @@
                           </div>
                           <div class="col-2 p-0 d-flex flex-column">
                             <div style="padding-right:10px;">
-                              <label for="tipoCampo" class="m-0 form-label fw-light">Tipo de Examen</label>
+                              <label for="tipoCampo" class="m-0 form-label fw-light">Tipo de examen</label>
                               <input readonly name="tipoCampo" id="tipoCampo" type="text" class="form-control">
                             </div>
                           </div>
                           <div class="col-5 p-0 d-flex flex-column">
                             <div>
-                              <label for="salonCampo" class="m-0 form-label fw-light">Salon</label>
+                              <label for="salonCampo" class="m-0 form-label fw-light">Salón</label>
                               <input readonly name="salonCampo" id="salonCampo" type="text" class="form-control">
                             </div>
                           </div>
                           <div class="col-5 p-0 d-flex flex-column">
                             <div style="padding-right:10px;">
-                              <label for="nombreCampo" class="m-0 form-label fw-light">Sinodal Titular</label>
+                              <label for="nombreCampo" class="m-0 form-label fw-light">Sinodal titular</label>
                               <input readonly name="nombreCampo" id="nombreCampo" type="text" class="form-control">
                             </div>
                           </div>
                           <div class="col-5 p-0 d-flex flex-column">
                             <div style="padding-right:10px;">
-                              <label for="nombreCampo2" class="m-0 form-label fw-light">Sinodal Secretario</label>
+                              <label for="nombreCampo2" class="m-0 form-label fw-light">Sinodal secretario</label>
                               <input readonly name="nombreCampo2" id="nombreCampo2" type="text" class="form-control">
                             </div>
                           </div>
@@ -196,7 +196,7 @@
               
                           <div class="col-2 p-0 d-flex flex-column mt-4">
                             <div class="w-100">
-                              <button type="submit" id="calificacionesbutton" class="w-100 mb-3 btn btn-dark">calificaciones</button>
+                              <button type="submit" id="calificacionesbutton" class="w-100 mb-3 btn btn-dark">Calificaciones</button>
                             </div>
                           </div>
                         </div>
@@ -215,7 +215,7 @@
                                 <tr>
                                   <th scope="col">UASLP</th>
                                   <th scope="col">Nombre de Alumno</th>
-                                  <th scope="col">Calificacion</th>
+                                  <th scope="col">Calificación</th>
                                 </tr>
                               </thead>
                               <tbody id="bodyCapturaCalificaciones">
@@ -299,6 +299,10 @@
         background-color: white!important; 
         width: 15px!important;
     }
+
+    tr, td{
+        white-space: nowrap;
+    }
 </style>
 @stop
 
@@ -326,13 +330,13 @@
 
     const tablaExamenes = document.querySelector("#tablaExamen");
 
-  
     //Constantes para algunos botones de la pantalla
 	//Estos botones, ademas de hacer el submit en sus respectivos form, se encargan de realizar otra accion
 	//por ello son declarados para manejar estos eventos.
     const botonFechas = document.querySelector("#fechasbutton");
     const botonExamenes = document.querySelector("#examenesbutton");
     const botonGuardar = document.querySelector('#guardarCalificaciones');
+    const botonCalificaciones = document.querySelector('#calificacionesbutton');
 
     //Constant para un input dentro del form de fechas(Ciclo-escolar, periodo)
 	//este input sirvira para identificar la consulta que se hara, 
@@ -406,6 +410,12 @@
             }
             limpiarHTML(tablaFechasTbody); // Se llama a la función de limpiar en caso de que haya datos ya consultados en la tabla
 
+
+            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+            // TRUE: para deshabilitar los botones
+            // FALSE: para habilitar los botones
+            deshabilitarBotones(true);
+
             fetch(this.getAttribute("action"), {
                 method: "POST",
                 body: formData,
@@ -443,25 +453,36 @@
                         url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
                         //url: 'resources/js/es_es.json'
                     },
-                    /*
-                    info: function(start, end, total, items) {
-                        //return 'start + ' de ' + total;}
-                        //return start + ' a ' + end + ' de ' + total + ' entradas';
-                    }
-                    */
-                    info: false
+                    info: false,
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 15], [5, 10, 15]]
                 });
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                deshabilitarBotones(false);
             })
             .catch((error) => {
                 console.error("Error:", error);
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                deshabilitarBotones(false);
             });
-        } else if (tipoConsulta.value === "examen") {
+        } else if (tipoConsulta.value === "examen") { // Al menos uno de los elementos de calificacion es nulo o vacío
 
             // Destruir la instancia de DataTables existente
             if ($.fn.DataTable.isDataTable("#tablaExamen")) {
                     $("#tablaExamen").DataTable().destroy();
             }
             limpiarHTML(tablaExamenesTbody);
+
+            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+            // TRUE: para deshabilitar los botones
+            // FALSE: para habilitar los botones
+            deshabilitarBotones(true);
 
             fetch(this.getAttribute("action"), {
                 method: "POST",
@@ -506,16 +527,23 @@
                         url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
                         //url: 'resources/js/es_es.json'
                     },
-                    /*
-                    info: function(start, end, total, items) {
-                        return start + ' de ' + total;
-                    }
-                    */
-                   info: false,
+                    info: false,
+                    pageLength : 5,
+                    lengthMenu: [[5, 10, 15], [5, 10, 15]]
                 });
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                deshabilitarBotones(false);
             })
             .catch((error) => {
                 console.error("Error:", error);
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                deshabilitarBotones(false);
             });
         }
     }
@@ -547,8 +575,17 @@
 
     //Esta funcion solo define el fetch y .then para la recepcion y manejo de estos datos
     function promesaDatosFormTablaCalificacinoes(action, formData){
+        // Destruir la instancia de DataTables existente
+        if ($.fn.DataTable.isDataTable("#tablaCalificaciones")) {
+                $("#tablaCalificaciones").DataTable().destroy();
+        }
         limpiarHTML(tablaCalificacionesTbody); //Se limpia la tabla en caso de haber datos ya consultados
-  
+
+        //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+        // TRUE: para deshabilitar los botones
+        // FALSE: para habilitar los botones
+        deshabilitarBotones(true);
+
         fetch(action, {
             method: "POST",
             body: formData,
@@ -602,10 +639,34 @@
                 //row.appendChild(tdButton);
 
                 tablaCalificacionesTbody.appendChild(row);
+
+                
             });
+
+            // Inicialización de DataTables con paginación, scroll y buscador
+            $('#tablaCalificaciones').DataTable({
+                scrollY: '200px',
+                scrollCollapse: true,
+                paging: false, // Habilitar paginación
+                searching: true, // Habilitar el buscador
+                language: {
+                        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+                },
+                info: false,
+            });
+
+            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+            // TRUE: para deshabilitar los botones
+            // FALSE: para habilitar los botones
+            deshabilitarBotones(false);
         })
         .catch((error) => {
             console.error("Error:", error);
+
+            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+            // TRUE: para deshabilitar los botones
+            // FALSE: para habilitar los botones
+            deshabilitarBotones(false);
         });
     }
 
@@ -741,6 +802,15 @@
         while (node.firstChild) {
             node.removeChild(node.firstChild);
         }
+    }
+
+    //Funcion para desahbilitar o habilitar los botones cuando se hace una consulta de cualquiera de los form
+    //de la pantalla
+    function deshabilitarBotones(content){
+        botonCalificaciones.disabled = content;
+        botonExamenes.disabled = content;
+        botonFechas.disabled = content;
+        botonGuardar.disabled = content;
     }
 
 
