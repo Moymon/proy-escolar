@@ -52,6 +52,7 @@
                     </div>
 
                     <br>
+
                     <div class="row d-flex justify-content-center">
                         <div class="col-6 ">
                             <button type="submit" id="fechasbutton" class="btn-sm bg-dark form-control">Listar fechas</button>
@@ -85,6 +86,11 @@
                         </div>
                     </div>
                     <br>
+
+                    <div id="erroresDeTablaFechas" style="display: none">
+
+                    </div>
+
                     <div class="row d-flex justify-content-center">
                         <div class="col-6">
                             <button type="submit" id="examenesbutton" class="btn-sm bg-dark form-control">Listar exámenes</button>
@@ -149,6 +155,10 @@
                             </tr>
                         </tbody>    
                     </table>   
+
+                    <div id="erroresDeTablaExamenes" style="display: none">
+
+                    </div>
                     
                 </div>
             </div>
@@ -200,6 +210,7 @@
                             </div>
                           </div>
                         </div>
+
                     </form>
 
                     <form method="POST" action="{{route('updateCalificaciones')}}" id="formCalificaciones">
@@ -242,15 +253,15 @@
                               </tbody>
                             </table>
                         </div>
+
+                        <div id="erroresDeTablaCalificaciones" style="display: none">
+
+                        </div>
       
                         <div class=" d-flex flex-row align-items-center justify-content-start w-100">
                           <button id="guardarCalificaciones" style="" type="submit" class="px-5 m-0 btn-success btn-sm mt-2">Guardar</button>
                         </div>
-      
-                        <div id="contenedorForm">
-      
-                        </div>
-      
+    
                     </form>
 
                 </div>
@@ -404,13 +415,6 @@
 
         if (tipoConsulta.value === "fecha") {// se evalúa el valor del input escondido en el form para saber qué tipo de consulta realizar (fecha o examen)
             
-            // Destruir la instancia de DataTables existente
-            if ($.fn.DataTable.isDataTable("#tablaFechas")) {
-                $("#tablaFechas").DataTable().destroy();
-            }
-            limpiarHTML(tablaFechasTbody); // Se llama a la función de limpiar en caso de que haya datos ya consultados en la tabla
-
-
             //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
             // TRUE: para deshabilitar los botones
             // FALSE: para habilitar los botones
@@ -422,62 +426,51 @@
             })
             .then((response) => response.json()) // "promesa" donde se espera la respuesta json desde el controlador de Laravel
             .then((response) => {
-                // después de recibir el valor de la respuesta json desde el controlador, se trabaja con los datos recibidos
-                const data = response.data; // se obtiene el elemento data que contiene la información de las fechas
+                if(response.error){
+                    displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
+                    deshabilitarBotones(false);
+                }else{
+                    cargarLimpiezaDeTabla(tablaFechasTbody, "tablaFechas" ,"erroresDeTablaFechas");
 
-                const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado",];
-                const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",];
+                    // después de recibir el valor de la respuesta json desde el controlador, se trabaja con los datos recibidos
+                    const data = response.data; // se obtiene el elemento data que contiene la información de las fechas
 
-                data.forEach((element) => {
-                    const fechaOriginal = new Date(element.fecha);
-                    const diaSemana = diasSemana[fechaOriginal.getDay()];
-                    const dia = fechaOriginal.getDate();
-                    const mes = meses[fechaOriginal.getMonth()];
-                    const anio = fechaOriginal.getFullYear();
+                    const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado",];
+                    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",];
 
-                    const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
-                    const row = document.createElement("tr");
-                    const td = createTableCell(fechaFormateada, "fechaCampo");
-                    row.appendChild(td);
+                    data.forEach((element) => {
+                        const fechaOriginal = new Date(element.fecha);
+                        const diaSemana = diasSemana[fechaOriginal.getDay()];
+                        const dia = fechaOriginal.getDate();
+                        const mes = meses[fechaOriginal.getMonth()];
+                        const anio = fechaOriginal.getFullYear();
 
-                    tablaFechasTbody.appendChild(row);
-                });
+                        const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
+                        const row = document.createElement("tr");
+                        const td = createTableCell(fechaFormateada, "fechaCampo");
+                        row.appendChild(td);
 
-                // Inicialización de DataTables
-                $('#tablaFechas').DataTable({
-                    scrollY: '200px',
-                    scrollCollapse: true,
-                    paging: true,
-                    searching: false,
-                    language: {
-                        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
-                        //url: 'resources/js/es_es.json'
-                    },
-                    info: false,
-                    pageLength : 5,
-                    lengthMenu: [[5, 10, 15], [5, 10, 15]]
-                });
+                        tablaFechasTbody.appendChild(row);
+                    });
 
-                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
-                // TRUE: para deshabilitar los botones
-                // FALSE: para habilitar los botones
-                deshabilitarBotones(false);
+                    // Inicialización de DataTables
+                    edicionDeTablas('tablaFechas', '', false, false, false, false, 5, [[5, 10, 15], [5, 10, 15]]);
+
+                    //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                    // TRUE: para deshabilitar los botones
+                    // FALSE: para habilitar los botones
+                    deshabilitarBotones(false); 
+                }
             })
             .catch((error) => {
-                console.error("Error:", error);
-
+                //console.error("Error:", error);
+                displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
                 //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
                 // TRUE: para deshabilitar los botones
                 // FALSE: para habilitar los botones
                 deshabilitarBotones(false);
             });
         } else if (tipoConsulta.value === "examen") { // Al menos uno de los elementos de calificacion es nulo o vacío
-
-            // Destruir la instancia de DataTables existente
-            if ($.fn.DataTable.isDataTable("#tablaExamen")) {
-                    $("#tablaExamen").DataTable().destroy();
-            }
-            limpiarHTML(tablaExamenesTbody);
 
             //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
             // TRUE: para deshabilitar los botones
@@ -490,56 +483,51 @@
             })
             .then((response) => response.json())
             .then((response) => {
-                const data = response.data;
+                if(response.error){
+                    displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
+                    deshabilitarBotones(false);
+                }else{
+                    cargarLimpiezaDeTabla(tablaExamenesTbody, "tablaExamen" ,"erroresDeTablaExamenes");
 
-                data.forEach((element) => {
-                    const row = document.createElement("tr");
+                    const data = response.data;
 
-                    const fieldOrder = {
-                        tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
-                        tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
-                        tdHora: createTableCell(element.hora, "horaCampo"),
-                        tdSalon: createTableCell(element.salon, "salonCampo"),
-                        tdTipo: createTableCell(element.tipo, "tipoCampo"),
-                        tdNombre: createTableCell(element.nombre, "nombreCampo"),
-                        tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
-                    };
+                    data.forEach((element) => {
+                        const row = document.createElement("tr");
 
-                    const fieldKeys = Object.keys(fieldOrder);
+                        const fieldOrder = {
+                            tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
+                            tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
+                            tdHora: createTableCell(element.hora, "horaCampo"),
+                            tdSalon: createTableCell(element.salon, "salonCampo"),
+                            tdTipo: createTableCell(element.tipo, "tipoCampo"),
+                            tdNombre: createTableCell(element.nombre, "nombreCampo"),
+                            tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
+                        };
 
-                    fieldKeys.forEach((key) => {
-                        const field = fieldOrder[key];
-                        row.appendChild(field);
+                        const fieldKeys = Object.keys(fieldOrder);
+
+                        fieldKeys.forEach((key) => {
+                            const field = fieldOrder[key];
+                            row.appendChild(field);
+                        });
+
+                        tablaExamenesTbody.appendChild(row);
+
+                        //cargaFiltros(data);
                     });
 
-                    tablaExamenesTbody.appendChild(row);
+                    // Inicialización de DataTables con paginación, scroll y buscador
+                    edicionDeTablas('tablaExamen', '200px', true, true, true, false, 5, [[5, 10, 15], [5, 10, 15]]);
 
-                    //cargaFiltros(data);
-                });
-
-                // Inicialización de DataTables con paginación, scroll y buscador
-                $('#tablaExamen').DataTable({
-                    scrollY: '200px',
-                    scrollCollapse: true,
-                    paging: true, // Habilitar paginación
-                    searching: true, // Habilitar el buscador
-                    language: {
-                        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
-                        //url: 'resources/js/es_es.json'
-                    },
-                    info: false,
-                    pageLength : 5,
-                    lengthMenu: [[5, 10, 15], [5, 10, 15]]
-                });
-
-                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
-                // TRUE: para deshabilitar los botones
-                // FALSE: para habilitar los botones
-                deshabilitarBotones(false);
+                    //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                    // TRUE: para deshabilitar los botones
+                    // FALSE: para habilitar los botones
+                    deshabilitarBotones(false);
+                }
             })
             .catch((error) => {
-                console.error("Error:", error);
-
+                //console.error("Error:", error);
+                displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
                 //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
                 // TRUE: para deshabilitar los botones
                 // FALSE: para habilitar los botones
@@ -575,12 +563,6 @@
 
     //Esta funcion solo define el fetch y .then para la recepcion y manejo de estos datos
     function promesaDatosFormTablaCalificacinoes(action, formData){
-        // Destruir la instancia de DataTables existente
-        if ($.fn.DataTable.isDataTable("#tablaCalificaciones")) {
-                $("#tablaCalificaciones").DataTable().destroy();
-        }
-        limpiarHTML(tablaCalificacionesTbody); //Se limpia la tabla en caso de haber datos ya consultados
-
         //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
         // TRUE: para deshabilitar los botones
         // FALSE: para habilitar los botones
@@ -592,81 +574,117 @@
         })
         .then((response) => response.json())
         .then((response) => {
+            if(response.error){
+                displayError("Datos de alumno erróneos", true, "erroresDeTablaCalificaciones");
+                deshabilitarBotones(false);
+            }else{
+                cargarLimpiezaDeTabla(tablaCalificacionesTbody, "tablaCalificaciones" ,"erroresDeTablaCalificaciones");
 
-            const data = response.data; //Se recogen los datos de response en $data
-            //console.log(data);
+                const data = response.data; //Se recogen los datos de response en $data
+                //console.log(data);
 
-            //Se recogen los datos recibidos en response de los campos definidos en el controlador
-            const claveCampo_materia = response.claveCampo_materia;
-            const nombreCampo_materia = response.nombreCampo_materia;
+                //Se recogen los datos recibidos en response de los campos definidos en el controlador
+                const claveCampo_materia = response.claveCampo_materia;
+                const nombreCampo_materia = response.nombreCampo_materia;
 
-            //Los siguientes son campos escondidos en la tabla de captura de calificaciones
-            //En estos campos se define el value recibido por respons
+                //Los siguientes son campos escondidos en la tabla de captura de calificaciones
+                //En estos campos se define el value recibido por respons
 
-            //LARAVEL CON ESTRUCUTRA ORIGINAL
-            //estos campos sirven para establecer unsa relacion entre los datos de la tabla de calificacion y para registrarlos 
-            //es necesario actualizar estos datos y hacer la relacion en los controladores segun la estructura original
-            const materiaCampoModal = document.getElementById("materiaCampoModal");
-            const claveCampoModal = document.getElementById("claveCampooModal");
-            materiaCampoModal.value = nombreCampo_materia;
-            claveCampoModal.value = claveCampo_materia;
+                //LARAVEL CON ESTRUCUTRA ORIGINAL
+                //estos campos sirven para establecer unsa relacion entre los datos de la tabla de calificacion y para registrarlos 
+                //es necesario actualizar estos datos y hacer la relacion en los controladores segun la estructura original
+                const materiaCampoModal = document.getElementById("materiaCampoModal");
+                const claveCampoModal = document.getElementById("claveCampooModal");
+                materiaCampoModal.value = nombreCampo_materia;
+                claveCampoModal.value = claveCampo_materia;
 
-            //console.log(data);
-            data.forEach((element) => { //Se manejan los datos recibidos
-                const row = document.createElement("tr");
+                //console.log(data);
+                data.forEach((element) => { //Se manejan los datos recibidos
+                    const row = document.createElement("tr");
 
-                //La siguiente constante es un booleano que evalua si todas las calificaciones de la consulta, ninguna es vacia
-                //En caso de ser vacia alguna significa que es la primera captura de calificaciones
-                //En caso de no ser vacia significa que ya se registraron calificaciones anteriormente
-                const todasLasCalificacionesNoNulas = data.every((element) => element.calificacion !== null && element.calificacion !== "");
+                    //La siguiente constante es un booleano que evalua si todas las calificaciones de la consulta, ninguna es vacia
+                    //En caso de ser vacia alguna significa que es la primera captura de calificaciones
+                    //En caso de no ser vacia significa que ya se registraron calificaciones anteriormente
+                    const todasLasCalificacionesNoNulas = data.every((element) => element.calificacion !== null && element.calificacion !== "");
 
-                //Se crea un objeto con la informacion de cada campo recibido y se registra en cada una de las celdas que se usaran
-                const fieldOrder = {
-                    tdCveUnica: createTableCell(element.cve_unica, "cve_unicaModal"),
-                    tdnombre: createTableCell(element.nombre + " " + element.paterno + " " + element.materno, "nombreModal"),
-                    tdCalificacion: createTableCellCalificacion(element.calificacion, "calificacionModal", todasLasCalificacionesNoNulas),
-                };
+                    //Se crea un objeto con la informacion de cada campo recibido y se registra en cada una de las celdas que se usaran
+                    const fieldOrder = {
+                        tdCveUnica: createTableCell(element.cve_unica, "cve_unicaModal"),
+                        tdnombre: createTableCell(element.nombre + " " + element.paterno + " " + element.materno, "nombreModal"),
+                        tdCalificacion: createTableCellCalificacion(element.calificacion, "calificacionModal", todasLasCalificacionesNoNulas),
+                    };
 
-                //Se obtiene cada una de las keys(nombres) de los campos en el objeto
-                const fieldKeys = Object.keys(fieldOrder);
+                    //Se obtiene cada una de las keys(nombres) de los campos en el objeto
+                    const fieldKeys = Object.keys(fieldOrder);
 
-                //Se itera sobre el array de keys del objeto y de esta manera ir registrando cada celda en su fila
-                fieldKeys.forEach(key => {
-                    const field = fieldOrder[key];
-                    row.className="fila-calificacion"; //Se asignan clases que ayudaran a identificar el row de la tabla de calificaciones
-                    row.appendChild(field);
+                    //Se itera sobre el array de keys del objeto y de esta manera ir registrando cada celda en su fila
+                    fieldKeys.forEach(key => {
+                        const field = fieldOrder[key];
+                        row.className="fila-calificacion"; //Se asignan clases que ayudaran a identificar el row de la tabla de calificaciones
+                        row.appendChild(field);
+                    });
+                    //row.appendChild(tdButton);
+
+                    tablaCalificacionesTbody.appendChild(row);
                 });
-                //row.appendChild(tdButton);
 
-                tablaCalificacionesTbody.appendChild(row);
+                // Inicialización de DataTables con paginación, scroll y buscador
+                edicionDeTablas('tablaCalificaciones', '200px', true, false, true, false, null, []);
 
-                
-            });
-
-            // Inicialización de DataTables con paginación, scroll y buscador
-            $('#tablaCalificaciones').DataTable({
-                scrollY: '200px',
-                scrollCollapse: true,
-                paging: false, // Habilitar paginación
-                searching: true, // Habilitar el buscador
-                language: {
-                        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
-                },
-                info: false,
-            });
-
-            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
-            // TRUE: para deshabilitar los botones
-            // FALSE: para habilitar los botones
-            deshabilitarBotones(false);
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                deshabilitarBotones(false);
+            }
         })
         .catch((error) => {
-            console.error("Error:", error);
-
+            //console.error("Error:", error);
+            displayError("Error en la consulta de calificaciones", true, "erroresDeTablaCalificaciones");
             //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
             // TRUE: para deshabilitar los botones
             // FALSE: para habilitar los botones
             deshabilitarBotones(false);
+        });
+    }
+
+    function displayError(textContent, deshabiltar, tipoError){
+        if(deshabiltar === false){
+            const error = document.getElementById(tipoError);
+            error.setAttribute('style', 'display:none;');
+            error.innerHTML = ``;
+            return;
+        }
+        const error = document.getElementById(tipoError);
+        error.setAttribute('style', 'display:block;');
+        error.innerHTML=`
+        <div class="mt-1 bg-danger p-2 rounded-lg mb-6 text-white text-center uppercase font-bold">
+            ${textContent}     
+        </div>
+        `;
+    }
+
+    function cargarLimpiezaDeTabla(tablaTbody, tabla, tipoError){
+        // Destruir la instancia de DataTables existente
+        if ($.fn.DataTable.isDataTable("#"+tabla)) {
+            $("#"+tabla).DataTable().destroy();
+        }
+        limpiarHTML(tablaTbody); //Se limpia la tabla en caso de haber datos ya consultados
+        displayError("", false, tipoError);
+    }
+
+    function edicionDeTablas(tabla, scrollY, scrollCollapse, paging, searching, info, pageLength, lengthMenu){
+        // Inicialización de DataTables con paginación, scroll y buscador
+        $('#'+tabla).DataTable({
+            scrollY: scrollY,
+            scrollCollapse: scrollCollapse,
+            paging: paging, // Habilitar paginación
+            searching: searching, // Habilitar el buscador
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+            },
+            info: info,
+            pageLength : pageLength,
+            lengthMenu: lengthMenu
         });
     }
 
@@ -684,6 +702,7 @@
         const td = document.createElement("td");
         td.className = className;
         td.textContent = content;
+        //td.data-original-value="10"
     
         return td;
     }
@@ -835,6 +854,8 @@
             const clave = celdaClave.textContent.trim(); //se obtiene el contenido de la celda, cve_unica
             const inputCalificacion = celdaCalificacion.querySelector('input'); //Se obtiene el contenido de la celda, calificacion
 
+            const buscadorDeTabla = document.getElementById("tablaCalificaciones_filter").querySelector("input");
+            //console.log(buscadorDeTabla);
             //Se identifica si la celda contiene un input o solo es texto, esto ayudara a poder evaluar la celda cuando un usuario no 
             //finaliza la edicion de una calificacion, se podran leer celdas tanto con inputs como con solo texto y obtener su valor
             const calificacion = inputCalificacion ? inputCalificacion.value.trim() : celdaCalificacion.textContent.trim();
@@ -842,11 +863,14 @@
             if (!calificacion) {
                 // La calificación está vacía
                 evaluaCalificaciones = false;
-                mostrarAdvertencia(celdaCalificacion, 'Asigna una Calificacion');
+                mostrarAdvertencia(celdaCalificacion, 'Asigna una calificación');
             } else if (!validarRangoCalificacion(calificacion)) {
                 // La calificación no está dentro del rango válido
                 evaluaCalificaciones = false;
                 mostrarAdvertencia(celdaCalificacion, 'Asigna una calificación valida: 0-10, AC o NP');
+            }else if (buscadorDeTabla.value !== ''){
+                evaluaCalificaciones = false;
+                mostrarAdvertencia(celdaCalificacion, 'Debes asignar una calificación a todos los alumnos');
             } else {
                 // La calificación es válida, elimina cualquier advertencia anterior
                 eliminarAdvertencia(celdaCalificacion);
@@ -865,6 +889,8 @@
             inputDatosCalificaciones.setAttribute('name', 'datosCalificaciones');
             inputDatosCalificaciones.value = JSON.stringify(datosCalificaciones);
             form.appendChild(inputDatosCalificaciones);
+
+            //console.log(datosCalificaciones);
 
             validacion = true;
         } else {

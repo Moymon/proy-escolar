@@ -37,28 +37,21 @@ class ExamenEjemplo extends Controller
             $fechaInicio = $anio.'-07-01';
             $fechaFin = $anio.'-12-31';
         } else {
-            // Maneja un número de período inválido o desconocido
-            // Puedes lanzar una excepción, redireccionar o mostrar un mensaje de error
-            // según la lógica de tu aplicación
+            return view('examenes_et_er.captura_ex_reg')->with('advertenciaFechas', 'Datos erroneos de consulta');
         }
-
-        // Continúa con el procesamiento de los datos recibidos del formulario
-        // ...
-
-        // Ejemplo de uso de las fechas obtenidas
-        // Puedes almacenarlas en una base de datos, realizar cálculos, etc.
-        // Aquí simplemente las mostramos como ejemplo
-        //echo "Fecha de inicio: " . $fechaInicio . "<br>";
-        //echo "Fecha de fin: " . $fechaFin;
 
         if($request->tipoConsulta == "fecha"){
             $data = $this->getFechas($fechaInicio, $fechaFin, $request->periodo);
-        }else if("examen"){
+        }else if($request->tipoConsulta == "examen"){
             $data = $this->getExamenes($fechaInicio, $fechaFin, $request->periodo);
+        }else{
+            return response()->json([
+                'error' => 'Consulta fallida',
+            ], 400);
         }
 
         $response = [
-            'fecha' => $request,
+            //'fecha' => $request,
             'data' => $data,
         ];
         
@@ -105,42 +98,70 @@ class ExamenEjemplo extends Controller
         return response()->json($response);
     }
 
-    public function updateCalificaciones(Request $request){
+    public function updateCalificaciones(Request $request)
+    {
         $claveCampo = $request->claveCampo;
         $materiaCampo = $request->materiaCampo;
-
-
+    
         $calificacionesArray = json_decode($request->datosCalificaciones, true);
-        //dd($calificacionesArray);
-        // Accede a cada elemento de datosCalificaciones
+    
+        if (!is_array($calificacionesArray)) {
+            return response()->json([
+                'error' => 'Datos de calificaciones incorrectos',
+            ], 400);
+        }
+    
+        $datosAGuardar = []; // Array para almacenar los datos a guardar
+    
+        // Accede a cada elemento de datosCalificaciones y almacena los datos en $datosAGuardar
         foreach ($calificacionesArray as $calificacion) {
             $clave = $calificacion['clave'];
             $valorCalificacion = $calificacion['calificacion'];
-        
+    
             $alumno = Alumno::where('cve_unica', $clave)->first();
-            //dd($alumno->id_alumno);
+            if ($alumno == null) {
+                return response()->json([
+                    'error' => 'Datos erróneos de consulta',
+                ], 400);
+            }
+    
             $kardex = Kardex::where('id_alumno', $alumno->id_alumno)
                 ->where('cve_materia', $claveCampo)
                 ->first();
-        
-            //dd($kardex);
+            if ($kardex == null) {
+                return response()->json([
+                    'error' => 'Datos erróneos de consulta',
+                ], 400);
+            }
+    
+            // Almacena los datos en $datosAGuardar en lugar de guardarlos directamente
+            $datosAGuardar[] = [
+                'kardex' => $kardex,
+                'valorCalificacion' => $valorCalificacion,
+            ];
+        }
+    
+        // Realiza las operaciones de guardado para todos los datos en $datosAGuardar
+        foreach ($datosAGuardar as $datos) {
+            $kardex = $datos['kardex'];
+            $valorCalificacion = $datos['valorCalificacion'];
+    
             $kardex->calificacion = $valorCalificacion;
             $kardex->save();
         }
-
-
+    
         $data = DB::table('alumno')
-        ->join('kardex_lic', 'alumno.id_alumno', '=', 'kardex_lic.id_alumno')
-        ->join('cat_materia', 'kardex_lic.cve_materia', '=', 'cat_materia.cve_materia')
-        ->where('kardex_lic.cve_materia', $request->claveCampo)
-        ->get();
-
+            ->join('kardex_lic', 'alumno.id_alumno', '=', 'kardex_lic.id_alumno')
+            ->join('cat_materia', 'kardex_lic.cve_materia', '=', 'cat_materia.cve_materia')
+            ->where('kardex_lic.cve_materia', $request->claveCampo)
+            ->get();
+    
         $response = [
             'claveCampo_materia' => $request->claveCampo,
             'nombreCampo_materia' => $request->materiaCampo,
             'data' => $data,
         ];
-
+    
         return response()->json($response);
     }
 }
