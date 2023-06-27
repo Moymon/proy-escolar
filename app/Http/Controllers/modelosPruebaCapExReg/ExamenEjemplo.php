@@ -113,7 +113,6 @@ class ExamenEjemplo extends Controller
     
         $datosAGuardar = []; // Array para almacenar los datos a guardar
     
-        // Accede a cada elemento de datosCalificaciones y almacena los datos en $datosAGuardar
         foreach ($calificacionesArray as $calificacion) {
             $clave = $calificacion['clave'];
             $valorCalificacion = $calificacion['calificacion'];
@@ -133,15 +132,13 @@ class ExamenEjemplo extends Controller
                     'error' => 'Datos erróneos de consulta',
                 ], 400);
             }
-    
-            // Almacena los datos en $datosAGuardar en lugar de guardarlos directamente
+
             $datosAGuardar[] = [
                 'kardex' => $kardex,
                 'valorCalificacion' => $valorCalificacion,
             ];
         }
     
-        // Realiza las operaciones de guardado para todos los datos en $datosAGuardar
         foreach ($datosAGuardar as $datos) {
             $kardex = $datos['kardex'];
             $valorCalificacion = $datos['valorCalificacion'];
