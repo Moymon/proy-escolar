@@ -62,6 +62,11 @@ class sidebar extends Controller
             return view('posgrado.alumnos.alumnos_posgrado');
         }
 
+        /*kardex*/
+        public function kardex_pos(){
+            return view('posgrado.kardex.kardex-impresion-posgrado');
+        }
+
     /*Adminsitracion-------------------------------------------------------*/
     
 
