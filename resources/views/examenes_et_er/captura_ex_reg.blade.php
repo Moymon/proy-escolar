@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+
 <div class="row">
     <div class="col-4 d-flex flex-column">
         <div class="card w-100 h-100">
@@ -14,11 +15,8 @@
                 <!--
                 <form action="" class="m-0 p-0">
                 -->
-                <form id="formFiltroFechas" method="POST" action="{{route('getTipoConsulta')}}" class="m-0 p-0">
+                <form id="formFiltroFechas" method="POST" action="{{route('getFechas')}}" class="m-0 p-0">
                     @csrf
-
-                    <input type="hidden" name="tipoConsulta" id="tipoConsulta">
-
                     <div class="row">
                         <div class="col-6">
                             <label for="ciclo_escolar" class="m-0 form-label fw-light">Ciclo escolar</label>
@@ -53,15 +51,18 @@
 
                     <br>
 
+                    <!--
                     <div class="row d-flex justify-content-center">
                         <div class="col-6 ">
-                            <button type="submit" id="fechasbutton" class="btn-sm bg-dark form-control">Listar fechas</button>
+                            <button style="display:none;" type="submit" id="fechasbutton" class="btn-sm bg-dark form-control">Listar fechas</button>
                         </div>
                     </div>
+                    -->
                 
                     <br>
                     <div class="row">
                         <div class="col-12">
+                            
                             <table class="table table-bordered table-striped dataTable dtr-inline tablas_pago"  id="tablaFechas">
                                 <thead>
                                     <tr class="text-center">
@@ -91,11 +92,13 @@
 
                     </div>
 
+                    <!--
                     <div class="row d-flex justify-content-center">
                         <div class="col-6">
-                            <button type="submit" id="examenesbutton" class="btn-sm bg-dark form-control">Listar exámenes</button>
+                            <button style="display:none;"type="submit" id="examenesbutton" class="btn-sm bg-dark form-control">Listar exámenes</button>
                         </div>
                     </div>
+                    -->
                 </form>
             </div>
         </div>
@@ -104,6 +107,17 @@
     <div class="col-8 d-flex flex-column">
             <div class="card w-100 h-100">
                 <div class="card-body">
+                    <form method="POST" action="{{route('getExamenes')}}" id="formSelectFechaForExam" style="display:none;">
+                        @csrf
+                        <input type="hidden" name="fechaForExam" class="inputFechaForExam">
+                        <input type="hidden" name="periodoForExam" class="inputPeriodoForExam">
+                        
+
+                        <!--
+                        <button style="display:none!important;" type="submit" id="buttonfechaForExam">Consultar</button>
+                        -->
+                    </form>
+                    <p class="text-center m-0 mb-1" style="display:none;" id="infoTablaExamenes"><p>
                     <table id="tablaExamen" class="table table-bordered table-striped dataTable dtr-inline">
                         <thead>
                             <tr>
@@ -156,9 +170,13 @@
                         </tbody>    
                     </table>   
 
-                    <div id="erroresDeTablaExamenes" style="display: none">
 
-                    </div>
+                    <!--
+                    *************************************************************************************
+                    *    Div que mostrara un error en caso de ocurrir                                   *
+                    *************************************************************************************
+                    -->
+                    <div id="erroresDeTablaExamenes" style="display: none"></div>
                     
                 </div>
             </div>
@@ -204,11 +222,13 @@
                           
                           <input readonly name="claveCampo" id="claveCampo" type="hidden" class="form-control">
               
-                          <div class="col-2 p-0 d-flex flex-column mt-4">
-                            <div class="w-100">
-                              <button type="submit" id="calificacionesbutton" class="w-100 mb-3 btn btn-dark">Calificaciones</button>
+                            
+                            <div class="col-2 p-0 d-flex flex-column mt-4">
+                                <div class="w-100">
+                                    <button type="submit" id="calificacionesbutton" class="w-100 mb-3 btn btn-dark">Calificaciones</button>
+                                </div>
                             </div>
-                          </div>
+                            
                         </div>
 
                     </form>
@@ -259,7 +279,7 @@
                         </div>
       
                         <div class=" d-flex flex-row align-items-center justify-content-start w-100">
-                          <button id="guardarCalificaciones" style="" type="submit" class="px-5 m-0 btn-success btn-sm mt-2">Guardar</button>
+                          <button id="guardarCalificaciones" type="submit" class="px-5 m-0 btn-success btn-sm mt-2">Guardar</button>
                         </div>
     
                     </form>
@@ -276,13 +296,6 @@
     label{
         font-weight: 500!important;
     }
-
-    #tablaFechasTbody td{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-  
     .materiaCampo{
       cursor: pointer;
       transition: all ease-in 0.3s;
@@ -291,6 +304,7 @@
         color: blue;
         text-decoration:underline ;
     }
+
   
     #bodyTablaExamen tr{
         cursor: pointer;
@@ -300,6 +314,25 @@
     #bodyTablaExamen tr:hover{
         background-color: rgb(230, 230, 230);
     }
+
+
+    #tablaFechasTbody tr{
+        cursor: pointer;
+        transition: all ease-in 0.3s;
+    }
+
+    #tablaFechasTbody tr:hover{
+        background-color: rgb(230, 230, 230);
+        color: blue;
+        text-decoration: underline;
+    }
+
+    #tablaFechasTbody td{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
 
     #tablaCalificaciones{
         border-top: none!important;
@@ -315,6 +348,7 @@
         white-space: nowrap;
     }
 </style>
+
 @stop
 
 @section('js')
@@ -330,8 +364,10 @@
 		formCalificaciones: Este form recibe la informacion de materia y realiza el update de calificaciones.
 	*/
     const formFechasFiltro = document.getElementById("formFiltroFechas");
+    const formExamenesFiltro = document.getElementById("formSelectFechaForExam");
     const formMateriaConsulta = document.getElementById("camposMateriaInfo");
     const formCalificaciones = document.getElementById("formCalificaciones");
+    const formSelectFechaForExam = document.getElementById("formSelectFechaForExam");
   
     //Constantes para identificar cada tbody de las tablas de la pantalla
 	//Estos tobody ayudaran a identificar, donde se colocaran las consultas de base de datos
@@ -344,38 +380,50 @@
     //Constantes para algunos botones de la pantalla
 	//Estos botones, ademas de hacer el submit en sus respectivos form, se encargan de realizar otra accion
 	//por ello son declarados para manejar estos eventos.
-    const botonFechas = document.querySelector("#fechasbutton");
-    const botonExamenes = document.querySelector("#examenesbutton");
+    //const botonFechas = document.querySelector("#fechasbutton");
+    //const botonExamenes = document.querySelector("#examenesbutton");
     const botonGuardar = document.querySelector('#guardarCalificaciones');
     const botonCalificaciones = document.querySelector('#calificacionesbutton');
+
+    const inputFormFiltroFecha = formFechasFiltro.querySelector('#ciclo_escolar');
+    const inputFormFiltroPeriodo = formFechasFiltro.querySelector('#periodo');
+
+    var PERIODO;
+
 
     //Constant para un input dentro del form de fechas(Ciclo-escolar, periodo)
 	//este input sirvira para identificar la consulta que se hara, 
 	//es decir para la tabla de fechas o la tabla examenes-materia
-    const tipoConsulta = document.querySelector("#tipoConsulta");
+    //const tipoConsulta = document.querySelector("#tipoConsulta");
   
     //Esta funcion permite englobar cada uno de los listener que se usuaran para la dinamica de la pagina
     cargarEventListener();
     function cargarEventListener() {
         // Estos listener cambian el valor del input escondido en el form (ciclo-escolar, periodo) para la el tipo de consulta que se hara
+        /*
         botonFechas.addEventListener("click", () => {
             tipoConsulta.value = "fecha";
         });
         botonExamenes.addEventListener("click", () => {
             tipoConsulta.value = "examen";
         });
+        */
   
         //Estos listener se les asigna un evento y la funcion que se ejecutara cuando suceda el evento
 		
 		//Listener para el evento de submit de cada form cuando se hace la consulta a base de datos
-        formFechasFiltro.addEventListener("submit", consultaFechas);
+        //formFechasFiltro.addEventListener("submit", consultaFechas);
+        //formExamenesFiltro.addEventListener("submit", consultaExamenes);
         formMateriaConsulta.addEventListener("submit", consultaCalificaciones);
         formCalificaciones.addEventListener("submit", updateCalificaciones);
 
         //Listener para la dinamica de seleccion de una materia en la tabla de (examenes-materia) 
         tablaExamenesTbody.addEventListener("click", seleccionarExamen);
+        tablaFechasTbody.addEventListener("click", seleccionarFecha);
 
 
+        inputFormFiltroFecha.addEventListener("change", revisaCampos);
+        inputFormFiltroPeriodo.addEventListener("change", revisaCampos);
         //ES IMPORTNATE RECALCAR QUE SE DEBE MANTENER O MANEJAR LAS CLASES ESTABLECIDAS EN EL HTML
         //DE NO SER ASI NO SE PODRAN IDENTIFICAR LOS ELEMENTOS PARA MANEJARLOS, SI SE CAMBIAN ESTAS CLASE
         //DEBERA CAMBIAR LOS CAMPOS CON LOS QUE SE LLAMAN EN ESTAS FUNCIONES
@@ -407,133 +455,163 @@
                 se debe cambiar esto por element.fechaCalifiacion.*/
                 /***********************************************************/
 
+    function revisaCampos(e){
+        e.preventDefault();
+
+        //console.log(inputFormFiltroFecha.value);
+        //console.log(inputFormFiltroPeriodo.value);
+        if(inputFormFiltroFecha.value != "" && inputFormFiltroPeriodo.value != ""){
+            const inputPeriodoForExam = formSelectFechaForExam.querySelector('.inputPeriodoForExam');
+            inputPeriodoForExam.value = inputFormFiltroPeriodo.value;
+            peticionAjaxFechas();
+        }
+    }
+
     //Esta funcion recibe el evento formFechasFiltro "submit" esto sucede cuando se presiona el boton type="submit"
     function consultaFechas(e) {
         e.preventDefault(); //evita que el botón recargue la página
 
         const formData = new FormData(this); //se recibe el form del cual se está haciendo el listener
-
-        if (tipoConsulta.value === "fecha") {// se evalúa el valor del input escondido en el form para saber qué tipo de consulta realizar (fecha o examen)
             
-            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
-            // TRUE: para deshabilitar los botones
-            // FALSE: para habilitar los botones
-            deshabilitarBotones(true);
+        //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+        // TRUE: para deshabilitar los botones
+        // FALSE: para habilitar los botones
+        deshabilitarBotones(true);
 
-            fetch(this.getAttribute("action"), {
-                method: "POST",
-                body: formData,
-            })
-            .then((response) => response.json()) // "promesa" donde se espera la respuesta json desde el controlador de Laravel
-            .then((response) => {
-                if(response.error){
-                    displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
-                    deshabilitarBotones(false);
-                }else{
-                    cargarLimpiezaDeTabla(tablaFechasTbody, "tablaFechas" ,"erroresDeTablaFechas");
-
-                    // después de recibir el valor de la respuesta json desde el controlador, se trabaja con los datos recibidos
-                    const data = response.data; // se obtiene el elemento data que contiene la información de las fechas
-
-                    const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado",];
-                    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",];
-
-                    data.forEach((element) => {
-                        const fechaOriginal = new Date(element.fecha);
-                        const diaSemana = diasSemana[fechaOriginal.getDay()];
-                        const dia = fechaOriginal.getDate();
-                        const mes = meses[fechaOriginal.getMonth()];
-                        const anio = fechaOriginal.getFullYear();
-
-                        const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
-                        const row = document.createElement("tr");
-                        const td = createTableCell(fechaFormateada, "fechaCampo");
-                        row.appendChild(td);
-
-                        tablaFechasTbody.appendChild(row);
-                    });
-
-                    // Inicialización de DataTables
-                    edicionDeTablas('tablaFechas', '', false, false, false, false, 5, [[5, 10, 15], [5, 10, 15]]);
-
-                    //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
-                    // TRUE: para deshabilitar los botones
-                    // FALSE: para habilitar los botones
-                    deshabilitarBotones(false); 
-                }
-            })
-            .catch((error) => {
-                //console.error("Error:", error);
+        fetch(this.getAttribute("action"), {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.json()) // "promesa" donde se espera la respuesta json desde el controlador de Laravel
+        .then((response) => {
+            if(response.error){
                 displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
+                deshabilitarBotones(false);
+            }else{
+                cargarLimpiezaDeTabla(tablaFechasTbody, "tablaFechas" ,"erroresDeTablaFechas");
+
+                // después de recibir el valor de la respuesta json desde el controlador, se trabaja con los datos recibidos
+                const data = response.data; // se obtiene el elemento data que contiene la información de las fechas
+
+                const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado",];
+                const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",];
+
+                data.forEach((element) => {
+                    const fechaOriginal = new Date(element.fecha);
+                    const diaSemana = diasSemana[fechaOriginal.getDay()];
+                    const dia = fechaOriginal.getDate();
+                    const mes = meses[fechaOriginal.getMonth()];
+                    const anio = fechaOriginal.getFullYear();
+
+                    const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
+                    const row = document.createElement("tr");
+                    const td = createTableCell(fechaFormateada, "fechaCampo");
+
+                    const inputFechaElement = document.createElement('input');
+                    inputFechaElement.type="hidden";
+                    inputFechaElement.value = element.fecha;
+                    inputFechaElement.setAttribute('style', 'display:none;');
+                    inputFechaElement.className = "inputFechaElement";
+
+                    const inputPeriodoElement = document.createElement('input');
+                    inputPeriodoElement.type="hidden";
+                    inputPeriodoElement.value = response.periodo;
+                    inputPeriodoElement.setAttribute('style', 'display:none;');
+                    inputPeriodoElement.className = "inputPeriodoElement";
+
+                    td.appendChild(inputFechaElement);
+                    td.appendChild(inputPeriodoElement);
+
+                    row.appendChild(td);
+
+                    tablaFechasTbody.appendChild(row);
+                });
+
+                // Inicialización de DataTables
+                edicionDeTablas('tablaFechas', '', false, false, false, false, 5, [[5, 10, 15], [5, 10, 15]]);
+
                 //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
                 // TRUE: para deshabilitar los botones
                 // FALSE: para habilitar los botones
-                deshabilitarBotones(false);
-            });
-        } else if (tipoConsulta.value === "examen") { // Al menos uno de los elementos de calificacion es nulo o vacío
-
+                deshabilitarBotones(false); 
+            }
+        })
+        .catch((error) => {
+            //console.error("Error:", error);
+            displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
             //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
             // TRUE: para deshabilitar los botones
             // FALSE: para habilitar los botones
-            deshabilitarBotones(true);
+            deshabilitarBotones(false);
+        }); 
+    }
 
-            fetch(this.getAttribute("action"), {
-                method: "POST",
-                body: formData,
-            })
-            .then((response) => response.json())
-            .then((response) => {
-                if(response.error){
-                    displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
-                    deshabilitarBotones(false);
-                }else{
-                    cargarLimpiezaDeTabla(tablaExamenesTbody, "tablaExamen" ,"erroresDeTablaExamenes");
 
-                    const data = response.data;
+    function consultaExamenes(e){
+        e.preventDefault(); //evita que el botón recargue la página
 
-                    data.forEach((element) => {
-                        const row = document.createElement("tr");
+        const formData = new FormData(this); //se recibe el form del cual se está haciendo el listener
 
-                        const fieldOrder = {
-                            tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
-                            tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
-                            tdHora: createTableCell(element.hora, "horaCampo"),
-                            tdSalon: createTableCell(element.salon, "salonCampo"),
-                            tdTipo: createTableCell(element.tipo, "tipoCampo"),
-                            tdNombre: createTableCell(element.nombre, "nombreCampo"),
-                            tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
-                        };
+        //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+        // TRUE: para deshabilitar los botones
+        // FALSE: para habilitar los botones
+        deshabilitarBotones(true);
 
-                        const fieldKeys = Object.keys(fieldOrder);
+        fetch(this.getAttribute("action"), {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            if(response.error){
+                displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
+                deshabilitarBotones(false);
+            }else{
+                cargarLimpiezaDeTabla(tablaExamenesTbody, "tablaExamen" ,"erroresDeTablaExamenes");
+                const data = response.data;
+                
+                data.forEach((element) => {
+                    const row = document.createElement("tr");
 
-                        fieldKeys.forEach((key) => {
-                            const field = fieldOrder[key];
-                            row.appendChild(field);
-                        });
+                    const fieldOrder = {
+                        tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
+                        tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
+                        tdHora: createTableCell(element.hora, "horaCampo"),
+                        tdSalon: createTableCell(element.salon, "salonCampo"),
+                        tdTipo: createTableCell(element.tipo, "tipoCampo"),
+                        tdNombre: createTableCell(element.nombre, "nombreCampo"),
+                        tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
+                    };
 
-                        tablaExamenesTbody.appendChild(row);
+                    const fieldKeys = Object.keys(fieldOrder);
 
-                        //cargaFiltros(data);
+                    fieldKeys.forEach((key) => {
+                        const field = fieldOrder[key];
+                        row.appendChild(field);
                     });
 
-                    // Inicialización de DataTables con paginación, scroll y buscador
-                    edicionDeTablas('tablaExamen', '200px', true, true, true, false, 5, [[5, 10, 15], [5, 10, 15]]);
+                    tablaExamenesTbody.appendChild(row);
 
-                    //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
-                    // TRUE: para deshabilitar los botones
-                    // FALSE: para habilitar los botones
-                    deshabilitarBotones(false);
-                }
-            })
-            .catch((error) => {
-                //console.error("Error:", error);
-                displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
+                    //cargaFiltros(data);
+                });
+
+                // Inicialización de DataTables con paginación, scroll y buscador
+                edicionDeTablas('tablaExamen', '200px', true, true, true, false, 5, [[5, 10, 15], [5, 10, 15]]);
+
                 //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
                 // TRUE: para deshabilitar los botones
                 // FALSE: para habilitar los botones
                 deshabilitarBotones(false);
-            });
-        }
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
+            //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+            // TRUE: para deshabilitar los botones
+            // FALSE: para habilitar los botones
+            deshabilitarBotones(false);
+        });
     }
 
     // Funcion para consulta de calificaciones, esta se ejecuta cunado se consulta las calificaiciones de una materia que se selecciona por primera vez
@@ -647,47 +725,6 @@
         });
     }
 
-    function displayError(textContent, deshabiltar, tipoError){
-        if(deshabiltar === false){
-            const error = document.getElementById(tipoError);
-            error.setAttribute('style', 'display:none;');
-            error.innerHTML = ``;
-            return;
-        }
-        const error = document.getElementById(tipoError);
-        error.setAttribute('style', 'display:block;');
-        error.innerHTML=`
-        <div class="mt-1 bg-danger p-2 rounded-lg mb-6 text-white text-center uppercase font-bold">
-            ${textContent}     
-        </div>
-        `;
-    }
-
-    function cargarLimpiezaDeTabla(tablaTbody, tabla, tipoError){
-        // Destruir la instancia de DataTables existente
-        if ($.fn.DataTable.isDataTable("#"+tabla)) {
-            $("#"+tabla).DataTable().destroy();
-        }
-        limpiarHTML(tablaTbody); //Se limpia la tabla en caso de haber datos ya consultados
-        displayError("", false, tipoError);
-    }
-
-    function edicionDeTablas(tabla, scrollY, scrollCollapse, paging, searching, info, pageLength, lengthMenu){
-        // Inicialización de DataTables con paginación, scroll y buscador
-        $('#'+tabla).DataTable({
-            scrollY: scrollY,
-            scrollCollapse: scrollCollapse,
-            paging: paging, // Habilitar paginación
-            searching: searching, // Habilitar el buscador
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
-            },
-            info: info,
-            pageLength : pageLength,
-            lengthMenu: lengthMenu
-        });
-    }
-
     /********************************************************************************/
     /* Funciones: para la creacion de celdas 'td' en las tablas de la pantalla      */
     /* estas funciones son llamadas cuando se hace una cosulta nueva y se asignan   */
@@ -766,53 +803,376 @@
 
         return td;
     }
+
+
+    /********************************************************************************/
+    /* Peticiones con AJAX                                                          */
+    /********************************************************************************/
  
-  
+    function peticionAjaxFechas(){
+        // Crear objeto XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+
+        // Configurar la solicitud AJAX
+        xhr.open("POST", '{{ route('getFechas') }}'); // Especifica la ruta del script
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Manejar la respuesta de la solicitud
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                cargarLimpiezaDeTabla(tablaFechasTbody, "tablaFechas" ,"erroresDeTablaFechas");
+
+                //console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                //console.log(response);
+                const data = response.data; // se obtiene el elemento data que contiene la información de las fechas
+
+                const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+                const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",];
+
+                data.forEach((element) => {
+                    const fechaOriginal = new Date(element.fecha);
+                    const diaSemana = diasSemana[fechaOriginal.getDay()];
+                    const dia = fechaOriginal.getDate();
+                    const mes = meses[fechaOriginal.getMonth()];
+                    const anio = fechaOriginal.getFullYear();
+
+                    const fechaFormateada = `${diaSemana} ${dia} de ${mes} del ${anio}`;
+                    const row = document.createElement("tr");
+                    const td = createTableCell(fechaFormateada, "fechaCampo");
+
+                    const inputFechaElement = document.createElement('input');
+                    inputFechaElement.type="hidden";
+                    inputFechaElement.value = element.fecha;
+                    
+                    inputFechaElement.setAttribute('style', 'display:none;');
+                    inputFechaElement.className = "inputFechaElement";
+
+                    //const inputPeriodoElement = document.createElement('input');
+                    //inputPeriodoElement.type="hidden";
+                    //inputPeriodoElement.value = response.periodo;
+                    //inputPeriodoElement.setAttribute('style', 'display:none;');
+                    //inputPeriodoElement.className = "inputPeriodoElement";
+
+                    td.appendChild(inputFechaElement);
+                    //td.appendChild(inputPeriodoElement);
+
+                    row.appendChild(td);
+
+                    tablaFechasTbody.appendChild(row);
+                });
+
+                // Inicialización de DataTables con paginación, scroll y buscador
+                edicionDeTablas('tablaFechas', '', false, false, false, false, 5, [[5, 10, 15], [5, 10, 15]]);
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                //deshabilitarBotones(false);
+            } else {
+                //console.error("Error en la solicitud. Código de estado: " + xhr.status);
+                displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
+            }
+        };
+
+        // Capturar errores en la solicitud
+        xhr.onerror = function() {
+            //console.error("Error en la solicitud");
+            displayError("Consulta de fechas fallida", true, "erroresDeTablaFechas");
+        };
+
+        // Obtener los datos del formulario
+        const formData = new FormData(formFechasFiltro);
+
+        // Convertir los datos del formulario en una cadena de consulta URL codificada
+        const encodedData = new URLSearchParams(formData).toString();
+
+        // Enviar la solicitud AJAX con los datos del formulario
+        xhr.send(encodedData);
+    }
+
+    function peticionAjaxExamenes(){
+        // Crear objeto XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+
+        // Configurar la solicitud AJAX
+        xhr.open("POST", '{{ route('getExamenes') }}'); // Especifica la ruta del script
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Manejar la respuesta de la solicitud
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                cargarLimpiezaDeTabla(tablaExamenesTbody, "tablaExamen" ,"erroresDeTablaExamenes");
+
+                //console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                //console.log(response);
+                const data = response.data;
+
+                data.forEach((element) => {
+                    const row = document.createElement("tr");
+
+                    const fieldOrder = {
+                        tdCveMateria: createTableCell(element.cve_materia, "claveCampo"),
+                        tdNombre_ing: createTableCell(element.nombre_ing, "materiaCampo"),
+                        tdHora: createTableCell(element.hora, "horaCampo"),
+                        tdSalon: createTableCell(element.salon, "salonCampo"),
+                        tdTipo: createTableCell(element.tipo, "tipoCampo"),
+                        tdNombre: createTableCell(element.nombre, "nombreCampo"),
+                        tdNombre2: createTableCell(element.nombre, "nombreCampo2"),
+                    };
+
+                    const fieldKeys = Object.keys(fieldOrder);
+
+                    fieldKeys.forEach((key) => {
+                        const field = fieldOrder[key];
+                        row.appendChild(field);
+                    });
+
+                    tablaExamenesTbody.appendChild(row);
+
+                    //cargaFiltros(data);
+                });
+
+                // Inicialización de DataTables con paginación, scroll y buscador
+                edicionDeTablas('tablaExamen', '200px', true, true, true, false, 5, [[5, 10, 15], [5, 10, 15]]);
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                //deshabilitarBotones(false);
+            } else {
+                //console.error("Error en la solicitud. Código de estado: " + xhr.status);
+                displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes");
+            }
+        };
+
+        // Capturar errores en la solicitud
+        xhr.onerror = function() {
+            //console.error("Error en la solicitud");
+            displayError("Consulta de exámenes fallida", true, "erroresDeTablaExamenes")
+        };
+
+        // Obtener los datos del formulario
+        const formData = new FormData(formSelectFechaForExam);
+
+        // Convertir los datos del formulario en una cadena de consulta URL codificada
+        const encodedData = new URLSearchParams(formData).toString();
+
+        // Enviar la solicitud AJAX con los datos del formulario
+        xhr.send(encodedData);
+    }
+
+    function peticionAjaxCalificaciones(){
+        deshabilitarBotones(true);
+        // Crear objeto XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+
+        // Configurar la solicitud AJAX
+        xhr.open("POST", '{{ route('getCalificaciones') }}'); // Especifica la ruta del script
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Manejar la respuesta de la solicitud
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                cargarLimpiezaDeTabla(tablaCalificacionesTbody, "tablaCalificaciones" ,"erroresDeTablaCalificaciones");
+
+                //console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+                //console.log(response);
+                const data = response.data; //Se recogen los datos de response en $data
+                //console.log(data);
+
+                //Se recogen los datos recibidos en response de los campos definidos en el controlador
+                const claveCampo_materia = response.claveCampo_materia;
+                const nombreCampo_materia = response.nombreCampo_materia;
+
+                //Los siguientes son campos escondidos en la tabla de captura de calificaciones
+                //En estos campos se define el value recibido por respons
+
+                //LARAVEL CON ESTRUCUTRA ORIGINAL
+                //estos campos sirven para establecer unsa relacion entre los datos de la tabla de calificacion y para registrarlos 
+                //es necesario actualizar estos datos y hacer la relacion en los controladores segun la estructura original
+                const materiaCampoModal = document.getElementById("materiaCampoModal");
+                const claveCampoModal = document.getElementById("claveCampooModal");
+                materiaCampoModal.value = nombreCampo_materia;
+                claveCampoModal.value = claveCampo_materia;
+
+                //console.log(data);
+                data.forEach((element) => { //Se manejan los datos recibidos
+                    const row = document.createElement("tr");
+
+                    //La siguiente constante es un booleano que evalua si todas las calificaciones de la consulta, ninguna es vacia
+                    //En caso de ser vacia alguna significa que es la primera captura de calificaciones
+                    //En caso de no ser vacia significa que ya se registraron calificaciones anteriormente
+                    const todasLasCalificacionesNoNulas = data.every((element) => element.calificacion !== null && element.calificacion !== "");
+
+                    //Se crea un objeto con la informacion de cada campo recibido y se registra en cada una de las celdas que se usaran
+                    const fieldOrder = {
+                        tdCveUnica: createTableCell(element.cve_unica, "cve_unicaModal"),
+                        tdnombre: createTableCell(element.nombre + " " + element.paterno + " " + element.materno, "nombreModal"),
+                        tdCalificacion: createTableCellCalificacion(element.calificacion, "calificacionModal", todasLasCalificacionesNoNulas),
+                    };
+
+                    //Se obtiene cada una de las keys(nombres) de los campos en el objeto
+                    const fieldKeys = Object.keys(fieldOrder);
+
+                    //Se itera sobre el array de keys del objeto y de esta manera ir registrando cada celda en su fila
+                    fieldKeys.forEach(key => {
+                        const field = fieldOrder[key];
+                        row.className="fila-calificacion"; //Se asignan clases que ayudaran a identificar el row de la tabla de calificaciones
+                        row.appendChild(field);
+                    });
+                    //row.appendChild(tdButton);
+
+                    tablaCalificacionesTbody.appendChild(row);
+                });
+
+                // Inicialización de DataTables con paginación, scroll y buscador
+                edicionDeTablas('tablaCalificaciones', '200px', true, false, true, false, null, []);
+
+                //habilitar los botones de la pantalla, esto permitira no hacer una misma consulta muchas veces al presionar el boton varias veces
+                // TRUE: para deshabilitar los botones
+                // FALSE: para habilitar los botones
+                deshabilitarBotones(false);
+
+                //console.log(filasConsulta);
+
+            } else {
+                //console.error("Error en la solicitud. Código de estado: " + xhr.status);
+                displayError("Datos de alumno erróneos", true, "erroresDeTablaCalificaciones");
+                deshabilitarBotones(false);
+            }
+        };
+
+        // Capturar errores en la solicitud
+        xhr.onerror = function() {
+            //console.error("Error en la solicitud");
+            displayError("Consulta de calificaciones fallida", true, "erroresDeTablaCalificaciones");
+            deshabilitarBotones(false);
+        };
+
+        // Obtener los datos del formulario
+        const formData = new FormData(formMateriaConsulta);
+
+        // Convertir los datos del formulario en una cadena de consulta URL codificada
+        const encodedData = new URLSearchParams(formData).toString();
+
+        // Enviar la solicitud AJAX con los datos del formulario
+        xhr.send(encodedData);
+    }
+
     /********************************************************************************/
     /* Funcion para la seleccion de una fila en la tabla de examenes-materia        */
     /* al seleccionar una materia esta se asigna en cada campo del form de materia  */
     /* donde esta el boton para la consulta de calificaciones                       */
     /********************************************************************************/
+
     function seleccionarExamen(e) {
-      e.preventDefault();
+        e.preventDefault();
+        
+        //Cuando ocurre la selecion de una materia se hace sobre una celda(td) por lo que sera necesario obtener su padre
+        const materiaSeleccionada = e.target.parentElement;
+        const tds = Array.from(materiaSeleccionada.children); //Se hace un array con todos los datos del padre, es decir cada celda
     
-      //Cuando ocurre la selecion de una materia se hace sobre una celda(td) por lo que sera necesario obtener su padre
-      const materiaSeleccionada = e.target.parentElement;
-      const tds = Array.from(materiaSeleccionada.children); //Se hace un array con todos los datos del padre, es decir cada celda
-  
-      //Se hace un objeto con los campos que seran llenados con la informacion de la materia seleccionada
-      const fieldOrder = {
-            materiaCampo: document.getElementById("materiaCampo"),
-            tipoCampo: document.getElementById("tipoCampo"),
-            salonCampo: document.getElementById("salonCampo"),
-            nombreCampo: document.getElementById("nombreCampo"),
-            nombreCampo2: document.getElementById("nombreCampo2"),
-            claveCampo: document.getElementById("claveCampo"),
-      };
-    
-      //Se obtienes las keys(nombres) de los campos del objetos creado anteriormente
-      const fieldKeys = Object.keys(fieldOrder);
-  
-      //Se hace un forEach sobre los tds obtenidos
-      tds.forEach(td => {
-        //Se itera osbre el array de llaves para identificar cada campo del objeto
-        fieldKeys.forEach(key => {
-            //Se evalua si la iteracion del td coincide con la iteracion de las keys
-          if(td.classList.contains(key)) { //SI coincide se registra la informacion dentro de la celda
-            const contenido = td.textContent;
-            const field = fieldOrder[key];
-            field.value = contenido;
-          }
-        });
-      });
+        if(tds){
+            //Se hace un objeto con los campos que seran llenados con la informacion de la materia seleccionada
+            const fieldOrder = {
+                    materiaCampo: document.getElementById("materiaCampo"),
+                    tipoCampo: document.getElementById("tipoCampo"),
+                    salonCampo: document.getElementById("salonCampo"),
+                    nombreCampo: document.getElementById("nombreCampo"),
+                    nombreCampo2: document.getElementById("nombreCampo2"),
+                    claveCampo: document.getElementById("claveCampo"),
+            };
+            
+            //Se obtienes las keys(nombres) de los campos del objetos creado anteriormente
+            const fieldKeys = Object.keys(fieldOrder);
+        
+            //Se hace un forEach sobre los tds obtenidos
+            tds.forEach(td => {
+                //Se itera osbre el array de llaves para identificar cada campo del objeto
+                fieldKeys.forEach(key => {
+                    //Se evalua si la iteracion del td coincide con la iteracion de las keys
+                if(td.classList.contains(key)) { //SI coincide se registra la informacion dentro de la celda
+                    const contenido = td.textContent;
+                    const field = fieldOrder[key];
+                    field.value = contenido;
+                }
+                });
+            });
+
+            //botonCalificaciones.click();
+            peticionAjaxCalificaciones();
+
+            //form.submit();
+
+      }else{
+            displayError("Sin datos para consultar", true, "erroresDeTablaExamenes");
+      }
   
     }
 
 
+
+    function seleccionarFecha(e) {
+        e.preventDefault();
+    
+        //Cuando ocurre la selecion de una materia se hace sobre una celda(td) por lo que sera necesario obtener su padre
+        const fechaSeleccionada = e.target.parentElement;
+        const valueFecha = fechaSeleccionada.querySelector('.inputFechaElement');
+
+        //const valuePeriodo = fechaSeleccionada.querySelector('.inputPeriodoElement');
+        //console.log(buttonfechaForExam);
+        //const tds = Array.from(fechaSeleccionada.children); //Se hace un array con todos los datos del padre, es decir cada celda
+
+        //const formSelectFechaForExam = document.getElementById("formSelectFechaForExam");
+        //const inputFechaForExam = formSelectFechaForExam.querySelector('.inputFechaForExam');
+        //const inputPeriodoForExam = formSelectFechaForExam.querySelector('.inputPeriodoForExam');
+
+        //const buttonfechaForExam = document.getElementById("buttonfechaForExam");
+        //const inputFechaForExam = document.getElementById("formSelectFechaForExam");
+        
+        //console.log(inputFechaForExam);
+        //console.log(inputFechaForExam);
+        if(valueFecha){
+            const infoTablaExamenes = document.getElementById("infoTablaExamenes"); 
+            const inputPeriodoForExam = formSelectFechaForExam.querySelector('.inputPeriodoForExam');
+
+            const inputFechaForExam = formSelectFechaForExam.querySelector('.inputFechaForExam');
+            //console.log(inputFechaForExam.parentNode);
+            inputFechaForExam.value = valueFecha.value.trim();
+
+            infoTablaExamenes.setAttribute("style", "color:lightgray;"); 
+            const fechaCompleta = inputFechaForExam.value;
+            const partesFecha = fechaCompleta.split(" ");
+            const fecha = partesFecha[0];
+            //console.log(fecha);
+            const cadenaFinal = `Fecha: ${fecha} Periodo: ${inputPeriodoForExam.value}`;
+            infoTablaExamenes.textContent = cadenaFinal;
+
+            peticionAjaxExamenes();
+        }else{
+            displayError("Sin datos para consultar", true, "erroresDeTablaFechas");
+        }
+        //inputPeriodoForExam.value = valuePeriodo.value.trim();
+        //inputFechaForExa
+        //console.log(inputFechaForExam.value);
+
+        //buttonfechaForExam.click();
+        //formSelectFechaForExam.submit();
+        //console.log(inputFechaForExam.value);
+        //console.log(formSelectFechaForExam);
+
+        
+    }
+
     /********************************************************************************/
-    /* Funcion para la limpieza de una tabla cuando esta ya tiene datos y se quiere */
-    /* cargar nuevos datos                                                          */
+    /* Fuinciones de carga y limpieza                                                */
     /********************************************************************************/
+
+    // Funcion para la limpieza de una tabla cuando esta ya tiene datos y se quiere
+    // cargar nuevos datos                                                          
     function limpiarHTML(node) {
         // Forma lenta e insegura
         // node.innerHTML = '';
@@ -827,9 +1187,50 @@
     //de la pantalla
     function deshabilitarBotones(content){
         botonCalificaciones.disabled = content;
-        botonExamenes.disabled = content;
-        botonFechas.disabled = content;
+        //botonExamenes.disabled = content;
+        //botonFechas.disabled = content;
         botonGuardar.disabled = content;
+    }
+
+    function displayError(textContent, deshabiltar, tipoError){
+        if(deshabiltar === false){
+            const error = document.getElementById(tipoError);
+            error.setAttribute('style', 'display:none;');
+            error.innerHTML = ``;
+            return;
+        }
+        const error = document.getElementById(tipoError);
+        error.setAttribute('style', 'display:block;');
+        error.innerHTML=`
+        <div class="mt-1 bg-danger p-2 rounded-lg mb-6 text-white text-center uppercase font-bold">
+            ${textContent}     
+        </div>
+        `;
+    }
+
+    function cargarLimpiezaDeTabla(tablaTbody, tabla, tipoError){
+        // Destruir la instancia de DataTables existente
+        if ($.fn.DataTable.isDataTable("#"+tabla)) {
+            $("#"+tabla).DataTable().destroy();
+        }
+        limpiarHTML(tablaTbody); //Se limpia la tabla en caso de haber datos ya consultados
+        displayError("", false, tipoError);
+    }
+
+    function edicionDeTablas(tabla, scrollY, scrollCollapse, paging, searching, info, pageLength, lengthMenu){
+        // Inicialización de DataTables con paginación, scroll y buscador
+        $('#'+tabla).DataTable({
+            scrollY: scrollY,
+            scrollCollapse: scrollCollapse,
+            paging: paging, // Habilitar paginación
+            searching: searching, // Habilitar el buscador
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+            },
+            info: info,
+            pageLength : pageLength,
+            lengthMenu: lengthMenu
+        });
     }
 
 
@@ -839,7 +1240,8 @@
     /********************************************************************************/
     function validarCalificaciones(e) {
         e.preventDefault(); //previene la accion por defecto
-
+        //const tablaCalificaciones = document.getElementById('tablaCalificaciones');
+        //console.log(tablaCalificaciones);
         //S obtienen todas las filas de la tabla de calificaciones segun la clase asignada "fila-calificacion"
         const filas = document.getElementsByClassName('fila-calificacion');
         let evaluaCalificaciones = true; //bandera para identificar cuando existe un error
@@ -858,7 +1260,7 @@
             //console.log(buscadorDeTabla);
             //Se identifica si la celda contiene un input o solo es texto, esto ayudara a poder evaluar la celda cuando un usuario no 
             //finaliza la edicion de una calificacion, se podran leer celdas tanto con inputs como con solo texto y obtener su valor
-            const calificacion = inputCalificacion ? inputCalificacion.value.trim() : celdaCalificacion.textContent.trim();
+            var calificacion = inputCalificacion ? inputCalificacion.value.trim() : celdaCalificacion.textContent.trim();
 
             if (!calificacion) {
                 // La calificación está vacía
@@ -874,6 +1276,13 @@
             } else {
                 // La calificación es válida, elimina cualquier advertencia anterior
                 eliminarAdvertencia(celdaCalificacion);
+
+                const isNumeric = n => !isNaN(n);
+                if(isNumeric(calificacion)){
+                    calificacionValue = parseInt(calificacion, 10);
+                    calificacion = calificacionValue.toString();
+                }
+                //console.log(calificacion)
                 datosCalificaciones.push({ clave, calificacion });
             }
         }
@@ -940,6 +1349,7 @@
   
   
 <script>
+    /*
     //Esta funcion sirve para evaluar si los campos no para la obtenciona de las fechas y las materias
     //Estan llenos de no ser asi, los botones se deshabilitan
 
@@ -972,7 +1382,7 @@
   
     // Se verifican los campos iniciales al cargar la pagina
     verificarCampos();
-  
+    */
 </script>
 
 
