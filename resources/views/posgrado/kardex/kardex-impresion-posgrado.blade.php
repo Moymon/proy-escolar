@@ -37,49 +37,20 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <label>Grado: </label>
-                        <select class="form-control form-select">
-                            <option>Doctorado en Ingenieria Mecánica</option>
-                        </select>
+                        <label>Alumno: </label>
+                        <input class="form-control" type="text" name="" value="Boix Salazar Julio Alberto" disabled>
                     </div>
                     <div class="col-3">
-                        <label>Alumno: </label>
-                        <select  class="form-control form-select">
-                            <option>Boix Salazar Julio Alberto</option>
-                        </select>
-                    </div>
-                    <div class="col-2">
                         <label>Grado</label>
                         <input type="text" class="form-control" id="grado" name="" value="Doctorado en Ingeniería Mecánica" disabled>   
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <label class="form-label">Opción</label>
                         <input type="text" class="form-control" id="opcion" name="" value="Mecatrónica y Sistemas Mecánicos" disabled>    
                     </div>
                     <div class="col-2">
-                        <label class="form-label">Estatus</label>
+                        <label class="form-label">Estado</label>
                         <input type="text" class="form-control" id="estatus" name="" value="AI" disabled>   
-                    </div>
-                    <div class="col-2">
-                        <label class="form-label">Kardex</label>
-                        <input type="text" class="form-control" id="kardex" value="Verificado" disabled> 
-                    </div>
-                    <div class="col-3">
-                        <label class="form-label">Promedio General:</label>
-                        <input type="text" class="form-control" id="prom_general" value="8.57" disabled>
-                    </div>
-                    <div class="col-3">
-                        <label class="form-label">Promedio General Aprobatorio</label>
-                        <input type="text" class="form-control" id="prom_gral_apro" value="8.57" disabled>    
-                    </div>
-                    <div class="col-3">
-                        <label class="form-label">Total Créditos Aprobados</label>
-                        <input type="text" id="total_cre_apro" class="form-control" value="40" disabled>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-end">
-                    <div class="col-3">
-                        <button class="btn bg-dark">Crear PDF</button>
                     </div>
                 </div>
             </div>
@@ -87,6 +58,11 @@
         <br>
         <br>
         <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-center">
+                    <label><h3>Estadisticas</h3></label>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row ">
                     <div class="col-12">
@@ -110,7 +86,10 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button class="btn bg-dark ">Crear PDF</button>   
+                                <form method="POST" action="/crearPDF-kardexPosgrado">
+                                    @csrf
+                                    <button class="btn bg-dark" type="submit">Crear PDF</button>
+                                </form>   
                             </div>
                         </div>
                     </div>

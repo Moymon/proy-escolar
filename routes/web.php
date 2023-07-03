@@ -6,7 +6,7 @@ use App\Http\Controllers\authwp;
 use App\Http\Controllers\usuarios\usuariosController;
 use App\Http\Controllers\administracion\datosGenerales;
 use App\Http\Controllers\rolesypermisos\roles_permisos;
-
+use App\Http\Controllers\archivos\pdfController;
 
 use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
 
@@ -104,6 +104,10 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
     /*Ejemplos obtencion de fechas y materias*/
     Route::post('/get-dataCapturaCalificaciones',[ExamenEjemplo::class,'getTipoConsulta'])->name('getTipoConsulta');
     Route::post('/get-calificaciones',[ExamenEjemplo::class,'getCalificaciones'])->name('getCalificaciones');
+
+    /*Ejemplo crear pdf*/
+    
+    Route::post('/crearPDF-kardexPosgrado',[pdfController::class,'pdfKardexPosgrado']);
 });
 
 //Route::get('/roles',[roles_permisos::class,'index_r']);
