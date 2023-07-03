@@ -79,7 +79,10 @@
                 </div>
                 <div class="row d-flex justify-content-end">
                     <div class="col-3">
-                        <button class="btn bg-dark">Crear PDF</button>
+                        <form method="POST" action="/crearPDF-kardexPosgrado">
+                            @csrf
+                            <button class="btn bg-dark" type="submit">Crear PDF</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -110,7 +113,10 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button class="btn bg-dark ">Crear PDF</button>   
+                                <form method="POST" action="/crearPDF-kardexPosgrado">
+                                    @csrf
+                                    <button class="btn bg-dark" type="submit">Crear PDF</button>
+                                </form>   
                             </div>
                         </div>
                     </div>
