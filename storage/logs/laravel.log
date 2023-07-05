@@ -21629,3 +21629,66 @@ DETAIL:  La fila que falla contiene (6, null, web, 2023-06-16 18:16:25, 2023-06-
 #55 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 {main}
 "} 
+[2023-07-05 15:04:30] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:210)
+[stacktrace]
+#0 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(481): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(136): Illuminate\\Foundation\\Http\\Kernel->reportException()
+#6 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
+#7 {main}
+"} 
+[2023-07-05 15:04:30] laravel.ERROR: syntax error, unexpected single-quoted string "url", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected single-quoted string \"url\", expecting \"]\" at C:\\inetpub\\wwwroot\\escolar_v01_2\\config\\adminlte.php:496)
+[stacktrace]
+#0 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#1 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(242): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#2 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Foundation\\Application->bootstrapWith()
+#3 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(160): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#4 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#5 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
+#6 {main}
+"} 
+[2023-07-05 15:04:34] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:210)
+[stacktrace]
+#0 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(481): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(136): Illuminate\\Foundation\\Http\\Kernel->reportException()
+#6 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
+#7 {main}
+"} 
+[2023-07-05 15:04:34] laravel.ERROR: syntax error, unexpected single-quoted string "url", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected single-quoted string \"url\", expecting \"]\" at C:\\inetpub\\wwwroot\\escolar_v01_2\\config\\adminlte.php:496)
+[stacktrace]
+#0 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#1 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(242): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#2 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Foundation\\Application->bootstrapWith()
+#3 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(160): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#4 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#5 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
+#6 {main}
+"} 
+[2023-07-05 15:04:37] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:210)
+[stacktrace]
+#0 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(481): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(136): Illuminate\\Foundation\\Http\\Kernel->reportException()
+#6 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
+#7 {main}
+"} 
+[2023-07-05 15:04:37] laravel.ERROR: syntax error, unexpected single-quoted string "url", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected single-quoted string \"url\", expecting \"]\" at C:\\inetpub\\wwwroot\\escolar_v01_2\\config\\adminlte.php:496)
+[stacktrace]
+#0 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#1 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(242): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#2 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Foundation\\Application->bootstrapWith()
+#3 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(160): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#4 C:\\inetpub\\wwwroot\\escolar_v01_2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#5 C:\\inetpub\\wwwroot\\escolar_v01_2\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
+#6 {main}
+"} 

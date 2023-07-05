@@ -397,12 +397,14 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Impresión',
+                            'icon' => 'fas fa-print',
                             'url'  => 'index_kardex_lic',
                             'can'  => ['administrador'],
                             'classes' => 'ml-3',       
                         ],
                         [
                             'text' => 'Verificación',
+                            'icon' => ' fas fa-clipboard-check',
                             'url'  => 'verificacion_kardex_lic',
                             'can'  => ['administrador'],
                             'classes' => 'ml-3', 
@@ -483,12 +485,14 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Impresión',
+                            'icon' => 'fas fa-print',
                             'url'  => 'index_kardex_pos',
                             'can'  => ['administrador'],
                             'classes' => 'ml-3',       
                         ],
                         [
                             'text' => 'Verificación',
+                            'icon' => ' fas fa-clipboard-check',
                             'url'  => 'verificacion_kardex_pos',
                             'can'  => ['administrador'],
                             'classes' => 'ml-3', 
