@@ -1,0 +1,33 @@
+.container{
+	padding: 0px;
+	padding-right: 45px;
+}
+
+.custom-image-css input[type="file"]{
+	display: none;
+}
+
+.custom-image-css label{
+	display: inline-block;
+	text-transform: uppercase;
+	background-color: #20809d;
+	text-align: center;
+	padding-left: 50%;
+	padding-right: 50%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	user-select: none;
+	cursor: pointer;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+
+}
+
+.custom-image-css label i {
+	color: white;
+	font-size: 15px;
+}
+
+.custom-image-css label:active{
+	transform: scale(.9);
+}

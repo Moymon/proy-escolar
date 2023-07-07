@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @extends('modalAlumnos')
+@extends('subirFotoPerfil');
 
 @section('title', 'Kardex')
 
@@ -22,8 +23,17 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-1">
-                <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
+            <div class="col-1">
+                <div class="input-group">
+                    <img src="{{'storage/assets/imagenes/perfil.png'}}" class="img-fluid" alt="">
+                    <div class="container custom-image-css">
+                         <input type="file" id="upImagen" accept="image/*" name="">
+                        <label for="upImagen" ><i class="fas fa-camera"></i></label>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-info"><i class="fas fa-camera"data-toggle="modal" data-target="#modalSubirImagen"></i></button>
+                    </div>
+                </div>
             </div>
             <div class="col-11">
                 <div class="row">
@@ -37,11 +47,11 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <label>Alumno: </label>
+                        <label>Alumno </label>
                         <input class="form-control" type="text" name="" value="Boix Salazar Julio Alberto" disabled>
                     </div>
                     <div class="col-3">
-                        <label>Grado</label>
+                        <label>Posgrado</label>
                         <input type="text" class="form-control" id="grado" name="" value="Doctorado en Ingeniería Mecánica" disabled>   
                     </div>
                     <div class="col-3">
@@ -67,9 +77,9 @@
                 <div class="row ">
                     <div class="col-12">
                         <div class="row d-flex justify-content-end">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="input-group">
-                                    <label class="input-group-text" >Promedio General:</label>
+                                    <label class="input-group-text" >Promedio General</label>
                                     <input type="text" class="form-control" id="prom_general" value="8.57" readonly> 
                                 </div>
                             </div>
@@ -284,6 +294,7 @@
 @stop
 
 @section('css')
+    <link rel="stylesheet"  href="{{ asset('css/custom-file-image.css')}}" />
 @stop
 
 @section('js')
@@ -306,5 +317,24 @@
                 },
             });
         });  */  
+    </script>
+
+    <script>
+        const $imagen = document.querySelector('#foto'), $imagenPreview = document.querySelector('#imagenPreview');
+
+        $imagen.addEventListener("change",() =>{
+            const archivo = $imagen.files;
+            /*Si no hay datos del archivo no hacemos nada*/
+            if (!archivo || !archivo.length) {
+                $imagen.src = "";
+                return;
+            }else{
+                /*Tomamos el primer archivo*/
+                const archivo1 = archivo[0];
+                const blobObject = URL.createObjectURL(archivo[0]);
+                $imagenPreview.src = blobObject;
+            }
+
+        });
     </script>
 @stop
