@@ -11,7 +11,8 @@ class sidebar extends Controller
     
         /*Alumnos*/
         public function alumnos_licenciatura(){
-            return view('licenciatura.alumnos.alumnos-licenciatura');
+            $url_img_perfil = 'storage/assets/imagenes/perfil.png';
+            return view('licenciatura.alumnos.alumnos-licenciatura',compact('url_img_perfil'));
         }
 
         /*Kardex*/
@@ -55,33 +56,19 @@ class sidebar extends Controller
             return view('licenciatura.procedimientos.menuprincipal');
         }
     
-    /*Posgrado-------------------------------------------------------------*/
+        /*Posgrado-------------------------------------------------------------*/
     
         /*Alumnos----------------------------------------------------------*/
         public function alumnos_posgrado(){
-            return view('posgrado.alumnos.alumnos_posgrado');
+            $url_img_perfil = 'storage/assets/imagenes/perfil.png';
+            return view('posgrado.alumnos.alumnos_posgrado',compact('url_img_perfil'));
         }
 
         /*kardex*/
         public function kardex_pos(){
-            return view('posgrado.kardex.kardex-impresion-posgrado');
+            $url_img_perfil = 'storage/assets/imagenes/perfil.png';
+            return view('posgrado.kardex.kardex-impresion-posgrado',compact('url_img_perfil'));
         }
-
-    /*Adminsitracion-------------------------------------------------------*/
-    
-
-    
-
-    //
-    /*Rutas para Kardex---------------------------------------------------------------------*/
-    
-
-    
-
-    //
-    /*------------------Rutas para Examenes ET y ET-------------------------------------------*/
-    
-    
     
 
     /*Rutas para Administracion-------------------------------------------------------------*/

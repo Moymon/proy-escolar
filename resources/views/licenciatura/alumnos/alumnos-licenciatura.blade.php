@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @extends('modalAlumnos')
+@extends('subirFotoPerfil')
 
 @section('title', 'Dashboard')
 
@@ -46,7 +47,12 @@
         <div class="border border-5 p-3">
             <div class="row">
                 <div class="col-1">
-                    <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
+                    <div class="input-group">
+                        <img src="{{$url_img_perfil}}" class="img-fluid" alt="">
+                        <div class="container custom-image-css" data-toggle="modal" data-target="#modalSubirImagen">
+                            <label ><i class="fas fa-camera"></i></label>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-11">
                     <div class="row"> 
@@ -1169,6 +1175,7 @@
 @stop
 
 @section('css')
+    <link rel="stylesheet"  href="{{ asset('css/custom-file-image.css')}}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>        
         label{
@@ -1199,5 +1206,23 @@
                 },
             });
         });    
+</script>
+<script>
+    const $imagen = document.querySelector('#foto'), $imagenPreview = document.querySelector('#imagenPreview');
+
+    $imagen.addEventListener("change",() =>{
+        const archivo = $imagen.files;
+        /*Si no hay datos del archivo no hacemos nada*/
+        if (!archivo || !archivo.length) {
+            $imagen.src = "";
+            return;
+        }else{
+            /*Tomamos el primer archivo*/
+            const archivo1 = archivo[0];
+            const blobObject = URL.createObjectURL(archivo[0]);
+            $imagenPreview.src = blobObject;
+        }
+
+    });
 </script>
 @stop

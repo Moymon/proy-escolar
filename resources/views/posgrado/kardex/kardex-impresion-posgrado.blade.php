@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @extends('modalAlumnos')
-@extends('subirFotoPerfil');
+@extends('subirFotoPerfil')
 
 @section('title', 'Kardex')
 
@@ -25,14 +25,7 @@
         <div class="row">
             <div class="col-1">
                 <div class="input-group">
-                    <img src="{{'storage/assets/imagenes/perfil.png'}}" class="img-fluid" alt="">
-                    <div class="container custom-image-css">
-                         <input type="file" id="upImagen" accept="image/*" name="">
-                        <label for="upImagen" ><i class="fas fa-camera"></i></label>
-                    </div>
-                    <div class="">
-                        <button class="btn btn-info"><i class="fas fa-camera"data-toggle="modal" data-target="#modalSubirImagen"></i></button>
-                    </div>
+                    <img src="{{$url_img_perfil}}" class="img-fluid" alt="">
                 </div>
             </div>
             <div class="col-11">
@@ -294,7 +287,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet"  href="{{ asset('css/custom-file-image.css')}}" />
+    
 @stop
 
 @section('js')
