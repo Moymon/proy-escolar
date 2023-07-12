@@ -41,6 +41,8 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+//$app->register(Barryvdh\Snappy\LumenServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

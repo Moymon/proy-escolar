@@ -6,8 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "barryvdh/laravel-snappy": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "jeroennoten/laravel-adminlte": "^3.9",
+        "knplabs/knp-snappy": "^1.4",
         "laravel/fortify": "^1.17",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^3.0",

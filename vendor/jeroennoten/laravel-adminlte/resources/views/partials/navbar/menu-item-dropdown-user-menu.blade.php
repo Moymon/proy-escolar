@@ -2,7 +2,7 @@
 @php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )
 
 @if (config('adminlte.usermenu_profile_url', false))
-    @php( $profile_url = "#" )
+    @php( $profile_url = Auth::user()->adminlte_profile_url() )
 @endif
 
 @if (config('adminlte.use_route_url', false))
@@ -18,12 +18,12 @@
     {{-- User menu toggler --}}
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
         @if(config('adminlte.usermenu_image'))
-            <img src="https://picsum.photos/200/300"
+            <img src="{{ Auth::user()->adminlte_image() }}"
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
-        <span >
-            {{ Auth::user()->nombre }}
+        <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
+            {{ Auth::user()->name }}
         </span>
     </a>
 
@@ -35,14 +35,14 @@
             <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
                 @if(!config('adminlte.usermenu_image')) h-auto @endif">
                 @if(config('adminlte.usermenu_image'))
-                    <img src="https://picsum.photos/200/300"
+                    <img src="{{ Auth::user()->adminlte_image() }}"
                          class="img-circle elevation-2"
                          alt="{{ Auth::user()->name }}">
                 @endif
                 <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif">
-                    {{ Auth::user()->nombre }}
+                    {{ Auth::user()->name }}
                     @if(config('adminlte.usermenu_desc'))
-                        <small></small>
+                        <small>{{ Auth::user()->adminlte_desc() }}</small>
                     @endif
                 </p>
             </li>
@@ -73,7 +73,7 @@
                 <i class="fa fa-fw fa-power-off text-red"></i>
                 {{ __('adminlte::adminlte.log_out') }}
             </a>
-            <form id="logout-form" action="/cerrarsesion" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
                 @if(config('adminlte.logout_method'))
                     {{ method_field(config('adminlte.logout_method')) }}
                 @endif
