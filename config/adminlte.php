@@ -376,6 +376,7 @@ return [
             'icon'    => 'fas fa-home',
             'url'     => 'Inicio',
         ],
+        /****************************Licenciatura**********************************/
         [
             'text' => 'Licenciatura',
             'icon' => 'fas fa-book-reader',
@@ -465,6 +466,7 @@ return [
                 ],
             ],
         ],
+        /****************************Posgrado******************/
         [
             'text' => 'Posgrado',
             'icon' => 'fas fa-user-graduate',

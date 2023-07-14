@@ -55,27 +55,28 @@ Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);*/
 //Route::get('/usuarios',[sidebar::class,'usuarios']);
 //Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
 
-/*Permisos de rutas para el administrador*/
+/*Permisos de rutas para el administrador******************************************/
 Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
-    /*Permisos de solo lectura*/
+    /*Permisos de solo lectura*****************************************************/
     Route::group(['middleware' => ['permission:administrador.read']], function(){
-        /*Rutas de administracion*/
+        /*Rutas de administracion**************************************************/
         Route::get('/roles',[roles_permisos::class,'index_r']);
         Route::get('/permisos',[roles_permisos::class,'index_p']);
         Route::get('/administracion-index',[datosGenerales::class,'index']);
         Route::get('/usuarios',[sidebar::class,'usuarios']);
-        /*Rutas de examenes*/
+        /*Rutas de examenes********************************************************/
         Route::get('/ex_re',[sidebar::class,'examenes_regularizacion']);
         Route::get('/ex_t',[sidebar::class,'examenes_titulo']);
         Route::get('/list_ex',[sidebar::class,'listado_examenes']);
         Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);
         Route::get('/ordenes_pago',[sidebar::class,'ordenes_pago']);
         Route::get('/cap_ex_reg',[sidebar::class,'captura_ex_reg']);
-        /*Rutas para el kardex*/
+        /*Rutas para el kardex****************************************************/
         Route::get('/index_kardex_lic',[sidebar::class,'kardex_lic']);
         Route::get('/verificacion_kardex_lic',[sidebar::class,'verificacion_lic']);
         Route::get('/index_kardex_pos',[sidebar::class,'kardex_pos']);
-        /* Rutas Alumnos*/
+        Route::get('/verificacion_kardex_pos',[sidebar::class,'verificacion_pos']);
+        /* Rutas Alumnos************************************************************/
         Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
         Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
     });

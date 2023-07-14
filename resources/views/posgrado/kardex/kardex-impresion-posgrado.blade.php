@@ -45,7 +45,10 @@
                     </div>
                     <div class="col-3">
                         <label>Posgrado</label>
-                        <input type="text" class="form-control" id="grado" name="" value="Doctorado en Ingeniería Mecánica" disabled>   
+                        <select id="grado" class="form-control form-select">
+                            <option>Posgrado 1</option>
+                            <option>Posgrado 2</option>
+                        </select>
                     </div>
                     <div class="col-3">
                         <label class="form-label">Opción</label>

@@ -56,7 +56,7 @@ class sidebar extends Controller
             return view('licenciatura.procedimientos.menuprincipal');
         }
     
-        /*Posgrado-------------------------------------------------------------*/
+    /*Posgrado-------------------------------------------------------------*/
     
         /*Alumnos----------------------------------------------------------*/
         public function alumnos_posgrado(){
@@ -64,11 +64,18 @@ class sidebar extends Controller
             return view('posgrado.alumnos.alumnos_posgrado',compact('url_img_perfil'));
         }
 
-        /*kardex*/
+        /*kardex************************************************************/
         public function kardex_pos(){
             $url_img_perfil = 'storage/assets/imagenes/perfil.png';
             return view('posgrado.kardex.kardex-impresion-posgrado',compact('url_img_perfil'));
         }
+
+        public function verificacion_pos()
+        {
+            $url_img_perfil = 'storage/assets/imagenes/perfil.png';
+            return view('posgrado.kardex.kardex-verificacion-posgrado',compact('url_img_perfil'));
+        }
+
     
 
     /*Rutas para Administracion-------------------------------------------------------------*/
