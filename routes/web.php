@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\authwp;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\menu\sidebar;
-use App\Http\Controllers\authwp;
+use App\Http\Controllers\PDFs\PDFController;
 use App\Http\Controllers\usuarios\usuariosController;
 use App\Http\Controllers\administracion\datosGenerales;
+
+
 use App\Http\Controllers\rolesypermisos\roles_permisos;
-
-
 use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
 
 /*
@@ -79,6 +80,9 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         /* Rutas Alumnos************************************************************/
         Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
         Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
+		
+		/*Rutas PDFs */
+        Route::post('/print',[PDFController::class,'imprimeKardex'])->name('imprimeKardex');
     });
     /*Permisos de editar*/
     Route::group(['middleware' => ['permission:administrador.edit']], function(){

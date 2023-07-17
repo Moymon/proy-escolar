@@ -134,6 +134,10 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
             'Laravel\\Jetstream\\' => 18,
             'Laravel\\Fortify\\' => 16,
         ),
+        'K' => 
+        array (
+            'Knp\\Snappy\\' => 11,
+        ),
         'J' => 
         array (
             'JeroenNoten\\LaravelAdminLte\\' => 28,
@@ -185,6 +189,7 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'Barryvdh\\Snappy\\' => 16,
             'BaconQrCode\\' => 12,
         ),
         'A' => 
@@ -463,6 +468,10 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         array (
             0 => __DIR__ . '/..' . '/laravel/fortify/src',
         ),
+        'Knp\\Snappy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy',
+        ),
         'JeroenNoten\\LaravelAdminLte\\' => 
         array (
             0 => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src',
@@ -579,6 +588,10 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'Barryvdh\\Snappy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src',
+        ),
         'BaconQrCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
@@ -625,11 +638,13 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\PDFs\\PDFController' => __DIR__ . '/../..' . '/app/Http/Controllers/PDFs/PDFController.php',
         'App\\Http\\Controllers\\administracion\\datosGenerales' => __DIR__ . '/../..' . '/app/Http/Controllers/administracion/datosGenerales.php',
         'App\\Http\\Controllers\\alumnosController' => __DIR__ . '/../..' . '/app/Http/Controllers/alumnosController.php',
         'App\\Http\\Controllers\\authwp' => __DIR__ . '/../..' . '/app/Http/Controllers/authwp.php',
         'App\\Http\\Controllers\\inicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/inicioController.php',
         'App\\Http\\Controllers\\menu\\sidebar' => __DIR__ . '/../..' . '/app/Http/Controllers/menu/sidebar.php',
+        'App\\Http\\Controllers\\modelosPruebaCapExReg\\ExamenEjemplo' => __DIR__ . '/../..' . '/app/Http/Controllers/modelosPruebaCapExReg/ExamenEjemplo.php',
         'App\\Http\\Controllers\\rolesypermisos\\roles_permisos' => __DIR__ . '/../..' . '/app/Http/Controllers/rolesypermisos/roles_permisos.php',
         'App\\Http\\Controllers\\usuarios\\usuariosController' => __DIR__ . '/../..' . '/app/Http/Controllers/usuarios/usuariosController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -646,6 +661,11 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\administracion\\datosGenerales' => __DIR__ . '/../..' . '/app/Models/administracion/datosGenerales.php',
         'App\\Models\\alumno' => __DIR__ . '/../..' . '/app/Models/alumno.php',
+        'App\\Models\\modelosPruebaCapExReg\\CatMateria' => __DIR__ . '/../..' . '/app/Models/modelosPruebaCapExReg/CatMateria.php',
+        'App\\Models\\modelosPruebaCapExReg\\ExamenLic' => __DIR__ . '/../..' . '/app/Models/modelosPruebaCapExReg/ExamenLic.php',
+        'App\\Models\\modelosPruebaCapExReg\\Kardex' => __DIR__ . '/../..' . '/app/Models/modelosPruebaCapExReg/Kardex.php',
+        'App\\Models\\modelosPruebaCapExReg\\SinodalAseLic' => __DIR__ . '/../..' . '/app/Models/modelosPruebaCapExReg/SinodalAseLic.php',
+        'App\\Models\\modelosPruebaCapExReg\\alumno' => __DIR__ . '/../..' . '/app/Models/modelosPruebaCapExReg/alumno.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -716,6 +736,15 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         'BaconQrCode\\Renderer\\RendererStyle\\GradientType' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Renderer/RendererStyle/GradientType.php',
         'BaconQrCode\\Renderer\\RendererStyle\\RendererStyle' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Renderer/RendererStyle/RendererStyle.php',
         'BaconQrCode\\Writer' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Writer.php',
+        'Barryvdh\\Snappy\\Facades\\SnappyImage' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/Facades/SnappyImage.php',
+        'Barryvdh\\Snappy\\Facades\\SnappyPdf' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/Facades/SnappyPdf.php',
+        'Barryvdh\\Snappy\\IlluminateSnappyImage' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/IlluminateSnappyImage.php',
+        'Barryvdh\\Snappy\\IlluminateSnappyPdf' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/IlluminateSnappyPdf.php',
+        'Barryvdh\\Snappy\\ImageWrapper' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/ImageWrapper.php',
+        'Barryvdh\\Snappy\\LumenServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/LumenServiceProvider.php',
+        'Barryvdh\\Snappy\\PdfFaker' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfFaker.php',
+        'Barryvdh\\Snappy\\PdfWrapper' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/PdfWrapper.php',
+        'Barryvdh\\Snappy\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-snappy/src/ServiceProvider.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -843,6 +872,11 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         'DASPRiD\\Enum\\Exception\\UnserializeNotSupportedException' => __DIR__ . '/..' . '/dasprid/enum/src/Exception/UnserializeNotSupportedException.php',
         'DASPRiD\\Enum\\NullValue' => __DIR__ . '/..' . '/dasprid/enum/src/NullValue.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
+        'Database\\Factories\\modelosPruebaCapExReg\\AlumnoFactory' => __DIR__ . '/../..' . '/database/factories/modelosPruebaCapExReg/AlumnoFactory.php',
+        'Database\\Factories\\modelosPruebaCapExReg\\CatMateriaFactory' => __DIR__ . '/../..' . '/database/factories/modelosPruebaCapExReg/CatMateriaFactory.php',
+        'Database\\Factories\\modelosPruebaCapExReg\\ExamenLicFactory' => __DIR__ . '/../..' . '/database/factories/modelosPruebaCapExReg/ExamenLicFactory.php',
+        'Database\\Factories\\modelosPruebaCapExReg\\KardexFactory' => __DIR__ . '/../..' . '/database/factories/modelosPruebaCapExReg/KardexFactory.php',
+        'Database\\Factories\\modelosPruebaCapExReg\\SinodalAseLicFactory' => __DIR__ . '/../..' . '/database/factories/modelosPruebaCapExReg/SinodalAseLicFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\roles' => __DIR__ . '/../..' . '/database/seeders/roles.php',
         'Database\\Seeders\\usuarios' => __DIR__ . '/../..' . '/database/seeders/usuarios.php',
@@ -2964,6 +2998,11 @@ class ComposerStaticInitc6c994800e83d5f9ffc47ded1c46de53
         'JeroenNoten\\LaravelAdminLte\\View\\Components\\Widget\\ProfileWidget' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/View/Components/Widget/ProfileWidget.php',
         'JeroenNoten\\LaravelAdminLte\\View\\Components\\Widget\\Progress' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/View/Components/Widget/Progress.php',
         'JeroenNoten\\LaravelAdminLte\\View\\Components\\Widget\\SmallBox' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/View/Components/Widget/SmallBox.php',
+        'Knp\\Snappy\\AbstractGenerator' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/AbstractGenerator.php',
+        'Knp\\Snappy\\Exception\\FileAlreadyExistsException' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Exception/FileAlreadyExistsException.php',
+        'Knp\\Snappy\\GeneratorInterface' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/GeneratorInterface.php',
+        'Knp\\Snappy\\Image' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Image.php',
+        'Knp\\Snappy\\Pdf' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Pdf.php',
         'Laravel\\Fortify\\Actions\\AttemptToAuthenticate' => __DIR__ . '/..' . '/laravel/fortify/src/Actions/AttemptToAuthenticate.php',
         'Laravel\\Fortify\\Actions\\CompletePasswordReset' => __DIR__ . '/..' . '/laravel/fortify/src/Actions/CompletePasswordReset.php',
         'Laravel\\Fortify\\Actions\\ConfirmPassword' => __DIR__ . '/..' . '/laravel/fortify/src/Actions/ConfirmPassword.php',
