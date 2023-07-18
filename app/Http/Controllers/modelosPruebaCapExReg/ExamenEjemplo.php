@@ -6,16 +6,16 @@ use App\Models\modelosPruebaCapExReg\ExamenLic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\alumno;
+use App\Models\modelosPruebaCapExReg\Kardex;
 use Illuminate\Support\Facades\Response;
 
 class ExamenEjemplo extends Controller
 {
-    public function getTipoConsulta(Request $request){
-        //dd($request);
+    public function getFechas(Request $request){
         $request->validate([
             'ciclo_escolar' => 'required',
             'periodo' => 'required',
-            'tipoConsulta' => 'required',
         ]);
 
         // Obtén el valor de ciclo_escolar del formulario
@@ -35,53 +35,39 @@ class ExamenEjemplo extends Controller
             $fechaInicio = $anio.'-07-01';
             $fechaFin = $anio.'-12-31';
         } else {
-            // Maneja un número de período inválido o desconocido
-            // Puedes lanzar una excepción, redireccionar o mostrar un mensaje de error
-            // según la lógica de tu aplicación
+            return response()->json([
+                'error' => 'Consulta fallida',
+            ]);
         }
 
-        // Continúa con el procesamiento de los datos recibidos del formulario
-        // ...
-
-        // Ejemplo de uso de las fechas obtenidas
-        // Puedes almacenarlas en una base de datos, realizar cálculos, etc.
-        // Aquí simplemente las mostramos como ejemplo
-        //echo "Fecha de inicio: " . $fechaInicio . "<br>";
-        //echo "Fecha de fin: " . $fechaFin;
-
-        if($request->tipoConsulta == "fecha"){
-            $data = $this->getFechas($fechaInicio, $fechaFin, $request->periodo);
-        }else if("examen"){
-            $data = $this->getExamenes($fechaInicio, $fechaFin, $request->periodo);
-        }
+        $data = ExamenLic::whereBetween('fecha', [$fechaInicio, $fechaFin])->where('periodo', $request->periodo)->get('fecha');
 
         $response = [
-            'fecha' => $request,
+            'periodo' => $request->periodo,
             'data' => $data,
         ];
         
         return response()->json($response);
     }
 
-    public function getFechas($periodo1, $periodo2, $periodo)
-    {
-        $data = ExamenLic::whereBetween('fecha', [$periodo1, $periodo2])->where('periodo', $periodo)->get('fecha');
-
-        return $data;
-    }
-
-    public function getExamenes($periodo1, $periodo2, $periodo){
-        //$data = ExamenLic::whereBetween('fecha', [$request->periodo1, $request->periodo2])->get();
-
+    public function getExamenes(Request $request){
+        $request->validate([
+            'fechaForExam' => 'required',
+            'periodoForExam' => 'required'
+        ]);
+        
         $data = DB::table('examen_lic')
             ->join('cat_materia', 'examen_lic.cve_materia', '=', 'cat_materia.cve_materia')
             ->join('sinodal_ase_lic', 'examen_lic.folio_ase_lic', '=', 'sinodal_ase_lic.folio_ase_lic')
-            ->whereBetween('fecha', [$periodo1, $periodo2])
-            ->where('periodo', $periodo)
+            ->where('fecha', $request->fechaForExam)
+            ->where('periodo', $request->periodoForExam)
             ->get();
 
-        //dd($data);
-        return $data;
+            $response = [
+                'data' => $data,
+            ];
+            
+            return response()->json($response);
     }
 
 
@@ -100,6 +86,70 @@ class ExamenEjemplo extends Controller
             'data' => $data,
         ];
         
+        return response()->json($response);
+    }
+
+    public function updateCalificaciones(Request $request)
+    {
+        $claveCampo = $request->claveCampo;
+        $materiaCampo = $request->materiaCampo;
+    
+        $calificacionesArray = json_decode($request->datosCalificaciones, true);
+    
+        if (!is_array($calificacionesArray)) {
+            return response()->json([
+                'error' => 'Datos de calificaciones incorrectos',
+            ]);
+        }
+    
+        $datosAGuardar = []; // Array para almacenar los datos a guardar
+    
+        foreach ($calificacionesArray as $calificacion) {
+            $clave = $calificacion['clave'];
+            $valorCalificacion = $calificacion['calificacion'];
+    
+            $alumno = Alumno::where('cve_unica', $clave)->first();
+            if ($alumno == null) {
+                return response()->json([
+                    'error' => 'Datos erróneos de consulta',
+                ]);
+            }
+    
+            $kardex = Kardex::where('id_alumno', $alumno->id_alumno)
+                ->where('cve_materia', $claveCampo)
+                ->first();
+            if ($kardex == null) {
+                return response()->json([
+                    'error' => 'Datos erróneos de consulta',
+                ]);
+            }
+
+            $datosAGuardar[] = [
+                'kardex' => $kardex,
+                'valorCalificacion' => $valorCalificacion,
+            ];
+        }
+    
+        foreach ($datosAGuardar as $datos) {
+            $kardex = $datos['kardex'];
+            $valorCalificacion = $datos['valorCalificacion'];
+    
+            $kardex->calificacion = $valorCalificacion;
+            $kardex->save();
+        }
+    
+        $data = DB::table('alumno')
+            ->join('kardex_lic', 'alumno.id_alumno', '=', 'kardex_lic.id_alumno')
+            ->join('cat_materia', 'kardex_lic.cve_materia', '=', 'cat_materia.cve_materia')
+            ->where('kardex_lic.cve_materia', $request->claveCampo)
+            ->get();
+    
+        $response = [
+            'claveCampo_materia' => $request->claveCampo,
+            'nombreCampo_materia' => $request->materiaCampo,
+            'data' => $data,
+        ];
+    
         return response()->json($response);
     }
 }
