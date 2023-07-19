@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\authwp;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\menu\sidebar;
-use App\Http\Controllers\authwp;
+use App\Http\Controllers\PDFs\PDFController;
 use App\Http\Controllers\usuarios\usuariosController;
 use App\Http\Controllers\administracion\datosGenerales;
+
+
 use App\Http\Controllers\rolesypermisos\roles_permisos;
-
-
 use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
 
 /*
@@ -79,6 +80,9 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         /* Rutas Alumnos************************************************************/
         Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
         Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
+		
+		/*Rutas PDFs */
+        Route::post('/print',[PDFController::class,'imprimeKardex'])->name('imprimeKardex');
     });
     /*Permisos de editar*/
     Route::group(['middleware' => ['permission:administrador.edit']], function(){
@@ -103,8 +107,10 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
 
 
     /*Ejemplos obtencion de fechas y materias*/
-    Route::post('/get-dataCapturaCalificaciones',[ExamenEjemplo::class,'getTipoConsulta'])->name('getTipoConsulta');
+    Route::post('/get-fechas',[ExamenEjemplo::class,'getFechas'])->name('getFechas');
+    Route::post('/get-examenes',[ExamenEjemplo::class,'getExamenes'])->name('getExamenes');
     Route::post('/get-calificaciones',[ExamenEjemplo::class,'getCalificaciones'])->name('getCalificaciones');
+    Route::post('/update-calificaciones',[ExamenEjemplo::class,'updateCalificaciones'])->name('updateCalificaciones');
 });
 
 //Route::get('/roles',[roles_permisos::class,'index_r']);
