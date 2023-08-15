@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\modulos;
+use App\Models\catalogo_permiso;
+use DB;
 
 class roles_permisos extends Controller
 {
@@ -30,8 +33,9 @@ class roles_permisos extends Controller
     {
         //
         $permisos = Permission::all();
-
-        return view('administracion.roles_permisos.permisos-index',compact('permisos'));
+        $modulos  = modulos::all();
+        
+        return view('administracion.roles_permisos.permisos-index',compact('permisos','modulos'));
     }
 
     /**
@@ -50,7 +54,22 @@ class roles_permisos extends Controller
     public function create_p(Request $request)
     {
         //
+        /*
+        var_dump($request->nombre_permiso);
+        var_dump($request->id_modulo);
+        var_dump($request->descripcion);
+        */
+
+        $catalogo = new catalogo_permiso();
+
         Permission::create(['name'=>$request->nombre_permiso]);
+
+        $permiso = DB::table('permissions')->latest('id')->first();
+
+        //var_dump($permiso);
+
+        DB::insert('insert into ' . $catalogo->getTable() . '(id_permiso,id_modulo_c, descripcion) values (?,?,?) ' , [$permiso->id,$request->id_modulo, $request->descripcion] );
+
         return redirect('/permisos');
     }
 

@@ -46,7 +46,7 @@
 
 <!-----Modal Nuevo permiso------>
 <div class="modal fade" id="nuevoPermiso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Nuevo Permiso</h5>
@@ -60,16 +60,34 @@
                         <form method="post" action="/permisos-create">
                             @csrf
                             <div class="form-group"> 
-                                <div class="d-flex justify-content-around row">
-                                    <div class="col-12">
+                                <div class="d-flex justify-content-center row">
+                                    <div class="col-4">
                                         <label class="col-form-label">Nombre</label>
-                                        <input class="form-control" type="text" name="nombre_permiso">
+                                        <input class="form-control" type="text" name="nombre_permiso" required>
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="col-form-label">Modulo</label>
+                                        <select class="form-control form-select" name="id_modulo" required>
+                                            @foreach ($modulos as $modulo)
+                                                <option value="{{$modulo->id_modulo}}">{{$modulo->nombre}}</option>
+                                            @endforeach 
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button class="btn btn-primary" type="submit">Crear</button>
+                                <br>
+                                <div class="d-flex justify-content-center row">
+                                    <label>Descripcion del permiso:</label>
+                                    <div class="col-12">
+                                        <textarea class="form-control" name="descripcion" required></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="d-flex justify-content-end row">
+                                    <div class="">
+                                        <div class="col-3">
+                                            <button class="btn btn-primary" type="submit">Crear</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>    
