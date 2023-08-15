@@ -34,8 +34,12 @@ class roles_permisos extends Controller
         //
         $permisos = Permission::all();
         $modulos  = modulos::all();
+
+        $modulos_permisos = DB::table('catalogo_permiso')->join('permissions', 'catalogo_permiso.id_permiso','=','permissions.id')->join('modulo_catalogo','catalogo_permiso.id_modulo_c','=','modulo_catalogo.id_modulo')->select('permissions.id','permissions.name','modulo_catalogo.nombre','catalogo_permiso.descripcion')->get();
         
-        return view('administracion.roles_permisos.permisos-index',compact('permisos','modulos'));
+        var_dump($modulos_permisos);
+        
+        return view('administracion.roles_permisos.permisos-index',compact('permisos','modulos','modulos_permisos'));
     }
 
     /**
@@ -53,20 +57,11 @@ class roles_permisos extends Controller
 
     public function create_p(Request $request)
     {
-        //
-        /*
-        var_dump($request->nombre_permiso);
-        var_dump($request->id_modulo);
-        var_dump($request->descripcion);
-        */
-
         $catalogo = new catalogo_permiso();
 
         Permission::create(['name'=>$request->nombre_permiso]);
 
         $permiso = DB::table('permissions')->latest('id')->first();
-
-        //var_dump($permiso);
 
         DB::insert('insert into ' . $catalogo->getTable() . '(id_permiso,id_modulo_c, descripcion) values (?,?,?) ' , [$permiso->id,$request->id_modulo, $request->descripcion] );
 

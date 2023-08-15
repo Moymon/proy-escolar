@@ -26,8 +26,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Origen</th>
+                    <th>Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +35,28 @@
                     <tr>
                         <td>{{$permiso->id}}</td>
                         <td>{{$permiso->name}}</td>
-                        <td>{{$permiso->guard_name}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <br>
+        <table id="tabla_permisos" class="table table-bordered table-striped dataTable dtr-inline">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Permiso</th>
+                    <th>Catalogo</th>
+                    <th>Descripcion</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach ($modulos_permisos as $modulo_permiso)
+                    <tr>
+                        <td>{{$modulo_permiso->id}}</td>
+                        <td>{{$modulo_permiso->name}}</td>
+                        <td>{{$modulo_permiso->nombre}}</td>
+                        <td>{{$modulo_permiso->descripcion}}</td>
                     </tr>
                 @endforeach
             </tbody>
