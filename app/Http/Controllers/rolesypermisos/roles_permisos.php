@@ -35,9 +35,9 @@ class roles_permisos extends Controller
         $permisos = Permission::all();
         $modulos  = modulos::all();
 
-        $modulos_permisos = DB::table('catalogo_permiso')->join('permissions', 'catalogo_permiso.id_permiso','=','permissions.id')->join('modulo_catalogo','catalogo_permiso.id_modulo_c','=','modulo_catalogo.id_modulo')->select('permissions.id','permissions.name','modulo_catalogo.nombre','catalogo_permiso.descripcion')->get();
+        $modulos_permisos = DB::table('catalogo_permiso')->join('permissions', 'catalogo_permiso.id_permiso','=','permissions.id')->join('modulo_catalogo','catalogo_permiso.id_modulo_c','=','modulo_catalogo.id_modulo')->orderBy('modulo_catalogo.nombre','asc')->select('permissions.id','permissions.name','modulo_catalogo.nombre','catalogo_permiso.descripcion')->get();
         
-        var_dump($modulos_permisos);
+        /*var_dump($modulos_permisos);*/
         
         return view('administracion.roles_permisos.permisos-index',compact('permisos','modulos','modulos_permisos'));
     }
