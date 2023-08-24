@@ -35,7 +35,7 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-datos_generales" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Datos Generales</button>
       <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Contacto y Domicilio</button>
-      <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-academico" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedente Academico</button>
+      <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-academico" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedente Académico</button>
       <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-egreso" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Datos de Egreso</button>
     </div>
 </nav>
@@ -58,7 +58,7 @@
                     <div class="row"> 
                         <div class="col-2">
                             <div class="">
-                                <label for="clave_uaslp" class="form-label">Clave UASLP:</label>
+                                <label for="clave_uaslp" class="form-label">Clave UASLP</label>
                                 <input type="text" class="form-control" id="clave_uaslp">
                             </div>
                         </div>
@@ -127,9 +127,9 @@
             <div class="row">
                 
                 <div class="col-1">
-                    <label for="sexo" class="m-0 form-label">Genero</label>
+                    <label for="sexo" class="m-0 form-label">Género</label>
                     <select id="sexo" class="form-select form-control" aria-label="sexo">
-                        <option selected>sexo</option>
+                        <option selected>----</option>
                         <option value="1">Masculino</option>
                         <option value="2">Femenino</option>
                         <option value="3">Otro</option>
@@ -163,7 +163,7 @@
                     <input type="text" class="w-100 m-0 small form-control" id="afiliacion_imss">
                 </div>
                 <div class="col-2">
-                    <label for="fecha_imss" class="m-0 form-label">Fecha Afiliacion NNS</label>
+                    <label for="fecha_imss" class="m-0 form-label">Fecha de Afiliación NNS</label>
                     <input type="date" class="w-100 m-0 small form-control" id="fecha_imss">
                 </div>
                 <div class="col-2">
@@ -184,7 +184,7 @@
             <br>
             <div class="row">
                 <div class="col-2">
-                    <label>Habla alguna lengua indigena</label>
+                    <label>Habla alguna lengua indígena</label>
                     <div class="row">
                         <div class="col-4">
                             <select class="form-control form-select"> 
@@ -228,7 +228,7 @@
                     </select>
                 </div>
                 <div class="col-2">
-                    <label class="m-0 form-label">Telefono</label>
+                    <label class="m-0 form-label">Teléfono</label>
                     <input class="form-control" type="text" name="">
                 </div>
                 <div class="col-2">
@@ -472,12 +472,12 @@
                         <div class="col-4">
                             <label for="periodo_pasante_incio" class="m-0 form-label">Periodo</label>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="">
                                         <input type="number" class="mid form-control" id="periodo_pasante_incio" min="1900" max="2099" value="2020">
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="">
                                         <input type="number" class="mid form-control" id="periodo_pasante_fin" min="1900" max="2099" value="2021" >
                                     </div>    

@@ -39,11 +39,6 @@
                     </div>
                 </div>
                 <br>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-6 ">
-                        <button class="btn bg-dark form-control">Listar Fechas</button>    
-                    </div> 
-                </div>
                 <br>
                 <div class="row">
                     <div class="col-12">
@@ -75,12 +70,7 @@
                         </div>    
                     </div>
                 </div>
-                <wbr>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-6">
-                        <button class="btn bg-dark form-control">Listar Exámenes</button>
-                    </div>
-                </div> 
+                <br> 
             </div>
         </div>   
     </div>

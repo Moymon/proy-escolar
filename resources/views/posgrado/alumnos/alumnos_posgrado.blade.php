@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @extends('subirFotoPerfil')
+@extends('modalAlumnos')
 
 @section('title', 'Dashboard')
 
@@ -15,9 +16,6 @@
         <div class=" d-flex flex-row align-items-center justify-content-end">
             <div>
                 <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
-            </div>
-            <div>
-                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark"><i class="bi bi-plus"></i></button>
             </div>
         </div>
     </div>

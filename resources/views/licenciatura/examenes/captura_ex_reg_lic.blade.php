@@ -3,7 +3,7 @@
 @section('title', 'Listado de Exámenes')
 
 @section('content_header')
-    <h1>Captura de examenes a regularización</h1>
+    <h1>Captura de exámenes a regularización</h1>
 @stop
 
 @section('content')

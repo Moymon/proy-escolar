@@ -80,7 +80,8 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         /* Rutas Alumnos************************************************************/
         Route::get('/al_lic',[sidebar::class,'alumnos_licenciatura']);
         Route::get('/al_pos',[sidebar::class,'alumnos_posgrado']);
-		
+		/* Rutas Procedimientos*/
+        Route::get('/procedimientos',[sidebar::class,'procedimientos_archivos_constancias']);
 		/*Rutas PDFs */
         Route::post('/print',[PDFController::class,'imprimeKardex'])->name('imprimeKardex');
     });

@@ -413,7 +413,7 @@ return [
                     ],
                 ],
                 [
-                    'text'    => 'Examenes ET y ER',
+                    'text'    => 'Exámenes ET y ER',
                     'icon'    => 'fas fa-book',
                     'can'     => ['administrador','capturista'],
                     'classes' => 'ml-2',
