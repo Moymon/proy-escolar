@@ -25,7 +25,7 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-datos_generales" type="button" role="tab" aria-controls="nav-alumno" aria-selected="true">Datos Generales</button>
       <button class="nav-link" id="" data-bs-toggle="tab" data-bs-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-domicilio" aria-selected="true">Contacto y Domicilio</button>
-      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-antecedentes" type="button" role="tab" aria-controls="nav-licenciatura" aria-selected="false">Antecedentes Academicos</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-antecedentes" type="button" role="tab" aria-controls="nav-licenciatura" aria-selected="false">Antecedentes Académicos</button>
     </div>
 </nav>
 
@@ -101,7 +101,7 @@
                     </select>
                 </div>
                 <div class="col-2">
-                    <label for="sexo" class="m-0 form-label">Genero</label>
+                    <label for="sexo" class="m-0 form-label">Género</label>
                     <select id="sexo" class="form-select form-control" aria-label="sexo">
                         <option value="1">Masculino</option>
                         <option value="2">Femenino</option>
@@ -124,7 +124,7 @@
                     <input type="text" class="w-100 m-0 small form-control" id="afiliacion_imss">
                 </div>
                 <div class="col-2">
-                    <label for="fecha_imss" class="m-0 form-label">Fecha Afiliacion NNS</label>
+                    <label for="fecha_imss" class="m-0 form-label">Fecha Afiliación NNS</label>
                     <input type="date" class="w-100 m-0 small form-control" id="fecha_imss">
                 </div>
                 <div class="col-2">
@@ -132,7 +132,7 @@
                     <input type="text" name="archivo_nss" class="form-control" />
                 </div>
                 <div class="col-2">
-                    <label class="m-0">Habla alguna lengua indigena</label>
+                    <label class="m-0">Habla alguna lengua indígena</label>
                     <div class="row">
                         <div class="col-4">
                             <select class="form-control form-select"> 
@@ -200,7 +200,7 @@
                     </select>
                 </div>
                 <div class="col-2">
-                    <label class="m-0 form-label">Telefono</label>
+                    <label class="m-0 form-label">Teléfono</label>
                     <input class="form-control" type="text" name="">
                 </div>
                 <div class="col-2">
@@ -460,7 +460,7 @@
                             <th>Posgrado</th>
                             <th>Facultad</th>
                             <th>Universidad</th>
-                            <th>Edicion</th>
+                            <th>Edición</th>
                         </tr>
                     </thead>
                     <tbody>

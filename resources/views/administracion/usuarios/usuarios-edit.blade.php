@@ -24,11 +24,11 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                     <label>Nombre</label>
                     <input class="form-control" type="text" value="{{$usuario->nombre}}" disabled>
                 </div>
-                <div class="col-6">
+                <div class="col-1">
                     <label>RPE</label>
                     <input class="form-control" type="numer"  value="{{$usuario->rpe}}" disabled>
                 </div>

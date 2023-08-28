@@ -64,7 +64,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-center">
-                    <label><h3>Estadisticas</h3></label>
+                    <label><h3>Estadísticas</h3></label>
                 </div>
             </div>
             <div class="card-body">
