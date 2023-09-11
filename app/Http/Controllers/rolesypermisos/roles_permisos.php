@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\rolesypermisos;
 
 use App\Http\Controllers\Controller;
+use App\Models\modelosPruebaModulos\CatalogoPermiso;
+use App\Models\modelosPruebaModulos\Modulo;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -22,8 +24,11 @@ class roles_permisos extends Controller
         //
 
         $roles = Role::all();
+        $permisos = Permission::all();
+        $modulos = Modulo::all();
 
-        return view('administracion.roles_permisos.roles-index',compact('roles'));
+
+        return view('administracion.roles_permisos.roles-index',compact('roles', 'permisos', 'modulos'));
     }
 
     public function index_p()
@@ -42,7 +47,6 @@ class roles_permisos extends Controller
 
     public function create_r(Request $request)
     {
-        //
         Role::create(['name'=>$request->nombre_rol]);
         return redirect('/roles');
     }

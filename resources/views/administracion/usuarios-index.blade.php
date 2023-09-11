@@ -22,25 +22,23 @@
 @stop
 
 @section('js')
+
+Para inicializar el DataTable en esta tabla, puedes usar el siguiente código jQuery:
+
+html
+Copy code
+<!-- Agrega el enlace al archivo de DataTables -->
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 <script>
- $(document).ready(function (){
+    $(document).ready(function () {
+        // Inicializar el DataTable en la tabla con el id "tabla_usuarios"
         $('.table').DataTable({
-            language:{
-                "emptyTable" : "No hay información",
-                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "lengthMenu" : "Mostrar _MENU_ resultados",
-                "search"     : "Buscar",
-                "zeroRecords": "Resultados no encontrados",
-                "paginate":{
-                    "first"  :"Primero",
-                    "last"   :"Ultimo",
-                    "next"   :"Siguiente",
-                    "previous":"Anterior"
-                }
-            },
-            "autoWidth":false,
+            
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            }
         });
-    });    
+    });
 </script>
-    
 @stop

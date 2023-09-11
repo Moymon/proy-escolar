@@ -19,18 +19,20 @@ class roles extends Seeder
     {
         //
         /*Primero crear Roles*/
-        $rol_Admin =  Role::create(['name'=>'Administrador']);
-        $rol_Ventillas = Role::create(['name'=>'Ventanillas']);
-        
-
-        /*Segundo crear permisos*/
-        Permission::create(['name'=>'administrador'])->syncRoles([$rol_Admin]);
-        Permission::create(['name'=>'capturista'])->syncRoles([$rol_Ventillas]);
+        //$rol_Admin =  Role::create(['name'=>'Administrador']);
+        //$rol_Ventillas = Role::create(['name'=>'Ventanillas']);
+        //Role::where('name', $request->rol)->first();
+        $rol_Admin =  Role::where('name', 'Administrador')->first();
+        $rol_Ventillas = Role::where('name', 'Ventanillas')->first();
         
         /*Segundo crear permisos*/
-        Permission::create(['name'=>'administrador.update'])->syncRoles([$rol_Admin]);
-        Permission::create(['name'=>'administrador.edit'])->syncRoles([$rol_Admin]);
-        Permission::create(['name'=>'administrador.create'])->syncRoles([$rol_Admin]);
-        Permission::create(['name'=>'administrador.read'])->syncRoles([$rol_Admin]);
+        Permission::where('name', 'administrador')->first()->syncRoles([$rol_Admin]);
+        Permission::where('name', 'capturista')->first()->syncRoles([$rol_Ventillas]);
+        
+        /*Segundo crear permisos*/
+        Permission::where('name', 'administrador.update')->first()->syncRoles([$rol_Admin]);
+        Permission::where('name', 'administrador.edit')->first()->syncRoles([$rol_Admin]);
+        Permission::where('name', 'administrador.create')->first()->syncRoles([$rol_Admin]);
+        Permission::where('name', 'administrador.read')->first()->syncRoles([$rol_Admin]);
     }
 }

@@ -18,6 +18,8 @@ class Administracionuserindex extends Component
 
     public function render()
     {
+        $roles = Role::all();
+
         $users = User::where('nombre', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('rpe', 'LIKE', '%' . $this->search . '%')
                 ->paginate();
@@ -34,6 +36,6 @@ class Administracionuserindex extends Component
         }
         */
         
-        return view('livewire.administracionuserindex',compact('users'));
+        return view('livewire.administracionuserindex',compact('users', 'roles'));
     }
 }
