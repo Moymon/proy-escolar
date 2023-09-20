@@ -9,31 +9,40 @@
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
                         <th>Rol</th>
-                        <th>Permisos</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td>{{$user->rpe}}</td>
+                            <td><div >
+                                <a href="#" class="seleccionable" data-id="{{$user->id}}">{{$user->rpe}}</a></div> </td>
                             <td>{{$user->nombre}}</td>
                             <td>{{$user->apellido_pa}}</td>
                             <td>{{$user->apellido_ma}}</td>
-                            @foreach ($user->roles as $rol)
-                                <td>{{$rol->name}}</td>
+                            
                                 <td>
-                                @foreach ($rol->permissions as $permission)
-                                    <div class="badge badge-secondary">
-                                        <h6>{{$permission->name}}</h6>
-                                    </div> 
+                                @foreach ($user->roles as $rol)
+                                <div class="badge badge-secondary">
+                                   <h5>{{$rol->name}}</h5> 
+                                </div>
                                 @endforeach
                                 </td>
-                            @endforeach
-                            <td>
-                                <div class="input-group">
+                            <td  >
+                                <div class="input-group " >
+                                    <!--
                                     <div class="col-6">
                                         <a class="btn btn-info" href="{{route('catalogo.usuarios.edit',$user)}}"><i class="fas fa-pencil-alt"></i></a>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#actualizarRol" ><i class="fas fa-pencil-alt"></i></button>
+                                    </div> --->
+                                    <div class="col-6">
+                                        <div >
+                                            <button type="button" class="btn btn-info seleccionable" data-id="{{$user->id}}"><i class="fas fa-pencil-alt " ></i></button>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </td>
@@ -47,3 +56,62 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="actualizarRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cambiar de Roles</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form >
+                        <div class="form-group "> 
+                            <div class="d-flex justify-content-around row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Selecciona el rol</label>
+                                        <br>
+                                        <select class="form-control form-select buscar">
+                                            @foreach ($roles as $rol)
+                                                <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="p-2 w-100">
+                                    <div class="mb-2 w-100 d-flex flex-row align-items-center justify-content-between">
+                                        <h3>Roles asignados</h3>
+                                    </div>
+                                    <div style="max-height:50vh;overflow:auto;">
+                                        <div id="boxRolesAsignados" class="row permisosAsignados w-100 d-flex flex-row align-items-start justify-content-start">
+                                        </div>
+                                    </div>                   
+                                </div>
+                                <br>
+                                <div class="p-2 w-100">
+                                    <h3>Roles</h3>
+                                    <div style="max-height:50vh;overflow:auto;">
+                                        <div id="boxRolesNoAsignados" class="row permisosNoAsigandos w-100 d-flex flex-row align-items-start justify-content-start"> 
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button id="btnGuardarRoles" disabled type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+

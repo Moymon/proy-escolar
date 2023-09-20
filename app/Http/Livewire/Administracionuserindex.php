@@ -21,7 +21,7 @@ class Administracionuserindex extends Component
         $users = User::where('nombre', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('rpe', 'LIKE', '%' . $this->search . '%')
                 ->paginate();
-
+        $roles = Role::all();
         /*
         foreach($users as $user){
             var_dump($user->rpe);
@@ -34,6 +34,6 @@ class Administracionuserindex extends Component
         }
         */
         
-        return view('livewire.administracionuserindex',compact('users'));
+        return view('livewire.administracionuserindex',compact('users','roles'));
     }
 }

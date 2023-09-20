@@ -112,6 +112,11 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
     Route::post('/get-examenes',[ExamenEjemplo::class,'getExamenes'])->name('getExamenes');
     Route::post('/get-calificaciones',[ExamenEjemplo::class,'getCalificaciones'])->name('getCalificaciones');
     Route::post('/update-calificaciones',[ExamenEjemplo::class,'updateCalificaciones'])->name('updateCalificaciones');
+
+    Route::group(['middleware' => ['permission:administrador.update|administrador.create']], function(){
+        Route::post('/get-roles-nombre',[roles_permisos::class,'getRolesNombre'])->name('getRolesNombre');
+    });
+
 });
 
 //Route::get('/roles',[roles_permisos::class,'index_r']);
