@@ -99,9 +99,9 @@
                 const setRolesAsignados = new Set(this.rolesXUsuario_Asignados);
                 const setRolesOriginales = new Set(this.rolesXUsuario_Originales);
                 if (this.comparaListaDeRoles(setRolesAsignados, setRolesOriginales )) {
-                    btnGuardadoRoles.disabled = true;
+                    btnGuardarRoles.disabled = true;
                 } else {
-                    btnGuardadoRoles.disabled = false;
+                    btnGuardarRoles.disabled = false;
                 }
             }            
 
@@ -415,7 +415,6 @@
             if (event.target.classList.contains("rolDeSidebarSeleccionable")) {
                 event.preventDefault();
                 seleccionarRolDeSideBar(event.target);
-
             } else if(event.target.id === "btnConfirmarCambio"){
                 event.preventDefault();
                 const inputCambio = modalConfirmacionDeCambio.querySelector('#idRolConfirmarCambio');
@@ -435,12 +434,15 @@
                 event.preventDefault();
                 onclickModulo(event);
 
+            /*Quinto if para los movimientos de roles*/
             } else if(event.target.classList.contains("boxDeRol") || event.target.classList.contains("labeLBotonRol")){
                 event.preventDefault();
                 if(event.target.classList.contains("labeLBotonRol")){
-                    verificaClickBoxDeRol(event.target.parentElement);
+                    //verificaClickBoxDeRol(event.target.parentElement);
+                    verificaClickBox(event.target.parentElement);
                 }else{
-                    verificaClickBoxDeRol(event.target);
+                    //verificaClickBoxDeRol(event.target);
+                    verificaClickBox(event.target);
                 }
             }else if (event.target.id === "btnGuardadoPermisos"){
                 event.preventDefault();
@@ -474,19 +476,6 @@
         //***************************************************************************************************************************/
         //***************************************************************************************************************************/
         //***************************************************************************************************************************/
-        //Funcion para mostrar los permisos del rol seleccionado
-        function muestraPermisosRolSeleccionado() {
-            ui.limpiarHTML(boxPermisosAsignados);
-            ui.limpiarHTML(boxPermisosNoAsignados);
-
-            objectRol.listaPermisos.forEach(elementPermiso => {
-                let padreBotonRol = ui.creaBotonPermiso(`${elementPermiso.name}`);
-                const boxBotonDeRol = padreBotonRol.querySelector('.boxDeRol');
-
-                ui.verificaSiPermisoEstaAsignado(objectRol.permisosXRol_Asignados, objectRol.permisosXRol_NoAsignados, padreBotonRol, boxBotonDeRol, elementPermiso);
-            });
-            
-        }
 
         function muestraRolesUsuarioSeleccionado() {
             ui.limpiarHTML(boxRolesAsignados);
@@ -660,6 +649,55 @@
             }
         }
 
+        function mueveEnListas(nombre, isAsignados){
+            let newSelected = objectRol['newRolesSelected'];
+            let newDeleted = objectRol['newRolesDeleted'];
+
+            const sourceList = isAsignados ? 'rolesXUsuario_Asignados' : 'rolesXUsuario_NoAsignados';
+            const targetList = isAsignados ? 'rolesXUsuario_NoAsignados' : 'rolesXUsuario_Asignados';
+
+            const movido = objectRol[sourceList].find(rol => rol.name === nombre);
+
+            if (movido) {
+
+                //PRIMERA PARTE: 1°
+                const fuente = objectRol[sourceList];
+                const destino = objectRol[targetList];
+
+                //SEGUNDA PARTE: 2°
+                const backgroundColor = isAsignados ? 
+                (objectRol.rolesXUsuario_Originales.find(rol => rol.name === movido.name) ? ui.colorPermisoEliminado : ui.colorPermisoNoAsignado) : 
+                (objectRol.rolesXUsuario_Originales.find(rol => rol.name === movido.name) ? ui.colorPermisoAsignado : ui.colorPermisoNuevo);
+
+                const color = backgroundColor === ui.colorPermisoNoAsignado ? 'black' : 'white';
+                fuente.splice(fuente.indexOf(movido), 1);
+                destino.push(movido);
+
+                const permisoElement = document.getElementById(nombre);
+                permisoElement.style.backgroundColor = backgroundColor;
+                permisoElement.style.color = color;
+
+                //TERCERA PARTE: 3°
+                if(fuente === objectRol.rolesXUsuario_NoAsignados){
+                    if(objectRol.rolesXUsuario_Originales.find(rol => rol.name === movido.name) == null){
+                        newSelected.push(movido);
+                    }
+                    if(newDeleted.find(roles => roles.name === movido.name)){
+                        newDeleted.splice(newDeleted.indexOf(movido), 1);
+                    }
+                }else if(fuente === objectRol.rolesXUsuario_Asignados){
+                    if(objectRol.rolesXUsuario_Originales.find(rol => rol.name === movido.name) != null){
+                        newDeleted.push(movido);
+                    }
+                    if(newSelected.find(rol => rol.name === movido.name)){
+                        newSelected.splice(newSelected.indexOf(movido), 1);
+                    }
+                }
+
+                objectRol.asignaListaDeRoles(newSelected, newDeleted);
+            }
+        }
+
         // Función para verificar el click en el cuadro de rol en el sidebar
         function verificaClickBoxDeRol(element) {
             const $element = $(element);
@@ -672,6 +710,19 @@
             $element.attr('style', styleBackground);
 
             muevePermisoEnListas(element.id, isAsignados);
+        }
+
+        function verificaClickBox(element){
+            const $element = $(element);
+            const $contenedorPadre = $element.closest(".padreBotonRol");
+            const isAsignados = $element.closest(".permisosAsignados").length > 0;
+            const $contenedorDestino = isAsignados ? $(".permisosNoAsigandos") : $(".permisosAsignados");
+            const styleBackground = isAsignados ? 'background-color:'+ ui.colorPermisoNoAsignado +';color:black;' : 'background-color:'+ ui.colorPermisoAsignado + ';color:white;';
+
+            $contenedorPadre.appendTo($contenedorDestino);
+            $element.attr('style', styleBackground);
+
+            mueveEnListas(element.id, isAsignados);
         }
 
 
