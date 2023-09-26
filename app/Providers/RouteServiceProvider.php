@@ -44,9 +44,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('Inicio')
                 ->group(base_path('routes/inicio.php'));
 
-            Route::middleware('web')
-                ->prefix('procedimientos')
-                ->group(base_path('routes/procedimientos.php'));
         });
     }
 

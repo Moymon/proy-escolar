@@ -4,6 +4,7 @@ namespace App\Http\Controllers\menu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class sidebar extends Controller
 {
@@ -81,7 +82,8 @@ class sidebar extends Controller
     /*Rutas para Administracion-------------------------------------------------------------*/
     /*Funcion Index que mostrara los usuarios*/
     public function usuarios(){
-        return view('administracion.usuarios-index');
+        $roles = Role::all();
+        return view('administracion.usuarios-index',compact('roles'));
     }
 
 

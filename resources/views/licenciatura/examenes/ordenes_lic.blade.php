@@ -45,9 +45,10 @@
                     </div>
                     <br>
                     <div class="row d-flex justify-content-center">
+                        <!-----
                         <div class="col-6 ">
                             <button type="button" class="btn-sm bg-dark form-control">Listar Fechas</button>
-                        </div>
+                        </div> ----->
                     </div>
                     <br>
                     <div class="row">
@@ -77,9 +78,11 @@
                     </div>
                     <br>
                     <div class="row d-flex justify-content-center">
+                        <!------
                         <div class="col-6">
                             <button type="button" class="btn-sm bg-dark form-control">Listar Exámenes</button>
                         </div>
+                        ------>
                     </div>
                 </div>
             </div>
@@ -124,7 +127,7 @@
                         <div class="col-2">
                             <label>Clave de Materia</label>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-8">
                                     <input class="form-control" type="text" name="" disabled>
                                 </div>
                             </div>
@@ -132,7 +135,7 @@
                         <div class="col-3">
                             <label>Clave de Materia UASLP</label>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-8">
                                     <input class="form-control" type="text" name="" disabled>   
                                 </div>
                             </div>

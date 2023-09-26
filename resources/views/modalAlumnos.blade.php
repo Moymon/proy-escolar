@@ -14,20 +14,20 @@
                         <div class="form-group "> 
                             <div class="d-flex justify-content-around row">
                                 <div class="col-2">
-                                    <label class="col-form-label">Busqueda por</label>   
+                                    <label class="col-form-label">Búsqueda por</label>   
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
 
                                         <select class="form-control buscar">
                                             <option>Nombre</option>
-                                            <option>Clave Unica</option>
-                                            <option>Clave Ingenieria</option>
+                                            <option>Clave Única</option>
+                                            <option>Clave Ingeniería</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-5">
-                                    <input class="form-control buscar" type="text" name="var_buscar" placeholder="nombre/clave unica/clave ingenieria">
+                                    <input class="form-control buscar" type="text" name="var_buscar" placeholder="nombre/clave única/clave ingeniería">
                                 </div>
                                 <div class="col-2">
                                     <button class="btn btn-light"><i class="fas fa-search"></i></button>
@@ -39,7 +39,7 @@
                                         <thead>
                                             <tr>
                                                 <th>CVE. UASLP</th>
-                                                <th>CVE. Ingenieria</th>
+                                                <th>CVE. Ingeniería</th>
                                                 <th>Nombre</th>
                                                 <th>Carrera</th>
                                                 <th>Seleccionar</th>

@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
-use App\Models\modelosPruebaModulos\Modulo;
 use App\Models\modelosPruebaModulos\CatalogoPermiso;
+use App\Models\modulos;
+use App\Models\catalogo_permiso;
+use DB;
+use App\Models\User;
 
 class roles_permisos extends Controller
 {
@@ -36,8 +39,13 @@ class roles_permisos extends Controller
     {
         //
         $permisos = Permission::all();
+        $modulos  = modulos::all();
 
-        return view('administracion.roles_permisos.permisos-index',compact('permisos'));
+        $modulos_permisos = DB::table('catalogo_permiso')->join('permissions', 'catalogo_permiso.id_permiso','=','permissions.id')->join('modulo_catalogo','catalogo_permiso.id_modulo_c','=','modulo_catalogo.id_modulo')->orderBy('modulo_catalogo.nombre','asc')->select('permissions.id','permissions.name','modulo_catalogo.nombre','catalogo_permiso.descripcion')->get();
+        
+        /*var_dump($modulos_permisos);*/
+        
+        return view('administracion.roles_permisos.permisos-index',compact('permisos','modulos','modulos_permisos'));
     }
 
     /**
@@ -54,8 +62,14 @@ class roles_permisos extends Controller
 
     public function create_p(Request $request)
     {
-        //
+        $catalogo = new catalogo_permiso();
+
         Permission::create(['name'=>$request->nombre_permiso]);
+
+        $permiso = DB::table('permissions')->latest('id')->first();
+
+        DB::insert('insert into ' . $catalogo->getTable() . '(id_permiso,id_modulo_c, descripcion) values (?,?,?) ' , [$permiso->id,$request->id_modulo, $request->descripcion] );
+
         return redirect('/permisos');
     }
 
@@ -130,10 +144,6 @@ class roles_permisos extends Controller
         //
     }
 
-
-
-
-
     function getPermisosRelacionadosConNombre(Request $request){
         $request->validate([
             'nombre' => 'required|string'
@@ -154,6 +164,31 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
+    public function getRolesNombre(Request $request){
+
+        $roles = DB::table('model_has_roles')
+                ->join('users','model_has_roles.model_id','=','users.id')
+                ->join('roles','model_has_roles.role_id','=','roles.id')
+                ->where('users.id',$request->rol)
+                ->select('roles.id','roles.name')
+                ->get();
+
+        $rolesUserSeleccionado = $roles;
+        $rolesOriginalesXUser = $roles;
+        $rolesNoCoincidentes = $this->getRNoCoincidentes($roles);
+
+        $rolesAll = Role::all();
+
+        $response = [
+            'roles' => $rolesAll,
+            'rolesUserSeleccionado' => $rolesUserSeleccionado,
+            'rolesOriginalesUser' => $rolesOriginalesXUser,
+            'rolesNoCoincidentes' => $rolesNoCoincidentes,
+        ];
+
+        return response()->json($response);
+    }
+
     function getPermisosModuloConRol(Request $request){
         $request->validate([
             'modulo' => 'required|string'
@@ -166,7 +201,7 @@ class roles_permisos extends Controller
         ];
         
         return response()->json($response);
-    }
+    }    
 
     function guardarPermisos(Request $request){
         $request->validate([
@@ -183,6 +218,7 @@ class roles_permisos extends Controller
             $permisosIDs = array_column($permisosXRol_Asignados, 'id');
             $rol->syncPermissions($permisosIDs);
         }
+        
 
         $permisosRol = $rol->permissions;
         $permisosOriginalesXRol = $rol->permissions;
@@ -199,6 +235,29 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
+    function guardarRoles(Request $request){
+    
+        $user = User::find($request->rol);
+        
+        if($request->asignados > 0){
+            $role_s = $request->asignados;
+            $id_s = array_column($role_s,'id');
+            $user->syncRoles($id_s);
+        }else{
+            $user->syncRoles([]);
+        }
+
+
+        
+        $response = [
+            'data' => $request->rol,
+            'user' => $user,
+            'asignados' => $request->asignados,
+            'message' => 'Permisos actualizados correctamente',
+        ];
+    
+        return response()->json($response);
+    }
 
     function getPermisosModulo($modulo_name){
         $modulo = Modulo::where('nombre', $modulo_name)->first();
@@ -223,9 +282,7 @@ class roles_permisos extends Controller
         return $permisosNoCoincidentes;
     }
 
-
-
-
+    
     function getUsuariosXRol(Request $request){
         $rol = Role::where('name', $request->rol)->first();
         //$users = User::all();
@@ -240,6 +297,18 @@ class roles_permisos extends Controller
         ];
 
         return response()->json($response);
+    }
+
+
+    function getRNoCoincidentes($roles){
+        $rolesCompletos = Role::all();
+
+        /*Filtrar los roles que no se encuentren en los seleccionados*/
+        $rolesNoCoincidentes = $rolesCompletos->filter(function ($rol)
+            use ($roles) {
+                return !$roles->contains('name',$rol->name);
+            })->values()->all();
+        return $rolesNoCoincidentes;
     }
 
     function guardarUsuariosXRol(Request $request){

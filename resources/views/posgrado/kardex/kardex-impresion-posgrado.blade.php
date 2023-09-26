@@ -23,8 +23,8 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-1">
-                <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
+            <div class="col-1">
+                <img src="{{$url_img_perfil}}" class="img-fluid" alt="">
             </div>
             <div class="col-11">
                 <div class="row">
@@ -38,12 +38,15 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <label>Alumno: </label>
+                        <label>Alumno </label>
                         <input class="form-control" id="nombreAlumno" type="text" name="" value="Boix Salazar Julio Alberto" disabled>
                     </div>
                     <div class="col-3">
-                        <label>Grado</label>
-                        <input type="text" class="form-control" id="grado" name="" value="Doctorado en Ingeniería Mecánica" disabled>   
+                        <label>Posgrado</label>
+                        <select id="grado" class="form-control form-select">
+                            <option>Posgrado 1</option>
+                            <option>Posgrado 2</option>
+                        </select>   
                     </div>
                     <div class="col-3">
                         <label class="form-label">Opción</label>
@@ -61,14 +64,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-center">
-                    <label><h3>Estadisticas</h3></label>
+                    <label><h3>Estadísticas</h3></label>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
                         <div class="row d-flex justify-content-end">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="input-group">
                                     <label class="input-group-text" >Promedio General:</label>
                                     <input type="text" class="form-control" id="prom_general" value="8.57" readonly> 

@@ -134,6 +134,8 @@
                     </tr>
                 </tfoot>
             </table>
+            <br>
+            <br>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-outline-primary" type="button" tabindex="0">Generar Archivo</button>
             </div>
