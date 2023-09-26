@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Permission;
 use App\Models\modulos;
 use App\Models\catalogo_permiso;
 use DB;
+use App\Models\User;
 
 class roles_permisos extends Controller
 {
@@ -147,7 +148,7 @@ class roles_permisos extends Controller
                 ->where('users.id',$request->rol)
                 ->select('roles.id','roles.name')
                 ->get();
-                
+
         $rolesUserSeleccionado = $roles;
         $rolesOriginalesXUser = $roles;
         $rolesNoCoincidentes = $this->getRNoCoincidentes($roles);
@@ -209,8 +210,53 @@ class roles_permisos extends Controller
     
         return response()->json($response);
     }
-    
 
+
+    function guardarRoles(Request $request){
+        // Validar los datos de la solicitud
+        /*
+        $request->validate([
+            'rol' => 'required|string',
+            'permisosXRol_Asignados' => 'required',
+        ]);
+
+        $rol = Role::where('name', $request->rol)->first();
+
+        // Decodificar el JSON a un objeto de PHP
+        $permisosXRol_Asignados = $request->permisosXRol_Asignados;
+        $permisosIDs = array_column($permisosXRol_Asignados, 'id');
+        $rol->syncPermissions($permisosIDs);
+
+        $permisosRol = $rol->permissions;
+        $permisosOriginalesXRol = $rol->permissions;
+        $permisosNoCoincidentes = $this->getPermisosNoCoincidentes($rol->permissions);*/
+    
+        $user = User::find($request->rol);
+        
+        if($request->asignados > 0){
+            $role_s = $request->asignados;
+            $id_s = array_column($role_s,'id');
+
+            $user->syncRoles($id_s);
+        }else{
+            $user->syncRoles([]);
+        }
+
+
+        
+        $response = [
+            /*
+            'permisosRol' => $permisosRol,
+            'permisosOriginalesXRol' => $permisosOriginalesXRol,
+            'permisos_no_coincidentes' => $permisosNoCoincidentes,*/
+            'data' => $request->rol,
+            'user' => $user,
+            'asignados' => $request->asignados,
+            'message' => 'Permisos actualizados correctamente',
+        ];
+    
+        return response()->json($response);
+    }
 
 
     function getPermisosModulo($modulo_name){

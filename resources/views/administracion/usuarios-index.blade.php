@@ -2,7 +2,7 @@
 @extends('modalAlumnos')
 
 @section('title', 'Kardex')
-
+@section('plugins.Sweetalert2', true);
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
@@ -473,6 +473,16 @@
             }
         });
 
+        document.addEventListener("click", function (event){
+            if(event.target.id === "btnGuardarRoles"){
+                event.preventDefault();
+                $('#confirmarRol').modal('show');
+            }else if(event.target.id === "btnConfirmarRoles"){
+                event.preventDefault();
+                peticionAjaxGuardar();
+            }
+        });
+
         //***************************************************************************************************************************/
         //***************************************************************************************************************************/
         //***************************************************************************************************************************/
@@ -537,6 +547,55 @@
                 objectRol.actualizarPermisos(data.permisosRol, data.permisosOriginalesXRol, data.permisos_no_coincidentes);
                 muestraResultadosGuardado();
                 */
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+        }
+
+        // Función para realizar una petición AJAX para el guardado
+        function peticionAjaxGuardar() {
+            const endpoint = '{{ route('guardarRoles') }}'
+            const requestData = {
+                rol: objectRol.rol,
+                asignados: objectRol.rolesXUsuario_Asignados,
+            };
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la solicitud. Código de estado: " + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                //console.log(data);
+                $('#actualizarRol').modal('hide');
+                $('#confirmarRol').modal('hide');
+
+                Swal.fire({
+                    type: 'success',
+                    text: 'Cambios realizados',
+                    confirmButtonText: 'Ok',
+                }).then((result) => {
+                    window.location ='/usuarios';
+                });
+                /*
+                $('#permisosModal').modal('hide');
+                btnGuardadoPermisos.disabled = true;
+                ui.limpiarHTML(modalListaPermisos);
+                ui.limpiarHTML(modalListaPermisosEliminados);
+                objectRol.newPermissionsDeleted = [];
+                objectRol.newPermissionsSelected = [];
+                objectRol.actualizarPermisos(data.permisosRol, data.permisosOriginalesXRol, data.permisos_no_coincidentes);
+                muestraResultadosGuardado();*/
             })
             .catch(error => {
                 console.error("Error en la solicitud:", error);

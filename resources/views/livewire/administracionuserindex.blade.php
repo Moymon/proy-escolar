@@ -8,8 +8,7 @@
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
-                        <th>Rol</th>
-                        <th>Opciones</th>
+                        <th>Rol(es)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +39,7 @@
                                     </div> --->
                                     <div class="col-6">
                                         <div >
-                                            <button type="button" class="btn btn-info seleccionable" data-id="{{$user->id}}"><i class="fas fa-pencil-alt " ></i></button>
+                                            
                                         </div>
                                         
                                     </div>
@@ -72,17 +71,6 @@
                     <form >
                         <div class="form-group "> 
                             <div class="d-flex justify-content-around row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Selecciona el rol</label>
-                                        <br>
-                                        <select class="form-control form-select buscar">
-                                            @foreach ($roles as $rol)
-                                                <option value="{{$rol->id}}">{{$rol->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="p-2 w-100">
                                     <div class="mb-2 w-100 d-flex flex-row align-items-center justify-content-between">
                                         <h3>Roles asignados</h3>
@@ -114,4 +102,34 @@
     </div>
 </div>
 
-
+<div class="modal fade" id="confirmarRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form >
+                        <div class="form-group "> 
+                            <div class="d-flex justify-content-around row">
+                                <div class="p-2 w-100">
+                                    <h5>¿Seguro que deseas guardar los cambios?</h5>
+                                </div> 
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button id="btnConfirmarRoles" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
