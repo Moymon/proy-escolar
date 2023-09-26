@@ -117,9 +117,11 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
 
     /*Ejemplos de obtencion de permisos */
     Route::group(['middleware' => ['permission:administrador.update|administrador.create']], function(){
-        Route::post('/get-permisos-nombre',[PermisosYRoles::class,'getPermisosRelacionadosConNombre'])->name('getPermisosRelacionadosConNombre');
-        Route::post('/get-permisosConRol',[PermisosYRoles::class,'getPermisosModuloConRol'])->name('getPermisosModuloConRol');
-        Route::post('/save-permisos',[PermisosYRoles::class,'guardarPermisos'])->name('guardarPermisos');
+        Route::post('/get-permisos-nombre',[roles_permisos::class,'getPermisosRelacionadosConNombre'])->name('getPermisosRelacionadosConNombre');
+        Route::post('/get-permisosConRol',[roles_permisos::class,'getPermisosModuloConRol'])->name('getPermisosModuloConRol');
+        Route::post('/save-permisos',[roles_permisos::class,'guardarPermisos'])->name('guardarPermisos');
+        Route::post('/getUsuariosXRol',[roles_permisos::class,'getUsuariosXRol'])->name('getUsuariosXRol');
+        Route::post('/save-usuarios-rol', [roles_permisos::class,'guardarUsuariosXRol'])->name('guardarUsuariosXRol');
     });
 
 });
