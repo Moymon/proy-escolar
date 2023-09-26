@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\usuarios;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class usuariosController extends Controller
 {
@@ -62,9 +63,10 @@ class usuariosController extends Controller
         //
 
         $roles = Role::all();
+        $permisos = Permission::all();
 
         $usuario = User::where('id',$user)->first();
-        return view('administracion.usuarios.usuarios-edit',compact('usuario','roles'));
+        return view('administracion.usuarios.usuarios-edit',compact('usuario','roles', 'permisos'));
     }
 
     /**

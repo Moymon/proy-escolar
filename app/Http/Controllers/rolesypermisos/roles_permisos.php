@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\rolesypermisos;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use App\Models\modelosPruebaModulos\CatalogoPermiso;
 use App\Models\modulos;
 use App\Models\catalogo_permiso;
 use DB;
@@ -26,8 +28,11 @@ class roles_permisos extends Controller
         //
 
         $roles = Role::all();
+        $permisos = Permission::all();
+        $modulos = Modulo::all();
 
-        return view('administracion.roles_permisos.roles-index',compact('roles'));
+
+        return view('administracion.roles_permisos.roles-index',compact('roles', 'permisos', 'modulos'));
     }
 
     public function index_p()
@@ -51,7 +56,6 @@ class roles_permisos extends Controller
 
     public function create_r(Request $request)
     {
-        //
         Role::create(['name'=>$request->nombre_rol]);
         return redirect('/roles');
     }
@@ -140,6 +144,26 @@ class roles_permisos extends Controller
         //
     }
 
+    function getPermisosRelacionadosConNombre(Request $request){
+        $request->validate([
+            'nombre' => 'required|string'
+        ]);
+        $rol = Role::where('name', $request->nombre)->first();
+    
+        $permisosRolSeleccionado = $rol->permissions;
+        $permisosOriginalesXRol = $rol->permissions;
+        $permisosNoCoincidentes = $this->getPermisosNoCoincidentes($rol->permissions);
+    
+        $response = [
+            'rol' => $rol,
+            'permisosRolSeleccionado' => $permisosRolSeleccionado,
+            'permisosOriginalesXRol' => $permisosOriginalesXRol,
+            'permisos_no_coincidentes' => $permisosNoCoincidentes,
+        ];
+    
+        return response()->json($response);
+    }
+
     public function getRolesNombre(Request $request){
 
         $roles = DB::table('model_has_roles')
@@ -165,8 +189,6 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
-
-
     function getPermisosModuloConRol(Request $request){
         $request->validate([
             'modulo' => 'required|string'
@@ -179,22 +201,24 @@ class roles_permisos extends Controller
         ];
         
         return response()->json($response);
-    }
-
+    }    
 
     function guardarPermisos(Request $request){
-        // Validar los datos de la solicitud
         $request->validate([
             'rol' => 'required|string',
-            'permisosXRol_Asignados' => 'required',
         ]);
 
         $rol = Role::where('name', $request->rol)->first();
 
-        // Decodificar el JSON a un objeto de PHP
         $permisosXRol_Asignados = $request->permisosXRol_Asignados;
-        $permisosIDs = array_column($permisosXRol_Asignados, 'id');
-        $rol->syncPermissions($permisosIDs);
+
+        if (empty($permisosXRol_Asignados)) {
+            $rol->syncPermissions([]);
+        } else {
+            $permisosIDs = array_column($permisosXRol_Asignados, 'id');
+            $rol->syncPermissions($permisosIDs);
+        }
+        
 
         $permisosRol = $rol->permissions;
         $permisosOriginalesXRol = $rol->permissions;
@@ -211,32 +235,13 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
-
     function guardarRoles(Request $request){
-        // Validar los datos de la solicitud
-        /*
-        $request->validate([
-            'rol' => 'required|string',
-            'permisosXRol_Asignados' => 'required',
-        ]);
-
-        $rol = Role::where('name', $request->rol)->first();
-
-        // Decodificar el JSON a un objeto de PHP
-        $permisosXRol_Asignados = $request->permisosXRol_Asignados;
-        $permisosIDs = array_column($permisosXRol_Asignados, 'id');
-        $rol->syncPermissions($permisosIDs);
-
-        $permisosRol = $rol->permissions;
-        $permisosOriginalesXRol = $rol->permissions;
-        $permisosNoCoincidentes = $this->getPermisosNoCoincidentes($rol->permissions);*/
     
         $user = User::find($request->rol);
         
         if($request->asignados > 0){
             $role_s = $request->asignados;
             $id_s = array_column($role_s,'id');
-
             $user->syncRoles($id_s);
         }else{
             $user->syncRoles([]);
@@ -245,10 +250,6 @@ class roles_permisos extends Controller
 
         
         $response = [
-            /*
-            'permisosRol' => $permisosRol,
-            'permisosOriginalesXRol' => $permisosOriginalesXRol,
-            'permisos_no_coincidentes' => $permisosNoCoincidentes,*/
             'data' => $request->rol,
             'user' => $user,
             'asignados' => $request->asignados,
@@ -257,7 +258,6 @@ class roles_permisos extends Controller
     
         return response()->json($response);
     }
-
 
     function getPermisosModulo($modulo_name){
         $modulo = Modulo::where('nombre', $modulo_name)->first();
@@ -282,6 +282,24 @@ class roles_permisos extends Controller
         return $permisosNoCoincidentes;
     }
 
+    
+    function getUsuariosXRol(Request $request){
+        $rol = Role::where('name', $request->rol)->first();
+        //$users = User::all();
+
+
+        //$usersXRol = $rol->users;
+
+        $response = [
+            //'users' => $users,
+            //'usersXRol' => $usersXRol,
+            'message' => 'response',
+        ];
+
+        return response()->json($response);
+    }
+
+
     function getRNoCoincidentes($roles){
         $rolesCompletos = Role::all();
 
@@ -291,5 +309,33 @@ class roles_permisos extends Controller
                 return !$roles->contains('name',$rol->name);
             })->values()->all();
         return $rolesNoCoincidentes;
+    }
+
+    function guardarUsuariosXRol(Request $request){
+        $request->validate([
+            'rol' => 'required|string',
+            'listaDeUsuariosAdded' => 'required',
+        ]);
+        
+        /*
+        $rol = Role::where('name', $request->rol)->first();
+        
+        $usersToAssignRole = User::whereIn('nombre', $request->listaDeUsuariosAdded)->get();
+        
+        $usersToAssignRole->each(function ($user) use ($rol) {
+            $user->syncRoles([$rol->name]);
+        });
+        
+        $usersNotWithRole = User::whereNotIn('nombre', $request->listaDeUsuariosAdded)->get();
+        $usersNotWithRole->each(function ($user) use ($rol) {
+            $user->removeRole($rol->name);
+        });
+        */
+        
+        $response = [
+            'message' => 'Asignacion correcta',
+        ];
+    
+        return response()->json($response);
     }
 }

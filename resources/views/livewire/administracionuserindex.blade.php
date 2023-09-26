@@ -1,6 +1,9 @@
 <div>
     <div class="card">
         <div class="card-body">
+            <div class="d-flex align-items-center justify-content-end">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Agregar usuario</button>
+            </div>
             <table id="tabla_usuarios" class="table table-striped">
                 <thead>
                     <tr>
@@ -49,9 +52,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="card-footer">
-            {{$users->links()}}
         </div>
     </div>
 </div>

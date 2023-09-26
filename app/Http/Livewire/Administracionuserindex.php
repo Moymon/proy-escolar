@@ -18,22 +18,12 @@ class Administracionuserindex extends Component
 
     public function render()
     {
+        $roles = Role::all();
+
         $users = User::where('nombre', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('rpe', 'LIKE', '%' . $this->search . '%')
                 ->paginate();
         $roles = Role::all();
-        /*
-        foreach($users as $user){
-            var_dump($user->rpe);
-            foreach($user->roles as $rol){
-                var_dump($rol->name);
-                foreach($rol->permissions as $permission){
-                    var_dump($permission->name);
-                }
-            }
-        }
-        */
-        
-        return view('livewire.administracionuserindex',compact('users','roles'));
+        return view('livewire.administracionuserindex',compact('users', 'roles'));
     }
 }

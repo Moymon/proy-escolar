@@ -10,6 +10,8 @@ use App\Http\Controllers\administracion\datosGenerales;
 
 use App\Http\Controllers\rolesypermisos\roles_permisos;
 use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
+use App\Http\Controllers\modelosPruebaCapExReg\CreacionDeUsuarios;
+use App\Http\Controllers\modelosPruebaCapExReg\PermisosYRoles;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,8 +94,11 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
     });
     /*Permisos de crear*/
     Route::group(['middleware' => ['permission:administrador.create']], function(){
-        Route::post('/roles-create',[roles_permisos::class,'create_r']);
+        Route::post('/roles-create',[roles_permisos::class,'create_r'])->name("crearRoles");
         Route::post('/permisos-create',[roles_permisos::class,'create_p']);
+
+        //Ejemplo creacion de usuario
+        Route::post('/create-users', [CreacionDeUsuarios::class, 'createUsers'])->name('createUsers');
     });
     /*Permisos de actualizar*/
     Route::group(['middleware' => ['permission:administrador.update']], function(){
@@ -105,8 +110,6 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
         Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
     });
 
-
-
     /*Ejemplos obtencion de fechas y materias*/
     Route::post('/get-fechas',[ExamenEjemplo::class,'getFechas'])->name('getFechas');
     Route::post('/get-examenes',[ExamenEjemplo::class,'getExamenes'])->name('getExamenes');
@@ -114,10 +117,19 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
     Route::post('/update-calificaciones',[ExamenEjemplo::class,'updateCalificaciones'])->name('updateCalificaciones');
 
 
+    /*Ejemplos de obtencion de permisos */
+    Route::group(['middleware' => ['permission:administrador.update|administrador.create']], function(){
+        Route::post('/get-permisos-nombre',[roles_permisos::class,'getPermisosRelacionadosConNombre'])->name('getPermisosRelacionadosConNombre');
+        Route::post('/get-permisosConRol',[roles_permisos::class,'getPermisosModuloConRol'])->name('getPermisosModuloConRol');
+        Route::post('/save-permisos',[roles_permisos::class,'guardarPermisos'])->name('guardarPermisos');
+        Route::post('/getUsuariosXRol',[roles_permisos::class,'getUsuariosXRol'])->name('getUsuariosXRol');
+        Route::post('/save-usuarios-rol', [roles_permisos::class,'guardarUsuariosXRol'])->name('guardarUsuariosXRol')
+
 
     Route::group(['middleware' => ['permission:administrador.update|administrador.create']], function(){
         Route::post('/get-roles-nombre',[roles_permisos::class,'getRolesNombre'])->name('getRolesNombre');
         Route::post('/update-roles',[roles_permisos::class,'guardarRoles'])->name('guardarRoles');
+
     });
 
 });
