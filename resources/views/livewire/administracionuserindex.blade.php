@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-end">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Agregar usuario</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuario" ><i class="fas fa-user-plus"> </i> </button>
             </div>
             <table id="tabla_usuarios" class="table table-striped">
                 <thead>
@@ -128,6 +128,38 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button id="btnConfirmarRoles" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="nuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ingresa los datos para el nuevo usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form >
+                        <div class="form-group "> 
+                            <div class="d-flex justify-content-around row">
+                                <div class="p-2 w-100">
+                                    <h5>¿Seguro que deseas guardar los cambios?</h5>
+                                </div> 
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button id="btnGuardarUsuario" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
         </div>
