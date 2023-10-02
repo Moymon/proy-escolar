@@ -32,23 +32,24 @@ export class UI {
     creaBotonUsuario(users, usersXRol, listaDeUsuarios) {
         
         // Itera sobre la lista de usuarios
-        for (let usuario of users) {     
+        for (let usuario of users) {  
+
             let generalBtnUsuarios = this.createElementHTML('div', '', 'col-3', 'generalBtnUsuarios', '');
             generalBtnUsuarios.setAttribute('data-id', `${usuario.nombre}`);
-            let padreBtnUsuarios = this.createElementHTML('div', 'background-color:rgb(242, 242, 242);', 'mr-1 mb-2 px-2 py-1 d-flex flex-row border rounded', 'padreBtnUsuarios', '');
-            let label = this.createElementHTML('label', '', 'container m-0', 'labelbtnUsuarios', usuario.nombre);
-            let input = this.createElementHTML('input', '', '', '', '');
+            let padreBtnUsuarios = this.createElementHTML('div', 'background-color:rgb(242, 242, 242);', 'checkbox-wrapper-1 mr-1 mb-2 px-2 py-1 d-flex flex-row border rounded', 'padreBtnUsuarios', '');
+
+            let input = this.createElementHTML('input', '', 'substituted', usuario.nombre, '');
             input.setAttribute('type', 'checkbox');
+
+            let label = this.createElementHTML('label', '', 'm-0', 'labelbtnUsuarios', usuario.nombre);
+            label.setAttribute('for', usuario.nombre);
 
             // Verifica si el usuario está en la lista de usuarios con el rol
             if (usersXRol.find(user => user.id === usuario.id)) {
                 input.setAttribute('checked', 'checked'); // Establece el atributo 'checked'
             }
 
-            let span = this.createElementHTML('span', '', 'checkmark', 'spanBtnUsuarios', '');
-
-            label.appendChild(input);
-            label.appendChild(span);
+            padreBtnUsuarios.appendChild(input);
             padreBtnUsuarios.appendChild(label);
             generalBtnUsuarios.appendChild(padreBtnUsuarios);
 
@@ -61,7 +62,7 @@ export class UI {
         if(listaDePermisos.length){
             for (const numeroPermiso in listaDePermisos) {
                 const permiso = listaDePermisos[numeroPermiso];
-    
+                //Jorge D. R.M.
                 const padrePermiso = this.createElementHTML('div', '', 'col-4', '', '');
                 const boxPermiso = this.createElementHTML('div', 'background-color:' + this.colorPermisoNoAsignado + ';color:black;', 'text-center mr-2 mb-2 rounded border', permiso.name, permiso.name);
     

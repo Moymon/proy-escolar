@@ -44,7 +44,7 @@ export class Permisos extends Rol{
 
         //Estas variables me permitiran mostrar los permisos que seran guardados o eliminados en un modal
         this.newPermissionsSelected = []; //Guardara momentaneamente los permisos que se moveran a los Asigandos
-        this.newPermissionsDeleted = []; ////Guardara momentaneamente los permisos que se moveran a los Eliminados
+        this.newPermissionsDeleted = []; //Guardara momentaneamente los permisos que se moveran a los Eliminados
     }
 
     //Funcion para guardar los permisos que van siendo movidos y comprobar las listas de los asignados con los originales para deshabilitar el boton de guardado
@@ -53,6 +53,7 @@ export class Permisos extends Rol{
         this.newPermissionsDeleted = newPermissionsDeleted;
     
         //console.log(permisosAsignados);
+        //Jorge D. R.M.
         // Crear conjuntos a partir de las listas, esto para hacer mas rapido la comparacion
         const setPermisosAsignados = new Set(this.permisosXRol_Asignados);
         const setPermisosOriginales = new Set(this.permisosXRol_Originales);
@@ -68,8 +69,6 @@ export class Permisos extends Rol{
         let permisoMovido;
             
         if (setAsignados.size !== setOriginales.size) {
-            //console.log(setAsignados.size + " setAsigandos");
-            //console.log(setOriginales.size + " setOriginales");
             return false;
         }
     
@@ -150,4 +149,3 @@ export function peticionAjaxAplication(route, requestData) {
         xhr.send(JSON.stringify(requestData));
     });
 }
-

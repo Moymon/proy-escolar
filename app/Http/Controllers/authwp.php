@@ -16,11 +16,12 @@ class authwp extends Controller
     //
     public function login_without_password(Request $request){
         $usuario = User::where('rpe',$request->rpe)->first();
-        /*Auth::login($usuario);
-        return redirect('/Inicio');*/
+        Auth::login($usuario);
+        return redirect('/Inicio');
         
         
         //$usuario = User::where('rpe',$request->rpe)->first();
+        /*
         $datosG = datosGenModel::find(1);
 
         if( Crypt::decrypt($datosG->master) == $request->password && $usuario !== NULL ){
@@ -34,7 +35,7 @@ class authwp extends Controller
             }
         }
         return redirect('/login');
-
+        */
         /*if(Auth::login($usuario)){
             return redirect('/Inicio');
         }else{

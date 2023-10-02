@@ -28,13 +28,13 @@ class roles extends Seeder
         User::where('nombre', 'Super Usuario')->first()->syncRoles(['Administrador']);
 
         /*Segundo crear permisos*/
-        Permission::where('name', 'administrador')->first()->syncRoles([$rol_Admin]);
-        Permission::where('name', 'capturista')->first()->syncRoles([$rol_Ventillas]);
+        //Permission::where('name', 'administrador')->first()->syncRoles([$rol_Admin]);
+        //Permission::where('name', 'capturista')->first()->syncRoles([$rol_Ventillas]);
         
         /*Segundo crear permisos*/
-        Permission::where('name', 'administrador.update')->first()->syncRoles([$rol_Admin]);
-        Permission::where('name', 'administrador.edit')->first()->syncRoles([$rol_Admin]);
-        Permission::where('name', 'administrador.create')->first()->syncRoles([$rol_Admin]);
-        Permission::where('name', 'administrador.read')->first()->syncRoles([$rol_Admin]);
+        //Permission::where('name', 'administrador.update')->first()->syncRoles([$rol_Admin]);
+        //Permission::where('name', 'administrador.edit')->first()->syncRoles([$rol_Admin]);
+        //Permission::where('name', 'administrador.create')->first()->syncRoles([$rol_Admin]);
+        //Permission::where('name', 'administrador.read')->first()->syncRoles([$rol_Admin]);
     }
 }
