@@ -13,10 +13,7 @@
         </div>
     </div>
 
-    <!--
-    vite(['resources/css/Administracion/rolesYPermisos.css'])
-    -->
-    <link rel="stylesheet" href="{{asset('/css/Administracion/Roles/rolesYPermisos.css')}}">
+    @vite(['resources/css/Administracion/rolesYPermisos.css'])
 @stop
 
 @section('content')
@@ -41,19 +38,19 @@
                 </thead>
                 <tbody>
 
-                    foreach ($roles as $rol)
+                    @foreach ($roles as $rol)
                         <tr>
-                            <td>{$rol->id}}</td>
-                            <td>{$rol->name}}</td>
-                            <td>{$rol->guard_name}}</td>
+                            <td>{{$rol->id}}</td>
+                            <td>{{$rol->name}}</td>
+                            <td>{{$rol->guard_name}}</td>
                             <td>
-                                foreach ($rol->permissions as $permission)
-                                    <div class="badge badge-secondary"><h6>{$permission->name}}</h6></div>
-                                endforeach
+                                @foreach ($rol->permissions as $permission)
+                                    <div class="badge badge-secondary"><h6>{{$permission->name}}</h6></div>
+                                @endforeach
                             </td>
-                            <td width="10px">Ver...<a href="/roles-edit/{$rol->id}}"><i class="fas fa-list"></i></a></td>
+                            <td width="10px">Ver...<a href="/roles-edit/{{$rol->id}}"><i class="fas fa-list"></i></a></td>
                         </tr>
-                    endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -151,7 +148,7 @@
                                 </div>
                             </div>
 
-                            <div id="boxIndices" class="p-2 w-100 d-flex flex-column">
+                            <div class="p-2 w-100 d-flex flex-column">
                                 <h5 class="fs-5">Indice permisos:</h5>
                                 <div class="w-100 d-flex flex-row align-items-center justify-content-start">
                                     <div class="d-flex flex-row mr-3 align-items-center justify-content-center">
@@ -173,7 +170,7 @@
                                 </div>
                             </div>
 
-                            <div id="contentRolSeleccionadoPermisos" class="w-100 h-100">
+                            <div id="contentRolSeleccionado" class="w-100 h-100">
                                 <div class="p-2 w-100">
                                     <div class="mb-2 w-100 d-flex flex-row align-items-center justify-content-between">
                                         <h3>Permisos asignados</h3>
@@ -215,15 +212,13 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalPermisosLabel">Permisos a guardar: <span class="text-center" id="modalTituloRol"></span></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <h5 class="modal-title" id="modalPermisosLabel">Permisos a guardar: <span class="text-center" id="modalTituloRol"></span></h5>
+            <button type="" class="rounded px-2" data-dismiss="modal" aria-label="Close"><i class='fa fa-times'></i></button>
             </div>
             <div id="modalPermisosBody" class="modal-body">
                 <div class="w-100 d-flex flex-column">
-                    <h5 class="text-center mb-4">¿Estas seguro que quieres asignar los siguientes permisos al rol : <span class="text-center" id="modalSubTituloRol"></span>?</h5>
-
+                    <h5>¿Estas seguro que quieres asignar los siguientes permisos al rol : <span class="text-center" id="modalSubTituloRol"></span>?</h5>
+                    <hr class="m-0 mb-2">
                     <h3 class="text-center mb-1">Permisos por agregar</h3>
                     <div id="modalListaPermisos" class="row w-100 m-0">
 
@@ -243,21 +238,21 @@
         </div>
     </div>
 
-    <!--Modal Confirmar cambio de Rol-->
+    <!-- Modal Confirmar cambio de Rol-->
     <div class="modal fade" id="confirmacionDeCambio" tabindex="-1" aria-labelledby="modalConfirmarCambioDeRoL" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                
-                <div id="modalPermisosBody" class="modal-body">
-                    <h5 class="text-center">¿Estás seguro de que quieres continuar sin guardar los cambios?</h5>
-                    <div class="w-100 d-flex flex-row align-items-center justify-content-center">
-                        <button id="btnConfirmarCambio" type="button" class="mr-1 btn btn-secondary" data-dismiss="modal">Continuar</button>
-                        <button id="permanecerEnRol" type="button" class="ml-1 btn btn-primary" data-dismiss="modal">Permanecer en este rol</button>
-                    </div>
-
-                    <input type="hidden" style="display:none;" id="idRolConfirmarCambio">
+        <div class="modal-content">
+            
+            <div id="modalPermisosBody" class="modal-body">
+                <h5 class="text-center">¿Estás seguro de que quieres continuar sin guardar los cambios?</h5>
+                <div class="w-100 d-flex flex-row align-items-center justify-content-center">
+                    <button id="btnConfirmarCambio" type="button" class="mr-1 btn btn-secondary" data-dismiss="modal">Continuar</button>
+                    <button id="permanecerEnRol" type="button" class="ml-1 btn btn-primary" data-dismiss="modal">Permanecer en este rol</button>
                 </div>
+
+                <input type="hidden" style="display:none;" id="idRolConfirmarCambio">
             </div>
+        </div>
         </div>
     </div>
 
@@ -265,43 +260,45 @@
     <div class="modal fade" id="nuevoRol" tabindex="-1" role="dialog" aria-labelledby="modalNuevoRol" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo rol</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Rol</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
+            </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{route("crearRoles")}}">
-                        @csrf
-                        <div class="form-group"> 
-                            <div class="d-flex justify-content-around row">
-                                <div class="col-12">
-                                    <label class="col-form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="nombre_rol">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST" action="{{route("crearRoles")}}">
+                                @csrf
+                                <div class="form-group"> 
+                                    <div class="d-flex justify-content-around row">
+                                        <div class="col-12">
+                                            <label class="col-form-label">Nombre</label>
+                                            <input class="form-control" type="text" name="nombre_rol">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button id="botonCrearRol" class="btn btn-primary" type="submit">Crear</button>
+                                    </div>
+                                </div>
+                            </form>    
                         </div>
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-end">
-                                <button id="botonCrearRol" class="btn btn-primary" type="submit">Crear</button>
-                            </div>
-                        </div>
-                    </form>    
+                    </div>
                 </div>
             </div>
         </div>
     </div> 
   
-    <!--Modal Agregar Usuario-->
+    <!-- Modal -->
     <div class="modal fade" id="modalAsignaRolAUsuario" tabindex="-1" aria-labelledby="modalAsignaRolAUsuarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalAsignaRolAUsuarioTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="w-100">
@@ -329,17 +326,14 @@
         </div>
     </div>
     
-    <!--
-    vite(['resources/js/Administracion/Roles/rolesYPermisos.js'])
-    -->
-
-    <script type="module" src="{{asset('js/Administracion/Roles/rolesYPermisos.js') }}"></script>
+    @vite(['resources/js/Administracion/Roles/rolesYPermisos.js'])
 @stop
 
 @section('css')
 @stop
 
 @section('js')
+
     <script>
         listaRolesJSON = @json($roles);
         listaPermisosJSON = @json($permisos);
@@ -349,8 +343,6 @@
         const getPermisosModuloConRol = '{{ route('getPermisosModuloConRol') }}';
         const guardarUsuariosXRol = '{{ route('guardarUsuariosXRol') }}';
         const getUsuariosXRol = '{{ route('getUsuariosXRol') }}';
-
-        const rutaClassRolPermisos = "{{ asset('js/Administracion/classRolPermisos.js') }}";
 
 
         //VARIABLES
@@ -362,57 +354,52 @@
         //const formRolDeSideBar = document.getElementById("formRolDeSideBar");
         //const nombreRolSeleccionadoDeSideBar = document.getElementById("nombreRolSeleccionadoDeSideBar");
         const navbarRoles = document.getElementById("navbarRoles");
-        const tituloRolSeleccionado = navbarRoles.querySelector("#tituloRolSeleccionado");
-        const sidebarCollapse = navbarRoles.querySelector("#sidebarCollapse");
-        const botonNuevoRol = navbarRoles.querySelector("#botonNuevoRol");
-        const asignarRolBoton = navbarRoles.querySelector("#asignarRolBoton"); //Boton para abriri modal de asiganr Rol a un usuario
-        
 
         const sidebar = document.getElementById("sidebar");
-        const listaRoles = sidebar.querySelector('#listaRoles');
-        const buscadorSidebar = sidebar.querySelector("#searchSideBarRoles");
+        const listaRoles = document.getElementById('listaRoles');
+        const sidebarCollapse = document.getElementById("sidebarCollapse");
+        const buscadorSidebar = document.getElementById("searchSideBarRoles");
 
         //Elementos de la ventana de permisos
         const contentRolSeleccionado = document.getElementById("contentRolSeleccionado");
-        const boxPermisosAsignados = contentRolSeleccionado.querySelector("#boxPermisosAsignados");
-        const boxPermisosNoAsignados = contentRolSeleccionado.querySelector("#boxPermisosNoAsignados");
-        const buscadorPermiso = contentRolSeleccionado.querySelector("#buscadorPermiso");
+        const tituloRolSeleccionado = document.getElementById("tituloRolSeleccionado");
+        const boxPermisosAsignados = document.getElementById("boxPermisosAsignados");
+        const boxPermisosNoAsignados = document.getElementById("boxPermisosNoAsignados");
+        const buscadorPermiso = document.getElementById("buscadorPermiso");
 
         //Elementos de la venta de permisos, especificos para el Modulo
-        const tituloModulo = contentRolSeleccionado.querySelector("#tituloModulo");
+        const tituloModulo = document.getElementById("tituloModulo");
 
         //Boton para el guardado
-        const btnGuardadoPermisos = contentRolSeleccionado.querySelector("#btnGuardadoPermisos");
+        const btnGuardadoPermisos = document.getElementById("btnGuardadoPermisos");
 
         //Dropdown
         const menuModulos = document.getElementById("menuModulos");
-        const dropdown = menuModulos.querySelector("#dropdown-content");
+        const dropdown = document.getElementById("dropdown-content");
 
         //elementos del MODAL donde se muestran los permisos que se van a guardar o eliminar
         const modalPermisos = document.getElementById("modalPermisos");
-        const modalListaPermisos = modalPermisos.querySelector("#modalListaPermisos");
-        const modalListaPermisosEliminados = modalPermisos.querySelector("#modalListaPermisosEliminados");
-        const btnGuardadoPermisosModal = modalPermisos.querySelector("#btnGuardadoPermisosModal");
+        const modalListaPermisos = document.getElementById("modalListaPermisos");
+        const modalListaPermisosEliminados = document.getElementById("modalListaPermisosEliminados");
+        const btnGuardadoPermisosModal = document.getElementById("btnGuardadoPermisosModal");
+        const modalConfirmacionDeCambio =  document.getElementById("confirmacionDeCambio");
 
         //Seccion de indices para los colores del los permisos
-        const boxIndices = document.getElementById('boxIndices');
-        const indiceAsignados = boxIndices.querySelector("#indiceAsignados");
-        const indiceNuevos = boxIndices.querySelector("#indiceNuevos");
-        const indiceEliminados = boxIndices.querySelector("#indiceEliminados");
-        const indiceNoAsiganados = boxIndices.querySelector("#indiceNoAsiganados");
+        const indiceAsignados = document.getElementById("indiceAsignados");
+        const indiceNuevos = document.getElementById("indiceNuevos");
+        const indiceEliminados = document.getElementById("indiceEliminados");
+        const indiceNoAsiganados = document.getElementById("indiceNoAsiganados");
 
         //elementos de la secuencia de creacion de un NuevoRol
-        const nuevoRol = document.getElementById('nuevoRol');
-        const botonCrearRol = nuevoRol.querySelector("#botonCrearRol");
+        const botonNuevoRol = document.getElementById("botonNuevoRol");
+        const botonCrearRol = document.getElementById("botonCrearRol");
 
         //Botones en Modal Permamencia de Rol
-        const modalConfirmacionDeCambio = document.getElementById("confirmacionDeCambio");
-        const permanecerEnRol = modalConfirmacionDeCambio.querySelector("#permanecerEnRol");
+        const permanecerEnRol = document.getElementById("permanecerEnRol");
 
         //Elementos de modal para asiganra el rol a un usuario
+        const asignarRolBoton = document.getElementById("asignarRolBoton"); //Boton para abriri modal de asiganr Rol a un usuario
         const modalAsignaRolAUsuario = document.getElementById("modalAsignaRolAUsuario");
-        const btnGuardarRolXUsuarios = modalAsignaRolAUsuario.querySelector('#btnGuardarRolXUsuarios');
-        
     </script>
 
     <script>

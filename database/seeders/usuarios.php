@@ -33,6 +33,8 @@ class usuarios extends Seeder
             'apellido_pa' => ' ',
             'apellido_ma' => ' ',
         ])->assignRole('Ventanillas');
+            
         //$user1->syncPermissions([$permiso]);
+
     }
 }

@@ -10,7 +10,6 @@ export class Filtro {
         const {name} = this.datosDeBusqueda;
         if(name) {
             //return rol.name === name;
-            //Jorge D. R.M.
             return element.name.toLowerCase().includes(name.toLowerCase());
         }
         return element;
@@ -43,5 +42,3 @@ export class Filtro {
         resultado.appendChild(noResultado);
     }
 }
-
-//Jorge D. R.M.
