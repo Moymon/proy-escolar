@@ -1,9 +1,8 @@
-import * as jsRolPer from '../classRolPermisos';
-import {UI} from '../UIRolesPermisos';
-import * as filtro from '../classFiltro';
+import * as jsRolPer from '../classRolPermisos.js';
+import {UI} from '../UIRolesPermisos.js';
+import * as filtro from '../classFiltro.js';
 
 /******CLASES******/
-
 
 //Instancias de las clases
 const ui = new UI();
@@ -12,7 +11,6 @@ const objectPer = new jsRolPer.Permisos();
 //***************************************************************************************************************************/
 //***************************************************************************************************************************/
 //***************************************************************************************************************************/
-
 
 //Definicion de los roles y permisos que llegan al inicia de la vista desde un controlador
 objectPer.listaRoles = listaRolesJSON;
@@ -43,7 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     permanecerEnRol.setAttribute('style', 'background-color:'+ ui.colorPrincipal +';color:white;');
 
-    asignarRolBoton.setAttribute('style', 'background-color:'+ ui.colorPrincipal +';color:white;');
+    asignarRolBoton.setAttribute('style', 'background-color:'+ ui.colorPrincipal +';color:white;')
+
+    btnGuardarRolXUsuarios.setAttribute('style', 'background-color:'+ ui.colorPrincipal +';color:white;');
 });
 
 //Listner para el CLICK: este es el evento principal de la interfaz, la mayoria de acciones suceden atraves de un click
@@ -57,12 +57,7 @@ document.addEventListener("click", function (event) {
     } else if (target.id === "btnGuardarRolXUsuarios") {
         event.preventDefault();
         saveRolForUser();
-    } else if (target.id === "btnGuardadoPermisos"){
-
-        event.preventDefault();
-        openModalForSave();
-
-    } 
+    }  
 });
 
 function loadListenersForInterfaceRoles(){
@@ -79,7 +74,12 @@ function loadListenersForInterfaceRoles(){
                 verificaClickBoxDeRol(target.parentElement);
             }else{
                 verificaClickBoxDeRol(target);
-            }
+            } 
+    
+        } else if (target.id === "btnGuardadoPermisos"){
+
+            event.preventDefault();
+            openModalForSave();
     
         } 
     });
@@ -327,7 +327,7 @@ function onclickModulo(target) {
 function muevePermisoEnListas(nombrePermiso, isAsignados) {
     let newPermissionsSelected = objectPer['newPermissionsSelected'];
     let newPermissionsDeleted = objectPer['newPermissionsDeleted'];
-
+    //Jorge D. R.M.
     const fuenteList = isAsignados ? 'permisosXRol_Asignados' : 'permisosXRol_NoAsignados';
     const destinoList = isAsignados ? 'permisosXRol_NoAsignados' : 'permisosXRol_Asignados';
 
@@ -388,7 +388,7 @@ function verificaClickBoxDeRol(element) {
     const isAsignados = $element.closest(".permisosAsignados").length > 0;
     const $contenedorDestino = isAsignados ? $(".permisosNoAsigandos") : $(".permisosAsignados");
     const styleBackground = isAsignados ? 'background-color:'+ ui.colorPermisoNoAsignado +';color:black;' : 'background-color:'+ ui.colorPermisoAsignado + ';color:white;';
-
+    
     $contenedorPadre.appendTo($contenedorDestino);
     $element.attr('style', styleBackground);
 
@@ -451,98 +451,85 @@ function peticionAjaxGuardarPermisos() {
 //**************************************************************************************************************
 //FUNCIONES DE ASIGNAR ROL A UN USUARIO
 function peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded){
-            const endpoint = guardarUsuariosXRol;
-            const requestData = {
-                rol: objectPer.rol,
-                listaDeUsuariosAdded: listaDeUsuariosAdded,
-            };
+    const endpoint = guardarUsuariosXRol;
+    const requestData = {
+        rol: objectPer.rol,
+        listaDeUsuariosAdded: listaDeUsuariosAdded,
+    };
 
-            fetch(endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify(requestData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error en la solicitud. Código de estado: " + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error("Error en la solicitud:", error);
-            });
+    jsRolPer.peticionAjaxAplication(guardarUsuariosXRol, requestData)
+    .then(response => {
+        $('#modalAsignaRolAUsuario').modal('hide');
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
 
 function saveRolForUser(){
-            const listaDeUsuarios = modalAsignaRolAUsuario.querySelector('#listaDeUsuarios');
-            const divs = Array.from(listaDeUsuarios.children);
-            var listaDeUsuariosAdded = [];
+    const listaDeUsuarios = modalAsignaRolAUsuario.querySelector('#listaDeUsuarios');
+    const divs = Array.from(listaDeUsuarios.children);
+    var listaDeUsuariosAdded = [];
 
-            divs.forEach(div => {
-                let input = div.querySelector('input');
-                let target = div.getAttribute('data-id');
+    divs.forEach(div => {
+        let input = div.querySelector('input');
+        let target = div.getAttribute('data-id');
 
-                if (input.checked) {
-                    listaDeUsuariosAdded.push(div.getAttribute('data-id'));
-                } 
-            });
+        if (input.checked) {
+            listaDeUsuariosAdded.push(div.getAttribute('data-id'));
+        } 
+    });
 
             peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded);
 }
 
 function muestraUsuarios(usuariosXRol, users){
-            //ui.limpiarHTML(modalAsignaRolAUsuario.querySelector("#listaDeUsuarios"));
-            const listaDeUsuarios = modalAsignaRolAUsuario.querySelector("#listaDeUsuarios");
-            ui.limpiarHTML(modalAsignaRolAUsuario.querySelector("#listaDeUsuarios"));
-            ui.creaBotonUsuario(users, usuariosXRol, listaDeUsuarios);
+    //ui.limpiarHTML(modalAsignaRolAUsuario.querySelector("#listaDeUsuarios"));
+    const listaDeUsuarios = modalAsignaRolAUsuario.querySelector("#listaDeUsuarios");
+    ui.limpiarHTML(modalAsignaRolAUsuario.querySelector("#listaDeUsuarios"));
+    ui.creaBotonUsuario(users, usuariosXRol, listaDeUsuarios);
 
-            $('#modalAsignaRolAUsuario').modal('show');
+     $('#modalAsignaRolAUsuario').modal('show');
 }
 
 function peticionAjaxUsuarios(){
-            const xhr = new XMLHttpRequest();
-            const endpoint = getUsuariosXRol;
+    const xhr = new XMLHttpRequest();
+    const endpoint = getUsuariosXRol;
             
-            const requestData = {
-                rol: objectPer.rol,
-            };
+    const requestData = {
+        rol: objectPer.rol,
+    };
             
-            xhr.open('POST', endpoint, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+    xhr.open('POST', endpoint, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
 
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    try {
-                        const data = JSON.parse(xhr.responseText);
-                        muestraUsuarios(data.usersXRol, data.users);
-                    } catch (error) {
-                        console.error("Error al procesar la respuesta:", error);
-                    }
-                } else {
-                    console.error("Error en la solicitud. Código de estado: " + xhr.status);
-                }
-            };
-            xhr.onerror = function () {
-                console.error("Error en la solicitud.");
-            };
-            xhr.send(JSON.stringify(requestData));
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                const data = JSON.parse(xhr.responseText);
+                muestraUsuarios(data.usersXRol, data.users);
+            } catch (error) {
+                console.error("Error al procesar la respuesta:", error);
+            }
+        } else {
+            console.error("Error en la solicitud. Código de estado: " + xhr.status);
+        }
+    };
+    xhr.onerror = function () {
+        console.error("Error en la solicitud.");
+    };
+    xhr.send(JSON.stringify(requestData));
 }
 
 function openModalToAssignToAUser(){
-            const titulo = modalAsignaRolAUsuario.querySelector("#modalAsignaRolAUsuarioTitle");
-            const subtitulo = modalAsignaRolAUsuario.querySelector("#asignaRolAUsuarioSubTitle");
+    const titulo = modalAsignaRolAUsuario.querySelector("#modalAsignaRolAUsuarioTitle");
+    const subtitulo = modalAsignaRolAUsuario.querySelector("#asignaRolAUsuarioSubTitle");
 
-            titulo.textContent = objectPer.rol;
-            subtitulo.textContent = objectPer.rol;
+    titulo.textContent = objectPer.rol;
+    subtitulo.textContent = objectPer.rol;
 
-            peticionAjaxUsuarios();
+    peticionAjaxUsuarios();
 }
 
 //**************************************************************************************************************
