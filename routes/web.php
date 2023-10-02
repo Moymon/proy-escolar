@@ -99,11 +99,17 @@ Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
 
         //Ejemplo creacion de usuario
         Route::post('/create-users', [CreacionDeUsuarios::class, 'createUsers'])->name('createUsers');
+
+        Route::post('/create-user',[usuariosController::class,'create'])->name(
+            'create-user');
+
     });
     /*Permisos de actualizar*/
     Route::group(['middleware' => ['permission:administrador.update']], function(){
         Route::post('/roles/update/{id}',[roles_permisos::class,'update']);
         Route::post('/administracion-update/{id}',[datosGenerales::class,'update']);
+
+        Route::post('/edit-users',[usuariosController::class, 'edit_any'])->name('edit-users');
     });
     /*Permisos de todo*/
     Route::group(['middleware' => ['permission:administrador.create|administrador.read|administrador.update']], function(){

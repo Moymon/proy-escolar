@@ -25,9 +25,27 @@ class usuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+
+        if($request->rol_id != 0){
+            $user = User::create([
+                'rpe' => $request->rpeNew,
+                'nombre' => $request->nombreNew,
+                'apellido_pa' => $request->apellido_paNew,
+                'apellido_ma' => $request->apellido_maNew,
+            ])->assignRole($request->rol_id);
+        }else{
+            $user = User::create([
+                'rpe' => $request->rpeNew,
+                'nombre' => $request->nombreNew,
+                'apellido_pa' => $request->apellido_paNew,
+                'apellido_ma' => $request->apellido_maNew,
+            ]);
+        }
+
+        return redirect('/usuarios');
     }
 
     /**
@@ -102,5 +120,18 @@ class usuariosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function edit_any(Request $request){
+        $usuario = User::where("rpe",$request->rpeForm)->first();
+        $usuario->rpe = $request->rpeForm;
+        $usuario->nombre = $request->nombreForm;
+        $usuario->apellido_ma = $request->apellido_maForm;
+        $usuario->apellido_pa = $request->apellido_paForm;
+        $usuario->correo = $request->correoForm;
+        $usuario->direccion_ip = $request->direccion_ipForm;
+        $usuario->save();
+
+        return redirect("/usuarios");
     }
 }

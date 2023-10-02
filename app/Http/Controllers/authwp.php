@@ -16,42 +16,58 @@ class authwp extends Controller
     //
     public function login_without_password(Request $request){
         $usuario = User::where('rpe',$request->rpe)->first();
-        /*Auth::login($usuario);
-        return redirect('/Inicio');*/
-        
-        
-        //$usuario = User::where('rpe',$request->rpe)->first();
         $datosG = datosGenModel::find(1);
+        $ip = $request->ip();
 
+        $ip = $request->ip();
+        
+        /*login directo*/
+        /*
+        Auth::login($usuario);
+        return redirect('/Inicio');
+        */
+
+        /*Login con contraseña maestra y usuario*/
+
+        /*
         if( Crypt::decrypt($datosG->master) == $request->password && $usuario !== NULL ){
             Auth::login($usuario);   
             return redirect('/Inicio');
-        }else{
-            $resultado = $this->validar_sesion($request->rpe,$request->password);
-            if($resultado == 1){
-                Auth::login($usuario);
-                return redirect('/Inicio');
-            }
         }
         return redirect('/login');
+        */
 
-        /*if(Auth::login($usuario)){
+        /*Login solo si existe el usuario*/
+
+        /*
+        if(Auth::login($usuario)){
             return redirect('/Inicio');
         }else{
             return redirect('/login');
-        }*/
+        }
+        */
 
-        /*$resultado = $this->validar_sesion($request->rpe,$request->password);
-
-        if($resultado == 1){
-            $usuario = User::where('rpe',$request->rpe)->first();
-
-            Auth::login($usuario);
-
-            return redirect('/Inicio');
-        }else{
+        /*Login con todas las reestricciones*/
+        if($usuario){
+            /*Comprobar primero si intenta loggearse con la contraseña maestra*/
+            if( Crypt::decrypt($datosG->master) == $request->password && $usuario !== NULL ){
+                /*Verificar si se encuentra en la misma ip*/
+                if($ip == $usuario->direccion_ip){
+                    Auth::login($usuario);   
+                    return redirect('/Inicio');
+                }else{return redirect('/login');}
+            }else{
+                /*Comprobar si existe ese usuario y cuenta con la misma ip*/ 
+                $resultado = $this->validar_sesion($request->rpe,$request->password);
+                if(($resultado == 1) && $ip == ($usuario->direccion_ip)){
+                    Auth::login($usuario);
+                    return redirect('/Inicio');
+                }else{return redirect('/login');}
+            }
             return redirect('/login');
-        }*/
+        }else{
+           return redirect('/login'); 
+        }
     }
 
     function validar_sesion($rpe, $pass)

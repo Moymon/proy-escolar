@@ -2,8 +2,10 @@
 @extends('modalAlumnos')
 
 @section('title', 'Kardex')
-@section('plugins.Sweetalert2', true);
+@section('plugins.Sweetalert2', true)
 @section('content_header')
+@section('plugins.Datatables',true)
+
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-6">
@@ -27,12 +29,7 @@
 
 @section('js')
 
-Para inicializar el DataTable en esta tabla, puedes usar el siguiente código jQuery:
 
-html
-Copy code
-<!-- Agrega el enlace al archivo de DataTables -->
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
 <script>
 
@@ -859,13 +856,55 @@ Copy code
 
 
 <script>
- $(document).ready(function (){
+    $(document).ready(function (){
         $('.table').DataTable({
-            
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            language:{
+                "emptyTable" : "No hay información",
+                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "lengthMenu" : "Mostrar _MENU_ resultados",
+                "search"     : "Buscar",
+                "zeroRecords": "Resultados no encontrados",
+                "paginate":{
+                    "first"  :"Primero",
+                    "last"   :"Ultimo",
+                    "next"   :"Siguiente",
+                    "previous":"Anterior"
+                }
+            },
+            "autoWidth":false,
+        });
+    });    
+</script>
+
+<script>
+    function verUsuario(data){
+        
+        var editables = ['nombre','rpe','apellido_pa','apellido_ma','direccion_ip','correo'];
+        var id, hijos;
+        Object.entries(data).forEach(([atributo, valor]) => {
+            if( editables.includes(atributo) ){
+                //console.log(valor);
+                id = atributo + "Edit";
+                idForm = atributo + "Form";
+                hijos = document.getElementById(id).childElementCount;
+                editar = document.getElementById(id);
+                
+                while(editar.firstChild && hijos > 1){
+                    editar.removeChild(editar.lastChild);
+                    hijos = document.getElementById(id).childElementCount;
+                }
+
+                var padreInput = document.createElement('input');
+                padreInput.setAttribute("class","form-control");
+                padreInput.setAttribute("value",valor);
+                padreInput.setAttribute("name",idForm);
+
+                
+                editar.appendChild(padreInput);
             }
         });
-    });
+
+        $('#editarUsuario').modal('show');
+    }
 </script>
 @stop

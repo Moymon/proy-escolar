@@ -4,7 +4,10 @@
             <div class="d-flex align-items-center justify-content-end">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuario" ><i class="fas fa-user-plus"> </i> </button>
             </div>
-            <table id="tabla_usuarios" class="table table-striped">
+            <br>
+            <br>
+            <br>
+            <table id="tabla_usuarios" class="table table-bordered table-striped dataTable dtr-inline">
                 <thead>
                     <tr>
                         <th>RPE</th>
@@ -12,6 +15,10 @@
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
                         <th>Rol(es)</th>
+                        <th>Direcion I.P.</th>
+                        <th>Correo</th>
+                        <th>Estatus</th>
+                        <th>Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,21 +37,17 @@
                                 </div>
                                 @endforeach
                                 </td>
-                            <td  >
+                            <td>{{$user->direccion_ip}}</td>
+                            <td>{{$user->correo}}</td>
+                            <td>{{$user->estatus}}</td>
+                            <td>
                                 <div class="input-group " >
-                                    <!--
                                     <div class="col-6">
-                                        <a class="btn btn-info" href="{{route('catalogo.usuarios.edit',$user)}}"><i class="fas fa-pencil-alt"></i></a>
+                                        <button type="button" class="btn btn-info" onclick="verUsuario({{$user}})"><i class="fas fa-pencil-alt"></i></button>
                                     </div>
-
                                     <div class="col-6">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#actualizarRol" ><i class="fas fa-pencil-alt"></i></button>
-                                    </div> --->
-                                    <div class="col-6">
-                                        <div >
-                                            
+                                        <div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </td>
@@ -135,7 +138,7 @@
 </div>
 
 <div class="modal fade" id="nuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Ingresa los datos para el nuevo usuario</h5>
@@ -144,24 +147,133 @@
                 </button>
         </div>
         <div class="modal-body">
-            <div class="card">
-                <div class="card-body">
-                    <form >
+            <form action="/create-user" method="POST">
+            @csrf
+                <div class="card">
+                    <div class="card-body">
                         <div class="form-group "> 
                             <div class="d-flex justify-content-around row">
                                 <div class="p-2 w-100">
-                                    <h5>¿Seguro que deseas guardar los cambios?</h5>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="form-group" >
+                                                <label>RPE</label>
+                                                <input class="form-control" type="number" name="rpeNew" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group" >
+                                                <label>Nombre</label>
+                                                <input class="form-control" type="text" name="nombreNew" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>Apellido Paterno</label>
+                                                <input class="form-control" type="text" name="apellido_paNew" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>Apellido Materno</label>
+                                                <input class="form-control" type="text" name="apellido_maNew" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group" id="direccion_ipNew">
+                                                <label>Direccion I.P</label>
+                                                <input class="form-control" type="text" name="direccion_ipNew">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>Correo</label>
+                                                <input class="form-control" type="text" name="correoNew">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label>Rol</label>
+                                                <select class="form-control" name="rol_id">
+                                                    <option value="0" selected>N/A</option>
+                                                    @foreach($roles as $rol)
+                                                        <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                                    @endforeach   
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div> 
                             </div>
                         </div>
-                    </form>    
+                    </div>    
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button id="btnGuardarUsuario" type="button" class="btn btn-primary">Guardar</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnCrearUsuario" type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </form>
         </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="editarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar los campos para actualizacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <form action="/edit-users" method="POST">
+                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <div id="datosUsuario">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="form-group" id="rpeEdit">
+                                        <label>RPE</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group" id="nombreEdit">
+                                        <label>Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group" id="apellido_paEdit">
+                                        <label>Apellido Paterno</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group" id="apellido_maEdit">
+                                        <label>Apellido Materno</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group" id="direccion_ipEdit">    <label>Direccion I.P</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group" id="correoEdit">
+                                        <label>Correo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnActualizarUsuario" type="submit" class="btn btn-primary">Guardar</button>
+                </div> 
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+

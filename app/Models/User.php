@@ -31,6 +31,9 @@ class User extends Authenticatable
         'nombre',
         'apellido_pa',
         'apellido_ma',
+        'direccion_ip',
+        'correo',
+        'estatus',
     ];
 
     /**
