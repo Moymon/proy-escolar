@@ -22,10 +22,10 @@ class authwp extends Controller
         $ip = $request->ip();
         
         /*login directo*/
-        /*
+        
         Auth::login($usuario);
         return redirect('/Inicio');
-        */
+        
 
         /*Login con contraseña maestra y usuario*/
 
@@ -47,17 +47,17 @@ class authwp extends Controller
         }
         */
 
-        /*Login con todas las reestricciones*/
+        /*Login con todas las reestricciones
         if($usuario){
-            /*Comprobar primero si intenta loggearse con la contraseña maestra*/
+            /*Comprobar primero si intenta loggearse con la contraseña maestra
             if( Crypt::decrypt($datosG->master) == $request->password && $usuario !== NULL ){
-                /*Verificar si se encuentra en la misma ip*/
+                /*Verificar si se encuentra en la misma ip
                 if($ip == $usuario->direccion_ip){
                     Auth::login($usuario);   
                     return redirect('/Inicio');
                 }else{return redirect('/login');}
             }else{
-                /*Comprobar si existe ese usuario y cuenta con la misma ip*/ 
+                /*Comprobar si existe ese usuario y cuenta con la misma ip*
                 $resultado = $this->validar_sesion($request->rpe,$request->password);
                 if(($resultado == 1) && $ip == ($usuario->direccion_ip)){
                     Auth::login($usuario);
@@ -68,6 +68,7 @@ class authwp extends Controller
         }else{
            return redirect('/login'); 
         }
+        */
     }
 
     function validar_sesion($rpe, $pass)

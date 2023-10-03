@@ -282,24 +282,6 @@ class roles_permisos extends Controller
         return $permisosNoCoincidentes;
     }
 
-    
-    function getUsuariosXRol(Request $request){
-        $rol = Role::where('name', $request->rol)->first();
-        //$users = User::all();
-
-
-        //$usersXRol = $rol->users;
-
-        $response = [
-            //'users' => $users,
-            //'usersXRol' => $usersXRol,
-            'message' => 'response',
-        ];
-
-        return response()->json($response);
-    }
-
-
     function getRNoCoincidentes($roles){
         $rolesCompletos = Role::all();
 
@@ -311,29 +293,52 @@ class roles_permisos extends Controller
         return $rolesNoCoincidentes;
     }
 
+
+
+    
+    function getUsuariosXRol(Request $request){
+        $rol = Role::where('name', $request->rol)->first();
+        $users = User::all();
+
+
+        $usersXRol = $rol->users;
+
+        $response = [
+            'users' => $users,
+            'usersXRol' => $usersXRol,
+            'message' => 'response',
+        ];
+
+        return response()->json($response);
+    }
+
+
     function guardarUsuariosXRol(Request $request){
         $request->validate([
             'rol' => 'required|string',
-            'listaDeUsuariosAdded' => 'required',
         ]);
-        
-        /*
+    
         $rol = Role::where('name', $request->rol)->first();
-        
-        $usersToAssignRole = User::whereIn('nombre', $request->listaDeUsuariosAdded)->get();
-        
-        $usersToAssignRole->each(function ($user) use ($rol) {
-            $user->syncRoles([$rol->name]);
-        });
-        
-        $usersNotWithRole = User::whereNotIn('nombre', $request->listaDeUsuariosAdded)->get();
-        $usersNotWithRole->each(function ($user) use ($rol) {
-            $user->removeRole($rol->name);
-        });
-        */
-        
+    
+        if (empty($request->listaDeUsuariosAdded)) {
+            User::role($rol->name)->each(function ($user) use ($rol) {
+                $user->removeRole($rol->name);
+            });
+        } else {
+            $usersToAssignRole = User::whereIn('nombre', $request->listaDeUsuariosAdded)->get();
+    
+            $usersToAssignRole->each(function ($user) use ($rol) {
+                $user->assignRole($rol->name);
+            });
+    
+            $usersNotWithRole = User::whereNotIn('nombre', $request->listaDeUsuariosAdded)->get();
+            $usersNotWithRole->each(function ($user) use ($rol) {
+                $user->removeRole($rol->name);
+            });
+        }
+    
         $response = [
-            'message' => 'Asignacion correcta',
+            'message' => 'Asignación correcta',
         ];
     
         return response()->json($response);
