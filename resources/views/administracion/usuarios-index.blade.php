@@ -16,11 +16,14 @@
 @stop
 
 @section('content')
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <p style="color:red">Error en la solicitud. El registro {{$error}} ya existe </p>
+        @endforeach
+    @endif
+</script>
+    
     @livewire('administracionuserindex')
-
-
-
-
 @stop
 
 @section('css')
@@ -907,4 +910,5 @@
         $('#editarUsuario').modal('show');
     }
 </script>
+
 @stop

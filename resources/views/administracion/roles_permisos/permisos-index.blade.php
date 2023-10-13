@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@section('plugins.Datatables',true)
 @section('title', 'Permisos')
 
 @section('content_header')
@@ -22,7 +22,9 @@
             </div>
         </div>
         <br>
+        <h3 align="center">Permisos Generales</h3>
         <table id="tabla_permisos" class="table table-bordered table-striped dataTable dtr-inline">
+            
             <thead>
                 <tr>
                     <th>ID</th>
@@ -40,7 +42,10 @@
             </tbody>
         </table>
         <br>
+        <br>
+        <h3 align="center">Permisos Catalogados</h3>
         <table id="tabla_permisos" class="table table-bordered table-striped dataTable dtr-inline">
+            
             <thead>
                 <tr>
                     <th>Catalogo</th>

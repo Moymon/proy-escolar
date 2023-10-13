@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 
 class usuariosController extends Controller
 {
@@ -28,6 +29,35 @@ class usuariosController extends Controller
     public function create(Request $request)
     {
         //
+        /*Validar ambas rpe e ip unicas y mandar errores dependiendo de que exista y que no*/
+        if($request->direccion_ipNew != null){
+            $messages = [
+                'rpeNew' => '[ RPE: ' . $request->rpeNew . ' ]',
+                'direccion_ipNew' => '[ IP: ' . $request->direccion_ipNew . ' ]',
+            ];
+            $validate = Validator::make($request->all(),[
+            'rpeNew' => 'unique:users,rpe',
+            'direccion_ipNew' => 'unique:users,direccion_ip',
+            ], $messages);
+
+             /*Si algo fallo que recargue */
+             if($validate->fails()){
+                return redirect('/usuarios')->withErrors($validate)->withInput();
+            }
+        }else{
+            $messages = [
+                'rpeNew' => '[ RPE: ' . $request->rpeNew . ' ]',
+            ];
+
+            $validate = Validator::make($request->all(),[
+            'rpeNew' => 'unique:users,rpe',
+            ], $messages);
+
+             /*Si algo fallo que recargue */
+            if($validate->fails()){
+                return redirect('/usuarios')->withErrors($validate)->withInput();
+            }
+        }
 
         if($request->rol_id != 0){
             $user = User::create([
@@ -35,6 +65,8 @@ class usuariosController extends Controller
                 'nombre' => $request->nombreNew,
                 'apellido_pa' => $request->apellido_paNew,
                 'apellido_ma' => $request->apellido_maNew,
+                'direccion_ip' => $request->direccion_ipNew,
+                'correo' => $request->correoNew,
             ])->assignRole($request->rol_id);
         }else{
             $user = User::create([
@@ -42,6 +74,8 @@ class usuariosController extends Controller
                 'nombre' => $request->nombreNew,
                 'apellido_pa' => $request->apellido_paNew,
                 'apellido_ma' => $request->apellido_maNew,
+                'direccion_ip' => $request->direccion_ipNew,
+                'correo' => $request->correoNew,
             ]);
         }
 
@@ -124,6 +158,51 @@ class usuariosController extends Controller
 
     public function edit_any(Request $request){
         $usuario = User::where("rpe",$request->rpeForm)->first();
+
+        if($usuario->direccion_ip == $request->direccion_ipForm){
+            /**/
+            $usuario->rpe = $request->rpeForm;
+            $usuario->nombre = $request->nombreForm;
+            $usuario->apellido_ma = $request->apellido_maForm;
+            $usuario->apellido_pa = $request->apellido_paForm;
+            $usuario->correo = $request->correoForm;
+            $usuario->direccion_ip = $request->direccion_ipForm;
+            $usuario->save();
+
+            return redirect("/usuarios");
+        }
+        //
+        /*Validar ambas rpe e ip unicas y mandar errores dependiendo de que exista y que no*/
+        if($request->direccion_ipForm != null){
+            $messages = [
+                'rpeForm' => '[ RPE: ' . $request->rpeForm . ' ]',
+                'direccion_ipForm' => '[ IP: ' . $request->direccion_ipForm . ' ]',
+            ];
+            $validate = Validator::make($request->all(),[
+            'rpeForm' => 'unique:users,rpe',
+            'direccion_ipForm' => 'unique:users,direccion_ip',
+            ], $messages);
+
+             /*Si algo fallo que recargue */
+             if($validate->fails()){
+                return redirect('/usuarios')->withErrors($validate)->withInput();
+            }
+        }else{
+            $messages = [
+                'rpeForm' => '[ RPE: ' . $request->rpeForm . ' ]',
+            ];
+
+            $validate = Validator::make($request->all(),[
+            'rpeNew' => 'unique:users,rpe',
+            ], $messages);
+
+             /*Si algo fallo que recargue */
+            if($validate->fails()){
+                return redirect('/usuarios')->withErrors($validate)->withInput();
+            }
+        }
+
+        
         $usuario->rpe = $request->rpeForm;
         $usuario->nombre = $request->nombreForm;
         $usuario->apellido_ma = $request->apellido_maForm;
