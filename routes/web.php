@@ -59,7 +59,7 @@ Route::get('/fechas_et_er',[sidebar::class,'fechas_et_er']);*/
 //Route::resource('/catalogo-usuarios',usuariosController::class)->names('catalogo.usuarios');
 
 /*Permisos de rutas para el administrador******************************************/
-Route::group(['middleware' => ['auth', 'role:Administrador',]] , function(){
+Route::group(['middleware' => ['auth', 'role:Administrador|Otros 2',]] , function(){
     /*Permisos de solo lectura*****************************************************/
     Route::group(['middleware' => ['permission:administrador.read']], function(){
         /*Rutas de administracion**************************************************/

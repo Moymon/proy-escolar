@@ -16,11 +16,14 @@
 @stop
 
 @section('content')
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <p style="color:red">Error en la solicitud. El registro {{$error}} ya existe </p>
+        @endforeach
+    @endif
+</script>
+    
     @livewire('administracionuserindex')
-
-
-
-
 @stop
 
 @section('css')
@@ -879,7 +882,7 @@
 <script>
     function verUsuario(data){
         
-        var editables = ['nombre','rpe','apellido_pa','apellido_ma','direccion_ip','correo'];
+        var editables = ['id','nombre','rpe','apellido_pa','apellido_ma','direccion_ip','correo'];
         var id, hijos;
         Object.entries(data).forEach(([atributo, valor]) => {
             if( editables.includes(atributo) ){
@@ -907,4 +910,5 @@
         $('#editarUsuario').modal('show');
     }
 </script>
+
 @stop

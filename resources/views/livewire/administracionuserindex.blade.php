@@ -1,9 +1,11 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <div class="d-flex align-items-center justify-content-end">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuario" ><i class="fas fa-user-plus"> </i> </button>
-            </div>
+            @can('administrador.create')
+                <div class="d-flex align-items-center justify-content-end">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuario" ><i class="fas fa-user-plus"> </i> </button>
+                </div>
+            @endcan
             <br>
             <br>
             <br>
@@ -14,11 +16,15 @@
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
-                        <th>Rol(es)</th>
-                        <th>Direcion I.P.</th>
+                        @can('administrador.edit')
+                            <th>Rol(es)</th>
+                            <th>Direcion I.P.</th>
+                        @endcan    
                         <th>Correo</th>
-                        <th>Estatus</th>
-                        <th>Editar</th>
+                        @can('administrador.edit')
+                            <th>Estatus</th>
+                            <th>Editar</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +35,7 @@
                             <td>{{$user->nombre}}</td>
                             <td>{{$user->apellido_pa}}</td>
                             <td>{{$user->apellido_ma}}</td>
-                            
+                            @can('administrador.edit')
                                 <td>
                                 @foreach ($user->roles as $rol)
                                 <div class="badge badge-secondary">
@@ -37,20 +43,23 @@
                                 </div>
                                 @endforeach
                                 </td>
-                            <td>{{$user->direccion_ip}}</td>
+                                <td>{{$user->direccion_ip}}</td>
+                            @endcan    
                             <td>{{$user->correo}}</td>
-                            <td>{{$user->estatus}}</td>
-                            <td>
-                                <div class="input-group " >
-                                    <div class="col-6">
-                                        <button type="button" class="btn btn-info" onclick="verUsuario({{$user}})"><i class="fas fa-pencil-alt"></i></button>
-                                    </div>
-                                    <div class="col-6">
-                                        <div>
+                            @can('administrador.edit')
+                                <td>{{$user->estatus}}</td>
+                                <td>
+                                    <div class="input-group " >
+                                        <div class="col-6">
+                                            <button type="button" class="btn btn-info" onclick="verUsuario({{$user}})"><i class="fas fa-pencil-alt"></i></button>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>
@@ -234,6 +243,11 @@
                     <div class="card-body">
                         <div id="datosUsuario">
                             <div class="row">
+                                <div class="col-2">
+                                        <div class="form-group" id="idEdit">
+                                            <label>ID</label>
+                                        </div>
+                                </div>
                                 <div class="col-2">
                                     <div class="form-group" id="rpeEdit">
                                         <label>RPE</label>
