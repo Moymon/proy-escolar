@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class usuariosController extends Controller
 {
@@ -157,10 +158,16 @@ class usuariosController extends Controller
     }
 
     public function edit_any(Request $request){
-        $usuario = User::where("rpe",$request->rpeForm)->first();
+        var_dump($request->all());
+        //$usuario = User::where("rpe",$request->rpeForm)->first();
 
+        /*Consulta para comprobar que no existe el mismo id en otro registro*/
+        //$response = DB::table('users')->select('rpe')->where('rpe','=',$usuario->rpe)->where('id','<>',$->id)->get();
+
+        //var_dump($response);
+
+        /*
         if($usuario->direccion_ip == $request->direccion_ipForm){
-            /**/
             $usuario->rpe = $request->rpeForm;
             $usuario->nombre = $request->nombreForm;
             $usuario->apellido_ma = $request->apellido_maForm;
@@ -171,8 +178,10 @@ class usuariosController extends Controller
 
             return redirect("/usuarios");
         }
+        */
         //
         /*Validar ambas rpe e ip unicas y mandar errores dependiendo de que exista y que no*/
+        /*
         if($request->direccion_ipForm != null){
             $messages = [
                 'rpeForm' => '[ RPE: ' . $request->rpeForm . ' ]',
@@ -183,7 +192,7 @@ class usuariosController extends Controller
             'direccion_ipForm' => 'unique:users,direccion_ip',
             ], $messages);
 
-             /*Si algo fallo que recargue */
+             
              if($validate->fails()){
                 return redirect('/usuarios')->withErrors($validate)->withInput();
             }
@@ -196,13 +205,13 @@ class usuariosController extends Controller
             'rpeNew' => 'unique:users,rpe',
             ], $messages);
 
-             /*Si algo fallo que recargue */
+        
             if($validate->fails()){
                 return redirect('/usuarios')->withErrors($validate)->withInput();
             }
         }
-
-        
+        */
+        /*
         $usuario->rpe = $request->rpeForm;
         $usuario->nombre = $request->nombreForm;
         $usuario->apellido_ma = $request->apellido_maForm;
@@ -210,7 +219,7 @@ class usuariosController extends Controller
         $usuario->correo = $request->correoForm;
         $usuario->direccion_ip = $request->direccion_ipForm;
         $usuario->save();
-
-        return redirect("/usuarios");
+        */
+        //return redirect("/usuarios");
     }
 }

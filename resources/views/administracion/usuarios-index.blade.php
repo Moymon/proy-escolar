@@ -882,7 +882,7 @@
 <script>
     function verUsuario(data){
         
-        var editables = ['nombre','rpe','apellido_pa','apellido_ma','direccion_ip','correo'];
+        var editables = ['id','nombre','rpe','apellido_pa','apellido_ma','direccion_ip','correo'];
         var id, hijos;
         Object.entries(data).forEach(([atributo, valor]) => {
             if( editables.includes(atributo) ){

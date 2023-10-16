@@ -533,7 +533,7 @@ return [
                     'text'    => 'Usuarios',
                     'icon'    => 'fas fa-users',
                     'url'     => 'usuarios',
-                    'can'     => ['administrador'],
+                    'can'     => ['administrador','administrador.edit'],
                     'classes' => 'ml-2',
                 ],
                 [
