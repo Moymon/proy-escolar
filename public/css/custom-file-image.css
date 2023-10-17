@@ -1,0 +1,28 @@
+.container{
+	margin-right: 23%;
+	border: none;
+	padding: 0px;
+	padding-right: 13%;
+}
+
+.custom-image-css label{
+	display: inline-block;
+	text-transform: uppercase;
+	background-color: #54B4D3;
+	text-align: center;
+	user-select: none;
+	cursor: pointer;
+	padding-left: 50%;
+	padding-right: 50%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.custom-image-css i {
+	font-size: 15px;
+	color: white;
+}
+.custom-image-css label:active{
+	transform: scale(0.9);
+}
