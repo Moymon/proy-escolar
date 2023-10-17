@@ -18,10 +18,9 @@ class authwp extends Controller
         $usuario = User::where('rpe',$request->rpe)->first();
         $datosG = datosGenModel::find(1);
         $ip = $request->ip();
-
-        $ip = $request->ip();
         
         /*login directo*/
+        
         
         Auth::login($usuario);
         return redirect('/Inicio');
@@ -47,11 +46,12 @@ class authwp extends Controller
         }
         */
 
-        /*Login con todas las reestricciones
+        /*
+        /*Login con todas las reestricciones*
         if($usuario){
-            /*Comprobar primero si intenta loggearse con la contraseña maestra
+            /*Comprobar primero si intenta loggearse con la contraseña maestra*
             if( Crypt::decrypt($datosG->master) == $request->password && $usuario !== NULL ){
-                /*Verificar si se encuentra en la misma ip
+                /*Verificar si se encuentra en la misma ip*
                 if($ip == $usuario->direccion_ip){
                     Auth::login($usuario);   
                     return redirect('/Inicio');
@@ -69,6 +69,7 @@ class authwp extends Controller
            return redirect('/login'); 
         }
         */
+        
     }
 
     function validar_sesion($rpe, $pass)

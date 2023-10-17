@@ -56,6 +56,10 @@ class roles_permisos extends Controller
 
     public function create_r(Request $request)
     {
+        $request->validate([
+            'nombre_rol' => 'required|string|unique:roles,name'
+        ]);
+
         Role::create(['name'=>$request->nombre_rol]);
         return redirect('/roles');
     }

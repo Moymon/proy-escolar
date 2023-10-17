@@ -102,7 +102,6 @@ Route::group(['middleware' => ['auth', 'role:Administrador|Otros 2',]] , functio
 
         Route::post('/create-user',[usuariosController::class,'create'])->name(
             'create-user');
-
     });
     /*Permisos de actualizar*/
     Route::group(['middleware' => ['permission:administrador.update']], function(){
@@ -135,7 +134,6 @@ Route::group(['middleware' => ['auth', 'role:Administrador|Otros 2',]] , functio
     Route::group(['middleware' => ['permission:administrador.update|administrador.create']], function(){
         Route::post('/get-roles-nombre',[roles_permisos::class,'getRolesNombre'])->name('getRolesNombre');
         Route::post('/update-roles',[roles_permisos::class,'guardarRoles'])->name('guardarRoles');
-
     });
 
 });

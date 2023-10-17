@@ -47,20 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //Listner para el CLICK: este es el evento principal de la interfaz, la mayoria de acciones suceden atraves de un click
-document.addEventListener("click", function (event) {
-    const target = event.target;
-
-    if (target.id === "asignarRolBoton"){
-        event.preventDefault();
-        openModalToAssignToAUser();
-
-    } else if (target.id === "btnGuardarRolXUsuarios") {
-        event.preventDefault();
-        saveRolForUser();
-    }  
-});
-
 function loadListenersForInterfaceRoles(){
+    content.addEventListener("click", function(event){
+        const target = event.target;
+
+        if (target.id === "asignarRolBoton"){
+            event.preventDefault();
+            openModalToAssignToAUser();
+        }
+
+    });
+
     contentRolSeleccionado.addEventListener('click', function(event){
         const target = event.target
     
@@ -145,6 +142,14 @@ function loadListenersForInterfaceRoles(){
             event.preventDefault();
             peticionAjaxGuardarPermisos();
     
+        } 
+    });
+
+    modalAsignaRolAUsuario.addEventListener('click', function(event){
+        const target = event.target;
+        if (target.id === "btnGuardarRolXUsuarios") {
+            event.preventDefault();
+            saveRolForUser();
         } 
     });
 }
@@ -327,7 +332,6 @@ function onclickModulo(target) {
 function muevePermisoEnListas(nombrePermiso, isAsignados) {
     let newPermissionsSelected = objectPer['newPermissionsSelected'];
     let newPermissionsDeleted = objectPer['newPermissionsDeleted'];
-    //Jorge D. R.M.
     const fuenteList = isAsignados ? 'permisosXRol_Asignados' : 'permisosXRol_NoAsignados';
     const destinoList = isAsignados ? 'permisosXRol_NoAsignados' : 'permisosXRol_Asignados';
 
@@ -418,7 +422,6 @@ function openModalForSave() {
 
 // Función para mostrar los resultados guardados
 function muestraResultadosGuardado() {
-    //JDRM
     btnGuardadoPermisos.disabled = true;
     if (objectPer.moduloSeleccionado) {
         muestraPermisos(objectPer.permisosXModulo);

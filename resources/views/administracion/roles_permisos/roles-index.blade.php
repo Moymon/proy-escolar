@@ -76,7 +76,7 @@
                             <input id="searchSideBarRoles" type="search" class="form-control rounded" placeholder="Buscar rol" aria-label="Search" aria-describedby="search-addon" />
                         </div>
                     </ul>
-                    <ul id="listaRoles" style="max-height:50vh;overflow:auto;" class="scrollRoles ulRoles list-unstyled components">
+                    <ul id="listaRoles" style="height:60vh;overflow:auto;" class="w-100 scrollRoles ulRoles list-unstyled components">
                         
                         @foreach ($roles as $rol)
                             <li class="liRoles" id="{{$rol->name}}" data-id="{{$rol->name}}">
@@ -279,6 +279,9 @@
                                 <div class="col-12">
                                     <label class="col-form-label">Nombre</label>
                                     <input class="form-control" type="text" name="nombre_rol">
+                                    @error('nombre_rol')
+                                        <p class="bg-red-500 text-danger my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -373,6 +376,7 @@
         const buscadorSidebar = sidebar.querySelector("#searchSideBarRoles");
 
         //Elementos de la ventana de permisos
+        const content = document.getElementById("content");
         const contentRolSeleccionado = document.getElementById("contentRolSeleccionado");
         const boxPermisosAsignados = contentRolSeleccionado.querySelector("#boxPermisosAsignados");
         const boxPermisosNoAsignados = contentRolSeleccionado.querySelector("#boxPermisosNoAsignados");
@@ -388,12 +392,6 @@
         const menuModulos = document.getElementById("menuModulos");
         const dropdown = menuModulos.querySelector("#dropdown-content");
 
-        //elementos del MODAL donde se muestran los permisos que se van a guardar o eliminar
-        const modalPermisos = document.getElementById("modalPermisos");
-        const modalListaPermisos = modalPermisos.querySelector("#modalListaPermisos");
-        const modalListaPermisosEliminados = modalPermisos.querySelector("#modalListaPermisosEliminados");
-        const btnGuardadoPermisosModal = modalPermisos.querySelector("#btnGuardadoPermisosModal");
-
         //Seccion de indices para los colores del los permisos
         const boxIndices = document.getElementById('boxIndices');
         const indiceAsignados = boxIndices.querySelector("#indiceAsignados");
@@ -401,9 +399,16 @@
         const indiceEliminados = boxIndices.querySelector("#indiceEliminados");
         const indiceNoAsiganados = boxIndices.querySelector("#indiceNoAsiganados");
 
+        
+        //elementos del MODAL donde se muestran los permisos que se van a guardar o eliminar
+        const modalPermisos = document.getElementById("modalPermisos");
+        const modalListaPermisos = modalPermisos.querySelector("#modalListaPermisos");
+        const modalListaPermisosEliminados = modalPermisos.querySelector("#modalListaPermisosEliminados");
+        const btnGuardadoPermisosModal = modalPermisos.querySelector("#btnGuardadoPermisosModal");
+
         //elementos de la secuencia de creacion de un NuevoRol
-        const nuevoRol = document.getElementById('nuevoRol');
-        const botonCrearRol = nuevoRol.querySelector("#botonCrearRol");
+        const modalNuevoRol = document.getElementById('nuevoRol');
+        const botonCrearRol = modalNuevoRol.querySelector("#botonCrearRol");
 
         //Botones en Modal Permamencia de Rol
         const modalConfirmacionDeCambio = document.getElementById("confirmacionDeCambio");
@@ -415,6 +420,7 @@
         
     </script>
 
+    <!--
     <script>
         $(document).ready(function (){
             $('.table').DataTable({
@@ -435,4 +441,5 @@
             });
         });    
     </script>
+    -->
 @stop
