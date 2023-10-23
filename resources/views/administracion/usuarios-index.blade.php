@@ -18,8 +18,19 @@
 @section('content')
     @if($errors->any())
         @foreach($errors->all() as $error)
-            <p style="color:red">Error en la solicitud. El registro {{$error}} ya existe </p>
+            <div class="alert alert-warning alert-dismissible default_cursor_cs">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                <i class="icon fas fa-exclamation-triangle" > Alerta </i>
+                Error en la solicitud. El registro {{$error}} ya existe
+            </div>
         @endforeach
+    @endif
+    @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible default_cursor_cs">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+            <i class="icon fas fa-check" > Éxito </i>
+            Solicitud realizada satisfactoriamente
+        </div>
     @endif
 </script>
     
@@ -902,6 +913,9 @@
                 padreInput.setAttribute("value",valor);
                 padreInput.setAttribute("name",idForm);
 
+                if(idForm === "idForm"){
+                    padreInput.setAttribute("readonly","readonly");
+                }
                 
                 editar.appendChild(padreInput);
             }

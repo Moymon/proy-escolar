@@ -13,6 +13,8 @@ use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
 use App\Http\Controllers\modelosPruebaCapExReg\CreacionDeUsuarios;
 use App\Http\Controllers\modelosPruebaCapExReg\PermisosYRoles;
 
+use Illuminate\Support\Facades\Redirect;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,19 +26,34 @@ use App\Http\Controllers\modelosPruebaCapExReg\PermisosYRoles;
 |
 */
 /*
-Route::get('/', function () {
-    return view('welcome');
+*/
+/*
+Route::get('/{algo}',function ($algo){
+    $ruta = '/'. strtolower($algo);
+
+    switch ($ruta){
+        case '/inicio':
+            return redirect('/Inicio');
+        break;    
+    }
 });*/
 
 //Auth::routes();
+/*Inicio o dashborad*/
+
+Route::get('/hola_mundo',function(){
+    echo 'prueba';
+});
+
+Route::get('/',[App\Http\Controllers\HomeController::class, 'inicio']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('inicio');
+
 
 /*Login chafa*/
 Route::post('/login_wp',[authwp::class,'login_without_password']);
 
 /*Otras rutas*/
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/Inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('Inicio');
 
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
 

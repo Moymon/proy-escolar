@@ -374,7 +374,7 @@ return [
         [
             'text'    => 'Dashborad',
             'icon'    => 'fas fa-home',
-            'url'     => 'Inicio',
+            'url'     => 'inicio',
         ],
         /****************************Licenciatura**********************************/
         [
