@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
+
+:root {
+    --fontPrimary: 'Open Sans', sans-serif;
+
+    --primaryHF: #004A98;
+    --secundaryHF: #00B2E3;
+
+    --primaryBG: #BBD5F1;
+    --secundaryBG: #F7F7F7;
+
+    --navitemHover: #109DCA;
+}
+
+/****************************************************************/
+
+/* Arreglo de vista general*/
+.content-header{
+    background-color: #f4f6f9;
+}
+.content, head, html, body{
+    background-color: #f4f6f9;
+    
+}
+
+/****************************************************************/
+
+/* BOTONES */
+.btn-primary { 
+    color: #FFFFFF; 
+    background-color: #004A98; 
+    border-color: #004A98; 
+} 
+   
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary:active, 
+.btn-primary.active, 
+.open .dropdown-toggle.btn-primary { 
+    color: #FFFFFF; 
+    background-color: #0b5ed7; 
+    border-color: #0b5ed7; 
+} 
+   
+.btn-primary:active, 
+.btn-primary.active, 
+.open .dropdown-toggle.btn-primary { 
+    background-image: none; 
+} 
+   
+.btn-primary.disabled, 
+.btn-primary[disabled], 
+fieldset[disabled] .btn-primary, 
+.btn-primary.disabled:hover, 
+.btn-primary[disabled]:hover, 
+fieldset[disabled] .btn-primary:hover, 
+.btn-primary.disabled:focus, 
+.btn-primary[disabled]:focus, 
+fieldset[disabled] .btn-primary:focus, 
+.btn-primary.disabled:active, 
+.btn-primary[disabled]:active, 
+fieldset[disabled] .btn-primary:active, 
+.btn-primary.disabled.active, 
+.btn-primary[disabled].active, 
+fieldset[disabled] .btn-primary.active { 
+    background-color: #004A98; 
+    border-color: #004A98; 
+} 
+   
+.btn-primary .badge { 
+    color: #004A98; 
+    background-color: #FFFFFF; 
+}
+
+
+.input-group button{
+    border-radius: 0px!important;
+} 
+
+/****************************************************************/
+
+/*INPUTS Y LABELS*/
+label{
+    font-weight: 400!important;
+}
+.form-label{
+    margin-bottom: 0px!important;
+}
+
+select, textarea, input{
+    border-radius: 0px!important;
+}
+
+.content-wrapper select, .content-wrapper textarea, .content-wrapper input, .content-wrapper input[type] {
+    border-color: gray;
+}
+
+.content-wrapper select:focus, .content-wrapper textarea:focus, .content-wrapper input:focus, .content-wrapper input[type]:focus {
+    border-color: var(--primaryHF)!important;
+    border-width: 2px!important;
+    box-shadow: none!important;
+    outline: 0 none;
+}
+
+/****************************************************************/
+
+/* TABLAS */
+thead{
+    background-color:  var(--primaryHF);
+    color: white;
+}
+
+/****************************************************************/
+
+/* MODALES */
+.modal-content{
+    
+}
+
+.modal-header{
+    border:none;
+}
+.modal-title{
+    text-align: center;
+    width: 100%;
+}
+
+.modal-footer{
+    border:none;
+}
+
+/****************************************************************/
+
+/* SIDEBAR */
+.main-sidebar, .brand-link{
+    background-color: var(--primaryHF)!important;
+}
+  
+.form-control-sidebar{
+    background-color: white!important;
+    color:black!important;
+}
+
+.form-control-sidebar:focus{
+    border-color: #007BFF!important;
+    border-width: 2px!important;
+    box-shadow: none!important;
+    outline: 0 none;
+}
+
+.btn-sidebar{
+    background-color: #007BFF!important;
+    border-color: #007BFF!important;
+    color: black;
+}
+
