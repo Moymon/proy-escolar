@@ -46,7 +46,6 @@ Route::get('/hola_mundo',function(){
 });
 
 Route::get('/',[App\Http\Controllers\HomeController::class, 'inicio']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('inicio');
 
 
@@ -169,6 +168,7 @@ Route::group(['middleware' => ['auth', 'role:Administrador|Otros 2',]] , functio
 
 
 /*------------*/
+/*
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -177,7 +177,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
+});*/
 
 /*Cerrar session*/
 Route::post('/cerrarsesion',[authwp::class,'logout']);

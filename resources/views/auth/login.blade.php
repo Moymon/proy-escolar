@@ -1,37 +1,56 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-        <x-validation-errors class="mb-4" />
+@if (session('status'))
+    <div class="mb-4 font-medium text-sm text-green-600">
+        {{ session('status') }}
+    </div>
+@endif
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
+<br>
+<br>
+<br>
+<div class="container-fluid" style="">
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-4">
+            <div class="card primary">
+                <div class="card-header">
+                    Sistema de información de la Facultad de Ingeniería
+                </div>
+                <form method="POST" action="/login_wp">
+                    @csrf
+                <div class="card-body">
+                    
+                        <div class="row">
+                            <div class="d-flex justify-content-center input-group">
+                                    <div class="col-3" >
+                                        <span class="form-control input-group-text">RPE</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="form-control" type="number" name="rpe" placeholder="123456" required>
+                                    </div>                
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="d-flex justify-content-center input-group">
+                                <div class="col-3">
+                                    <span class="form-control input-group-text">Contraseña</span>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" type="password" name="password" placeholder="******" required>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="card-footer">
+                    <div align="right">
+                        <button class="btn btn-primary" type="submit">Iniciar Sesion</button>
+                    </div>
+                </div>
+                </form>
             </div>
-        @endif
-
-        <form method="POST" action="/login_wp">
-            @csrf
-
-            <div>
-                <x-label for="rpe" value="{{ __('RPE') }}" />
-                <x-input id="rpe" class="block mt-1 w-full" type="number" name="rpe" :value="old('rpe')" required autofocus autocomplete="rpe" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Contraseña') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-
-            <div class="flex items-center justify-end mt-4">
-
-                <x-button class="ml-4">
-                    {{ __('Ingresar') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        </div>
+    </div>    
+</div>
