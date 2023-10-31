@@ -18,6 +18,8 @@ class authwp extends Controller
         $usuario = User::where('rpe',$request->rpe)->first();
         $datosG = datosGenModel::find(1);
         $ip = $request->ip();
+
+        $message = [];
         
         /*login directo*/
         
@@ -54,19 +56,38 @@ class authwp extends Controller
                 /*Verificar si se encuentra en la misma ip*/
                 if($ip == $usuario->direccion_ip){
                     Auth::login($usuario);   
-                    return redirect('/Inicio');
-                }else{return redirect('/login');}
+                    return redirect('/inicio');
+                }else{
+                    $message =[ 
+                        'Usuario' => 'Sin autorización' ,
+                    ];
+                    return redirect('/login')->withErrors($message)->withInput();
+                }
             }else{
                 /*Comprobar si existe ese usuario y cuenta con la misma ip*/
                 $resultado = $this->validar_sesion($request->rpe,$request->password);
-                if(($resultado == 1) && $ip == ($usuario->direccion_ip)){
-                    Auth::login($usuario);
-                    return redirect('/Inicio');
-                }else{return redirect('/login');}
+                if(($resultado == 1) ){
+                    if($ip == ($usuario->direccion_ip)){
+                        Auth::login($usuario);
+                        return redirect('/inicio');
+                    }else{
+                        $message =[ 
+                            'no_ip' => 'Usuario no autorizado' ,
+                        ];
+                        return redirect('/login')->withErrors($message)->withInput();
+                    }
+                }else{
+                    $message =[ 
+                        'ambos' => 'RPE y/o contraseñas incorrectas' ,
+                    ];
+                    return redirect('/login')->withErrors($message)->withInput();
+                }
             }
-            return redirect('/login');
         }else{
-           return redirect('/login'); 
+            $message =[ 
+                'ambos' => 'RPE y/o contraseñas incorrectas' ,
+            ];
+            return redirect('/login')->withErrors($message)->withInput();
         }
                 
     }

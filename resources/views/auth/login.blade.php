@@ -5,6 +5,15 @@
         {{ session('status') }}
     </div>
 @endif
+@if($errors->any())
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger alert-dismissible default_cursor_cs">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+            <i class="icon fas fa-user-slash" > Alerta </i>
+            {{$error}}
+        </div>
+    @endforeach
+@endif
 
 <br>
 <br>

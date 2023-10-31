@@ -46,7 +46,7 @@ Route::get('/hola_mundo',function(){
 });
 
 Route::get('/',[App\Http\Controllers\HomeController::class, 'inicio']);
-Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('inicio');
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio']);
 
 
 /*Login chafa*/
