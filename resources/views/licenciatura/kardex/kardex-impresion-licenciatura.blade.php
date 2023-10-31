@@ -21,70 +21,77 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-1">
-                <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
+
+        <div class="row gutters-sm">
+            <div class="col-sm-2 mb-3 d-flex align-items-start justify-content-start pr-0">
+                <div style="width: 133px;">
+                    <div style="height: 133px;">
+                        <img src="https://picsum.photos/200/300" class="img-fluid" alt="" style="width: 133px; height: 133px;">
+                    </div>
+                </div>
             </div>
-            <div class="col-11">
-                <div class="row">
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label>Clave UASLP</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                                <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>    
-                            </div>  
+
+            <div class="col-sm-10 mb-3 pl-0">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Clave UASLP</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="cve_unica" name="cve_unica">
+                            <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>    
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="form-group col-md-2">
                         <label>Situación</label>
-                        <input type="text" class="form-control" id="cve_unica" name="situacion" disabled>   
+                        <input type="text" class="form-control" id="cve_unica" name="situacion" disabled> 
                     </div>
-                    <div class="col-2">
-                        <label class="form-label">Fecha de situación</label>
-                        <input type="date" class="form-control" id="cve_unica" name="fecha_situacion" disabled>    
+                    <div class="form-group col-md-2">
+                        <label>Fecha de situación</label>
+                        <input type="date" class="form-control" id="cve_unica" name="fecha_situacion" disabled>  
                     </div>
-                    <div class="col-2">
+                    <div class="form-group col-md-2">
                         <label>Condición</label>
-                        <input type="text" class="form-control" id="cve_unica" name="Condicion" disabled>   
+                        <input type="text" class="form-control" id="cve_unica" name="Condicion" disabled> 
                     </div>
-                    <div class="col-2">
+                    <div class="form-group col-md-3">
                         <label>Clave Ingeniería</label>
                         <input type="number" class="form-control" name="ingenieria" disabled> 
                     </div>
-                    <div class="col-3">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
                         <label>Nombre</label>
                         <input type="text" class="form-control" name="domiclio" disabled>
                     </div>
-                    <div class="col-3">
+                    <div class="form-group col-md-4">
                         <label>Asesor</label>
-                        <input type="text" class="form-control" name="colonia" disabled>    
+                        <input type="text" class="form-control" name="colonia" disabled> 
                     </div>
-                    <div class="col-3">
+                    <div class="form-group col-md-4">
                         <label>Carrera</label>
                         <input type="text" name="cp" class="form-control" disabled>
                     </div>
                 </div>
             </div>
-        </div><!--Fin row Primera Seccion-->
+        </div>
+
+
         <br>
-        <div class="row">
-            <div class="col-6">
+        <div class="form-row">
+            <div class="form-group col-md-6">
                 <label>Aprobo 45 Créditos en 1 y 2 Semestres</label>
-                <div class="col-2">
+                <div class="col-2 p-0">
                     <input class="form-control" type="text" name="" disabled>    
                 </div>
-                
             </div>
-            <div class="col-6">
+            <div class="form-group col-md-6">
                 <label>Aprobo 45 Créditos en 3er Semestre</label>
-                <div class="col-2">
+                <div class="col-2 p-0">
                     <input class="form-control" type="text" name="" disabled>
                 </div>
             </div>
         </div>
         <br>
-        <br>
+
         <div class="row"> <!--Card para las tabs-->
            <div class="col-12 card">
                 <div class="card-title">

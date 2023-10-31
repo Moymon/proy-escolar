@@ -260,7 +260,7 @@
 
 @section('css')
 <style>
-        label{
+    label{
         font-weight: 500!important;
     }
 
