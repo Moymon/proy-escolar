@@ -7,13 +7,20 @@ use App\Http\Controllers\PDFs\PDFController;
 use App\Http\Controllers\usuarios\usuariosController;
 use App\Http\Controllers\administracion\datosGenerales;
 
-
 use App\Http\Controllers\rolesypermisos\roles_permisos;
 use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
 use App\Http\Controllers\modelosPruebaCapExReg\CreacionDeUsuarios;
 use App\Http\Controllers\modelosPruebaCapExReg\PermisosYRoles;
 
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Routing\Route as IlluminateRoute;
+use App\Validators\CaseInsensitiveUriValidator;
+use Illuminate\Routing\Matching\UriValidator;
+
+$validators = IlluminateRoute::getValidators();
+$validators[]= new CaseInsensitiveUriValidator;
+IlluminateRoute::$validators = array_filter($validators, function($validator) { 
+  return get_class($validator) != UriValidator::class;
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -40,19 +47,13 @@ Route::get('/{algo}',function ($algo){
 
 //Auth::routes();
 /*Inicio o dashborad*/
-
-Route::get('/hola_mundo',function(){
-    echo 'prueba';
-});
-
 Route::get('/',[App\Http\Controllers\HomeController::class, 'inicio']);
-Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio']);
-
 
 /*Login chafa*/
 Route::post('/login_wp',[authwp::class,'login_without_password']);
 
 /*Otras rutas*/
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('inicio');
 
 Route::post('/crudAlumno',[App\Http\Controllers\alumnosController::class,'crud']);
 

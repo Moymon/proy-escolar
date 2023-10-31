@@ -13,11 +13,10 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-1">
+
+    <div class="form-row mb-5">
+        <div class="form-group col-md-3">
             <label class="m-0">Ciclo Escolar: </label>
-        </div>
-        <div class="col-2">
             <select class="m-0 form-control form-select">
                 <option></option>
                 <option></option>
@@ -26,12 +25,11 @@
                 <option></option>
             </select>
         </div>
-        <div class="col-2">
-            <button type="button" class="btn-sm bg-dark">Buscar</button>
+        <div class="form-group col-md-2 d-flex align-items-end">
+            <button type="button" class="btn btn-primary w-100">Buscar</button>
         </div>
     </div>
 
-    <br><br><br>
 
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -134,74 +132,68 @@
                 </tbody>
             </table>
             <br>
-            <div class="row">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-6">
-                            <label class="form-label">Detalle del Alumno:</label>
-                            <textarea class="form-control" rows="5"></textarea>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Aclaración:</label>
-                            <textarea class="form-control" rows="5"></textarea> 
-                        </div>        
-                    </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label class="form-label">Detalle del Alumno:</label>
+                    <textarea class="form-control" rows="5"></textarea>
                 </div>
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-3">
-                            <label class="form-label">Kardex Corregido:</label>
-                            <select class="form-control form-select">
-                                <option></option>
-                                <option></option>
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Estatus de la corrección:</label>
-                            <select class="form-control form-select">
-                                <option></option>
-                                <option></option>
-                            </select>
-                        </div>  
-                    </div>
+                <div class="form-group col-md-3">
+                    <label class="form-label">Aclaración:</label>
+                    <textarea class="form-control" rows="5"></textarea> 
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="form-label">Kardex Corregido:</label>
+                    <select class="form-control form-select">
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="form-label">Estatus de la corrección:</label>
+                    <select class="form-control form-select">
+                        <option></option>
+                        <option></option>
+                    </select>
                 </div>
             </div>
+
             <br>
+
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn-sm bg-dark m-1">Guardar</button>
-                <button type="button" class="btn-sm bg-dark m-1">Modificar Kardex</button>
+                <button type="button" class="btn btn-primary m-1">Modificar Kardex</button>
+                <button type="button" class="btn btn-success m-1">Guardar</button>
             </div>
+
         </div> 
 
         <!--consultas-->
         <div class="p-3 tab-pane fade show" id="nav-consultas" role="tabpanel" aria-labelledby="nav-home-tab">
-            <br>
-                <div class="row">
-                    <div class="col-1">
-                        <label class="form-label">Clave UASLP:</label>
-                        <div class="input-group-append">
-                           <input class="form-control" type="" name=""> 
-                           <button class="btn btn-info"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <label class="form-label">Nombre</label>
-                        <input class="form-control" type="" name="" disabled>
-                    </div>
-                    <div class="col-2">
-                        <label class="form-label">Clave Ingenieria:</label>
-                        <input class="form-control" type="" name="" disabled>
-                    </div>
-                    <div class="col-2">
-                        <label class="form-label">Ciclo Escolar</label>
-                        <input class="form-control" type="" name="" disabled>
-                    </div>
-                    <div class="col-2">
-                        <label class="form-label">Carrera</label>
-                        <input class="form-control" type="" name="" disabled>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label>Clave UASLP</label>
+                    <div class="input-group-append">
+                       <input class="form-control"> 
+                       <button class="btn btn-info"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
-            <br>
+                <div class="form-group col-md-3">
+                    <label>Nombre</label>
+                    <input class="form-control" type="" name="" disabled>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Clave Ingenieria</label>
+                    <input class="form-control" type="" name="" disabled>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Ciclo Escolar</label>
+                    <input class="form-control" type="" name="" disabled>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Carrera</label>
+                    <input class="form-control" disabled>
+                </div>
+            </div>
             <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
                 <thead> 
                     <tr>
