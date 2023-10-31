@@ -80,7 +80,7 @@ class usuariosController extends Controller
             ]);
         }
 
-        return redirect('/usuarios');
+        return redirect('/usuarios')->with('success','Successfully');
     }
 
     /**
@@ -159,12 +159,35 @@ class usuariosController extends Controller
 
     public function edit_any(Request $request){
         var_dump($request->all());
-        //$usuario = User::where("rpe",$request->rpeForm)->first();
+        $usuario = User::where("id",$request->idForm)->first();
+        $succes ="corecto";
+        //var_dump($usuario);
 
         /*Consulta para comprobar que no existe el mismo id en otro registro*/
-        //$response = DB::table('users')->select('rpe')->where('rpe','=',$usuario->rpe)->where('id','<>',$->id)->get();
+        //$response = DB::table('users')->select('rpe')->where('rpe',$request->rpeForm)->where('id','<>',$usuario->id)->get();
+        $response = User::where('rpe',$request->rpeForm)->where('id','<>',$usuario->id)->orWhere('direccion_ip',$request->direccion_ipForm)->where('id','<>',$usuario->id)->first();
 
         //var_dump($response);
+
+        if($response){
+            //echo 'encontre uno igual';
+            $messages = [
+                'rpeForm' => '[ RPE: ' . $request->rpeForm . ' ]',
+                'direccion_ipForm' => '[ IP: ' . $request->direccion_ipForm . ' ]',
+            ];
+            return redirect('/usuarios')->withErrors($messages)->withInput();
+        }else{
+            //echo 'No hay ninguno igual';
+            $usuario->rpe = $request->rpeForm;
+            $usuario->nombre = $request->nombreForm;
+            $usuario->apellido_ma = $request->apellido_maForm;
+            $usuario->apellido_pa = $request->apellido_paForm;
+            $usuario->correo = $request->correoForm;
+            $usuario->direccion_ip = $request->direccion_ipForm;
+            $usuario->save();
+
+            return redirect("/usuarios")->with('success','Successfully');
+        }
 
         /*
         if($usuario->direccion_ip == $request->direccion_ipForm){

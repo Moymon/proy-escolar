@@ -12,6 +12,7 @@ use App\Http\Controllers\modelosPruebaCapExReg\ExamenEjemplo;
 use App\Http\Controllers\modelosPruebaCapExReg\CreacionDeUsuarios;
 use App\Http\Controllers\modelosPruebaCapExReg\PermisosYRoles;
 
+
 use Illuminate\Routing\Route as IlluminateRoute;
 use App\Validators\CaseInsensitiveUriValidator;
 use Illuminate\Routing\Matching\UriValidator;
@@ -21,6 +22,8 @@ $validators[]= new CaseInsensitiveUriValidator;
 IlluminateRoute::$validators = array_filter($validators, function($validator) { 
   return get_class($validator) != UriValidator::class;
 });
+
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,19 +36,19 @@ IlluminateRoute::$validators = array_filter($validators, function($validator) {
 |
 */
 /*
-Route::get('/', function () {
-    return view('welcome');
-});*/
+*/
 
 //Auth::routes();
+/*Inicio o dashborad*/
+
+Route::get('/',[App\Http\Controllers\HomeController::class, 'inicio']);
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'inicio'])->name('inicio');
+
 
 /*Login chafa*/
 Route::post('/login_wp',[authwp::class,'login_without_password']);
 
 /*Otras rutas*/
-Route::get('/', function (){
-    return redirect(route('inicio'));
-});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -165,6 +168,7 @@ Route::group(['middleware' => ['auth', 'role:Administrador|Otros 2',]] , functio
 
 
 /*------------*/
+/*
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -173,7 +177,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
+});*/
 
 /*Cerrar session*/
 Route::post('/cerrarsesion',[authwp::class,'logout']);
