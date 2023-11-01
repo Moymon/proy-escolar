@@ -35,15 +35,6 @@ IlluminateRoute::$validators = array_filter($validators, function($validator) {
 /*
 */
 /*
-Route::get('/{algo}',function ($algo){
-    $ruta = '/'. strtolower($algo);
-
-    switch ($ruta){
-        case '/inicio':
-            return redirect('/Inicio');
-        break;    
-    }
-});*/
 
 //Auth::routes();
 /*Inicio o dashborad*/
