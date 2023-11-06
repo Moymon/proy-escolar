@@ -13,11 +13,9 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-1">
-            <label class="m-0">Ciclo Escolar: </label>
-        </div>
-        <div class="col-2">
+    <div class="form-row mb-5">
+        <div class="form-group col-md-3">
+            <label class="m-0">Semestre: </label>
             <select class="m-0 form-control form-select">
                 <option></option>
                 <option></option>
@@ -26,8 +24,8 @@
                 <option></option>
             </select>
         </div>
-        <div class="col-2">
-            <button type="button" class="btn-sm bg-dark">Buscar</button>
+        <div class="form-group col-md-2 d-flex align-items-end">
+            <button type="button" class="btn btn-primary w-100">Buscar</button>
         </div>
     </div>
 
@@ -223,6 +221,58 @@
                 <option>Posgrado 1</option>
                 <option>Posgrado 2</option>
             </select>
+            <br>
+            <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
+                <thead> 
+                    <tr>
+                        <th>Folio</th>
+                        <th>Clave UASLP</th>
+                        <th>Nombre</th>
+                        <th>Posgrado</th>
+                        <th>Fecha y Hora Reg</th>
+                        <th>Estado</th>
+                        <th>Semestre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table> 
         </div>
     </div>
 
@@ -234,7 +284,7 @@
       <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Detalles de Verificación</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

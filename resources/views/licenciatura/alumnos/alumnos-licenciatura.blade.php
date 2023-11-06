@@ -1574,7 +1574,9 @@
 
         });
     }).columns.adjust(); 
+</script>
 
+<script>
     const $imagen = document.querySelector('#foto'), $imagenPreview = document.querySelector('#imagenPreview');
 
     $imagen.addEventListener("change",() =>{
