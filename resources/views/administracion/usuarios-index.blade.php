@@ -3,8 +3,10 @@
 
 @section('title', 'Kardex')
 @section('plugins.Sweetalert2', true)
-@section('content_header')
 @section('plugins.Datatables',true)
+
+@section('content_header')
+
 
 <div class="container-fluid">
     <div class="row mb-2">

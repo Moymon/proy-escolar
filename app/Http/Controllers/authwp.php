@@ -23,9 +23,9 @@ class authwp extends Controller
         
         /*login directo*/
         
-        /*
+        
         Auth::login($usuario);
-        return redirect('/Inicio');*/
+        return redirect('/Inicio');
         
 
         /*Login con contraseña maestra y usuario*/
