@@ -1549,6 +1549,25 @@
 
 @section('js')
 <script>
+    const $imagen = document.querySelector('#foto'), $imagenPreview = document.querySelector('#imagenPreview');
+
+    $imagen.addEventListener("change",() =>{
+        const archivo = $imagen.files;
+        /*Si no hay datos del archivo no hacemos nada*/
+        if (!archivo || !archivo.length) {
+            $imagen.src = "";
+            return;
+        }else{
+            /*Tomamos el primer archivo*/
+            const archivo1 = archivo[0];
+            const blobObject = URL.createObjectURL(archivo[0]);
+            $imagenPreview.src = blobObject;
+        }
+
+    });
+</script>
+
+<script>
     $(document).ready(function (){
         $('.table').DataTable({
             language:{
@@ -1567,25 +1586,7 @@
 
         });
     }); 
-
-
 </script>
-<script>
-    const $imagen = document.querySelector('#foto'), $imagenPreview = document.querySelector('#imagenPreview');
 
-    $imagen.addEventListener("change",() =>{
-        const archivo = $imagen.files;
-        /*Si no hay datos del archivo no hacemos nada*/
-        if (!archivo || !archivo.length) {
-            $imagen.src = "";
-            return;
-        }else{
-            /*Tomamos el primer archivo*/
-            const archivo1 = archivo[0];
-            const blobObject = URL.createObjectURL(archivo[0]);
-            $imagenPreview.src = blobObject;
-        }
-
-    });
 </script>
 @stop

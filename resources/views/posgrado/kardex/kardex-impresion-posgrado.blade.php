@@ -1,319 +1,319 @@
 @extends('adminlte::page')
-@extends('modalAlumnos')
-@extends('subirFotoPerfil')
+
+
 
 @section('title', 'Kardex')
 
 @section('content_header')
 <div class="container-fluid">
-    <div class="mb-2 d-flex align-items-center justify-content-between">
-        <div>
+    <div class="row mb-2">
+        <div class="col-6">
             <h1>Kardex</h1>
         </div>
-        <div>
-            <button class="btn btn-primary form-control" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+        <div class="col-6">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+            </div>
         </div>
     </div>
 </div>
 @stop
 
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <div class="row gutters-sm mb-5">
-            <div class="col-sm-1 mb-3 d-flex align-items-start justify-content-start">
-                <div style="width: 133px;" class="border">
-                    <div style="height: 133px;">
-                        <img src="{{ asset('img/perfil.png') }}" class="img-fluid" alt="" style="width: 133px; height: 133px;">
-                    </div>
-                    <button class="w-100 btn btn-sm btn-primary" style="border-radius:0px;" data-toggle="modal" data-target="#modalSubirImagen"><i class="fas fa-camera"></i></button>
-                </div>
-            </div>
-
-            <div class="col-sm-11 mb-3 pl-3">
+<div class="">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
                 <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label>Clave UASLP</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>    
-                        </div> 
+                    <div class="col-1">
+                        <img src="{{asset('img/perfil.png')}}" alt="">
                     </div>
-                    <div class="form-group col-md-4">
-                        <label>Alumno </label>
-                        <input class="form-control" id="nombreAlumno" type="text" name="" value="Boix Salazar Julio Alberto" disabled>
+                    <div class="col-11 form-row">
+                        <div class="form-group col-mb-2">
+                            <label>Clave UASLP</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="cve_unica" name="cve_unica">
+                                <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>    
+                            </div>
+                        </div>
+                        <div class="form-group col-mb-3">
+                            <label>Alumno </label>
+                            <input class="form-control" id="nombreAlumno" type="text" name="" value="Boix Salazar Julio Alberto" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Posgrado</label>
+                            <select id="grado" class="form-control form-select">
+                                <option>Posgrado 1</option>
+                                <option>Posgrado 2</option>
+                            </select> 
+                        </div>
+                        <div class="form-group col-mb-3">
+                            <label>Opción</label>
+                            <input type="text" class="form-control" id="opcion" name="" value="Mecatrónica y Sistemas Mecánicos" disabled>    
+                        </div>
+                        <div class="form-group col-mb-3">
+                            <label>Estado</label>
+                            <input type="text" class="form-control" id="estatus" name="" value="AI" disabled>   
+                        </div>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label>Posgrado</label>
-                        <select id="grado" class="form-control form-select">
-                            <option>Posgrado 1</option>
-                            <option>Posgrado 2</option>
-                        </select>   
+                </div><!--Fin primera parte-->
+            </div>
+
+            <div class="container" align="center">
+                <div class="card" >
+                    <div class="card-header">
+                        <div class="d-flex justify-content-center">
+                            <label><h3>Estadísticas</h3></label>
+                        </div>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label>Opción</label>
-                        <input type="text" class="form-control" id="opcion" name="" value="Mecatrónica y Sistemas Mecánicos" disabled>    
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-row d-flex justify-content-center">
+                                    <div class="col-2 m-1">
+                                        <div class="form-group">
+                                            <label >Promedio General</label>
+                                            <input type="text" class="form-control" id="prom_general" value="8.57" readonly> 
+                                        </div>
+                                    </div>
+                                    <div class="col-3 m-1">
+                                        <div class="form-group">
+                                            <label >Promedio General Aprobatorio</label>
+                                            <input type="text" class="form-control" id="prom_gral_apro" value="8.57" disabled> 
+                                        </div>
+                                    </div>
+                                    <div class="col-2 m-1">
+                                        <div class="form-group">
+                                            <label>Total Créditos Aprobados</label>
+                                            <input type="text" id="total_cre_apro" class="form-control" value="40" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 m-3">
+                                        <form id="formPDFKardexPosgrado" method="POST" action="{{route('imprimeKardex')}}">
+                                            @csrf
+                                            <button id="buttonCrearPdf" class="btn bg-dark">Crear PDF</button>
+                                        </form>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label>Estado</label>
-                        <input type="text" class="form-control" id="estatus" name="" value="AI" disabled>   
+                </div><!--Segunda card-->
+            </div><!---->
+            <br>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="tablaDatosCalificaciones table table-bordered table-striped dataTable dtr-inline">
+                                        <thead>
+                                            <tr align="center"><th colspan="6"  class="table-secondary">Semestre 2016-2017/II</th></tr>
+                                            <tr class="encabezados">
+                                                <th>No.</th>
+                                                <th>Materia</th>
+                                                <th>Tipo</th>
+                                                <th>Calificación</th>
+                                                <th>Fecha</th>
+                                                <th>Creditos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Metodos de Optimizacion</td>
+                                                <td>Complementaria</td>
+                                                <td>7.5</td>
+                                                <td>22-06-2017</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Procesos de Manufactura Avanzados (CAM)</td>
+                                                <td>Complementaria</td>
+                                                <td>7.0</td>
+                                                <td>22-06-2017</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Seminario I</td>
+                                                <td>Seminario</td>
+                                                <td>10.0</td>
+                                                <td>22-06-2017</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr class="promedios">
+                                                <td></td>
+                                                <td></td>
+                                                <td class="table-secondary" align="right">Promedio del Periodo:</td>
+                                                <td>8.17</td>
+                                                <td class="table-secondary" >Creditos Periodo:</td>
+                                                <td>17</td>
+                                            </tr>
+                                            <tr class="promedios">
+                                                <td></td>
+                                                <td></td>
+                                                <td class="table-dark" align="right">Promedio Aprobatorio del Periodo:</td>
+                                                <td>8.17</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="tablaDatosCalificaciones table table-bordered table-striped dataTable dtr-inline">
+                                        <thead>
+                                            <tr align="center"><th colspan="6"  class="table-secondary">Semestre 2017-2018/I</th></tr>
+                                            <tr class="encabezados">
+                                                <th>No.</th>
+                                                <th>Materia</th>
+                                                <th>Tipo</th>
+                                                <th>Calificación</th>
+                                                <th>Fecha</th>
+                                                <th>Creditos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Metodos de Optimizacion</td>
+                                                <td>Complementaria</td>
+                                                <td>7.5</td>
+                                                <td>22-06-2017</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Procesos de Manufactura Avanzados (CAM)</td>
+                                                <td>Complementaria</td>
+                                                <td>7.0</td>
+                                                <td>22-06-2017</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Seminario I</td>
+                                                <td>Seminario</td>
+                                                <td>10.0</td>
+                                                <td>22-06-2017</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr class="promedios">
+                                                <td></td>
+                                                <td></td>
+                                                <td class="table-secondary" align="right">Promedio del Periodo:</td>
+                                                <td>8.17</td>
+                                                <td class="table-secondary" >Creditos Periodo:</td>
+                                                <td>17</td>
+                                            </tr>
+                                            <tr class="promedios">
+                                                <td></td>
+                                                <td></td>
+                                                <td class="table-dark" align="right">Promedio Aprobatorio del Periodo:</td>
+                                                <td>8.17</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="tablaDatosCalificaciones table table-bordered table-striped dataTable dtr-inline">
+                                        <thead>
+                                            <tr align="center"><th colspan="6"  class="table-secondary">Semestre 2017-2018/II</th></tr>
+                                            <tr class="encabezados">
+                                                <th>No.</th>
+                                                <th>Materia</th>
+                                                <th>Tipo</th>
+                                                <th>Calificación</th>
+                                                <th>Fecha</th>
+                                                <th>Creditos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Metodos de Optimizacion</td>
+                                                <td>Complementaria</td>
+                                                <td>7.5</td>
+                                                <td>22-06-2017</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Procesos de Manufactura Avanzados (CAM)</td>
+                                                <td>Complementaria</td>
+                                                <td>7.0</td>
+                                                <td>22-06-2017</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Seminario I</td>
+                                                <td>Seminario</td>
+                                                <td>10.0</td>
+                                                <td>22-06-2017</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr class="promedios">
+                                                <td></td>
+                                                <td></td>
+                                                <td class="table-secondary" align="right">Promedio del Periodo:</td>
+                                                <td>8.17</td>
+                                                <td class="table-secondary" >Creditos Periodo:</td>
+                                                <td>17</td>
+                                            </tr>
+                                            <tr class="promedios">
+                                                <td></td>
+                                                <td></td>
+                                                <td class="table-dark" align="right">Promedio Aprobatorio del Periodo:</td>
+                                                <td>8.17</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="text-center">Estadísticas</h3>
-            </div>
-            <div class="card-body">
-                <div class="row d-flex flex-row align-items-center justify-content-end">
-                    <div class="form-group col-md-2">
-                        <div class="input-group">
-                            <label class="input-group-text" >Promedio General:</label>
-                            <input type="text" class="form-control" id="prom_general" value="8.57" readonly> 
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-text">Promedio General Aprobatorio</label>
-                            <input type="text" class="form-control" id="prom_gral_apro" value="8.57" disabled> 
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <div class="input-group">
-                            <label class="input-group-text">Total Créditos Aprobados</label>
-                            <input type="text" id="total_cre_apro" class="form-control" value="40" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-1 d-flex align-items-end m-0">
-                        <form id="formPDFKardexPosgrado" method="POST" action={{route('imprimeKardex')}}>
-                            @csrf
-                            <button id="buttonCrearPdf" class="btn btn-primary w-100">Crear PDF</button>
-                        </form>   
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
+    </div>
+</div>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="tablaDatosCalificaciones table table-bordered table-striped dataTable dtr-inline">
-                        <thead>
-                            <tr align="center"><th colspan="6"  class="table-secondary">Semestre 2016-2017/II</th></tr>
-                            <tr class="encabezados">
-                                <th>No.</th>
-                                <th>Materia</th>
-                                <th>Tipo</th>
-                                <th>Calificación</th>
-                                <th>Fecha</th>
-                                <th>Creditos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Metodos de Optimizacion</td>
-                                <td>Complementaria</td>
-                                <td>7.5</td>
-                                <td>22-06-2017</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Procesos de Manufactura Avanzados (CAM)</td>
-                                <td>Complementaria</td>
-                                <td>7.0</td>
-                                <td>22-06-2017</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Seminario I</td>
-                                <td>Seminario</td>
-                                <td>10.0</td>
-                                <td>22-06-2017</td>
-                                <td>1</td>
-                            </tr>
-                            <tr class="promedios">
-                                <td></td>
-                                <td></td>
-                                <td class="table-secondary" align="right">Promedio del Periodo:</td>
-                                <td>8.17</td>
-                                <td class="table-secondary" >Creditos Periodo:</td>
-                                <td>17</td>
-                            </tr>
-                            <tr class="promedios">
-                                <td></td>
-                                <td></td>
-                                <td class="table-dark" align="right">Promedio Aprobatorio del Periodo:</td>
-                                <td>8.17</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <br>
-                <div class="table-responsive">
-                    <table class="tablaDatosCalificaciones table table-bordered table-striped dataTable dtr-inline">
-                        <thead>
-                            <tr align="center"><th colspan="6"  class="table-secondary">Semestre 2017-2018/I</th></tr>
-                            <tr class="encabezados">
-                                <th>No.</th>
-                                <th>Materia</th>
-                                <th>Tipo</th>
-                                <th>Calificación</th>
-                                <th>Fecha</th>
-                                <th>Creditos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Metodos de Optimizacion</td>
-                                <td>Complementaria</td>
-                                <td>7.5</td>
-                                <td>22-06-2017</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Procesos de Manufactura Avanzados (CAM)</td>
-                                <td>Complementaria</td>
-                                <td>7.0</td>
-                                <td>22-06-2017</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Seminario I</td>
-                                <td>Seminario</td>
-                                <td>10.0</td>
-                                <td>22-06-2017</td>
-                                <td>1</td>
-                            </tr>
-                            <tr class="promedios">
-                                <td></td>
-                                <td></td>
-                                <td class="table-secondary" align="right">Promedio del Periodo:</td>
-                                <td>8.17</td>
-                                <td class="table-secondary" >Creditos Periodo:</td>
-                                <td>17</td>
-                            </tr>
-                            <tr class="promedios">
-                                <td></td>
-                                <td></td>
-                                <td class="table-dark" align="right">Promedio Aprobatorio del Periodo:</td>
-                                <td>8.17</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <br>
-
-                <div class="table-responsive">
-                    <table class="tablaDatosCalificaciones table table-bordered table-striped dataTable dtr-inline">
-                        <thead>
-                            <tr align="center"><th colspan="6"  class="table-secondary">Semestre 2017-2018/II</th></tr>
-                            <tr class="encabezados">
-                                <th>No.</th>
-                                <th>Materia</th>
-                                <th>Tipo</th>
-                                <th>Calificación</th>
-                                <th>Fecha</th>
-                                <th>Creditos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Metodos de Optimizacion</td>
-                                <td>Complementaria</td>
-                                <td>7.5</td>
-                                <td>22-06-2017</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Procesos de Manufactura Avanzados (CAM)</td>
-                                <td>Complementaria</td>
-                                <td>7.0</td>
-                                <td>22-06-2017</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Seminario I</td>
-                                <td>Seminario</td>
-                                <td>10.0</td>
-                                <td>22-06-2017</td>
-                                <td>1</td>
-                            </tr>
-                            <tr class="promedios">
-                                <td></td>
-                                <td></td>
-                                <td class="table-secondary" align="right">Promedio del Periodo:</td>
-                                <td>8.17</td>
-                                <td class="table-secondary" >Creditos Periodo:</td>
-                                <td>17</td>
-                            </tr>
-                            <tr class="promedios">
-                                <td></td>
-                                <td></td>
-                                <td class="table-dark" align="right">Promedio Aprobatorio del Periodo:</td>
-                                <td>8.17</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div><!--fin card body-->    
-</div><!--fin card-->
-
+@include('modalAlumnos')
+@include('subirFotoPerfil')
 @stop
 
+@section('footer')
+    <div></div>
+@stop
 
 @section('css')
     
 @stop
 
 @section('js')
-    <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script> 
-    <!--
-    <script src="{asset('js/Administracion/PDFs/kardex-impresion-posgrado.js')}}"></script>
-    -->
-    <script>
-        const imprimeKardex = @json(route('imprimeKardex'));
-    </script>
-    <script>/*
-        $(document).ready(function (){
-            $('.table').DataTable({
-                language:{
-                    "emptyTable" : "No hay información",
-                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                    "lengthMenu" : "Mostrar _MENU_ resultados",
-                    "search"     : "Buscar",
-                    "zeroRecords": "Resultados no encontrados",
-                    "paginate":{
-                        "first"  :"Primero",
-                        "last"   :"Ultimo",
-                        "next"   :"Siguiente",
-                        "previous":"Anterior"
-                    }
-                },
-            });
-        });  */  
-    </script>
 
     <script>
         const $imagen = document.querySelector('#foto'), $imagenPreview = document.querySelector('#imagenPreview');
@@ -334,7 +334,6 @@
         });
     </script>
 	
-    
 	<script>
         //Obtenemos el form en el cual se mnadara la informacion de la pantalla, nombre, calificaiones, etc.
         const formPDFKardexPosgrado = document.getElementById("formPDFKardexPosgrado");
@@ -480,5 +479,4 @@
             });
         }
     </script>
-    
 @stop

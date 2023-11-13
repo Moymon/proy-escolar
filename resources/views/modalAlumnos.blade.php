@@ -112,5 +112,5 @@
                 },
             });
         });    
-    </script>  
+    </script>
 @stop

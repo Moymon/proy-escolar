@@ -186,3 +186,13 @@ thead{
     color: black;
 }
 
+
+.main-footer{
+    position: relative !important;
+    padding: 1rem;
+    background-color: var(--primaryHF);
+    border-top: 1px solid #dee2e6;
+    color: white;
+}
+
+

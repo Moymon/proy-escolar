@@ -16,7 +16,7 @@
 
     <div class="form-row mb-5">
         <div class="form-group col-md-3">
-            <label class="m-0">Ciclo Escolar: </label>
+            <label class="m-0">Semestre: </label>
             <select class="m-0 form-control form-select">
                 <option></option>
                 <option></option>

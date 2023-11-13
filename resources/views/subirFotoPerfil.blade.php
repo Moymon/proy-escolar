@@ -12,15 +12,15 @@
 						</div>
 						<div class="row">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="foto" name="" accept="image/*">
+								<input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*">
 								<label class="custom-file-label"><i class="fas fa-upload"></i>   Abre el archivo...</label>
 							</div>
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="row d-flex justify-content-center">
-							<div class="col-4">
-								<img  src="" id="imagenPreview" alt="No se ha seleccionado una imagen" >
+							<div class="col-4" >
+								<img class="img-fluid" src="" id="imagenPreview" name="imagenPreview" alt="No se ha seleccionado una imagen" >
 							</div>
 						</div>
 						

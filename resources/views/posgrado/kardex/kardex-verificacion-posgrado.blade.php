@@ -15,7 +15,7 @@
 @section('content')
     <div class="form-row mb-5">
         <div class="form-group col-md-3">
-            <label class="m-0">Ciclo Escolar: </label>
+            <label class="m-0">Semestre: </label>
             <select class="m-0 form-control form-select">
                 <option></option>
                 <option></option>
@@ -223,16 +223,64 @@
         </div>  
 
         <!--listas-->
-        <div class="tab-pane fade show" id="nav-listas" role="tabpanel">
-            <div class="card">
-                <div class="card-body">
-                    <label>Posgrado</label>
-                    <select class="form-control col-2">
-                        <option>Posgrado 1</option>
-                        <option>Posgrado 2</option>
-                    </select>
-                </div>
-            </div>
+        <div class="p-3 tab-pane fade show" id="nav-listas" role="tabpanel">
+            <label>Posgrado</label>
+            <select class="form-control col-2">
+                <option>Posgrado 1</option>
+                <option>Posgrado 2</option>
+            </select>
+            <br>
+            <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
+                <thead> 
+                    <tr>
+                        <th>Folio</th>
+                        <th>Clave UASLP</th>
+                        <th>Nombre</th>
+                        <th>Posgrado</th>
+                        <th>Fecha y Hora Reg</th>
+                        <th>Estado</th>
+                        <th>Semestre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table> 
         </div>
     </div>
 
@@ -244,7 +292,7 @@
       <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Detalles de Verificación</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
