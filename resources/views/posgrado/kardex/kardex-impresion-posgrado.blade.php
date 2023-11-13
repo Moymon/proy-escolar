@@ -6,14 +6,12 @@
 
 @section('content_header')
 <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-6">
+    <div class="mb-2 d-flex align-items-center justify-content-between">
+        <div>
             <h1>Kardex</h1>
         </div>
-        <div class="col-6">
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
-            </div>
+        <div>
+            <button class="btn btn-primary form-control" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
         </div>
     </div>
 </div>
@@ -22,80 +20,76 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-1">
-                <img src="{{$url_img_perfil}}" class="img-fluid" alt="">
-            </div>
-            <div class="col-11">
-                <div class="row">
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label>Clave UASLP</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                                <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>    
-                            </div>  
-                        </div>
+        <div class="row gutters-sm mb-5">
+            <div class="col-sm-1 mb-3 d-flex align-items-start justify-content-start">
+                <div style="width: 133px;" class="border">
+                    <div style="height: 133px;">
+                        <img src="{{ asset('img/perfil.png') }}" class="img-fluid" alt="" style="width: 133px; height: 133px;">
                     </div>
-                    <div class="col-3">
+                    <button class="w-100 btn btn-sm btn-primary" style="border-radius:0px;" data-toggle="modal" data-target="#modalSubirImagen"><i class="fas fa-camera"></i></button>
+                </div>
+            </div>
+
+            <div class="col-sm-11 mb-3 pl-3">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Clave UASLP</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="cve_unica" name="cve_unica">
+                            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>    
+                        </div> 
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Alumno </label>
                         <input class="form-control" id="nombreAlumno" type="text" name="" value="Boix Salazar Julio Alberto" disabled>
                     </div>
-                    <div class="col-3">
+                    <div class="form-group col-md-3">
                         <label>Posgrado</label>
                         <select id="grado" class="form-control form-select">
                             <option>Posgrado 1</option>
                             <option>Posgrado 2</option>
                         </select>   
                     </div>
-                    <div class="col-3">
-                        <label class="form-label">Opción</label>
+                    <div class="form-group col-md-3">
+                        <label>Opción</label>
                         <input type="text" class="form-control" id="opcion" name="" value="Mecatrónica y Sistemas Mecánicos" disabled>    
                     </div>
-                    <div class="col-2">
-                        <label class="form-label">Estado</label>
+                    <div class="form-group col-md-2">
+                        <label>Estado</label>
                         <input type="text" class="form-control" id="estatus" name="" value="AI" disabled>   
                     </div>
                 </div>
             </div>
-        </div><!--Fin row Primera Seccion-->
-        <br>
-        <br>
+        </div>
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-center">
-                    <label><h3>Estadísticas</h3></label>
-                </div>
+                <h3 class="text-center">Estadísticas</h3>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row d-flex justify-content-end">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="input-group-text" >Promedio General:</label>
-                                    <input type="text" class="form-control" id="prom_general" value="8.57" readonly> 
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="input-group">
-                                    <label class="input-group-text">Promedio General Aprobatorio</label>
-                                    <input type="text" class="form-control" id="prom_gral_apro" value="8.57" disabled> 
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="input-group-text">Total Créditos Aprobados</label>
-                                    <input type="text" id="total_cre_apro" class="form-control" value="40" disabled>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <form id="formPDFKardexPosgrado" method="POST" action={{route('imprimeKardex')}}>
-                                    @csrf
-                                    <button id="buttonCrearPdf" class="btn bg-dark">Crear PDF</button>
-                                </form>   
-                            </div>
+                <div class="row d-flex flex-row align-items-center justify-content-end">
+                    <div class="form-group col-md-2">
+                        <div class="input-group">
+                            <label class="input-group-text" >Promedio General:</label>
+                            <input type="text" class="form-control" id="prom_general" value="8.57" readonly> 
                         </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="input-group">
+                            <label class="input-group-text">Promedio General Aprobatorio</label>
+                            <input type="text" class="form-control" id="prom_gral_apro" value="8.57" disabled> 
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="input-group">
+                            <label class="input-group-text">Total Créditos Aprobados</label>
+                            <input type="text" id="total_cre_apro" class="form-control" value="40" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1 d-flex align-items-end m-0">
+                        <form id="formPDFKardexPosgrado" method="POST" action={{route('imprimeKardex')}}>
+                            @csrf
+                            <button id="buttonCrearPdf" class="btn btn-primary w-100">Crear PDF</button>
+                        </form>   
                     </div>
                 </div>
             </div>
@@ -286,8 +280,6 @@
     </div><!--fin card body-->    
 </div><!--fin card-->
 
-
-
 @stop
 
 
@@ -297,8 +289,14 @@
 
 @section('js')
     <script src="{{ asset('/vendor/ckeditor/ckeditor/ckeditor.js')}}"></script> 
+    <!--
+    <script src="{asset('js/Administracion/PDFs/kardex-impresion-posgrado.js')}}"></script>
+    -->
+    <script>
+        const imprimeKardex = @json(route('imprimeKardex'));
+    </script>
     <script>/*
-    $(document).ready(function (){
+        $(document).ready(function (){
             $('.table').DataTable({
                 language:{
                     "emptyTable" : "No hay información",
@@ -336,6 +334,7 @@
         });
     </script>
 	
+    
 	<script>
         //Obtenemos el form en el cual se mnadara la informacion de la pantalla, nombre, calificaiones, etc.
         const formPDFKardexPosgrado = document.getElementById("formPDFKardexPosgrado");
@@ -481,4 +480,5 @@
             });
         }
     </script>
+    
 @stop

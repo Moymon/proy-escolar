@@ -42,212 +42,224 @@
     <!--tabs-->
     <div class="tab-content">
         <!--impresion-->
-        <div class="p-3 tab-pane fade show active" id="nav-impresion" role="tabpanel" aria-labelledby="nav-home-tab">
-            <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
-                <thead>
-                    <tr>
-                        <th>Folio</th>
-                        <th>Cve. UASLP</th>
-                        <th>Nombre</th>
-                        <th>Carrera</th>
-                        <th>Correcta</th>
-                        <th>Asesor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="tab-pane fade show active" id="nav-impresion" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Cve. UASLP</th>
+                                <th>Nombre</th>
+                                <th>Carrera</th>
+                                <th>Correcta</th>
+                                <th>Asesor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div> 
 
         <!--correcciones-->
-        <div class="p-3 tab-pane fade show" id="nav-correciones" role="tabpanel" aria-labelledby="nav-home-tab">
-            <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex"> 
-                <thead>
-                    <tr>
-                        <th>Folio</th>
-                        <th>Cve. UASLP</th>
-                        <th>Nombre</th>
-                        <th>Carrera</th>
-                        <th>Correcta</th>
-                        <th >Edición</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td width="10px"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td width="10px"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td width="10px"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td width="10px"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label class="form-label">Detalle del Alumno:</label>
-                    <textarea class="form-control" rows="5"></textarea>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="form-label">Aclaración:</label>
-                    <textarea class="form-control" rows="5"></textarea> 
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="form-label">Kardex Corregido:</label>
-                    <select class="form-control form-select">
-                        <option></option>
-                        <option></option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="form-label">Estatus de la corrección:</label>
-                    <select class="form-control form-select">
-                        <option></option>
-                        <option></option>
-                    </select>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary m-1">Modificar Kardex</button>
-                <button type="button" class="btn btn-success m-1">Guardar</button>
-            </div>
-
-        </div> 
-
-        <!--consultas-->
-        <div class="p-3 tab-pane fade show" id="nav-consultas" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <label>Clave UASLP</label>
-                    <div class="input-group-append">
-                       <input class="form-control"> 
-                       <button class="btn btn-info"><i class="fas fa-search"></i></button>
+        <div class="tab-pane fade show" id="nav-correciones" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex"> 
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Cve. UASLP</th>
+                                    <th>Nombre</th>
+                                    <th>Carrera</th>
+                                    <th>Correcta</th>
+                                    <th >Edición</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td width="10px"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td width="10px"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td width="10px"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td width="10px"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <div class="form-row mb-3">
+                        <div class="form-group col-md-3">
+                            <label class="form-label">Detalle del Alumno:</label>
+                            <textarea class="form-control" rows="5"></textarea>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="form-label">Aclaración:</label>
+                            <textarea class="form-control" rows="5"></textarea> 
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="form-label">Kardex Corregido:</label>
+                            <select class="form-control form-select">
+                                <option></option>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="form-label">Estatus de la corrección:</label>
+                            <select class="form-control form-select">
+                                <option></option>
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button type="button" class="btn btn-primary m-1">Modificar Kardex</button>
+                        <button type="button" class="btn btn-success m-1">Guardar</button>
                     </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label>Nombre</label>
-                    <input class="form-control" type="" name="" disabled>
-                </div>
-                <div class="form-group col-md-3">
-                    <label>Clave Ingenieria</label>
-                    <input class="form-control" type="" name="" disabled>
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Ciclo Escolar</label>
-                    <input class="form-control" type="" name="" disabled>
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Carrera</label>
-                    <input class="form-control" disabled>
+            </div>
+        </div>
+        
+
+        <!--consultas-->
+        <div class="tab-pane fade show" id="nav-consultas" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label>Clave UASLP</label>
+                            <div class="input-group-append">
+                               <input class="form-control"> 
+                               <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Nombre</label>
+                            <input class="form-control" type="" name="" disabled>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Clave Ingenieria</label>
+                            <input class="form-control" type="" name="" disabled>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Ciclo Escolar</label>
+                            <input class="form-control" type="" name="" disabled>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Carrera</label>
+                            <input class="form-control" disabled>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
+                        <thead> 
+                            <tr>
+                                <th>Folio</th>
+                                <th>Carrera</th>
+                                <th>Fecha y Hora</th>
+                                <th>Correcta</th>
+                                <th>Fecha y Hora Imp</th>
+                                <th>Ciclo</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center" width="10px">Ver más <button class="btn-sm btn-primary" onclick="detalles()"><i class="fas fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center" width="10px">Ver más <button class="btn-sm btn-primary"><i class="fas fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center" width="10px">Ver más <button class="btn-sm btn-primary"><i class="fas fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center" width="10px">Ver más <button class="btn-sm btn-primary"><i class="fas fa-list"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table> 
                 </div>
             </div>
-            <table class="table table-bordered table-striped dataTable dtr-inline tablas_kardex">
-                <thead> 
-                    <tr>
-                        <th>Folio</th>
-                        <th>Carrera</th>
-                        <th>Fecha y Hora</th>
-                        <th>Correcta</th>
-                        <th>Fecha y Hora Imp</th>
-                        <th>Ciclo</th>
-                        <th>Detalles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-center" width="10px">Ver más <button class="btn-sm btn-info" onclick="detalles()"><i class="fas fa-list"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-center" width="10px">Ver más <button class="btn-sm btn-info"><i class="fas fa-list"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-center" width="10px">Ver más <button class="btn-sm btn-info"><i class="fas fa-list"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-center" width="10px">Ver más <button class="btn-sm btn-info"><i class="fas fa-list"></i></button></td>
-                    </tr>
-                </tbody>
-            </table> 
-            <br>
-        </div>  
+        </div>
+          
     </div>
+
 
 
 
@@ -322,6 +334,8 @@
         </div>
       </div>
     </div>
+
+
 @stop
 
 @section('css')
@@ -352,3 +366,4 @@
     }   
 </script>
 @stop
+

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@extends('modalAlumnos')
+@section('plugins.Datatables',true)
 
 @section('title', 'Exámenes a Regularización')
 
@@ -12,7 +12,7 @@
         <div class="col-6">
 
             <div class="d-flex justify-content-end">
-                <button style="border rounded-circle width:min(150px, 100%);" type="button" class="m-1 btn bg-dark" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
             </div>
         </div>
     </div>
@@ -24,21 +24,21 @@
 <div class="card">
     <div class="card-body">
         <div class="row gutters-sm mb-3">
-            <div class="col-sm-2 mb-3 d-flex align-items-start justify-content-start pr-0">
+            <div class="col-sm-1 mb-3 d-flex align-items-start justify-content-start">
                 <div style="width: 133px;">
-                    <div style="height: 133px;">
-                        <img src="https://picsum.photos/200/300" class="img-fluid" alt="" style="width: 133px; height: 133px;">
+                    <div style="height: 156px;">
+                        <img src="https://picsum.photos/200/300" class="img-fluid" alt="" style="width: 133px; height: 156px;">
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-10 mb-3 pl-0">
+            <div class="col-sm-11 mb-3 pl-3">
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label>Clave UASLP</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                            <button class="btn btn-info"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
                     <div class="form-group col-md-3">
@@ -69,7 +69,7 @@
                         <label>Materias encontradas</label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="grp_encontrados" disabled>
-                            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
+                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#registroExamen">Mostrar</button>
                         </div>
                     </div>
                 </div>
@@ -390,8 +390,8 @@
 @stop
 
 @section('js')
-<script type="text/javascript">
-        $(document).ready(function (){
+<script>    
+    $(document).ready(function (){
         $('.table').DataTable({
             language:{
                 "emptyTable" : "No hay información",
@@ -408,6 +408,6 @@
             },
             "autoWidth":false,
         });
-    });  
+    }); 
 </script>
 @stop

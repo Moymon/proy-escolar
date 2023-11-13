@@ -11,7 +11,7 @@
         </div>
         <div class="col-6">
             <div class="d-flex justify-content-end">
-                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buscarAlumno">Buscar Alumno</button>
             </div>
         </div>
     </div>
@@ -21,82 +21,78 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-      <div class="row">
-        <div class="col-1">
-            <img src="https://picsum.photos/200/300" class="img-fluid" alt="">
-        </div>
-        <div class="col-11">
-            <div class="row">
-                <div class="col-2 m-3">
-                    <label>Clave UASLP </label>
-                    <div class="input-group">
-                        <input class="form-control" type="text" name="">
-                        <button class="btn btn-info"><i class="fas fa-search"></i></button>
+        <div class="row gutters-sm">
+            <div class="col-sm-1 mb-3 d-flex align-items-start justify-content-start">
+                <div style="width: 133px;">
+                    <div style="height: 156px;">
+                        <img src="https://picsum.photos/200/300" class="img-fluid" alt="" style="width: 133px; height: 156px;" />
                     </div>
                 </div>
-                <div class="col-2 m-3">
-                    <label>Ingeniería</label>
-                    <input type="number" class="form-control" name="ingenieria" disabled>
-                </div>
-                <div class="col-3 m-3">
-                    <label>Nombre</label>
-                    <input class="form-control" type="text" name="nombre" disabled>
-                </div>
-                <div class="col-3 m-3">
-                    <label>Asesor</label>
-                    <input class="form-control" type="text" name="asesor" disabled>
-                </div>
-                <div class="col-2 m-3">
-                    <label>Carrera</label>
-                    <input type="text" class="form-control" name="domiclio" disabled>    
-                </div>
-                <div class="col-2 m-3">
-                    <label>Domicilio</label>
-                    <input type="text" class="form-control" name="domiclio" disabled>
-                </div>
-                <div class="col-2 m-3">
-                    <label>Colonia</label>
-                    <input type="text" class="form-control" name="colonia" disabled>
-                </div>
-                <div class="col-2 m-3">
-                    <label>Código Postal</label>
-                    <input type="text" name="cp" class="form-control" disabled>
-                </div>
-                <div class="col-2 m-3">
-                   <label>Teléfono</label>
-                    <input type="number" class="form-control" name="telefono" disabled> 
-                </div>
-                <div class="col-2 m-3">
-                    <label>Ciudad</label>
-                    <input type="text" class="form-control" name="Ciudad" disabled>
+            </div>
+
+            <div class="col-sm-11 mb-3 pl-3">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Clave UASLP</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" />
+                            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Ingeniería</label>
+                        <input type="number" class="form-control" name="ingenieria" disabled />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Nombre</label>
+                        <input class="form-control" type="text" name="nombre" disabled />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Carrera</label>
+                        <input type="text" class="form-control" name="domiclio" disabled />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Asesor</label>
+                        <input class="form-control" type="text" name="asesor" disabled />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Domicilio</label>
+                        <input type="text" class="form-control" name="domiclio" disabled />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Colonia</label>
+                        <input type="text" class="form-control" name="colonia" disabled />
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label>Código Postal</label>
+                        <input type="text" name="cp" class="form-control" disabled />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Ciudad</label>
+                        <input type="text" class="form-control" name="Ciudad" disabled />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Teléfono</label>
+                        <input type="number" class="form-control" name="telefono" disabled />
+                    </div>
                 </div>
             </div>
         </div>
-     </div>
-     <br>
-     <br>
-    <div class="row">
-        <div class="col-12 table-responsive">
+
+        <div class="table-responsive">
             <table id="archivo" class="table table-bordered table-striped dataTable dtr-inline">
                 <thead>
                     <tr>
-                        <th class="sorting sorting_asc" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" tabindex="0" rowspan="1" colspan="1" >
+                        <th class="sorting sorting_asc" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" tabindex="0" rowspan="1" colspan="1">
                             Cre
                         </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Clv
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Materia
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Cal
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Fecha
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Ex
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >Sem
-                        </th>
-                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1" >
-                        </th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1">Clv</th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1">Materia</th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1">Cal</th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1">Fecha</th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1">Ex</th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1">Sem</th>
+                        <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,14 +130,13 @@
                     </tr>
                 </tfoot>
             </table>
-            <br>
-            <br>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-outline-primary" type="button" tabindex="0">Generar Archivo</button>
             </div>
         </div>
     </div>
 </div>
+
 @stop
 
 @section('css')
