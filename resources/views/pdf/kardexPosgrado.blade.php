@@ -127,7 +127,7 @@
     <div class="w-100 mb-3">
         <div class="centrarStart w-100" style="height: 150px;">
             <div id="logoInfoComp" class="h-100" style="width:140px;margin-right:50px;">
-                <img class="w-100 h-100" style="background-color:lightgray;" src="{{public_path('img/usuario.svg')}}" alt="">
+                <img class="w-100 h-100" style="background-color:lightgray;" src="{{public_path('img/perfil.png')}}" alt="">
             </div>
 
             <div class="h-100" style="width:855px;">

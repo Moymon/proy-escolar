@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="buscarAlumno" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -10,7 +11,7 @@
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
-                    <form >
+                    <form>
                         <div class="form-group "> 
                             <div class="d-flex justify-content-around row">
                                 <div class="col-2">

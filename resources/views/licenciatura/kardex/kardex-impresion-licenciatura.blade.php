@@ -11,7 +11,7 @@
         </div>
         <div class="col-6">
             <div class="d-flex justify-content-end">
-                <button class="btn btn-block bg-gradient-primary form-control col-3" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buscarAlumno" name="">Buscar Alumno</button>
             </div>
         </div>
     </div>
@@ -23,21 +23,21 @@
     <div class="card-body">
 
         <div class="row gutters-sm">
-            <div class="col-sm-2 mb-3 d-flex align-items-start justify-content-start pr-0">
+            <div class="col-sm-1 mb-3 d-flex align-items-start justify-content-start">
                 <div style="width: 133px;">
-                    <div style="height: 133px;">
-                        <img src="https://picsum.photos/200/300" class="img-fluid" alt="" style="width: 133px; height: 133px;">
+                    <div style="height: 156px;">
+                        <img src="https://picsum.photos/200/300" class="img-fluid" alt="" style="width: 133px; height: 156px;">
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-10 mb-3 pl-0">
+            <div class="col-sm-11 mb-3 pl-3">
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>Clave UASLP</label>
                         <div class="input-group">
                             <input type="number" class="form-control" id="cve_unica" name="cve_unica">
-                            <button type="button" class="btn btn-info"><i class="fas fa-search"></i></button>    
+                            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>    
                         </div>
                     </div>
                     <div class="form-group col-md-2">
@@ -119,7 +119,7 @@
                     <div class="tab-content" id="">
                         <div class="tab-pane fade show active" id="tab-kardex" role="tabpanel">
                             <div class="d-flex justify-content-end">
-                                <button class="btn bg-gradient-primary" data-toggle="modal" data-target="#nuevaMateria"><i class="fas fa-plus"></i></button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#nuevaMateria"><i class="fas fa-plus"></i></button>
                             </div>
                             <br>
                             <div class="table-responsive">

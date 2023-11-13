@@ -1,6 +1,5 @@
 @extends('adminlte::page')
-@extends('modalAlumnos')
-@extends('subirFotoPerfil')
+
 @section('plugins.Datatables',true)
 @section('title', 'Dashboard')
 
@@ -11,7 +10,6 @@
 @stop
 
 @section('content')
-
     <div class="al_lic w-100 d-flex align-items-center justify-content-end">
         <div class="w-100 d-flex flex-row align-items-center">
             <div class="w-50 d-flex flex-sm-row flex-column">
@@ -46,7 +44,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row gutters-sm">
-                        <div class="col-sm-2 mb-3 d-flex align-items-start justify-content-start pr-0">
+                        <div class="col-sm-1 mb-3 d-flex align-items-start justify-content-start">
                             <div style="width: 133px;" class="border">
                                 <div style="height: 133px;">
                                     <img src="{{ asset('img/perfil.png') }}" class="img-fluid" alt="" style="width: 133px; height: 133px;">
@@ -55,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-10 mb-3 pl-0">
+                        <div class="col-sm-11 mb-3 pl-3">
                             <div class="form-row">
                                 <div class="form-group col-md-3">
                                     <label for="clave_uaslp">Clave UASLP</label>
@@ -238,7 +236,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h5 class="">Datos de Contacto</h5>
+                    <h5>Datos de Contacto</h5>
                     <hr class="mb-4 mt-2" />
                     <div class="form-row">
                         <div class="form-group col-md-3">
@@ -338,11 +336,11 @@
                     <h5 class="">Domicilio y contacto del tutor</h5>
                     <hr class="mb-4 mt-2" />
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="padre">Padre o tutor</label>
                             <input type="text" class="form-control" id="padre">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="madre">Madre</label>
                             <input type="text" class="form-control" id="madre">
                         </div>
@@ -392,12 +390,8 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-end">
-                        <div>
-                            <button id="modificar" type="button" class="m-1 btn btn-primary">Modificar</button>
-                        </div>
-                        <div>
-                            <button id="guardar" type="button" class="m-1 btn btn-success">Guardar</button>
-                        </div>
+                        <button id="modificar" type="button" class="m-1 btn btn-primary">Modificar</button>
+                        <button id="guardar" type="button" class="m-1 btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -407,12 +401,12 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label for="secundaria">Secundaria</label>
                             <input type="text" class="small form-control" id="secundaria">
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label for="ciudad_secundaria">Ciudad</label>
                             <input type="text" class=" form-control" id="ciudad_secundaria">
                         </div>
@@ -436,22 +430,18 @@
                                 <label for="periodo_bachillerato_incio">Periodo</label>
                                 <div class="d-flex flex-row">
                                     <div class="pr-1 w-50">
-                                        <input type="number" min="1900" max="2099" class="mid form-control" id="periodo_bachillerato_incio" value="2015"/>
+                                        <input type="number" min="1900" max="2099" class="form-control" id="periodo_bachillerato_incio" value="2015"/>
                                     </div>
                                     <div class="pl-1 w-50">
-                                        <input type="number" class="mid form-control" min="1900" max="2099" id="periodo_bachillerato_fin" value="2018"/>
+                                        <input type="number" class="form-control" min="1900" max="2099" id="periodo_bachillerato_fin" value="2018"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-end">
-                        <div>
-                            <button id="modificar" type="button" class="m-1 btn btn-primary">Modificar</button>
-                        </div>
-                        <div>
-                            <button id="guardar" type="button" class="m-1 btn btn-success">Guardar</button>
-                        </div>
+                        <button id="modificar" type="button" class="m-1 btn btn-primary">Modificar</button>
+                        <button id="guardar" type="button" class="m-1 btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -1348,7 +1338,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <div class="d-flex align-items-center justify-content-end">
-                                <button id="salir" type="button" class="btn btn-sm btn-danger btn-close px-5" data-dismiss="modal">Salir</button>
+                                <button id="" type="button" class="btn btn-sm btn-secondary btn-close px-5" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
 
@@ -1370,7 +1360,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-flex flex align-items-center justify-content-center">
                 
                     <div class="p-2 w-100">
                         <table class="table table-bordered table-striped w-100 rounded-lg">
@@ -1531,7 +1521,7 @@
                     <div class="form-row w-100">
                         <div class="form-group col-md-12">
                             <div class="d-flex align-items-center justify-content-end">
-                                <button id="salir" type="button" class="btn btn-sm btn-danger btn-close px-5" data-dismiss="modal">Salir</button>
+                                <button id="" type="button" class="btn btn-sm btn-secondary btn-close px-5" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
 
@@ -1541,6 +1531,9 @@
         </div>
     </div>
 
+
+    @include('modalAlumnos')
+    @include('subirFotoPerfil')
 @stop
 
 @section('css')
@@ -1593,5 +1586,7 @@
 
         });
     }); 
+</script>
+
 </script>
 @stop

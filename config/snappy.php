@@ -35,7 +35,7 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary'  => base_path('wkhtmltopdf/bin/wkhtmltopdf'),
+        'binary'  => '"' . base_path('wkhtmltopdf/bin/wkhtmltopdf') . '"',
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,
@@ -47,7 +47,7 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary'  => base_path('wkhtmltopdf/bin/wkhtmltoimage'),
+        'binary'  => '"' . base_path('wkhtmltopdf/bin/wkhtmltoimage') . '"',
         'timeout' => false,
         'options' => [
             'enable-local-file-access' => true,

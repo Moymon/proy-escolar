@@ -7,288 +7,223 @@
 @stop
 
 @section('content')
-
-<div class="row">
-    <div class="col-4 d-flex flex-column">
-        <div class="card w-100 h-100">
-            <div class="card-body">
-                <!--
-                <form action="" class="m-0 p-0">
-                -->
-                <form id="formFiltroFechas" method="POST" action="{{route('getFechas')}}" class="m-0 p-0">
-                    @csrf
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="ciclo_escolar" class="m-0 form-label fw-light">Ciclo escolar</label>
-                            <select name="ciclo_escolar" id="ciclo_escolar" class="mb-1 form-select form-control">
-                                <option value="" selected>Ciclo Escolar</option>
-                                <option value="2018 - 2019/1">2018 - 2019/I</option>
-                                <option value="2018 - 2019/2">2018 - 2019/II</option>
-                                <option value="2019 - 2020/1">2019 - 2020/I</option>
-                                <option value="2019 - 2020/2">2019 - 2020/II</option>
-                                <option value="2020 - 2021/1">2020 - 2021/I</option>
-                                <option value="2020 - 2021/2">2020 - 2021/II</option>
-                                <option value="2021 - 2022/1">2021 - 2022/I</option>
-                                <option value="2021 - 2022/2">2021 - 2022/II</option>
-                                <option value="2022 - 2023/1">2022 - 2023/I</option>
-                                <option value="2022 - 2023/2">2022 - 2023/II</option>
-                                <option value="2023 - 2024/1">2023 - 2024/I</option>
-                                <option value="2023 - 2024/2">2023 - 2024/II</option>
-                            </select>
-                        </div>
+<div class="container-xxl">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="formFiltroFechas" method="POST" action="{{route('getFechas')}}" class="m-0 p-0">
+                            @csrf
+        
+                            <div class="mb-3">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="ciclo_escolar">Ciclo escolar</label>
+                                        <select name="ciclo_escolar" id="ciclo_escolar" class="form-select form-control">
+                                            <option value="" selected>Ciclo Escolar</option>
+                                            <option value="2018 - 2019/1">2018 - 2019/I</option>
+                                            <option value="2018 - 2019/2">2018 - 2019/II</option>
+                                            <option value="2019 - 2020/1">2019 - 2020/I</option>
+                                            <option value="2019 - 2020/2">2019 - 2020/II</option>
+                                            <option value="2020 - 2021/1">2020 - 2021/I</option>
+                                            <option value="2020 - 2021/2">2020 - 2021/II</option>
+                                            <option value="2021 - 2022/1">2021 - 2022/I</option>
+                                            <option value="2021 - 2022/2">2021 - 2022/II</option>
+                                            <option value="2022 - 2023/1">2022 - 2023/I</option>
+                                            <option value="2022 - 2023/2">2022 - 2023/II</option>
+                                            <option value="2023 - 2024/1">2023 - 2024/I</option>
+                                            <option value="2023 - 2024/2">2023 - 2024/II</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label for="periodo">Periodo</label>
+                                        <select name="periodo" id="periodo" class="form-select form-control">
+                                            <option value="" selected>Periodo</option>
+                                            <option value="EXAMENES A TITULO">EXAMENES A TITULO</option>
+                                            <option value="EXAMENES A REGULARIZACION">EXAMENES A REGULARIZACION</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <table class="table table-bordered table-striped dataTable dtr-inline tablas_pago" id="tablaFechas">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">Fechas de Exámenes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaFechasTbody">
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+        
+                            <div id="erroresDeTablaFechas" style="display: none;"></div>
+                        </form>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="periodo" class="m-0 form-label fw-light">Periodo</label>
-                            <select name="periodo" id="periodo" class="mb-1 form-select form-control">
-                                <option value="" selected>Periodo</option>
-                                <option value="EXAMENES A TITULO">EXAMENES A TITULO</option>
-                                <option value="EXAMENES A REGULARIZACION">EXAMENES A REGULARIZACION</option>
-                            </select>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form method="POST" action="{{route('getExamenes')}}" id="formSelectFechaForExam" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="fechaForExam" class="inputFechaForExam" />
+                            <input type="hidden" name="periodoForExam" class="inputPeriodoForExam" />
+                        </form>
+                        <table id="tablaExamen" class="table table-bordered table-striped dataTable dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Clave</th>
+                                    <th scope="col">Materia</th>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Salón</th>
+                                    <th scope="col">Ex</th>
+                                    <th scope="col">Sinodal titular</th>
+                                    <th scope="col">Sinodal secretario</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyTablaExamen">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <br>
-
-                    <!--
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-6 ">
-                            <button style="display:none;" type="submit" id="fechasbutton" class="btn-sm bg-dark form-control">Listar fechas</button>
-                        </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form id="camposMateriaInfo" method="POST" action="{{route('getCalificaciones')}}">
+                            @csrf
+                            <input readonly name="claveCampo" id="claveCampo" type="hidden" class="form-control" />
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label for="materiaCampo">Materia</label>
+                                    <input readonly name="materiaCampo" id="materiaCampo" type="text" class="form-control" /> 
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="tipoCampo">Tipo de examen</label>
+                                    <input readonly name="tipoCampo" id="tipoCampo" type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="salonCampo">Salón</label>
+                                    <input readonly name="salonCampo" id="salonCampo" type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="nombreCampo">Sinodal titular</label>
+                                    <input readonly name="nombreCampo" id="nombreCampo" type="text" class="form-control" />
+                                </div>
+        
+                                <div class="form-group col-md-5">
+                                    <label for="nombreCampo2">Sinodal secretario</label>
+                                    <input readonly name="nombreCampo2" id="nombreCampo2" type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-2 d-flex align-items-end">
+                                    <button type="submit" id="calificacionesbutton" class="w-100 btn btn-primary">Calificaciones</button>
+                                </div>
+                            </div>
+                        </form>
+        
+                        <form method="POST" action="{{route('updateCalificaciones')}}" id="formCalificaciones">
+                            @csrf
+                            <input type="hidden" name="materiaCampo" id="materiaCampoModal" />
+                            <input type="hidden" name="claveCampo" id="claveCampooModal" />
+        
+                            <div>
+                                <table id="tablaCalificaciones" class="table table-bordered table-striped dataTable dtr-inline">
+                                    <thead class="">
+                                        <tr>
+                                            <th scope="col">UASLP</th>
+                                            <th scope="col">Nombre de Alumno</th>
+                                            <th scope="col">Calificación</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bodyCapturaCalificaciones">
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+        
+                            <div id="erroresDeTablaCalificaciones" style="display: none;"></div>
+        
+                            <div class="d-flex align-items-center justify-content-end w-100">
+                                <button id="guardarCalificaciones" type="submit" class="px-5 btn btn-success">Guardar</button>
+                            </div>
+                        </form>
                     </div>
-                    -->
-                
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            
-                            <table class="table table-bordered table-striped dataTable dtr-inline tablas_pago"  id="tablaFechas">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th scope="col">Fechas de Exámenes</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tablaFechasTbody">
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>    
-                                </tbody>   
-                            </table>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div id="erroresDeTablaFechas" style="display: none">
-
-                    </div>
-
-                    <!--
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-6">
-                            <button style="display:none;"type="submit" id="examenesbutton" class="btn-sm bg-dark form-control">Listar exámenes</button>
-                        </div>
-                    </div>
-                    -->
-                </form>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="col-8 d-flex flex-column">
-            <div class="card w-100 h-100">
-                <div class="card-body">
-                    <form method="POST" action="{{route('getExamenes')}}" id="formSelectFechaForExam" style="display:none;">
-                        @csrf
-                        <input type="hidden" name="fechaForExam" class="inputFechaForExam">
-                        <input type="hidden" name="periodoForExam" class="inputPeriodoForExam">
-                        
-
-                        <!--
-                        <button style="display:none!important;" type="submit" id="buttonfechaForExam">Consultar</button>
-                        -->
-                    </form>
-                    <p class="text-center m-0 mb-1" style="display:none;" id="infoTablaExamenes"><p>
-                    <table id="tablaExamen" class="table table-bordered table-striped dataTable dtr-inline">
-                        <thead>
-                            <tr>
-                                <th scope="col">Clave</th>
-                                <th scope="col">Materia</th>
-                                <th scope="col">Hora</th>
-                                <th scope="col">Salón</th>
-                                <th scope="col">Ex</th>
-                                <th scope="col">Sinodal titular</th>
-                                <th scope="col">Sinodal secretario</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodyTablaExamen">
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>    
-                    </table>   
-
-
-                    <!--
-                    *************************************************************************************
-                    *    Div que mostrara un error en caso de ocurrir                                   *
-                    *************************************************************************************
-                    -->
-                    <div id="erroresDeTablaExamenes" style="display: none"></div>
-                    
-                </div>
-            </div>
-            
-            <div class="card w-100 h-100">
-                <div class="card-body">
-                    <!--
-                    <form action="">
-                    -->
-                    <form id="camposMateriaInfo" method="POST" action="{{route('getCalificaciones')}}">
-                        @csrf
-                        <div class="m-0 row w-100 mt-1 p-2">
-                          <div class="col-5 p-0 d-flex flex-column">
-                            <div style="padding-right:10px;">
-                              <label for="materiaCampo" class="m-0 form-label fw-light">Materia</label>
-                              <input readonly name="materiaCampo" id="materiaCampo" type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="col-2 p-0 d-flex flex-column">
-                            <div style="padding-right:10px;">
-                              <label for="tipoCampo" class="m-0 form-label fw-light">Tipo de examen</label>
-                              <input readonly name="tipoCampo" id="tipoCampo" type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="col-5 p-0 d-flex flex-column">
-                            <div>
-                              <label for="salonCampo" class="m-0 form-label fw-light">Salón</label>
-                              <input readonly name="salonCampo" id="salonCampo" type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="col-5 p-0 d-flex flex-column">
-                            <div style="padding-right:10px;">
-                              <label for="nombreCampo" class="m-0 form-label fw-light">Sinodal titular</label>
-                              <input readonly name="nombreCampo" id="nombreCampo" type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="col-5 p-0 d-flex flex-column">
-                            <div style="padding-right:10px;">
-                              <label for="nombreCampo2" class="m-0 form-label fw-light">Sinodal secretario</label>
-                              <input readonly name="nombreCampo2" id="nombreCampo2" type="text" class="form-control">
-                            </div>
-                          </div>
-                          
-                          <input readonly name="claveCampo" id="claveCampo" type="hidden" class="form-control">
-              
-                            
-                            <div class="col-2 p-0 d-flex flex-column mt-4">
-                                <div class="w-100">
-                                    <button type="submit" id="calificacionesbutton" class="w-100 mb-3 btn btn-dark">Calificaciones</button>
-                                </div>
-                            </div>
-                            
-                        </div>
-
-                    </form>
-
-                    <form method="POST" action="{{route('updateCalificaciones')}}" id="formCalificaciones">
-                        
-                        @csrf
-                        <input type="hidden" name="materiaCampo" id="materiaCampoModal">
-                        <input type="hidden" name="claveCampo" id="claveCampooModal">
-      
-                        <div style="">
-                        
-                            <table id="tablaCalificaciones" class="table table-bordered table-striped dataTable dtr-inline">
-                              <thead class="">
-                                <tr>
-                                  <th scope="col">UASLP</th>
-                                  <th scope="col">Nombre de Alumno</th>
-                                  <th scope="col">Calificación</th>
-                                </tr>
-                              </thead>
-                              <tbody id="bodyCapturaCalificaciones">
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        </div>
-
-                        <div id="erroresDeTablaCalificaciones" style="display: none">
-
-                        </div>
-      
-                        <div class=" d-flex flex-row align-items-center justify-content-start w-100">
-                          <button id="guardarCalificaciones" type="submit" class="px-5 m-0 btn-success btn-sm mt-2">Guardar</button>
-                        </div>
-    
-                    </form>
-
-                </div>
-            </div>
-    </div>
-
 </div>
+
 @stop
 
 @section('css')
