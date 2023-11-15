@@ -136,7 +136,10 @@
         </div>
     </div>
 </div>
+@stop
 
+@section('footer')
+    <div></div>
 @stop
 
 @section('css')

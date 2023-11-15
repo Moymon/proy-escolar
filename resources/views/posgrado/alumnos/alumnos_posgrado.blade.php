@@ -551,6 +551,10 @@
 </div>
 @stop
 
+@section('footer')
+    <div></div>
+@stop
+
 @section('css')
 <link rel="stylesheet"  href="{{ asset('css/custom-file-image.css')}}" />
     <link rel="stylesheet" href="/css/admin_custom.css">

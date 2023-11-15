@@ -195,4 +195,12 @@ thead{
     color: white;
 }
 
+.main-header{
+    background-color: var(--primaryHF) !important;
+}
+
+
+.user-header{
+    background-color: var(--primaryHF) !important;
+}
 
