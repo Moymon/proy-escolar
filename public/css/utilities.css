@@ -204,3 +204,11 @@ thead{
     background-color: var(--primaryHF) !important;
 }
 
+.nav-item span{
+    color: white;
+}
+
+.fa-bars{
+    color: white;
+}
+

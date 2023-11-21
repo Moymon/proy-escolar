@@ -22,7 +22,7 @@
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
-        <span style="color:white">
+        <span>
             {{ Auth::user()->nombre }}
         </span>
     </a>
