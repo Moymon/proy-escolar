@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @extends('modalAlumnos')
-
+@section('plugins.Datatables',true)
 @section('title', 'Exámenes a Título')
 
 @section('content_header')
@@ -124,7 +124,7 @@
                             <td></td>
                             <td></td>
                             <td width="10px">
-                                <button class="m-1btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="m-1 btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                <button class="m-1 btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button><button class="m-1 btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -147,7 +147,6 @@
 </div>
 
 <!----Modal registro---->
-
 <div class="modal fade" id="registroExamen" tabindex="-1" role="dialog" aria-labelledby="registroExamenModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -178,7 +177,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -187,7 +186,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -196,7 +195,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -205,7 +204,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -267,10 +266,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Registrar Examen</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Registrar Examen</button>
             </div>
         </div>
     </div>

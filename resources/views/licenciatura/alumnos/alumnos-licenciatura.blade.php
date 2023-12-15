@@ -1,8 +1,6 @@
 @extends('adminlte::page')
-
 @section('plugins.Datatables',true)
 @section('title', 'Dashboard')
-
 @section('content_header')
     <!--
         <h1>Dashboard</h1>
@@ -1332,13 +1330,13 @@
 
                         <div class="form-group col-md-6">
                             <div class="d-flex flex-wrap align-items-center justify-content-start">
-                                <button id="imprimir" type="button" class="btn btn-sm btn-primary px-5 mr-1 mb-1">Imprimir</button>
-                                <button id="exportar" type="button" class="btn btn-sm btn-primary px-5 mr-1 mb-1">Exportar</button>
+                                <button id="imprimir" type="button" class="btn btn-primary px-5 mr-1 mb-1">Imprimir</button>
+                                <button id="exportar" type="button" class="btn btn-primary px-5 mr-1 mb-1">Exportar</button>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <div class="d-flex align-items-center justify-content-end">
-                                <button id="" type="button" class="btn btn-sm btn-secondary btn-close px-5" data-dismiss="modal">Cerrar</button>
+                                <button id="" type="button" class="btn btn-secondary btn-close px-5" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
 
@@ -1354,7 +1352,7 @@
     <div class="modal fade p-0 m-0" id="modal_bitacora_portal_alumnos" tabindex="-1" aria-labelledby="modal_bitacora_portal_alumnosLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-scrollable mw-100 min-vh-100 m-0 p-0">
             <div class="modal-content w-100 min-vh-100">
-                <div class="modal-header" style="border:none;">
+                <div class="modal-header">
                     <h5 class="modal-title w-100 text-center">Bitácora del Portal de Alumnos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -1517,11 +1515,11 @@
                     </div>
     
                 </div>
-                <div class="modal-footer" style="border:none;">
+                <div class="modal-footer">
                     <div class="form-row w-100">
                         <div class="form-group col-md-12">
                             <div class="d-flex align-items-center justify-content-end">
-                                <button id="" type="button" class="btn btn-sm btn-secondary btn-close px-5" data-dismiss="modal">Cerrar</button>
+                                <button id="" type="button" class="btn btn-secondary btn-close px-5" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
 

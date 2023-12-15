@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Fechas de Exámenes')
+@section('plugins.Datatables',true)
 
 @section('content_header')
     <h1>Fechas de Exámenes</h1>

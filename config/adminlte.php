@@ -63,11 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Escolar</b>UASLP',
+    'logo' => 'Escolar<span class="textoUASLP">UASLP</span>',
     'logo_img' => 'img/logouaslp-white.png',
-    'logo_img_class' => 'brand-image elevation-3',
+    'logo_img_Ingenieria' => 'img/logo_Ing.png',
+    'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
+    'logo_img_xl_class' => 'img/logo_Ing.png',
     'logo_img_alt' => 'Admin Logo',
 
     /*

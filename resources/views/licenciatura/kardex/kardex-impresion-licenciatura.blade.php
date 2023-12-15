@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @extends('modalAlumnos')
+@section('plugins.Datatables',true)
 
 @section('title', 'Kardex')
 

@@ -51,9 +51,12 @@ function loadListenersForInterfaceRoles(){
     content.addEventListener("click", function(event){
         const target = event.target;
 
-        if (target.id === "asignarRolBoton"){
+        if (target.id === "asignarRolBoton" || target.id === "asignarRolBotonSpan"){
             event.preventDefault();
-            openModalToAssignToAUser();
+            openModalToAssignToAUser(() =>{
+                asignarRolBoton.disabled = false;
+                asignarRolBoton.classList.remove("button--loading");
+            });
         }
 
     });
@@ -138,9 +141,12 @@ function loadListenersForInterfaceRoles(){
     modalPermisos.addEventListener('click', function(event){
         const target = event.target;
     
-        if (target.id === "btnGuardadoPermisosModal"){
+        if (target.id === "btnGuardadoPermisosModal" || target.id === "btnGuardadoPermisosModalSpan"){
             event.preventDefault();
-            peticionAjaxGuardarPermisos();
+            peticionAjaxGuardarPermisos(() => {
+                btnGuardadoPermisosModal.disabled = false;
+                btnGuardadoPermisosModal.classList.remove("button--loading");
+            });
     
         } 
     });
@@ -178,8 +184,7 @@ function muestraPermisos(listaAverificar){
     listaAverificar.forEach(elementPermiso => {
         // Verifica si el permiso está en la lista de permisos asignados
         const [permisoEnAsignados, permisoEnNoAsignados] = objectPer.verificaSiPermisoEstaAsignado(objectPer.permisosXRol_Asignados, objectPer.permisosXRol_NoAsignados, elementPermiso);
-        
-        let padreBotonRol = ui.creaBotonPermiso(elementPermiso.name);
+        let padreBotonRol = ui.creaBotonPermiso(elementPermiso.descripcion, elementPermiso.name);
         const boxBotonDeRol = padreBotonRol.querySelector('.boxDeRol');
 
         if (permisoEnAsignados) {
@@ -224,7 +229,6 @@ function inciaInterfaceOnSave(){
 //***************************************************************************************************************************/
 //***************************************************************************************************************************/
 //FUNCIONES DE ROL
-        
 // Función para manejar la petición AJAX de permisos del Rol seleccionado
 function peticionAjaxPermisosRolSeleccionado(target) {
     //inciaRol(target.getAttribute('data-target'));
@@ -431,7 +435,10 @@ function muestraResultadosGuardado() {
 }
 
 // Función para realizar una petición AJAX para el guardado de permisos
-function peticionAjaxGuardarPermisos() {
+function peticionAjaxGuardarPermisos(callback) {
+    btnGuardadoPermisosModal.classList.add("button--loading");
+    btnGuardadoPermisosModal.disabled = true;
+
     const requestData = {
         rol: objectPer.rol,
         permisosXRol_Asignados: objectPer.permisosXRol_Asignados
@@ -443,9 +450,11 @@ function peticionAjaxGuardarPermisos() {
         ui.desactivaBoton(btnGuardadoPermisos, true);
         objectPer.actualizarPermisos(response.permisosRol, response.permisosOriginalesXRol, response.permisos_no_coincidentes);
         muestraResultadosGuardado();
+        callback();
     })
     .catch(error => {
         console.error(error);
+        callback();
     });
 }
 
@@ -483,11 +492,10 @@ function saveRolForUser(){
         } 
     });
 
-            peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded);
+    peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded);
 }
 
 function muestraUsuarios(usuariosXRol, users){
-    //ui.limpiarHTML(modalAsignaRolAUsuario.querySelector("#listaDeUsuarios"));
     const listaDeUsuarios = modalAsignaRolAUsuario.querySelector("#listaDeUsuarios");
     ui.limpiarHTML(modalAsignaRolAUsuario.querySelector("#listaDeUsuarios"));
     ui.creaBotonUsuario(users, usuariosXRol, listaDeUsuarios);
@@ -495,7 +503,7 @@ function muestraUsuarios(usuariosXRol, users){
      $('#modalAsignaRolAUsuario').modal('show');
 }
 
-function peticionAjaxUsuarios(){
+function peticionAjaxUsuarios(callback){
     const xhr = new XMLHttpRequest();
     const endpoint = getUsuariosXRol;
             
@@ -506,17 +514,20 @@ function peticionAjaxUsuarios(){
     xhr.open('POST', endpoint, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-
+    
     xhr.onload = function () {
         if (xhr.status === 200) {
             try {
                 const data = JSON.parse(xhr.responseText);
                 muestraUsuarios(data.usersXRol, data.users);
+                callback();
             } catch (error) {
                 console.error("Error al procesar la respuesta:", error);
+                callback();
             }
         } else {
             console.error("Error en la solicitud. Código de estado: " + xhr.status);
+            callback();
         }
     };
     xhr.onerror = function () {
@@ -525,21 +536,25 @@ function peticionAjaxUsuarios(){
     xhr.send(JSON.stringify(requestData));
 }
 
-function openModalToAssignToAUser(){
+function openModalToAssignToAUser(callback){
+    asignarRolBoton.disabled = true;
+    asignarRolBoton.classList.add("button--loading");
+
     const titulo = modalAsignaRolAUsuario.querySelector("#modalAsignaRolAUsuarioTitle");
     const subtitulo = modalAsignaRolAUsuario.querySelector("#asignaRolAUsuarioSubTitle");
 
     titulo.textContent = objectPer.rol;
     subtitulo.textContent = objectPer.rol;
 
-    peticionAjaxUsuarios();
+    peticionAjaxUsuarios(()=>{
+        callback();
+    });
 }
 
 //**************************************************************************************************************
 //**************************************************************************************************************
 //**************************************************************************************************************
 //FUNCIONES DE FILTRADO PARA EL SIDEBAR DE ROLES
-
 const filtroRoles = new filtro.Filtro({
     name: ''
 });

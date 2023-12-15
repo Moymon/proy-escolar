@@ -28,7 +28,13 @@ class roles_permisos extends Controller
         //
 
         $roles = Role::all();
-        $permisos = Permission::all();
+        //$permisos = Permission::all();
+        $permisos = DB::table('permissions')
+        ->leftJoin('catalogo_permiso', 'permissions.id', '=', 'catalogo_permiso.id_permiso')
+        //->select('permissions.*', 'catalogo_permiso.descripcion')
+        ->select('permissions.*', DB::raw('COALESCE(catalogo_permiso.descripcion, permissions.name) as descripcion'))
+        ->get();
+
         $modulos = Modulo::all();
 
 
@@ -148,15 +154,18 @@ class roles_permisos extends Controller
         //
     }
 
-    function getPermisosRelacionadosConNombre(Request $request){
+    public function getPermisosRelacionadosConNombre(Request $request){
         $request->validate([
             'nombre' => 'required|string'
         ]);
         $rol = Role::where('name', $request->nombre)->first();
-    
-        $permisosRolSeleccionado = $rol->permissions;
-        $permisosOriginalesXRol = $rol->permissions;
+
+        $permisos = $this->getPermisos($rol);
+
+        $permisosRolSeleccionado = $permisos;
+        $permisosOriginalesXRol = $permisos;
         $permisosNoCoincidentes = $this->getPermisosNoCoincidentes($rol->permissions);
+
     
         $response = [
             'rol' => $rol,
@@ -168,32 +177,7 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
-    public function getRolesNombre(Request $request){
-
-        $roles = DB::table('model_has_roles')
-                ->join('users','model_has_roles.model_id','=','users.id')
-                ->join('roles','model_has_roles.role_id','=','roles.id')
-                ->where('users.id',$request->rol)
-                ->select('roles.id','roles.name')
-                ->get();
-
-        $rolesUserSeleccionado = $roles;
-        $rolesOriginalesXUser = $roles;
-        $rolesNoCoincidentes = $this->getRNoCoincidentes($roles);
-
-        $rolesAll = Role::all();
-
-        $response = [
-            'roles' => $rolesAll,
-            'rolesUserSeleccionado' => $rolesUserSeleccionado,
-            'rolesOriginalesUser' => $rolesOriginalesXUser,
-            'rolesNoCoincidentes' => $rolesNoCoincidentes,
-        ];
-
-        return response()->json($response);
-    }
-
-    function getPermisosModuloConRol(Request $request){
+    public function getPermisosModuloConRol(Request $request){
         $request->validate([
             'modulo' => 'required|string'
         ]);
@@ -207,7 +191,99 @@ class roles_permisos extends Controller
         return response()->json($response);
     }    
 
-    function guardarPermisos(Request $request){
+    public function getRolesNombre(Request $request){
+
+        $roles = $this->getRoles($request->rol);
+
+        $rolesUserSeleccionado = $roles;
+        $rolesOriginalesXUser = $roles;
+        $rolesNoCoincidentes = $this->getRolesNoCoincidentes($roles);
+
+        $rolesAll = Role::all();
+
+        $response = [
+            'roles' => $rolesAll,
+            'rolesUserSeleccionado' => $rolesUserSeleccionado,
+            'rolesOriginalesUser' => $rolesOriginalesXUser,
+            'rolesNoCoincidentes' => $rolesNoCoincidentes,
+        ];
+
+        return response()->json($response);
+    }
+
+
+
+    /**********************************************************/
+    /*  FUNCIONES DE CONSULTA PARA OBTENER PERMISOS Y ROLES   */
+    /**********************************************************/
+    private function getPermisos($rol){
+        return DB::table('permissions')
+            ->leftJoin('catalogo_permiso', 'permissions.id', '=', 'catalogo_permiso.id_permiso')
+            ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
+            ->where('role_has_permissions.role_id', $rol->id)
+            //->select('permissions.*', 'catalogo_permiso.descripcion')
+            ->select('permissions.*', DB::raw('COALESCE(catalogo_permiso.descripcion, permissions.name) as descripcion'))
+            ->get();
+    }
+
+    private function getPermisosNoCoincidentes($permisosRol){
+        //$permisosCompletos = Permission::all();
+
+        $permisosCompletos = DB::table('permissions')
+        ->leftJoin('catalogo_permiso', 'permissions.id', '=', 'catalogo_permiso.id_permiso')
+        ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
+        //->select('permissions.*', 'catalogo_permiso.descripcion')
+        ->select('permissions.*', DB::raw('COALESCE(catalogo_permiso.descripcion, permissions.name) as descripcion'))
+        ->get();
+
+        // Filtrar los permisos que no se encuentran en permisosRolSeleccionado
+        $permisosNoCoincidentes = $permisosCompletos->filter(function ($permiso) use ($permisosRol) {
+            return !$permisosRol->contains('name', $permiso->name);
+        })->values()->all();
+
+        return $permisosNoCoincidentes;
+    }
+
+    private function getPermisosModulo($modulo_name){
+        $modulo = Modulo::where('nombre', $modulo_name)->first();
+
+        $permisos_modulo = DB::table('catalogo_permiso')
+        ->join('permissions', 'catalogo_permiso.id_permiso', '=', 'permissions.id')
+        ->where('catalogo_permiso.id_modulo_c', $modulo->id_modulo)
+        ->select('catalogo_permiso.id_permiso', 'permissions.name', 'catalogo_permiso.descripcion')
+        ->get();
+
+        return $permisos_modulo;
+    }
+
+
+    private function getRoles($rol){
+        $roles = DB::table('model_has_roles')
+                ->join('users','model_has_roles.model_id','=','users.id')
+                ->join('roles','model_has_roles.role_id','=','roles.id')
+                ->where('users.id',$rol)
+                ->select('roles.id','roles.name')
+                ->get();
+
+        return $roles;
+    }
+
+    private function getRolesNoCoincidentes($roles){
+        $rolesCompletos = Role::all();
+
+        /*Filtrar los roles que no se encuentren en los seleccionados*/
+        $rolesNoCoincidentes = $rolesCompletos->filter(function ($rol)
+            use ($roles) {
+                return !$roles->contains('name',$rol->name);
+            })->values()->all();
+        return $rolesNoCoincidentes;
+    }
+
+
+    /***************************************************** */
+    /*  FUNCIONES DE GUARDADO PARA PERMISOS Y USUARIOS     */
+    /***************************************************** */
+    public function guardarPermisos(Request $request){
         $request->validate([
             'rol' => 'required|string',
         ]);
@@ -222,10 +298,18 @@ class roles_permisos extends Controller
             $permisosIDs = array_column($permisosXRol_Asignados, 'id');
             $rol->syncPermissions($permisosIDs);
         }
+
+        $permisosXRol = DB::table('permissions')
+        ->leftJoin('catalogo_permiso', 'permissions.id', '=', 'catalogo_permiso.id_permiso')
+        ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
+        ->where('role_has_permissions.role_id', $rol->id)
+        //->select('permissions.*', 'catalogo_permiso.descripcion')
+        ->select('permissions.*', DB::raw('COALESCE(catalogo_permiso.descripcion, permissions.name) as descripcion'))
+        ->get();
         
 
-        $permisosRol = $rol->permissions;
-        $permisosOriginalesXRol = $rol->permissions;
+        $permisosRol = $permisosXRol;
+        $permisosOriginalesXRol = $permisosXRol;
         $permisosNoCoincidentes = $this->getPermisosNoCoincidentes($rol->permissions);
     
         $response = [
@@ -239,7 +323,7 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
-    function guardarRoles(Request $request){
+    public function guardarRoles(Request $request){
     
         $user = User::find($request->rol);
         
@@ -251,8 +335,6 @@ class roles_permisos extends Controller
             $user->syncRoles([]);
         }
 
-
-        
         $response = [
             'data' => $request->rol,
             'user' => $user,
@@ -263,44 +345,12 @@ class roles_permisos extends Controller
         return response()->json($response);
     }
 
-    function getPermisosModulo($modulo_name){
-        $modulo = Modulo::where('nombre', $modulo_name)->first();
-
-        $permisos_modulo = DB::table('catalogo_permiso')
-        ->join('permissions', 'catalogo_permiso.id_permiso', '=', 'permissions.id')
-        ->where('catalogo_permiso.id_modulo_c', $modulo->id_modulo)
-        ->select('catalogo_permiso.id_permiso', 'permissions.name', /* Otros campos de permisos */)
-        ->get();
-
-        return $permisos_modulo;
-    }
-
-    function getPermisosNoCoincidentes($permisosRol){
-        $permisosCompletos = Permission::all();
-
-        // Filtrar los permisos que no se encuentran en permisosRolSeleccionado
-        $permisosNoCoincidentes = $permisosCompletos->filter(function ($permiso) use ($permisosRol) {
-            return !$permisosRol->contains('name', $permiso->name);
-        })->values()->all();
-
-        return $permisosNoCoincidentes;
-    }
-
-    function getRNoCoincidentes($roles){
-        $rolesCompletos = Role::all();
-
-        /*Filtrar los roles que no se encuentren en los seleccionados*/
-        $rolesNoCoincidentes = $rolesCompletos->filter(function ($rol)
-            use ($roles) {
-                return !$roles->contains('name',$rol->name);
-            })->values()->all();
-        return $rolesNoCoincidentes;
-    }
 
 
-
-    
-    function getUsuariosXRol(Request $request){
+    /***************************************************** */
+    /*  FUNCIONES PARA MANIPULAR LOS ROLES DE UN USUARIO   */
+    /***************************************************** */
+    public function getUsuariosXRol(Request $request){
         $rol = Role::where('name', $request->rol)->first();
         $users = User::all();
 
@@ -317,7 +367,7 @@ class roles_permisos extends Controller
     }
 
 
-    function guardarUsuariosXRol(Request $request){
+    public function guardarUsuariosXRol(Request $request){
         $request->validate([
             'rol' => 'required|string',
         ]);

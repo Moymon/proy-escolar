@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('plugins.Datatables',true)
-
+@extends('modalAlumnos')
 @section('title', 'Exámenes a Regularización')
 
 @section('content_header')
@@ -10,9 +10,8 @@
             <h1>Exámenes a Regularización</h1>
         </div>
         <div class="col-6">
-
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buscarAlumno" name=""> Buscar Alumno </button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buscarAlumno">Buscar Alumno</button>
             </div>
         </div>
     </div>
@@ -202,7 +201,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -217,7 +216,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -232,7 +231,7 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -247,137 +246,109 @@
                                         <td></td>
                                         <td></td>
                                         <td width="10px" class="text-center">
-                                            <a class="btn btn-info btn-sm"><i class="fas fa-fill-drip"></i></a>
+                                            <a class="btn btn-primary btn-sm"><i class="fas fa-fill-drip"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="row">
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>Clave</label>
-                                        <div class="input-group">
-                                            <input type="number" name="" class="form-control" />
-                                            <div class="input-group-append">
-                                                <button class="btn btn-info"><i class="fas fa-search"></i></button>
-                                            </div>
-                                        </div>
+                                <div class="form-group col-md-3">
+                                    <label>Clave</label>
+                                    <div class="input-group">
+                                        <input type="number" name="" class="form-control" />
+                                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                     </div>
                                 </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Materia</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-3">
+                                    <label>Materia</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>Fecha</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>Fecha</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>Hora</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>Hora</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>Salón</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>Salón</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>RPE Titular</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>RPE Titular</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label>Sinodal Titular</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-4">
+                                    <label>Sinodal Titular</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>RPE Secretario</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>RPE Secretario</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label>Sinodal Secretario</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" disabled />
-                                    </div>
+                                <div class="form-group col-md-4">
+                                    <label>Sinodal Secretario</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" disabled />
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label>Sinodal Titular</label>
-                                        <br />
-                                        <select class="form-control">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group col-md-4">
+                                    <label>Sinodal Titular</label>
+                                    <br />
+                                    <select class="form-control">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>Única</label>
-                                        <br />
-                                        <select class="form-control">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>Única</label>
+                                    <br />
+                                    <select class="form-control">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>Tipo de Examen</label>
-                                        <br />
-                                        <select class="form-control">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>Tipo de Examen</label>
+                                    <br />
+                                    <select class="form-control">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label>No. de Recibo</label>
-                                        <br />
-                                        <input class="form-control" type="text" name="" />
-                                    </div>
+                                <div class="form-group col-md-2">
+                                    <label>No. de Recibo</label>
+                                    <br />
+                                    <input class="form-control" type="text" name="" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Registrar Examen</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Registrar Examen</button>
             </div>
         </div>
     </div>

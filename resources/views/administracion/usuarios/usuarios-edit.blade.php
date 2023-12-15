@@ -1,6 +1,5 @@
 @extends('adminlte::page')
 @extends('modalAlumnos')
-
 @section('title', 'Kardex')
 
 @section('content_header')

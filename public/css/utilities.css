@@ -149,17 +149,13 @@ thead{
     
 }
 
-.modal-header{
-    border:none;
-}
+
 .modal-title{
     text-align: center;
     width: 100%;
 }
 
-.modal-footer{
-    border:none;
-}
+
 
 /****************************************************************/
 
@@ -193,6 +189,181 @@ thead{
     background-color: var(--primaryHF);
     border-top: 1px solid #dee2e6;
     color: white;
+}
+
+
+
+/***LOADER***/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: opacity 0.75s, visibility 0.75s;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .loader {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border: 15px solid transparent;
+    border-top-color: #004A98; 
+    border-left-color: #004A98; 
+    border-radius: 50%;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+    transition: opacity 0.75s, visibility 0.75s;
+  }
+  
+  .loader::before {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    content: "";
+    border: 15px solid transparent;
+    border-top-color: #00B2E3;
+    border-left-color: #00B2E3; 
+    border-radius: 50%;
+    -webkit-animation: spinBack 1s linear infinite;
+    animation: spinBack 1s linear infinite;
+    transition: opacity 0.75s, visibility 0.75s;
+  }
+  
+  .loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  @-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @-webkit-keyframes spinBack {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(-720deg);
+      transform: rotate(-720deg);
+    }
+  }
+  
+  @keyframes spinBack {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(-720deg);
+      transform: rotate(-720deg);
+    }
+  }
+  
+
+
+/*******************************************/
+.divisorUASLP-ENTIDAD {
+    height: 60px;
+    width: 2px;
+    background-color: white;
+    max-height: 60px;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+}
+
+
+
+.textoTituloSidebar{
+  color: white !important;
+  margin-bottom: 0;
+  font-weight:500!important;
+}
+
+.textoUASLP {
+  color: white !important;
+  margin-bottom: 0;
+  font-weight:900!important;
+}
+
+
+
+.brand-link{
+  height: 110px!important;
+}
+.main-header{
+  height: 110px!important;
+}
+
+.os-padding{
+  margin-top: 50px!important;
+}
+.content-wrapper{
+  margin-top: 110px!important;
+}
+
+
+
+.brand-link .brand-image {
+  max-height: 60px;
+  margin: 0 auto!important;
+}
+
+
+.brand-link .imageIng{
+  margin-left: 0px!important;
+}
+
+.brand-link .imageUASLP{
+  margin-right: 0px!important;
+}
+
+
+
+@media (min-width: 992px){
+  .sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand).sidebar-focused .brand-image, .sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand):hover .brand-image {
+    margin: 0 auto!important;
+  }
+  
+  .sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand).sidebar-focused .brand-image, .sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand):hover .imageIng {
+    margin-left: 0px!important;
+  }
+
+  .sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand).sidebar-focused .brand-image, .sidebar-mini.sidebar-collapse .main-sidebar:not(.sidebar-no-expand):hover .imageUASLP {
+    margin-right: 0px!important;
+  }
+}
+
+.sidebar-focused .brand-link .boxLogos{
+  display: flex;
+  justify-content: center;
 }
 
 

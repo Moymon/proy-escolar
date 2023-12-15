@@ -109,7 +109,9 @@
                             
                             <div>
                                 <button id="botonNuevoRol" class="btn" data-toggle="modal" data-target="#nuevoRol" ><i class="fas fa-plus"></i></button>
-                                <button id="asignarRolBoton" class="btn">Asignar Rol</button>
+                                <button id="asignarRolBoton" class="btn btn-primary">
+                                    <span class="button__text" id="asignarRolBotonSpan">Asignar Rol</span>
+                                </button>
                             </div>
                         </div>
                     </nav>
@@ -237,7 +239,9 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button id="btnGuardadoPermisosModal" type="button" class="btn">Guardar cambios</button>
+            <button id="btnGuardadoPermisosModal" type="button" class="btn btn-primary">
+                <span class="button__text" id="btnGuardadoPermisosModalSpan">Guardar cambios</span>
+            </button>
             </div>
         </div>
         </div>
@@ -332,10 +336,6 @@
         </div>
     </div>
     
-    <!--
-    vite(['resources/js/Administracion/Roles/rolesYPermisos.js'])
-    -->
-
     <script type="module" src="{{asset('js/Administracion/Roles/rolesYPermisos.js') }}"></script>
 @stop
 
@@ -419,27 +419,4 @@
         const btnGuardarRolXUsuarios = modalAsignaRolAUsuario.querySelector('#btnGuardarRolXUsuarios');
         
     </script>
-
-    <!--
-    <script>
-        $(document).ready(function (){
-            $('.table').DataTable({
-                language:{
-                    "emptyTable" : "No hay información",
-                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                    "lengthMenu" : "Mostrar _MENU_ resultados",
-                    "search"     : "Buscar",
-                    "zeroRecords": "Resultados no encontrados",
-                    "paginate":{
-                        "first"  :"Primero",
-                        "last"   :"Ultimo",
-                        "next"   :"Siguiente",
-                        "previous":"Anterior"
-                    }
-                },
-                "autoWidth":false,
-            });
-        });    
-    </script>
-    -->
 @stop

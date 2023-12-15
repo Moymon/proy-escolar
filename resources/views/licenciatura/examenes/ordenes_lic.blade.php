@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@section('plugins.Datatables',true)
 @section('title', 'Ordenes de Pago')
 
 @section('content_header')

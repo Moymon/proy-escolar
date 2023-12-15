@@ -4,13 +4,13 @@
 @section('title', 'Kardex')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-6">
-            <h1>Credenciales del sistema</h1>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-6">
+                <h1>Credenciales del sistema</h1>
+            </div>
         </div>
     </div>
-</div>
 @stop
 
 @section('content')
@@ -23,7 +23,7 @@
                     @csrf
                     <div class="row">
                         <div class="d-flex justify-content-end col-12">
-                            <a href="administracion-edit/{{$boton}}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="administracion-edit/{{$boton}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                         </div>
                     </div>
                     <br>

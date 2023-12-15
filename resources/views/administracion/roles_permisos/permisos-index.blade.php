@@ -18,7 +18,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-12 d-flex justify-content-end">
-                <button class="btn btn-info" data-toggle="modal" data-target="#nuevoPermiso"><i class="fas fa-plus"></i></button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#nuevoPermiso"><i class="fas fa-plus"></i></button>
             </div>
         </div>
         <br>
@@ -129,7 +129,7 @@
 
 @section('js')
 <script>
- $(document).ready(function (){
+    $(document).ready(function (){
         $('.table').DataTable({
             language:{
                 "emptyTable" : "No hay información",

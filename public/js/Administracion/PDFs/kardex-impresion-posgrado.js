@@ -1,29 +1,51 @@
+class Materia {
+    constructor(numero, nombre, tipo, calificacion, fecha, creditos) {
+        this.numero = numero;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.calificacion = calificacion;
+        this.fecha = fecha;
+        this.creditos = creditos;
+    }
+}
+  
+class Semestre {
+    constructor(nombre, materias) {
+        this.nombre = nombre;
+        this.materias = materias;
+    }
+  
+    agregarMateria(materia) {
+        this.materias.push(materia);
+    }
+}
+
 class Alumno{
-    constructor(){
-        this.datosthis;
-        this.datosCalificaciones;
-        this.inputDatosSemestre;
+    constructor(clave, nombre, grado, opcion, prom_gnral, prom_gnral_apro, total_cre_apro, semestres){
+        this.clave = clave;
+        this.nombre = nombre;
+        this.grado = grado;
+        this.opcion = opcion;
+
+        this.prom_gnral = prom_gnral;
+        this.prom_gnral_apro = prom_gnral_apro;
+        this.total_cre_apro = total_cre_apro;
+
+        this.semestres = semestres;
     }
 }
 
-class AlumnoManager extends Alumno{
-    constructor(){
-        super();
 
-    }
-}
-
-const formPDFKardexPosgrado = document.getElementById("formPDFKardexPosgrado");
 const buttonCrearPdf = document.getElementById("buttonCrearPdf"); 
 const tablasCalificaciones = document.getElementsByClassName("tablaDatosCalificaciones");
-
-const alumno = new AlumnoManager();
+const tablasSemestre = $('.tablaDatosCalificaciones');
 
 function loadEventListeners(){
     buttonCrearPdf.addEventListener("click", (e) =>{
         e.preventDefault();
-        peticionCreaPDF(() =>{
-            console.log("Creado");
+        const alumno = recogeAlumno();
+        peticionAplication(imprimeKardex , alumno, () =>{
+            removeLoader();
         });
     });
 }
@@ -31,7 +53,9 @@ function loadEventListeners(){
 loadEventListeners();
 
 
-function recogeInformacion() { //Obtenemos toda la informacion de la pantalla
+
+
+function recogeAlumno() {
     const clave = document.getElementById('cve_unica').value;
     const nombreAlumno = document.getElementById('nombreAlumno').value;
     const grado = document.getElementById('grado').value;
@@ -39,254 +63,89 @@ function recogeInformacion() { //Obtenemos toda la informacion de la pantalla
     const prom_general = document.getElementById('prom_general').value;
     const prom_gral_apro = document.getElementById('prom_gral_apro').value;
     const total_cre_apro = document.getElementById('total_cre_apro').value;
-
-    alumno.datosAlumno = { //Objeto con los datos del alumno dentro de la pantalla
-        clave,
-        nombre: nombreAlumno,
-        grado,
-        opcion,
-    };
-
-    alumno.datosCalificaciones = { //Objeto con los datos generales de kardex dentro de la pantalla
-        'Promedio General': prom_general,
-        'Promedio General Aprobatorio': prom_gral_apro,
-        'Total Creditos Aprobados': total_cre_apro,
-    };
-
-    alumno.datosSemestre = recogeDatosSemestre();
-
-    const requestData = {
-        datosAlumno: alumno.datosAlumno,
-        datosCalificaciones: alumno.datosCalificaciones,
-        datosSemestre: alumno.datosSemestre 
-    }
-
-    return requestData;
+    const semestres = recogeSemestreYMaterias();
+    return new Alumno(clave, nombreAlumno, grado, opcion, prom_general, prom_gral_apro, total_cre_apro, semestres);
 }
 
-//Funcion que recoge la informacion de las tablas de califiaciones por semestre 
-function recogeDatosSemestre() {
-    const datosSemestreArray = []; //Objeto que guardara la informacion de cada semestre con las meterias.
+function recogeSemestreYMaterias() {
+    const semestres = [];
+    for (const element of tablasSemestre) {
+        const datosTabla = $(element).DataTable().rows().data();
+        const semestreNombre = element.querySelector('thead tr th').textContent.trim();
+        const materias = [];
 
-    //El siguiente es un ciclo anidado que guarda el semestre junto con la informacion de cada materia
-    for (const element of tablasCalificaciones) {
-        const semestre = element.querySelector('thead tr th').textContent; //Obtenemos el semestre
-        const materias = element.querySelectorAll('tbody tr:not(.promedios)'); //Obtenemos todos los renglones con materias, excepcion de los de promedios
-        const materiasArray = []; //Array que guardara la informacion de cada materia
-
-        for (const materia of materias) { //iteracion sobre los renglones de la tabla que contienen materias
-            const tds = materia.querySelectorAll("td"); //Se obetiene cada celda del renglon
-            const materiasInfoTds = []; //Array que guardara el valor de cada celda "td"
-            for (const td of tds) { //Iteracion sobre todos los tds
-                materiasInfoTds.push(td.textContent); //Guardamos cada td
-            }
-            materiasArray.push(materiasInfoTds); //Guardamos el array con la informacion de la materia
+        for (let i = 2; i < datosTabla.length; i++) {
+            const fila = datosTabla[i];
+            const materia = new Materia(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]);
+            materias.push(materia);
         }
 
-        //Objeto con la informacion del semestre y las materias que le corresponden
-        datosSemestreArray.push({
-            semestre,
-            materiasArray,
-        });
-
-        //console.log(materiasArray);
+        const semestre = new Semestre(semestreNombre, materias);
+        semestres.push(semestre);
     }
-    return datosSemestreArray;
+
+    return semestres;
 }
 
 
-function peticionCreaPDF(callback){
-    const requestData = recogeInformacion();
+function peticionAplication(route, requestData, callback) {
+    createLoader();
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", route);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.responseType = 'arraybuffer';
+    
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
 
-    peticionAplication(imprimeKardex , requestData)
-        .then(response => {
-            if (response) {
-                console.log(response);
-                callback();
-            } else {
-                console.error("Error en la respuesta del servidor: " + response.message);
-                callback();
-            }
-        })
-        .catch(error => {
-            console.error("Error en la solicitud AJAX: " + error);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var blob = new Blob([xhr.response], { type: 'application/pdf' });
+            var pdfUrl = URL.createObjectURL(blob);
+            window.open(pdfUrl, '_blank');
             callback();
-        });
+        } else {
+            console.error("Error en la solicitud. Código de estado: " + xhr.status);
+            callback();
+        }
+    };
+    xhr.onerror = function () {
+        const message = "Error en la solicitud";
+        console.log(message);
+        callback();
+    };
+
+    const jsonData = JSON.stringify(requestData);
+    xhr.send(jsonData);
 }
 
 
-function peticionAplication(route, requestData) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", route);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
 
-        xhr.onload = function () {
-            console.log(xhr.status);
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText); 
-                console.log(response);
-                resolve(response);
-            } else {
-                const message = "Error en la solicitud. Código de estado: " + xhr.status;
-                reject(message);
-            }
-        };
-        xhr.onerror = function () {
-            const message = "Error en la solicitud";
-            reject(message);
-        };
-        xhr.send(JSON.stringify(requestData));
+function createLoader(){
+    var loader = createHTML('div', 'loader', '', 'loader', '');
+    var overlay = createHTML('div', 'overlay', '', 'overlay','');
+    overlay.appendChild(loader);
+    document.body.appendChild(overlay);
+}
+
+function removeLoader() {
+    const loader = document.querySelector(".loader");
+    const overlay = document.querySelector(".overlay");
+
+    loader.classList.add("loader--hidden");
+    overlay.classList.add("loader--hidden");
+    loader.addEventListener("transitionend", () => {
+        loader.remove();
+        overlay.remove();
     });
 }
 
-/*
-() => {
-    //Obtenemos el form en el cual se mnadara la informacion de la pantalla, nombre, calificaiones, etc.
-    const formPDFKardexPosgrado = document.getElementById("formPDFKardexPosgrado");
-    const buttonCrearPdf = document.getElementById("buttonCrearPdf"); //Seleccionamos el boton que generara el evento de submit
-    const tablasCalificaciones = document.getElementsByClassName("tablaDatosCalificaciones"); //Hacemos un getElements de todas las tablas de califiaciones
+function createHTML(element, clase, estilo, id, text){
+    let elementHTML = document.createElement(element);
+    elementHTML.setAttribute('class', clase);
+    elementHTML.setAttribute('style', estilo);
+    elementHTML.setAttribute('id', id);
+    elementHTML.textContent = text;
 
-    cargarEventListener(); //Llamamos a la funcion que va estar escuchando el evento de "click" al boton de submit
-    function cargarEventListener() {
-        buttonCrearPdf.addEventListener("click", muestraPDF); //Lllamos a la funcion de muestraPDF sesun el evento de click
-    }
-
-    function muestraPDF(e) {
-        e.preventDefault(); //Prevenimos el evento por default del boton al dar click
-        recogeInformacion(); //Obtenemos toda la informacion y la almacenamos en inputs dentro del form
-        enviarSolicitudAjax(); //Llamamos a la funcion que se va encargar de hacer la peticion de datos, en este caso de pdf para mostrarlo en otra pantalla
-    }
-
-    function recogeInformacion() { //Obtenemos toda la informacion de la pantalla
-        const clave = document.getElementById('cve_unica').value;
-        const nombreAlumno = document.getElementById('nombreAlumno').value;
-        const grado = document.getElementById('grado').value;
-        const opcion = document.getElementById('opcion').value;
-        const prom_general = document.getElementById('prom_general').value;
-        const prom_gral_apro = document.getElementById('prom_gral_apro').value;
-        const total_cre_apro = document.getElementById('total_cre_apro').value;
-
-        const datosAlumno = { //Objeto con los datos del alumno dentro de la pantalla
-            clave,
-            nombre: nombreAlumno,
-            grado,
-            opcion,
-        };
-
-        const datosCalificaciones = { //Objeto con los datos generales de kardex dentro de la pantalla
-            'Promedio General': prom_general,
-            'Promedio General Aprobatorio': prom_gral_apro,
-            'Total Creditos Aprobados': total_cre_apro,
-        };
-
-        //Creamos los inputs que mandaremos en el form para la generacion del PDF
-        const inputDatosAlumno = crearInput('datosAlumno', JSON.stringify(datosAlumno));
-        const inputDatosCalificaciones = crearInput('datosCalificaciones', JSON.stringify(datosCalificaciones));
-        const inputDatosSemestre = crearInput('datosSemestre', JSON.stringify(recogeDatosSemestre()));
-
-        //Asignamos cada uno de los hijos al form
-        formPDFKardexPosgrado.appendChild(inputDatosAlumno);
-        formPDFKardexPosgrado.appendChild(inputDatosCalificaciones);
-        formPDFKardexPosgrado.appendChild(inputDatosSemestre);
-    }
-
-    //Funcion que recoge la informacion de las tablas de califiaciones por semestre 
-    function recogeDatosSemestre() {
-        const datosSemestreArray = []; //Objeto que guardara la informacion de cada semestre con las meterias.
-
-        //El siguiente es un ciclo anidado que guarda el semestre junto con la informacion de cada materia
-        for (const element of tablasCalificaciones) {
-            const semestre = element.querySelector('thead tr th').textContent; //Obtenemos el semestre
-            const materias = element.querySelectorAll('tbody tr:not(.promedios)'); //Obtenemos todos los renglones con materias, excepcion de los de promedios
-            const materiasArray = []; //Array que guardara la informacion de cada materia
-
-            for (const materia of materias) { //iteracion sobre los renglones de la tabla que contienen materias
-                const tds = materia.querySelectorAll("td"); //Se obetiene cada celda del renglon
-                const materiasInfoTds = []; //Array que guardara el valor de cada celda "td"
-                for (const td of tds) { //Iteracion sobre todos los tds
-                    materiasInfoTds.push(td.textContent); //Guardamos cada td
-                }
-                materiasArray.push(materiasInfoTds); //Guardamos el array con la informacion de la materia
-            }
-
-            //Objeto con la informacion del semestre y las materias que le corresponden
-            datosSemestreArray.push({
-                semestre,
-                materiasArray,
-            });
-
-            //console.log(materiasArray);
-        }
-        return datosSemestreArray;
-    }
-
-    //Funcion que permite crear inputs de forma dinamica
-    function crearInput(name, value) {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', name);
-        input.value = value;
-        return input;
-    }
-
-    //Funcion que realiza la peticion AJAX
-    function enviarSolicitudAjax() {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("POST", '{{ route('imprimeKardex') }}'); 
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.responseType = 'arraybuffer'; // Indica que esperamos una respuesta de tipo arraybuffer
-
-        // Manejar la respuesta de la solicitud
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var blob = new Blob([xhr.response], { type: 'application/pdf' });
-                //console.log(xhr.response);
-                var pdfUrl = URL.createObjectURL(blob);
-
-                // Abrir la URL del PDF en una nueva pestaña
-                window.open(pdfUrl, '_blank');
-
-                // Eliminar los inputs después de recibir la respuesta
-                eliminarInputs();
-            } else {
-                console.error("Error en la solicitud. Código de estado: " + xhr.status);
-            }
-        };
-
-        // Capturar errores en la solicitud
-        xhr.onerror = function() {
-            console.error("Error en la solicitud");
-        };
-
-        // Obtener los datos del formulario
-        const formData = new FormData(formPDFKardexPosgrado);
-
-        // Convertir los datos del formulario en una cadena de consulta URL codificada
-        const encodedData = new URLSearchParams(formData).toString();
-
-        // Enviar la solicitud AJAX con los datos del formulario
-        xhr.send(encodedData);
-    }
-        
-    //Funcion para eliminar inputs
-    function eliminarInputs() {
-        const inputsToBeRemoved = [ //Objeto con los nombres de los inputs a eliminar
-            'datosAlumno',
-            'datosCalificaciones',
-            'datosSemestre'
-        ];
-
-        inputsToBeRemoved.forEach(inputName => { //Iteracion para eliminar los inputs
-            const inputElement = formPDFKardexPosgrado.querySelector(`input[name="${inputName}"]`);
-            if (inputElement) {
-                inputElement.remove();
-            }
-        });
-    }
+    return elementHTML;
 }
-*/
-

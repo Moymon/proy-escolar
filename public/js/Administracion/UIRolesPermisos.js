@@ -14,11 +14,11 @@ export class UI {
     }
 
     //Funcion para crear los botones de los permisos
-    creaBotonPermiso(nombrePermiso){
+    creaBotonPermiso(nombrePermiso, idPermiso){
         let padreBotonRol = this.createElementHTML('div', '', 'col-3 padreBotonRol h-auto', '', '');
-        padreBotonRol.setAttribute("data-id", nombrePermiso);
+        padreBotonRol.setAttribute("data-id", idPermiso);
 
-        let boxBotonDeRol = this.createElementHTML('div', '', 'mb-1 ml-1 boxDeRol p-1 pr-2 border rounded-pill d-flex flex-row align-items-center justify-content-between', nombrePermiso, '');
+        let boxBotonDeRol = this.createElementHTML('div', '', 'mb-1 ml-1 boxDeRol p-1 pr-2 border rounded-pill d-flex flex-row align-items-center justify-content-between', idPermiso, '');
         //boxBotonDeRol.setAttribute('onclick', 'verificaClickBoxDeRol(this)');
 
         let labeLBotonRol = this.createElementHTML('div', 'user-select: none;', 'labeLBotonRol ml-1 text-wrap text-center h-100 w-100', '', nombrePermiso);
@@ -38,11 +38,11 @@ export class UI {
             generalBtnUsuarios.setAttribute('data-id', `${usuario.nombre}`);
             let padreBtnUsuarios = this.createElementHTML('div', 'background-color:rgb(242, 242, 242);', 'checkbox-wrapper-1 mr-1 mb-2 px-2 py-1 d-flex flex-row border rounded', 'padreBtnUsuarios', '');
 
-            let input = this.createElementHTML('input', '', 'substituted', usuario.nombre, '');
+            let input = this.createElementHTML('input', '', 'substituted', usuario.id, '');
             input.setAttribute('type', 'checkbox');
 
             let label = this.createElementHTML('label', '', 'm-0', 'labelbtnUsuarios', usuario.nombre);
-            label.setAttribute('for', usuario.nombre);
+            label.setAttribute('for', usuario.id);
 
             // Verifica si el usuario está en la lista de usuarios con el rol
             if (usersXRol.find(user => user.id === usuario.id)) {
@@ -64,7 +64,7 @@ export class UI {
                 const permiso = listaDePermisos[numeroPermiso];
                 //JDRM.
                 const padrePermiso = this.createElementHTML('div', '', 'col-4', '', '');
-                const boxPermiso = this.createElementHTML('div', 'background-color:' + this.colorPermisoNoAsignado + ';color:black;', 'text-center mr-2 mb-2 rounded border', permiso.name, permiso.name);
+                const boxPermiso = this.createElementHTML('div', 'background-color:' + this.colorPermisoNoAsignado + ';color:black;', 'text-center mr-2 mb-2 rounded border', permiso.name, permiso.descripcion);
     
                 padrePermiso.appendChild(boxPermiso);
                 elementLista.appendChild(padrePermiso);

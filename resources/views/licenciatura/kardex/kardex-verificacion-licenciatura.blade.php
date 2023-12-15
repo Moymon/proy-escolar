@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@section('plugins.Datatables',true)
 @section('title', 'Verificacion')
 
 @section('content_header')
@@ -181,7 +181,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label>Clave UASLP</label>
-                            <div class="input-group-append">
+                            <div class="input-group">
                                <input class="form-control"> 
                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                             </div>

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@section('plugins.Datatables',true)
 @section('title', 'Listado de Exámenes')
 
 @section('content_header')
