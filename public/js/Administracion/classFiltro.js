@@ -7,10 +7,19 @@ export class Filtro {
     //Se debe definir name al crear la instacion en el constructor
     //Esta funcion obtiene la clave de name, mediante la cual se verifica si "element(la busqueda)" existe en la lista
     filtrarSearch(element) {
-        const {name} = this.datosDeBusqueda;
+        const { name } = this.datosDeBusqueda;
         if(name) {
             //return rol.name === name;
             return element.name.toLowerCase().includes(name.toLowerCase());
+        }
+        return element;
+    }
+
+    filtrarSearchPermisos(element) {
+        const { name } = this.datosDeBusqueda;
+        if(name) {
+            //return rol.name === name;
+            return element.descripcion.toLowerCase().includes(name.toLowerCase());
         }
         return element;
     }
@@ -21,8 +30,21 @@ export class Filtro {
     showResultados(lista, listaConResultados) {
         for (let i = 0; i < lista.children.length; i++) {
             const elemento = lista.children[i];
-            const id = elemento.getAttribute('data-id');
-            const resultado = listaConResultados.find(resultado => resultado.name === id);
+            const name = elemento.getAttribute('data-name');
+            const resultado = listaConResultados.find(resultado => resultado.name === name);
+            if (resultado) {
+                elemento.style.display = 'block'; // Mostrar elementos relacionados
+            } else {
+                elemento.style.display = 'none'; // Ocultar elementos no relacionados
+            }
+        }
+    }
+
+    showResultadosPermisos(lista, listaConResultados) {
+        for (let i = 0; i < lista.children.length; i++) {
+            const elemento = lista.children[i];
+            const name = elemento.getAttribute('data-name');
+            const resultado = listaConResultados.find(resultado => resultado.descripcion === name);
             if (resultado) {
                 elemento.style.display = 'block'; // Mostrar elementos relacionados
             } else {

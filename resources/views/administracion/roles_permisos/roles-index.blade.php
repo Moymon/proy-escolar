@@ -79,7 +79,7 @@
                     <ul id="listaRoles" style="height:60vh;overflow:auto;" class="w-100 scrollRoles ulRoles list-unstyled components">
                         
                         @foreach ($roles as $rol)
-                            <li class="liRoles" id="{{$rol->name}}" data-id="{{$rol->name}}">
+                            <li class="liRoles" id="{{$rol->name}}" data-id="{{$rol->name}}" data-name="{{$rol->name}}">
                                 <div class="aRoles rolDeSidebarSeleccionable" data-target="{{$rol->name}}">{{$rol->name}}</div>
                             </li>
                         @endforeach

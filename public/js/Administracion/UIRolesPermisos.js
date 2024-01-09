@@ -17,6 +17,7 @@ export class UI {
     creaBotonPermiso(nombrePermiso, idPermiso){
         let padreBotonRol = this.createElementHTML('div', '', 'col-3 padreBotonRol h-auto', '', '');
         padreBotonRol.setAttribute("data-id", idPermiso);
+        padreBotonRol.setAttribute("data-name", nombrePermiso);
 
         let boxBotonDeRol = this.createElementHTML('div', '', 'mb-1 ml-1 boxDeRol p-1 pr-2 border rounded-pill d-flex flex-row align-items-center justify-content-between', idPermiso, '');
         //boxBotonDeRol.setAttribute('onclick', 'verificaClickBoxDeRol(this)');

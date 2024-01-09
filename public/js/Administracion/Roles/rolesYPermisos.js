@@ -590,8 +590,8 @@ buscadorPermiso.addEventListener('input', e => {
     
 //Funcion que realiza el filtrado con la busqueda, sobre la lista, en caso Object.listaRoles
 function filtrarPermiso() {
-    const resultado = objectPer.listaPermisos.filter(filtroPermisos.filtrarSearch.bind(filtroPermisos));
+    const resultado = objectPer.listaPermisos.filter(filtroPermisos.filtrarSearchPermisos.bind(filtroPermisos));
 
-    filtroPermisos.showResultados(boxPermisosAsignados, resultado);
-    filtroPermisos.showResultados(boxPermisosNoAsignados, resultado);
+    filtroPermisos.showResultadosPermisos(boxPermisosAsignados, resultado);
+    filtroPermisos.showResultadosPermisos(boxPermisosNoAsignados, resultado);
 }
