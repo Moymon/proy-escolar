@@ -511,7 +511,7 @@ return [
                 [
                     'text' => 'Perfil',
                     'icon' => 'fas fa-user',
-                    'url'  => '#',
+                    'url'  => 'profile',
                     'can'     => ['administrador','capturista'],
                     'classes' => 'ml-2',
                 ],
