@@ -34,9 +34,9 @@ export class UI {
         
         // Itera sobre la lista de usuarios
         for (let usuario of users) {  
-
             let generalBtnUsuarios = this.createElementHTML('div', '', 'col-3', 'generalBtnUsuarios', '');
-            generalBtnUsuarios.setAttribute('data-id', `${usuario.nombre}`);
+            generalBtnUsuarios.setAttribute('data-id', `${usuario.rpe}`);
+            generalBtnUsuarios.setAttribute('data-name', `${usuario.nombre}`);
             let padreBtnUsuarios = this.createElementHTML('div', 'background-color:rgb(242, 242, 242);', 'checkbox-wrapper-1 mr-1 mb-2 px-2 py-1 d-flex flex-row border rounded', 'padreBtnUsuarios', '');
 
             let input = this.createElementHTML('input', '', 'substituted', usuario.id, '');

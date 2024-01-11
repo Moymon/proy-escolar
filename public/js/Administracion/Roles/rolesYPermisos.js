@@ -155,7 +155,11 @@ function loadListenersForInterfaceRoles(){
         const target = event.target;
         if (target.id === "btnGuardarRolXUsuarios") {
             event.preventDefault();
-            saveRolForUser();
+
+            btnGuardarRolXUsuarios.disabled = true;
+            saveRolForUser(()=>{
+                btnGuardarRolXUsuarios.disabled = false;
+            });
         } 
     });
 }
@@ -462,7 +466,7 @@ function peticionAjaxGuardarPermisos(callback) {
 //**************************************************************************************************************
 //**************************************************************************************************************
 //FUNCIONES DE ASIGNAR ROL A UN USUARIO
-function peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded){
+function peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded, callback){
     const endpoint = guardarUsuariosXRol;
     const requestData = {
         rol: objectPer.rol,
@@ -472,27 +476,30 @@ function peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded){
     jsRolPer.peticionAjaxAplication(guardarUsuariosXRol, requestData)
     .then(response => {
         $('#modalAsignaRolAUsuario').modal('hide');
+        callback();
     })
     .catch(error => {
         console.error(error);
+        callback();
     });
 }
 
-function saveRolForUser(){
+function saveRolForUser(callback){
     const listaDeUsuarios = modalAsignaRolAUsuario.querySelector('#listaDeUsuarios');
     const divs = Array.from(listaDeUsuarios.children);
     var listaDeUsuariosAdded = [];
 
     divs.forEach(div => {
         let input = div.querySelector('input');
-        let target = div.getAttribute('data-id');
 
         if (input.checked) {
             listaDeUsuariosAdded.push(div.getAttribute('data-id'));
         } 
     });
 
-    peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded);
+    peticionAjaxGuardarUsuariosXRol(listaDeUsuariosAdded, () => {
+        callback();
+    });
 }
 
 function muestraUsuarios(usuariosXRol, users){

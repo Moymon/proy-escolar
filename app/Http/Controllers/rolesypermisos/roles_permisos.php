@@ -379,13 +379,13 @@ class roles_permisos extends Controller
                 $user->removeRole($rol->name);
             });
         } else {
-            $usersToAssignRole = User::whereIn('nombre', $request->listaDeUsuariosAdded)->get();
+            $usersToAssignRole = User::whereIn('rpe', $request->listaDeUsuariosAdded)->get();
     
             $usersToAssignRole->each(function ($user) use ($rol) {
                 $user->assignRole($rol->name);
             });
     
-            $usersNotWithRole = User::whereNotIn('nombre', $request->listaDeUsuariosAdded)->get();
+            $usersNotWithRole = User::whereNotIn('rpe', $request->listaDeUsuariosAdded)->get();
             $usersNotWithRole->each(function ($user) use ($rol) {
                 $user->removeRole($rol->name);
             });

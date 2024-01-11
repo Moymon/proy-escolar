@@ -353,9 +353,6 @@
         const guardarUsuariosXRol = '{{ route('guardarUsuariosXRol') }}';
         const getUsuariosXRol = '{{ route('getUsuariosXRol') }}';
 
-        const rutaClassRolPermisos = "{{ asset('js/Administracion/classRolPermisos.js') }}";
-
-
         //VARIABLES
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
