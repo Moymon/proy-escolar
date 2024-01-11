@@ -6,7 +6,6 @@
 @stop
 
 @section('content')
-
     @if(Auth::guest())
         <a href="{{ url('login') }}"></a>
         @else
