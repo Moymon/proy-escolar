@@ -1,0 +1,116 @@
+
+<div class="modal fade" id="buscarAlumno" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Consultar Alumnos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group "> 
+                            <div class="d-flex justify-content-around row">
+                                <div class="col-2">
+                                    <label class="col-form-label">Búsqueda por</label>   
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+
+                                        <select class="form-control buscar">
+                                            <option>Nombre</option>
+                                            <option>Clave Única</option>
+                                            <option>Clave Ingeniería</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <input class="form-control buscar" type="text" name="var_buscar" placeholder="nombre/clave única/clave ingeniería">
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-light"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="alumnos" class="table table-bordered table-striped dataTable dtr-inline tabla_alumno">
+                                        <thead>
+                                            <tr>
+                                                <th>CVE. UASLP</th>
+                                                <th>CVE. Ingeniería</th>
+                                                <th>Nombre</th>
+                                                <th>Carrera</th>
+                                                <th>Seleccionar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="d-flex justify-content-center"><button class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="d-flex justify-content-center"><button class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="d-flex justify-content-center"><button class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="d-flex justify-content-center"><button class="btn btn-info"><i class="fas fa-arrow-alt-circle-left"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<?php $__env->startSection('js'); ?>
+    <script>
+    $(document).ready(function (){
+            $('.table').DataTable({
+                language:{
+                    "emptyTable" : "No hay información",
+                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu" : "Mostrar _MENU_ resultados",
+                    "search"     : "Buscar",
+                    "zeroRecords": "Resultados no encontrados",
+                    "paginate":{
+                        "first"  :"Primero",
+                        "last"   :"Ultimo",
+                        "next"   :"Siguiente",
+                        "previous":"Anterior"
+                    }
+                },
+            });
+        });    
+    </script>
+<?php $__env->stopSection(); ?><?php /**PATH C:\Users\Alberto\Documents\GitHub\proy-escolar2\resources\views/modalAlumnos.blade.php ENDPATH**/ ?>
