@@ -86,7 +86,9 @@ class sidebar extends Controller
         return view('administracion.usuarios-index',compact('roles'));
     }
 
-
-
+    /* profile*/
+    public function profile(){
+        return view('administracion.profile');
+    }
 
 }

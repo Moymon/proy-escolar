@@ -157,6 +157,10 @@
     </div>
 </div>
 
+@section('footer')
+    <div></div>
+@stop
+
 <!----Modal registro---->
 
 <div class="modal fade" id="registroExamen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

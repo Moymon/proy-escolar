@@ -339,6 +339,10 @@
     <script type="module" src="{{asset('js/Administracion/Roles/rolesYPermisos.js') }}"></script>
 @stop
 
+@section('footer')
+    <div></div>
+@stop
+
 @section('css')
 @stop
 

@@ -94,6 +94,8 @@ Route::group(['middleware' => ['auth', 'role:Administrador|Otros 2',]] , functio
         Route::get('/procedimientos',[sidebar::class,'procedimientos_archivos_constancias']);
 		/*Rutas PDFs */
         Route::post('/print',[PDFController::class,'imprimeKardex'])->name('imprimeKardex');
+        /* Ruta perfil*/
+        Route::get('/profile',[sidebar::class,'profile']);
     });
     /*Permisos de editar*/
     Route::group(['middleware' => ['permission:administrador.edit']], function(){

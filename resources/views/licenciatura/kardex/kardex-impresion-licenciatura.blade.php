@@ -783,6 +783,10 @@
 
 @stop
 
+@section('footer')
+    <div></div>
+@stop
+
 @section('css')
 @stop
 

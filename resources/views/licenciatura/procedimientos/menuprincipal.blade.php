@@ -137,6 +137,12 @@
     </div>
 
     @include('modalAlumnos')
+
+</div>
+@stop
+
+@section('footer')
+    <div></div>
 @stop
 
 @section('css')
@@ -147,24 +153,24 @@
 @stop
 
 @section('js')
-<script type="text/javascript">
-        $(document).ready(function (){
-        $('.table').DataTable({
-            language:{
-                "emptyTable" : "No hay información",
-                "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "lengthMenu" : "Mostrar _MENU_ resultados",
-                "search"     : "Buscar",
-                "zeroRecords": "Resultados no encontrados",
-                "paginate":{
-                    "first"  :"Primero",
-                    "last"   :"Ultimo",
-                    "next"   :"Siguiente",
-                    "previous":"Anterior"
-                }
-            },
-            "autoWidth":false,
-        });
-    });  
-</script>
+    <script type="text/javascript">
+            $(document).ready(function (){
+            $('.table').DataTable({
+                language:{
+                    "emptyTable" : "No hay información",
+                    "info"       : "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "lengthMenu" : "Mostrar _MENU_ resultados",
+                    "search"     : "Buscar",
+                    "zeroRecords": "Resultados no encontrados",
+                    "paginate":{
+                        "first"  :"Primero",
+                        "last"   :"Ultimo",
+                        "next"   :"Siguiente",
+                        "previous":"Anterior"
+                    }
+                },
+                "autoWidth":false,
+            });
+        });  
+    </script>
 @stop

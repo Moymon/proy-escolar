@@ -292,7 +292,7 @@ return [
 
     'menu' => [
         // Navbar items:
-        /*Especificar topnav agrega solo al navbar*/
+        /*Especificar topnav agrega solo al navbar*//*
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -301,7 +301,7 @@ return [
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
-        ],
+        ],*/
         
 
         // Sidebar items:
@@ -512,7 +512,7 @@ return [
                 [
                     'text' => 'Perfil',
                     'icon' => 'fas fa-user',
-                    'url'  => '#',
+                    'url'  => 'profile',
                     'can'     => ['administrador','capturista'],
                     'classes' => 'ml-2',
                 ],

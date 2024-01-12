@@ -191,6 +191,22 @@ thead{
     color: white;
 }
 
+.main-header{
+    background-color: var(--primaryHF) !important;
+}
+
+
+.user-header{
+    background-color: var(--primaryHF) !important;
+}
+
+.nav-item span{
+    color: white;
+}
+
+.fa-bars{
+    color: white;
+}
 
 
 /***LOADER***/

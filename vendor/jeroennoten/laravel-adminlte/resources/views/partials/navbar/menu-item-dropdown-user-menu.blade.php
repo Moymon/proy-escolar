@@ -22,7 +22,7 @@
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
-        <span >
+        <span>
             {{ Auth::user()->nombre }}
         </span>
     </a>
@@ -55,7 +55,7 @@
 
         {{-- User menu body --}}
         @hasSection('usermenu_body')
-            <li class="user-body">
+            <li class="user-body" >
                 @yield('usermenu_body')
             </li>
         @endif
