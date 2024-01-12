@@ -9,8 +9,7 @@ use App\Http\Controllers\Controller;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 
 
-class PDFController extends Controller
-{
+class PDFController extends Controller {
 
     public function imprimeKardex(Request $request)
     {

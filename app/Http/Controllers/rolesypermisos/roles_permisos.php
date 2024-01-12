@@ -231,7 +231,6 @@ class roles_permisos extends Controller
 
         $permisosCompletos = DB::table('permissions')
         ->leftJoin('catalogo_permiso', 'permissions.id', '=', 'catalogo_permiso.id_permiso')
-        ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
         //->select('permissions.*', 'catalogo_permiso.descripcion')
         ->select('permissions.*', DB::raw('COALESCE(catalogo_permiso.descripcion, permissions.name) as descripcion'))
         ->get();
