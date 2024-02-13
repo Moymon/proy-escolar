@@ -31,8 +31,8 @@
 <x-adminlte-small-box title="Descargas" text="1205" icon="fas fa-download text-white"
     theme="purple"/>
 
-<x-adminlte-small-box title="528" text="Usuarios" icon="fas fa-user-plus text-teal"
-    theme="primary" url="#" url-text="Ver todos los usuarios..."/>
+<x-adminlte-small-box title="{{$numeroUsuarios}}" text="Usuarios" icon="fas fa-user-plus text-teal"
+    theme="primary" url="usuarios" url-text="Ver todos los usuarios..."/>
     
 
 

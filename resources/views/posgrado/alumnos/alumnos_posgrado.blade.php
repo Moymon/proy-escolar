@@ -21,16 +21,16 @@
 
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-datos_generales" type="button" role="tab" aria-controls="nav-alumno" aria-selected="true">Datos Generales</button>
-        <button class="nav-link" id="" data-bs-toggle="tab" data-bs-target="#nav-domicilio" type="button" role="tab" aria-controls="nav-domicilio" aria-selected="true">Contacto y Domicilio</button>
-        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-antecedentes" type="button" role="tab" aria-controls="nav-licenciatura" aria-selected="false">Antecedentes Académicos</button>
+        <button class="nav-link active" id="nav" data-toggle="tab" data-target="#nav-datos-generales" type="button" role="tab" aria-controls="nav-datos-generales" aria-selected="true">Datos Generales</button>
+        <button class="nav-link" id="nav" data-toggle="tab"  data-target="#nav-contacto-domicilio" type="button" role="tab" aria-controls="nav-contacto-domicilio" aria-selected="false">Contacto y Domicilio</button>
+        <button class="nav-link" id="nav" data-toggle="tab"  data-target="#nav-antecedentes" type="button" role="tab" aria-controls="nav-antecedentes" aria-selected="false">Antecedentes Académicos</button>
         </div>
     </nav>
 
     <!--Tabs posgrado-->
     <div class="tab-content" id="nav-tabContent">
         <!--Tab datos generales-->
-        <div class="mb-5 tab-pane fade show active" id="nav-datos_generales" role="tabpanel" aria-labelledby="nav-alumno-tab">
+        <div class="mb-5 tab-pane fade show active" id="nav-datos-generales" role="tabpanel" aria-labelledby="nav-datos-generales">
             <div class="card">
                 <div class="card-body">
                     <div class="row gutters-sm">
@@ -212,7 +212,7 @@
         </div>
 
         <!--Tab Domicilio-->
-        <div class="mb-5 tab-pane fade" id="nav-domicilio" role="tabpanel" >
+        <div class="mb-5 tab-pane fade" id="nav-contacto-domicilio" role="tabpanel" >
             <div class="card">
                 <div class="card-body">
                     <h5>Datos de Contacto</h5>
@@ -311,7 +311,7 @@
         </div>
 
         <!--Tab antecedentes-->
-        <div class="mb-5 tab-pane fade" id="nav-antecedentes" role="tabpanel" aria-labelledby="nav-licenciatura-tab">
+        <div class="mb-5 tab-pane fade" id="nav-antecedentes" role="tabpanel" aria-labelledby="nav-antecedentes">
             <div class="card">
                 <div class="card-body">
                     <div>

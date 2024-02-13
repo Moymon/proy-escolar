@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,10 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
     }
 
     public function inicio(){
-        return view('dashboard');
+        $usuarios = User::all();
+        $numeroUsuarios = $usuarios->count();
+        return view('dashboard', compact('numeroUsuarios'));
     }
 }
